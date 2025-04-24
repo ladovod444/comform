@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+
+    {% set inv = field_value(form.invariable) %}
+
+    {{ form_widget(form.invariable, { attr: { value: inv } }) }}
+
+{# <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path> #}
+
+
+{{ form_widget(form.products_favorite, {
+    label: '
+        <svg class="'~ color_tag ~' bi bi-heart-fill"
+        xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"
+        data-invariable="'~ inv ~'"
+        >
+<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314">
+</path
+></svg>	',
+    attr: {
+        class: 'favorite border-0',
+        style: 'padding: 0'
+    }, type: 'button' }
+) }}
+
+{{ form_end(form) }}

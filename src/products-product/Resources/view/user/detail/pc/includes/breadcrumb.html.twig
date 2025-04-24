@@ -1,0 +1,77 @@
+<section class="container py-3">
+    <h2 class="visually-hidden">Хлебные крошки</h2>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0" style="font-size: 11px;">
+
+
+            <li class="breadcrumb-item">
+                <a href="{{ path('core:user.homepage') }}"
+                   class="text-secondary text-decoration-none"
+                   aria-label="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}"
+                   title="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}">
+                    {{ 'breadcrumb.homepage.user'|trans({}, 'core') }}
+                </a>
+            </li>
+
+            <li class="breadcrumb-item">
+
+                <a href="{{ path('products-product:user.catalog.index') }}"
+                   class="text-secondary text-decoration-none"
+                   aria-label="Каталог"
+                   title="Каталог">
+                    Каталог
+                </a>
+            </li>
+
+            <li class="breadcrumb-item">
+                <a href="{{ path('products-product:user.catalog.category', { category : card.categoryUrl }) }}"
+                   class="text-secondary text-decoration-none"
+                   aria-label="{{ card.categoryName }}"
+                   title="{{ card.categoryName }}">
+                    {{ card.categoryName }}
+                </a>
+            </li>
+
+            {% set  breadcrumb_variation =  card.productVariationValue  ? ' - ' ~card.productVariationValue|call_twig_func(card.productVariationReference)~  ' - ' : '' %}
+            {% set breadcrumb_modification = card.productModificationValue is not null ?  card.productModificationValue|call_twig_func(card.productModificationReference) : '' %}
+            {% set  breadcrumb_offer =  card.productOfferValue|call_twig_func(card.productOfferReference) %}
+
+
+            {#            {% set breadcrumb_active_name = #}
+            {#                card.product_variation_value|call_twig_func(card.productVariationReference~'_render') ~#}
+            {#                card.product_modification_value|call_twig_func(card.productModificationReference~'_render') ~#}
+            {#                card.productOfferValue|call_twig_func(card.productOfferReference~'_render') %} #}
+
+            {% set breadcrumb_active_name =
+                breadcrumb_offer ~
+                breadcrumb_variation ~
+                breadcrumb_modification %}
+
+            {% if breadcrumb_active_name %}
+
+                <li class="breadcrumb-item">
+                    <a href="{{ path('products-product:user.model', {
+                        category: card.categoryUrl,
+                        url: card.productUrl
+                    }) }}" class="text-secondary text-decoration-none"
+                       aria-label="{{ card.productName }}"
+                       title="{{ card.productName }}">
+                        {{ card.productName }}
+                    </a>
+                </li>
+
+            {% else %}
+                {% set breadcrumb_active_name = card.productName %}
+            {% endif %}
+
+
+            <li class="breadcrumb-item text-secondary text-decoration-none"
+                aria-current="page"
+                aria-label="{{ breadcrumb_active_name }}"
+                title="{{ breadcrumb_active_name }}">
+                {# Значение торгового предложения #}
+                {{ breadcrumb_active_name }}
+            </li>
+        </ol>
+    </nav>
+</section>

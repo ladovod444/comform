@@ -1,0 +1,136 @@
+{% trans_default_domain('user.order') %}
+
+{# Обязательные поля формы для заполнения #}
+
+{#
+<h5>Данные получателя</h5>
+#}
+
+
+
+{% if form.usr.userProfile.type is defined and form.usr.userProfile.type is not null %}
+
+    <div class="d-flex justify-content-between">
+{#         <div class="w-25"><label>Пип профиля: *</label></div>#}
+
+        <div class="w-100 d-flex gap-3">
+            {{ form_row(form.usr.userProfile.type, {label: 'Тип профиля: *'}) }}
+
+        </div>
+    </div>
+    <hr>
+{% endif %}
+
+<div class="d-flex flex-column gap-3" id='user_profile'>
+
+    {% set section = null %}
+
+    {% for value in form.usr.userProfile.value %}
+
+        {% if section != value.vars.data.section %}
+            {% set section = value.vars.data.section %}
+
+            {# Закрываем секцию, eсли она не первая в цикле #}
+            {#            #}{# {% if loop.first != true %} #}
+            {#            </div></div> #}
+            {#        {% endif %} #}
+
+            {# Открываем новую секцию #}
+
+            <div class="card-header border-light bg-body">
+                <div class="card-title">
+                    {# Название секции #}
+                    <p><b><u>{{ value.vars.data.sectionName }}:</u></b></p>
+                </div>
+            </div>
+
+        {% endif %}
+
+
+
+        {# РЕНДЕР ПОЛЕЙ #}
+        {#         {{ render_field(value.vars.data.type, value.value) }} #}
+        {#         {{ render_field(value.vars.data.type, value.value) }} #}
+
+
+        {% if value.value is  defined %}
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="w-50 d-flex gap-3">
+                    {{ form_label(value.value) }}
+                </div>
+
+                <div class="w-50">
+                    {{ form_widget(value.value) }}
+                </div>
+            </div>
+
+        {% endif %}
+
+
+
+
+        {# {% if value %}
+		<div class="d-flex justify-content-between">
+			<div class="w-50">
+				{{ form_label(value.value) }}
+			</div>
+
+
+			<div class="w-50">
+				{{ form_widget(value.value, { attr: { class : 'rounded-3' }}) }}
+			</div>
+		</div>
+	{% endif %} #}
+
+
+
+        {# <div class="d-flex justify-content-between">
+		<div class="w-50">
+			{{ form_label(value.value) }}
+		</div>
+
+
+		<div class="w-50">
+			{{ form_widget(value.value, { attr: { class : 'rounded-3' }}) }}
+		</div>
+	</div> #}
+
+
+    {% endfor %}
+
+
+</div>
+
+
+{#
+<div class="d-flex justify-content-between">
+	<div class="w-50">
+		<label for="fio">ФИО получателя: *</label>
+	</div>
+	<div class="w-50">
+		<input class="form-control rounded-3" type="text" id="fio" required="">
+	</div>
+</div>
+скь
+
+<div class="d-flex justify-content-between">
+	<div class="w-50">
+		<label for="phone">Контактный телефон: *</label>
+	</div>
+	<div class="w-50">скь
+		<input class="form-control rounded-3" type="text" id="phone" required="">
+	</div>
+</div>
+
+
+<div class="d-flex justify-content-between">
+	<div class="w-50">
+		<label for="email">Контактный Email:</label>
+	</div>
+	<div class="w-50">
+		<input class="form-control rounded-3"
+				type="email" id="email"
+				aria-label="Email">
+	</div>
+</div> #}

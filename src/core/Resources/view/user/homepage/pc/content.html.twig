@@ -1,0 +1,20 @@
+{% trans_default_domain 'homepage.index' %}
+
+{#{{ dump(_context) }} #}
+<main>
+    <div class="container d-flex p-0">
+        <div style='width: 99%;'>
+            {{ include(_self|replace({ "content.html.twig" : "/includes/carousel.html.twig" })) }}
+            {{ include(_self|replace({ "content.html.twig" : "/includes/slider_section.html.twig" })) }}
+            {{ include(_self|replace({ "content.html.twig" : "/includes/catalog.html.twig" })) }}
+            {{ include(_self|replace({ "content.html.twig" : "/includes/recommended.html.twig" })) }}
+{#            {% include Template('@Template:user/'~baks_settings.device~'/includes/recomendet.html.twig') %}#}
+            {% include Template('@Template:public/'~baks_settings.device~'/includes/about.html.twig') %}
+            {{ include(_self|replace({ "content.html.twig" : "/includes/production.html.twig" })) }}
+        </div>
+        {#        {% include Template('/user/homepage/'~baks_settings.device~'/includes/carousel_tabs.html.twig') %} #}
+    </div>
+    <hr class="mb-5">
+
+</main>
+

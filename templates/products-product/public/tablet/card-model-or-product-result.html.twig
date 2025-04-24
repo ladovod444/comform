@@ -1,0 +1,241 @@
+{# @var card \BaksDev\Products\Product\Repository\ProductsCard\ProductsCardInterface #}
+
+{#  ПРОДУКТ  #}
+
+{# Постфикс #}
+{% set card_postfix = null %}
+{% set card_offer = null %}
+{% set card_variation = null %}
+{% set card_modification = null %}
+
+	{% if card.modificationAgg|json_decode|first is not null %}
+        {% set card_postfix = card.modificationAgg|json_decode|first.modification_postfix %}
+
+        {% set card_modification = card.modificationAgg|json_decode|first.modification_id %}
+        {% set card_variation = card.variationAgg|json_decode|first.variation_id %}
+        {% set card_offer = card.offerAgg|json_decode|first.offer_id %}
+
+    {% elseif card.variationAgg|json_decode|first is not null %}
+        {% set card_postfix = card.variationAgg|json_decode|first.variation_postfix %}
+
+        {% set card_variation = card.variationAgg|json_decode|first.variation_id %}
+        {% set card_offer = card.offerAgg|json_decode|first.offer_id %}
+
+    {% elseif card.offerAgg|json_decode|first is not null %}
+        {% set card_postfix = card.offerAgg|json_decode|first.offer_postfix %}
+
+        {% set card_offer = card.offerAgg|json_decode|first.offer_id %}
+
+    {% endif %}
+
+{# Тип карточки #}
+{% set card_type = 'product' %}
+
+{# Путь карточки #}
+{% set card_url = path('products-product:user.detail', {
+    category : card.categoryUrl,
+    url : card.productUrl,
+    offer: card.productOfferValue,
+    variation: card.productVariationValue,
+    modification: card.productModificationValue,
+    postfix: card_postfix,
+}) %}
+
+{# Название карточки #}
+{% set card_name %}
+
+    {# Название продукта #}
+    <small>{{ card.productName }}</small>
+    <br>
+
+    {# Значение множественного варианта ТП #}
+    {{ card.productVariationValue|call_twig_func(card.productVariationReference~'_render') ~
+    card.productModificationValue|call_twig_func(card.productModificationReference~'_render') }}
+
+    {# Значение торгового предложения #}
+    {{ card.productOfferValue|call_twig_func(card.productOfferReference~'_render') }}
+
+    {# Постфикс #}
+    {{ card_postfix|replace({ '/': '-' }) }}
+{% endset %}
+
+{# Переопределение для MODEL #}
+{% if
+    (card.categoryModificationCard == false and card.categoryModificationCard is not null) or
+    (card.categoryVariationCard == false and card.categoryVariationCard is not null) or
+    (card.categoryOfferCard == false and card.categoryOfferCard is not null) %}
+
+    {% set card_type = 'model' %}
+
+    {% set card_url = path('products-product:user.model', {
+        category : card.categoryUrl ,
+        url : card.productUrl ,
+        offer: card.productOfferValue,
+        variation: card.productVariationValue
+    }) %}
+
+{% endif %}
+
+{# Обложка продукта #}
+{% set images =  card.productRootImages %}
+
+{# Персональная скидка #}
+{% set price = user_profile_discount(card.productPrice) ?: card.productPrice %}
+
+{# Свойства продукта #}
+{#{% if card.categorySectionField != false %}#}
+{#    {% set card_fields = card.categorySectionField|json_decode %}#}
+{#{% endif %}#}
+
+
+<div
+        class="card card-open product-card h-100 border-0 p-2 position-relative rounded-4 bg-transparent ">
+
+    {# Изображение модели #}
+    <div class="card-img-top card-grid  ratio-3x4">
+        {% if card_type == 'product' %}
+            <div class="position-absolute" style="z-index: 1024">
+                {{ render_favorite_button(card.invariable|first) }}
+            </div>
+        {% endif %}
+
+
+        {# {% if card_type == 'product' %}
+														            <div class="position-absolute" style="z-index: 1024">
+														                {{ render_favorite_button(card.invariable|json_decode|first) }}
+														            </div>
+														        {% endif %}
+														
+														        <a class="d-block h-100 rounded-4 bg-cover show-card-image lazy" data-bg="{{ image_path }}"
+														           href="{{ card_url }}"
+														           aria-label="{{ card.productName }}"> #}
+
+        {# @TODO  #}
+        {#            <div class="position-absolute" style="top: 53% !important; left: 10% !important"> #}
+        {#                {% for field in card_fields %} #}
+        {#                    {% if field.field_photo == true %} #}
+        {#                        {{ field.field_value|call_twig_func(field.field_type~'_render') }} #}
+        {#                    {% endif %} #}
+        {#                {% endfor %} #}
+        {#            </div> #}
+
+        {# </a> #}
+
+        {# Слайдер для ховера #}
+
+
+        <div id="carouselCardHover-{{ card.productId }}"
+             class="carousel carousel-dark slide carousel-fade show-card-carousel ratio-3x4 h-100">
+            <div class="carousel-indicators">
+                {% if images|length > 1 %}
+
+
+                    {% for k, image  in images %}
+                        <button type="button" data-bs-target="#carouselCardHover-{{ card.productId }}"
+                                data-bs-slide-to="{{ k }}" class="{{ loop.first ? 'active' : '' }}" aria-current="true"
+                                aria-label="Slide {{ k }}"></button>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="carousel-inner h-100 rounded-4">
+
+                {% for image in images %}
+
+                    <div class="carousel-item h-100 {{ loop.first ? 'active' : '' }} lazy bg-cover"
+                         data-bg=" {{ cdn_image_path(image.img, image.img_ext, image.img_cdn) }} ">
+
+                        <a href="{{ card_url }}" class="d-block h-100 ">{# @TODO  #}
+                            {#                            <div class="position-absolute" style="top: 85% !important; left: 10% !important"> #}
+                            {#                                {% for field in card_fields %} #}
+                            {#                                    {% if field.field_photo == true %} #}
+                            {#                                        {{ field.field_value|call_twig_func(field.field_type~'_render') }} #}
+                            {#                                    {% endif %} #}
+                            {#                                {% endfor %} #}
+                            {#                            </div> #}
+
+                        </a>
+                    </div>
+
+                {% else %}
+
+                    <div class="carousel-item h-100 active lazy bg-cover" data-bg="/assets/img/blank.svg">
+                        <a href="{{ card_url }}" class="d-block h-100 "></a>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    {# КАРТОЧКИ #}
+    <div class="card-body  d-flex flex-column justify-content-between  pb-1 px-0">
+
+        <div>
+            <div
+                    class="d-flex align-items-center justify-content-between mb-2 px-2">
+
+                {# Цена #}
+                <div class="d-flex align-items-center gap-2">
+                    <p class="card-text fs-4 m-0" style="font-size:24px!important;">
+                        <strong>
+                            {% if card_type == 'product' %}
+                                {{ money(price, card.productCurrency) }}
+                            {% elseif card_type == 'model' %}
+                                от
+                                {{ money(price, card.productCurrency) }}
+                            {% endif %}
+                        </strong>
+                    </p>
+                </div>
+
+                {# Кнопка покупки #}
+                {% if card_type == 'product' %}
+
+                    <div
+                            class="d-flex">
+                        {# Кнопка для покупки #}
+                        {% include Template('@products-product/public/'~(baks_settings.device)~'/add_to_basket_button.html.twig') with {
+                            'model_event': card.productEvent,
+                            'product_offer': card_offer,
+                            'product_variation': card_variation,
+                            'product_modification': card_modification,
+                        } only %}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            {# Название #}
+            <div class="d-flex mb-2">
+                <a class="text-black text-decoration-none" href="{{ card_url }}">
+                    <h3 class="card-title fw-bold px-2 text-uppercase mb-0" style="font-size:14px!important;">
+                        {{ card_name }}
+                    </h3>
+                </a>
+
+            </div>
+
+            <div class="d-flex flex-wrap align-items-center gap-2 px-1">
+                {% for field in card.categorySectionField %}
+                    {% if field.field_photo == false %}
+                        {{ field.field_value|call_twig_func(field.field_type~'_render') }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            {# Наличие #}
+            <div class="d-flex justify-content-between align-items-baseline">
+				<span class="d-block px-2 fs-11 text-success mb-2">
+					&#9675; Есть в наличии
+				</span>
+            </div>
+        </div>
+    </div>
+</div>

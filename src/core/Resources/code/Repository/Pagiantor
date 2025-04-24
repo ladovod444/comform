@@ -1,0 +1,64 @@
+<?php
+
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+
+#set( $ALIAS = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
+
+use BaksDev\Core\Form\Search\SearchDTO;
+use BaksDev\Core\Services\Paginator\PaginatorInterface;
+use BaksDev\Core\Doctrine\DBALQueryBuilder;
+
+interface ${NAME}Interface
+{
+
+    public function search(SearchDTO ${DS}search): self;
+
+    /** Метод возвращает пагинатор ${CONTEXT} */
+    public function findPaginator(): PaginatorInterface;
+}
+
+final class ${NAME} implements ${NAME}Interface
+{
+    private ?SearchDTO ${DS}search = null;
+
+    public function __construct(
+        private readonly DBALQueryBuilder ${DS}DBALQueryBuilder,
+        private readonly PaginatorInterface ${DS}paginator,
+    ) {}
+
+    public function search(SearchDTO ${DS}search): self
+    {
+        ${DS}this->search = ${DS}search;
+        return ${DS}this;
+    }
+
+    /** Метод возвращает пагинатор ${CONTEXT} */
+    public function findPaginator() : PaginatorInterface
+    {
+        ${DS}dbal = ${DS}this->DBALQueryBuilder->createQueryBuilder(self::class);
+
+        ${DS}dbal->select('*');
+        ${DS}dbal->from(${CONTEXT}::class, 'alias');
+
+        /* Поиск */
+        if (${DS}this->search?->getQuery())
+        {
+//            ${DS}dbal
+//                ->createSearchQueryBuilder(${DS}this->search)
+//                //->addSearchEqualUid('alias.id')
+//
+//                ->addSearchLike('alias.name')
+//            ;
+
+        }
+
+        return ${DS}this->paginator->fetchAllAssociative(${DS}dbal);
+    }
+}

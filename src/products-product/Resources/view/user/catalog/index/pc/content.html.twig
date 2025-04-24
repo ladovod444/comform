@@ -1,0 +1,69 @@
+
+    {# БЛОК ДЛЯ ВЫБОРА КАТЕГОРИЙ #}
+    {{ include(_self|replace({ "content.html.twig" : "_includes/categories.html.twig" }), {'categories': categories }, with_context = false) }}
+
+    {# КАТАЛОГ ШИН #}
+    <section  class="container">
+
+        {% for categoryId, category in categories %}
+
+            {% if products[category.id] and bestOffers[category.id] %}
+
+                <div class="row">
+                    <div class="col-8 ">
+                        <div class="d-flex  align-items-center justify-content-between gap-5 mb-3">
+                            <h6 class="fs-18 mb-0 d-block text-uppercase w-25 fw-bold">
+                                {{ category.category_name }}
+                            </h6>
+                            <a href="{{ path('products-product:user.catalog.category', { category : category.category_url }) }}"
+                               class="text-black">
+                                <button class="btn btn-outline-dark border-0 rounded-3   fw-medium text-nowrap">
+                                    Все {{ category.category_name }}
+                                </button>
+                            </a>
+
+                            {% set filter = filters[category.id] %}
+
+                            {% include Template('@products-product/filter/'~baks_settings.device~'/filter.html.twig') %}
+
+                        </div>
+
+                        <div class="row row-cols-4 gy-4 gx-3">
+
+                            {% for product in products[category.id] %}
+                                <div class="col p-1">
+                                    {# КАРТОЧКА ТОВАРА #}
+
+                                    {% if product %}
+{#                                        {% include Template('@homepage:index/' ~baks_settings.device~ '/includes/card.html.twig') %}#}
+{#                                        {% include Template('@homepage:index/' ~baks_settings.device~ '/includes/card.html.twig') %}#}
+
+{#                                        {% include Template('/user/'~baks_settings.device~'/includes/card.html.twig') %}#}
+{#                                        {{ include (_self|replace({ "content.html.twig" : "_includes/card.html.twig" }), { 'card': product }, with_context = false) }}#}
+
+                                        {% include Template('@products-product/public/'~baks_settings.device~'/card-product-result.html.twig') with { product } only %}
+
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div class="col-1">
+                        <div class="h-75 border-end"></div>
+                    </div>
+
+                    <div class="col-3 ">
+                        {# ЛИДЕРЫ ПРОДАЖ #}
+                        {{ include (_self|replace({ "content.html.twig" : "_includes/best_offers.html.twig" }), { 'bestOffers' : bestOffers[category.id] }, with_context = false) }}
+                    </div>
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+    </section>
+
+

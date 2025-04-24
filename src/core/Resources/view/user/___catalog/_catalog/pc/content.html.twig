@@ -1,0 +1,551 @@
+<main class="main d-print-none container px-4">
+
+    <div class="mt-3">
+        {{ include(_self|replace({ "content.html.twig": "breadcrumb.html.twig" })) }}
+    </div>
+
+
+    {# Вложенные разделы (ктаегории) #}
+
+    {{ include(_self|replace({ "content.html.twig": "category.html.twig" })) }}
+
+
+    <div class="d-flex gap-3">
+
+        <div class="w-25 ">
+
+            {# Фильтр товаров по торговым предложениям и свойствам #}
+            {{ include(_self|replace({ "content.html.twig" : "filter.html.twig" })) }}
+
+
+
+            {# TODO: Лидеры продаж #}
+            {# <h2 class="text-uppercase h4 fw-bolder pb-2">Лидеры продаж</h2>
+			
+			<div class="rounded-4 bg-light d-flex flex-column gap-3 p-3">
+				{% include(Template('/user/pc/includes/leader.html.twig')) %}
+			</div> #}
+
+
+            {# TODO: Банер #}
+            {# <div class="w-100 mt-3">
+				<div class="card text-bg-dark rounded-4 overflow-hidden" style="height: 110px;"><img
+							data-src="/temp/img/discount-img/disc-img-01.webp" src="img/discount-img/disc-img-01.webp"
+							class="card-img lazy entered loaded" alt="..." data-ll-status="loaded">
+					<div class="card-img-overlay d-flex flex-column"><h3 class="card-title h5">супер-пупер акция! надо
+																							   брать.</h3>
+						<p class="card-text">* Скидка действует до 15 ноября 2022г.</p></div>
+				</div>
+			</div> #}
+
+        </div>
+
+
+        {#  Название активного раздела #}
+        <section class="cards-box w-75">
+
+
+            {% if other == false %}
+                <div class="d-flex gap-3 small align-items-center mb-3">
+
+                    {# Название раздела #}
+                    <h1 class="text-uppercase h4 fw-bolder mb-0 me-3">
+                        {% if category.parent_category_name %}
+                            {{ category.parent_category_name }}
+                        {% endif %}
+                        {{ category.category_name }}
+                    </h1>
+
+                    {# Ссылка на родительский раздел  #}
+                    {% if category.parent_category_url %}
+                        <a href="{{ path('products-product:user.catalog.category', { category : category.parent_category_url }) }}"
+                           class="small text-lowercase"
+                           title="{{ category.parent_category_name }}">
+                            Все {{ category.parent_category_name }}
+                        </a>
+                    {% endif %}
+
+
+                    {# СОРТИРОВКА  #}
+
+                    {# <span class="text-muted">Сортировать по:</span>
+
+				<button type="button" class="btn btn-link btn-sm p-0 dropdown-toggle" data-bs-toggle="dropdown"
+						aria-expanded="false">
+					<span class="small">Цене</span>
+				</button>
+
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="#">Дешевые</a></li>
+					<li><a class="dropdown-item" href="#">Дорогие</a></li>
+				</ul>
+
+				<a href="#" class="btn btn-link btn-sm p-0"><span class="small">Скидке</span></a>
+				<a href="#" class="btn btn-link btn-sm p-0"><span class="small">Популярности</span></a>
+				<a href="#" class="btn btn-link btn-sm p-0"><span class="small">Обновлению</span></a>
+				<a href="#" class="btn btn-link btn-sm p-0"><span class="small">Отзывам</span></a> #}
+
+
+                </div>
+
+                <div class='mb-3 '>
+                    {{ category.category_header|raw }}
+                </div>
+
+            {% else %}
+
+                {# Блок с ошибкой, если с установленным фильтром нет продукции #}
+                <div class="alert alert-warning" role="alert">
+
+
+                    К сожалению с такими характеристиками
+
+                    {% if other == true and products.data|length %}
+                        <div class='d-flex flex-column gap-1 my-3'>
+                            {% for field in fields %}
+                                <div class='d-flex align-items-center gap-3'>
+                                    <strong>{{ field.field_name }}</strong> {{ field.field_value|call_twig_func(field.field_type~'_template') }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    нет товаров в данной категории
+
+                    {% if other == true and products.data|length %}
+                        , но возможно Вас заинтересуют
+                        товары, у которых отличаются свойства:
+                    {% endif %}
+
+                </div>
+            {% endif %}
+
+
+            <div class="row cards-box-body mt-3">
+                {% for product in products.data %}
+                    <div class="col-3">
+                        {# Карточка товара раздела  #}
+                        {% include Template('/user/pc/includes/card/card.html.twig') with { 'card': product } %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% include Template('/user/pc/includes/pagination.html.twig') with { 'pagination' : products } %}
+
+        </section>
+
+    </div>
+
+
+    {# TODO: ПРОСТМОРЕННЫЕ #}
+    {# <section id="viewed" class="mt-4">
+		<div class="rounded-4 bg-light">
+			<h2 class="text-uppercase h5 fw-bolder p-3 pb-2">Просмотренные</h2>
+			
+			<div class="w-100 d-flex gap-3 justify-content-between p-3">
+				{% for i in 0..3 %}
+					{% include(Template('/user/pc/includes/viewed.html.twig')) %}
+				{% endfor %}
+			</div>
+		</div>
+	</section> #}
+
+    {# SEO ТЕКСТ #}
+    {% if category.category_bottom %}
+        <section id="viewed" class="container">
+
+
+            {#  <h3 class="text-uppercase me-4 h5 fw-bolder my-5">{{ category.category_name }}</h3> #}
+
+            {{ category.category_bottom|raw }}
+
+        </section>
+    {% endif %}
+
+
+    {# <div class="my-5">
+
+        <div class="d-flex justify-content-between gap-3">
+
+            <div class="w-75">
+                <h3 class="text-uppercase h4 fw-bolder">Шины для любых автомобилей - широкий выбор и по выгодной
+                    цене</h3>
+
+                <p>
+                    Автомобильная шина – одна из самых значимых частей колеса, представляющая собой упругую оболочку
+                    поверх обода диска. Она обеспечивает сцепление с дорожным покрытием и поглощает небольшие
+                    неровности, а также компенсирует погрешности траекторий колес.
+                </p>
+
+                <p>
+                    Выбирая шины для автомобиля, всегда ориентируйтесь на его техническую документацию и типоразмеры. На
+                    один и тот же автомобиль производитель может рекомендовать шины разных типоразмеров в зависимости от
+                    типа используемых дисков.
+                    <br>
+                    <br>
+                    Если не соблюдать рекомендации завода изготовителя касательно характеристик автомобильных шин, то
+                    вероятно ухудшение управляемости автомобилем, увеличение нагрузки на элементы подвески или сами
+                    шины, преждевременный износ и выход из строя.
+                </p>
+            </div>
+            <div class="w-50">
+                <div class="lazy h-100 bg-contain"
+                     data-bg="/triangle/catalog/wide-choose.webp"
+                     title="Шины для любых автомобилей - широкий выбор и по выгодной цене"
+                >
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="w-100 mt-5 rounded-circle border-0 opacity-25" style="height: 20px; box-shadow: 0 -20px 20px -6px #000;">
+        </div>
+
+
+        <div class="nav nav-pills d-flex gap-5 pb-4" id="pills-tab" role="tablist">
+
+
+            <div class="nav-item" role="presentation">
+                <button class="btn nav-link fw-bolder active" id="pills-profile-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                        aria-selected="true">
+                <span class="text-uppercase px-3">
+                    Как выбрать шины
+                </span>
+                </button>
+            </div>
+
+
+            <div class="nav-item" role="presentation">
+                <button class="btn nav-link fw-bolder " id="pills-contact-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                        aria-selected="false">
+                <span class="text-uppercase px-3">
+                    Маркировка шин
+                </span>
+                </button>
+            </div>
+
+
+            <div class="nav-item" role="presentation">
+                <button class="btn nav-link fw-bolder " id="pills-protector-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-protector" type="button" role="tab" aria-controls="pills-protector"
+                        aria-selected="false">
+                <span class="text-uppercase px-3">
+                    Протектор
+                </span>
+                </button>
+            </div>
+
+            <div class="nav-item" role="presentation">
+                <button class="btn nav-link fw-bolder " id="pills-knife-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-knife" type="button" role="tab" aria-controls="pills-knife"
+                        aria-selected="false">
+                <span class="text-uppercase px-3">
+                    Корд
+                </span>
+                </button>
+            </div>
+
+            <div class="nav-item" role="presentation">
+                <button class="btn nav-link fw-bolder " id="pills-reinforced-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-reinforced" type="button" role="tab" aria-controls="pills-reinforced"
+                        aria-selected="false">
+                <span class="text-uppercase px-3">
+                    Усиленные шины и шины Run Flat
+                </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="tab-content w-100" id="pills-tabContent">
+
+            <div id="pills-profile" class="tab-pane fade active show" role="tabpanel" aria-labelledby="pills-profile-tab"
+                 tabindex="0">
+                <h5 class="text-uppercase fw-bolder py-3">Как выбрать шины</h5>
+
+
+                <p>
+                    Современный рынок предлагает широкий выбор шин со значительными различиями в характеристиках. Все шины
+                    делятся
+                    на легковые и грузовые. Колеса, а соответственно и шины, грузовых автомобилей испытывают значительные
+                    нагрузки,
+                    поэтому износостойкости и прочности шин уделяется особое внимание.
+                </p>
+
+                <p>
+                    <strong>Летняя и зимняя резина</strong>
+                </p>
+
+                <p>
+                    Следующий принципиально важный параметр – сезонность. По сезону применения шины бывают летние
+                    (шоссейные),
+                    зимние ( или нешипованные) и всесезонные. Конструктивные и функциональные особенности обусловлены
+                    принципиально
+                    разными условиями, в которых эксплуатируются шины зимой и летом.&nbsp;
+
+
+                </p>
+
+                <p>
+                    <strong>Выбирать шины необходимо с учетом температуры и состояния дорожного полотна:</strong>
+                <ul>
+                    <li>
+                        Летние шины изготавливаются из твердой резины с низким широким протектором и подходят для температур
+                        выше +7
+                        градусов. На морозе летняя резина дубеет, становится хрупкой и трескается, повышая риск аварийных
+                        ситуаций.
+                        Ездить летом на зимней резине и наоборот – запрещено.
+                    </li>
+                    <li>
+                        Зимние шины производятся из более мягкой резины, менее чувствительной к холоду. Обладая высокой
+                        эластичностью,
+                        они обеспечивают наилучшее сцепление на заснеженных или обледенелых дорогах, в особенности при
+                        наличии шипов.
+                        Рисунок протектора у зимних шин глубже, чем у летних.
+                    </li>
+                    <li>
+                        Всесезонные шины изготавливаются из резины средней твердости и плотности. Протектор средней глубины,
+                        и он более
+                        широкий, чем у летних шин. Эти шины разработаны для эксплуатации диапазоне температур от -10 до +5
+                        градусов и
+                        условно универсальны.
+                    </li>
+
+                </ul>
+                </p>
+
+
+            </div>
+
+
+            <div id="pills-contact" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+
+                <div class="d-flex justify-content-between gap-3 ">
+                    <div class="w-100">
+
+                        <h5 class="text-uppercase fw-bolder py-3">
+                            Маркировка шин
+                        </h5>
+
+                        <p>
+                            Все шины имеют стандартную маркировку в соответствии с типоразмерами, а вся необходимая
+                            информация содержится на
+                            боковинах. Она представляет собой буквенно-цифровое обозначение, которое может выглядеть,
+                            например, так: 195/65
+                            R15 91T.
+                        </p>
+                        <p>
+
+                            Первое число – ширина шины в миллиметрах, а второе число – отношение высоты профиля к ширине в
+                            процентах. В
+                            данном примере ширина шины составляет 195 мм, а высота – 65% ее ширины.&nbsp;
+                        </p>
+                        <p>
+                            Следом, как правило, идет буква "R" (Radial), обозначающая, что это радиальная шина. Число после
+                            нее указывает
+                            посадочный диаметр обода в дюймах, соответственно 15.&nbsp;
+                        </p>
+                        <p>
+                            Последующие буквенно-цифровые индексы указывают на максимальную нагрузку и скорость, на которые
+                            рассчитана шина.
+                            В данном случае 91T – это нагрузка до 615 кг на колесо и максимальная скорость 190 км/ч.&nbsp;
+                        </p>
+                        <p>
+                            Иногда вначале могут стоять дополнительные буквы, указывающие на тип целевого автомобиля,
+                            например, буква "P"
+                            (Passenger) – для легковых автомобилей или "LT" (Light Trucks) – для малых коммерческих
+                            грузовиков.
+                        </p>
+
+                    </div>
+
+                    <div class="w-50">
+                        <div class="lazy h-100 bg-contain"
+                             data-bg="/triangle/catalog/tire-marking.webp"
+                             title="Шины для любых автомобилей - широкий выбор и по выгодной цене"
+                        >
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="pills-protector" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-protector-tab"
+                 tabindex="0">
+                <h5 class="text-uppercase fw-bolder py-3">
+                    Протектор
+                </h5>
+
+                <p>
+                    Протектор шины бывает направленный и ненаправленный, симметричный и асимметричный. Самыми доступными и
+                    распространенными являются комплекты шин с ненаправленным рисунком протектора. Это базовые шины
+                    универсальной
+                    конструкции со средними характеристиками и сравнительно небольшой стоимостью.&nbsp;
+                </p>
+                <p>
+                    Рисунок шин с направленным протектором позволяет эффективно отводить воду и грязь от колеса и
+                    обеспечивает
+                    оптимальный контакт с дорогой при плохих погодных условиях. Такие шины имеют метку «Rotation» на боковой
+                    поверхности и соответственно делятся на левые и правые.&nbsp;
+                </p>
+                <p>
+                    Внешняя сторона шины испытывает большие перегрузки при совершении маневров. Это обстоятельство привело к
+                    созданию так называемых «асимметричных» шин. Такие шины представляют собой два «сборных» колеса, где
+                    есть две
+                    части с разным рисунком, при этом одна часть предназначена для сухого асфальта, а вторая – для мокрого
+                    покрытия.
+                    Такие изделия можно узнать по маркировке «Outside» на внешней части и они дороже на 15-20% по сравнению
+                    с
+                    обычными симметричными шинами.
+                </p>
+
+                <div class="w-100 text-center my-5" style="height: 250px;">
+                    <div class="lazy h-100 bg-contain"
+                         data-bg="/triangle/catalog/protector.webp"
+                         title="Шины для любых автомобилей - широкий выбор и по выгодной цене"
+                    >
+                    </div>
+                </div>
+
+                <p>
+                    <strong>По целевому назначению протектора шины классифицируют на:</strong>
+
+                <ul>
+                    <li class="p-2">
+                        <strong>универсальные</strong> – шины, которые могут использоваться как на грунтовых дорогах, так и
+                        на дорогах с
+                        усовершенствованным покрытием (асфальтобетонное, цементобетонное, щебень и гравий).
+                    </li>
+
+                    <li class="p-2">
+                        <strong>дорожные</strong> – шины, которые имеют специальный рисунок протектора для оптимального
+                        сцепления с дорогой на высоких
+                        скоростях.
+                    </li>
+                    <li class="p-2">
+                        <strong>повышенной проходимости</strong> – шины с рисунком протектора, оптимизированным для
+                        передвижения по мокрому грунту или
+                        заснеженным поверхностям.
+                    </li>
+                    <li class="p-2">
+                        <strong>дождевые</strong> – шины, разработанные для устранения эффекта аквапланирования, что
+                        особенно заметно в сильный дождь.
+                    </li>
+                    <li class="p-2">
+                        <strong>скоростные или гоночные</strong> (псевдослики, слики – для сухого асфальта, микст – для
+                        мокрого) – шины, которые
+                        отличаются повышенными сцепными свойствами и более высоким уровнем управляемости.
+                    </li>
+                </ul>
+
+            </div>
+
+            <div id="pills-knife" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-knife-tab" tabindex="0">
+                <h5 class="text-uppercase fw-bolder py-3">
+                    Корд
+                </h5>
+
+                <strong>По типу корда шины делятся на радиальные и диагональные:</strong>
+
+                <ul>
+                    <li class="p-2">
+                        <strong>Радиальные</strong> – нити корда проходят от борта к борту перпендикулярно колесу, то есть под углом 90° без
+                        взаимного
+                        пересечения. Достоинства: технологичность, хорошо держат форму (стабильнее пятно контакта), лучше
+                        управляемость,
+                        меньше масса.
+                    </li>
+                    <li class="p-2">
+                        <strong>Диагональные</strong> – это те, что имеют четное число слоев корда, нити которого расположены под углом
+                        35°-40°, образуя
+                        пересекающиеся посредине линии. Достоинства: высокая стойкость боковины к порезам, способность
+                        переносить
+                        кратковременные перегрузки.
+                    </li>
+                </ul>
+
+                <div class="w-100 text-center my-5" style="height: 300px;">
+                    <div class="lazy h-100 bg-contain"
+                         data-bg="/triangle/catalog/knife.webp"
+                         title="Шины для любых автомобилей - широкий выбор и по выгодной цене"
+                    >
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="pills-reinforced" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-reinforced-tab" tabindex="0">
+
+                <h5 class="text-uppercase fw-bolder py-3">
+                    Усиленные шины и шины Run Flat
+                </h5>
+
+                <div class="d-flex justify-content-between ">
+
+                    <div class="w-75">
+
+                        <p>
+                            На некоторых колесах можно встретить маркировку XL, это сокращение от Extra Load, то есть «увеличенная
+                            нагрузка». Так обозначают резину с усиленным проволочным каркасом. Данные шины способны выдерживать большее
+                            давление по сравнению с обычными того же типоразмера, их грузоподъемность больше на 10-12%.
+                        </p>
+                        <p>
+                            Шины XL хорошо себя зарекомендовали на грунтовых дорогах. Ямы и кочки создают дополнительную нагрузку на всю
+                            ходовую часть автомобиля, в том числе, разумеется, на шины. Усиленный корд делает модели XL прочнее и устойчивее
+                            к боковым ударам. Такие колеса актуальны для кроссоверов, внедорожников и легкого коммерческого транспорта.
+                        </p>
+                        <p>
+                            "Run Flat" ("ран флет") – автомобильные шины, позволяющие проехать на спущенном колесе примерно 80-100 км со
+                            скоростью до 80 км/ч. Шины, изготавливаемые по этой технологии, еще называют «самонесущими шинами» или «шинами
+                            нулевого давления». Обычно такой эффект достигается за счет усиления боковин, например, с помощью
+                            дополнительного внутреннего опорного кольца, чтобы резина после потери давления продолжала держать форму, не
+                            прогибалась до обода диска и не сползала с него.
+                        </p>
+
+                        <p>
+                            Также выпускают шины Run Flat, в конструкции которых предусмотрен внутренний герметизирующий слой, затягивающий
+                            незначительные порезы или проколы. На таких колесах можно безопасно доехать до шиномонтажа. Усиленные шины и
+                            шины Run Flat заметно дороже обычных.
+                        </p>
+
+
+                    </div>
+
+                    <div class="w-50">
+                        <div class="lazy h-100 bg-contain"
+                             data-bg="/triangle/catalog/reinforced.webp"
+                             title="Шины для любых автомобилей - широкий выбор и по выгодной цене"
+                        >
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="mt-3 rounded-circle border-0 mb-5 opacity-25" style="height: 20px; box-shadow: 0 20px 20px -6px #000;"></div>
+
+
+            <h3 class="text-uppercase h4 fw-bolder">Правильный выбор шин - залог безопасности</h3>
+
+            <p>
+                Правильный выбор шин для вашего автомобиля позволяет сократить тормозной путь, улучшить сцепление с дорогой и
+                продлить жизнь как самим шинам, так и ходовой части авто в целом. Выбор и покупка шин – ответственное дело, к
+                которому надо подходить со всей серьезностью. Наши консультанты помогут вам при необходимости. Приятных вам
+                покупок и удачи на дороге!
+            </p>
+
+
+
+    </div> #}
+
+
+</main>
+
+

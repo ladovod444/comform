@@ -1,0 +1,49 @@
+{# КАРУСЕЛЬ ДЛЯ ПРОСМОТРА ИЗОБРАЖЕНИЙ #}
+
+{% if card.productImagesSortByRoot is not null %}
+	{% set photos = card.productImagesSortByRoot %}
+{% else %}
+	{% set photos = ['/assets/img/blank.svg'] %}
+{% endif %}
+
+<div class="carousel slide d-flex position-relative" id="productPageCarousel" data-bs-wrap="true" style="height: 360px;">
+
+	{# КАРУСЕЛЬ ВСЕХ ИЗОБРАЖЕНИЙ #}
+	<div class="carousel-indicators product-carousel-indicators overflow-y-scroll scroll-none gap-2 justify-content-between flex-column m-0 me-2 scroll-container">
+		{% for key, photo in photos %}
+
+			{# Обложка #}
+			{% set image_path = '/assets/img/blank.svg' %}
+			{% if photo.product_img_ext is defined and photo.product_img_ext is not null %}
+				{% set image_path = cdn_image_path(photo.product_img, photo.product_img_ext, photo.product_img_cdn) %}
+			{% endif %}
+
+			<button type="button" class="{{ key == 0 ? 'active' : '' }} rounded-3 border m-0" data-bs-target="#productPageCarousel" data-bs-slide-to="{{ key }}">
+				<img class="rounded-3" src="{{ image_path }}" alt="Изображение товара">
+			</button>
+		{% endfor %}
+	</div>
+
+	{# ВЫБРАННОЕ ИЗОБРАЖЕНИЕ #}
+	<div class="carousel-inner carousel-inner-product rounded-4 border ">
+		{% for key, photo in photos %}
+
+			{# Обложка  #}
+			{% set image_path = '/assets/img/blank.svg' %}
+			{% if photo.product_img_ext is defined and photo.product_img_ext is not null %}
+				{% set image_path = cdn_image_path(photo.product_img, photo.product_img_ext, photo.product_img_cdn) %}
+			{% endif %}
+
+			<div class="carousel-item {{ key == 0 ? 'active' : '' }} text-center h-100"
+				 style="
+						 cursor: pointer;
+						 background: url({{ image_path }});
+						 background-size: cover;
+						 background-position: center;"
+				 data-bs-toggle="modal" data-bs-target="#ModalProductCarousel">
+			</div>
+
+		{% endfor %}
+	</div>
+
+</div>

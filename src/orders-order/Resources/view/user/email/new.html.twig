@@ -1,0 +1,135 @@
+{% trans_default_domain 'user.restore' %}
+
+<div style="font-family:Arial,Helvetica,sans-serif; line-height: 1.5; font-weight: normal; font-size: 13px; color: #2F3044; min-height: 100%; margin:0; padding:0; width:100%; background-color:#edf2f7">
+    <br>
+
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
+           style="border-collapse:collapse;margin:0 auto; padding:0; max-width:600px">
+        <tbody>
+        <tr>
+            <td align="center" valign="center" style="text-align:center; padding: 40px">
+                {# Логотип #}
+                <a href="{{ url('core:user.homepage') }}" rel="noopener" target="_blank">
+                    <img alt="Logo" src="{{ absolute_url('/logo.webp') }}">
+                </a>
+            </td>
+
+        <tr>
+            <td align="center" valign="center" style="background-color:#ffffff; padding-top: 20px;">
+                <h3>Спасибо! Ваш заказ № {{ order.order_number }} оформлен</h3>
+
+
+        <tr>
+
+            <td align="left" valign="center" style="background-color:#ffffff; padding: 20px; padding-bottom: 10px;">
+
+                <p>Вы получили это письмо, потому что мы получили запрос на упаковку заказа для вашей учетной
+                    записи.</p>
+
+                <ul>
+                    <li>Наш менеджер обрабатывает ваш заказ.</li>
+                    <li>Всю информацию о заказе вы можете посмотреть в личном кабинете.</li>
+                    <li>В связи с высокой нагрузкой возможны изменения в сроках доставки. Приносим извинения за
+                        возможные неудобства.
+                    </li>
+                </ul>
+
+
+                <h3>Доставка:</h3>
+                <p style="font-size: 13px;"><strong>{{ order.delivery_name }}
+                        :</strong> {{ order.delivery_geocode_address }}</p>
+
+
+                <h3>Информация о заказе:</h3>
+
+                {% set products = order.order_products|json_decode %}
+
+
+                <table class="table" style="font-size: 12px; width: 100%">
+                    <thead>
+                    <tr class="small text-muted border-white">
+                        <th scope="col" align="left">Наименование</th>
+                        <th scope="col">Стоимость, шт</th>
+                        <th scope="col" class="text-center">Количество</th>
+                        <th scope="col">Сумма</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for card in products %}
+                    <tr>
+
+                        <td>
+                            <a href="{{ url('products-product:user.detail', {
+                                category : card.category_url ,
+                                url : card.product_url ,
+                                offer: card.product_offer_value,
+                                variation: card.product_variation_value,
+                                modification: card.product_modification_value
+                            }) }}" target="_blank" class="text-dark me-3 text-uppercase">
+
+                                {{ card.product_name }}
+
+                                {{ card.product_variation_value|call_twig_func(card.product_variation_reference) ~
+                                card.product_modification_value|call_twig_func(card.product_modification_reference) }}
+
+                                {{ card.product_offer_value|call_twig_func(card.product_offer_reference) }}
+
+
+                                {# Постфикс торгового предложения #}
+                                {{ card.product_offer_postfix }}
+                                {# Постфикс множественного варианта #}
+                                {{ card.product_variation_postfix }}
+                                {# Постфикс модификации #}
+                                {{ card.product_modification_postfix }}
+                            </a>
+
+                        <td class="vertical-middle"
+                            align="center">{{ money(card.product_price, card.product_price_currency) }}
+                        <td class="vertical-middle" align="center">{{ card.product_total }}
+                        <td class="vertical-middle" align="center">
+
+                            {% set summ = (card.product_total * card.product_price) %}
+
+                            <strong class="h5 mb-0">
+                                {{ money(summ, card.product_price_currency) }}
+                            </strong>
+
+                            {% endfor %}
+
+                    </tbody>
+                </table>
+
+
+        <tr>
+            <td align="center" valign="center"
+                style="background-color:#ffffff; color: #a0a1a3; font-size: 12px; padding: 20px; padding-bottom: 40px;">
+
+
+                <div style="border-bottom: 1px solid #eeeeee; margin: 15px 0"></div>
+
+                <p>Уважаемые клиенты!</p>
+                <p>Участились звонки пользователям различных приложений от мошенников. Они представляются работниками
+                    интернет-магазинов, банков, государственных структур и просят сообщить личные данные: банк, в
+                    котором обслуживается клиент,
+                    паспортные данные, пароли и значения SMS-кодов. Обращаем ваше внимание, что <strong
+                            style="color: #747676;;">операторы нашего
+                        онлайн-магазина не осуществляют телефонные звонки через «МЕССЕНДЖЕРЫ» (Viber, WhatsApp, Telegram
+                        и пр.) и не спрашивают
+                        конфиденциальную информацию.</strong></p>
+                <p>Не сообщайте никому свою конфиденциальную информацию и совершайте покупки безопасно.</p>
+
+                Хорошего дня и приятных покупок в онлайн‑магазине {{ host }}.
+
+        <tr>
+            <td align="center" valign="center"
+                style="font-size: 13px; text-align:center;padding: 20px; color: #6d6e7c;">
+                Copyright © <a href="{{ url('core:user.homepage') }}"
+                               rel="noopener"
+                               target="_blank">{{ senderName }}</a>.
+
+        </tbody>
+    </table>
+</div>
+

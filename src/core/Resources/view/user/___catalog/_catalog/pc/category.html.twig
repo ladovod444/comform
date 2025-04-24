@@ -1,0 +1,48 @@
+{# ВЛОЖЕННЫЕ РАЗДЕЛЫ (КТАЕГОРИИ) #}
+	
+	{% set parent_category = category.parent_category|json_decode %}
+
+	{% if parent_category[0].parent_category_url %}
+
+        <ul class="leader list-group list-group-flush list-group-horizontal flex-wrap gap-3 mb-3 bg-light p-3">
+
+            {% for parent in parent_category|filter(v => v.parent_category_counter > 0) %}
+
+                <li class="list-group-item bg-transparent border-0 text-truncate rounded-5" style="width: 32%;">
+
+                    <a href="{{ path('products-product:user.catalog.category', { category : parent.parent_category_url }) }}"
+                       class="text-decoration-none text-dark d-flex gap-3 align-items-center w-100 justify-content-start"
+                       title="{{ parent.parent_category_name }}">
+
+                        <div class=''>
+
+                            {# Обложка  #}
+                            {% set image_path = '/assets/img/blank.svg' %}
+
+                            {% if parent.parent_category_cover_ext is defined and parent.parent_category_cover_ext is not null %}
+                                {% set img_host =  parent.parent_category_cover_cdn == true  ? CDN_HOST : '' %}
+                                {% set img_dir = parent.parent_category_cover_name %}
+                                {% set img_file = (img_host is empty ? '/image.' : '/small.') ~ parent.parent_category_cover_ext %}
+                                {% set image_path = img_host ~ img_dir ~ img_file %}
+                            {% endif %}
+
+
+                            <span class="icon rounded-circle bg-contain lazy p-1 entered lazy"
+                                  style="width: 43px; height: 43px;
+										background-image: url('/assets/img/empty.svg');"
+                                  data-bg="{{ image_path }}"
+                            >
+								</span>
+                        </div>
+
+                        <div>
+                            {{ parent.parent_category_name }}
+                            <div class='small'><small>{{ parent.parent_category_counter }} товаров</small></div>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+
+        </ul>
+    {% endif %}
+	

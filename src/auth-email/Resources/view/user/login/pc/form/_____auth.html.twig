@@ -1,0 +1,78 @@
+<div class="modal-dialog modal-dialog-centered" style="max-width: 800px;">
+    {{ form_start(form) }}
+    <div class="modal-content p-3 border-bottom border-5 border-primary">
+
+
+        <div class="modal-body  px-5">
+
+            <div class="mb-3">
+                {{ form_label(form.email, 'E-mail*',
+                    {'label_attr': {
+                        'class': 'form-label fw-medium'}
+                    }) }}
+
+                {{ form_widget(form.email, {
+                    attr: {
+                        class: 'form-control rounded-5 border-0 bg-body-tertiary py-2',
+                        style: 'box-shadow: 0px 3px 3px rgba(0,0,0,0.08) inset;'
+                    } }) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.password, 'Пароль*',
+                    {'label_attr': {
+                        'class': 'form-label fw-medium'}
+                    }) }}
+
+                {{ form_widget(form.password, {
+                    attr: {
+                        class: 'form-control rounded-5 border-0 bg-body-tertiary py-2',
+                        style: 'box-shadow: 0px 3px 3px rgba(0,0,0,0.08) inset;'
+                    } }) }}
+            </div>
+
+            <button
+                    data-href="{{ path('auth-email:user.registration') }}"
+                    {# data-bs-toggle="modal" #}
+                    data-bs-target="#modal"
+            >54564654
+            </button>
+
+        </div>
+
+        <div class="modal-footer justify-content-between border-0 px-5 flex-nowrap gap-4">
+
+            {{ form_widget(form.login,
+                {
+                    label: 'Войти',
+                    attr: { class: 'btn btn-primary m-0 rounded-5 w-100 fw-medium'}}
+            ) }}
+
+            {# @TODO  #}
+            {#        <button class="btn shadow m-0 rounded-5 w-100 fw-medium" data-bs-target="#reg" #}
+            {#                data-bs-toggle="modal" type="button">Регистрация #}
+            {#        </button> #}
+
+
+
+
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+
+
+    <button class="btn shadow m-0 rounded-5 w-100 fw-medium modal-link"
+
+            type="button"
+            data-href="{{ path('auth-email:user.registration') }}"
+            data-bs-toggle="modal"
+            data-bs-target="#modal"
+
+            role="button"
+    >
+
+        Регистрация
+    </button>
+</div>

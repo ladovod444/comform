@@ -1,0 +1,31 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+
+#end
+#set( $EventClass = $NAME.replace("DTO", "Event") )
+use Symfony\Component\Validator\Constraints as Assert;
+
+/** @see ${EventClass} */
+final class ${NAME} implements ${EventClass}Interface {
+
+	/**
+	* Идентификатор события
+	*/
+	#[Assert\Uuid]
+	private ?${EventClass}Uid ${DS}id = null;
+
+
+	/**
+	* Идентификатор события
+	*/
+	public function getEvent() : ?${EventClass}Uid
+	{
+		return ${DS}this->id;
+	}
+
+}

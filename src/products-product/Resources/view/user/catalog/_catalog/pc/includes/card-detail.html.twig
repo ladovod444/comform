@@ -1,0 +1,95 @@
+{% set image_path = '/assets/img/blank.svg' %}
+
+    {% if i.product_image_ext is defined and i.product_image_ext is not null %}
+        {% set image_path = cdn_image_path(i.product_image, i.product_image_ext, i.product_image_cdn) %}
+    {% endif %}
+
+
+<img class="card-img-top rounded-3 show-card-image" style="height: 170px;" src="{{ image_path }}"
+     alt="Изображение товара {{ i.productName }}">
+
+{# Слайдер для ховера #}
+<div id="carouselKitchens{{ k + section_number }}" class="carousel slide carousel-fade show-card-carousel"
+     style="height: 170px;">
+    <div class="carousel-indicators m-0">
+        <button type="button" data-bs-target="#carouselKitchens{{ k + section_number }}" data-bs-slide-to="0"
+                class="active m-0" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselKitchens{{ k + section_number }}" data-bs-slide-to="1"
+                class="m-0" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselKitchens{{ k + section_number }}" data-bs-slide-to="2"
+                class="m-0" aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner h-100">
+        <a href="{{ path('products-product:user.detail', {
+            'category': i.category_url,
+            'url': i.url
+        }) }}">
+            <div class="carousel-item active h-100">
+                <img src="{{ image_path }}"
+                     class="d-block w-100  h-100 rounded-3"
+                     alt="Изображение товара">
+            </div>
+            {#                <div class="carousel-item h-100"> #}
+            {#                    <img src="/assets/comfort/img/kitchens/{{ 2 }}.webp" class="d-block w-100 h-100 rounded-3" #}
+            {#                         alt="Изображение товара"> #}
+            {#                </div> #}
+            {#                <div class="carousel-item h-100"> #}
+            {#                    <img src="/assets/comfort/img/kitchens/{{ 3 }}.webp" class="d-block w-100 h-100 rounded-3" #}
+            {#                         alt="Изображение товара"> #}
+            {#                </div> #}
+        </a>
+    </div>
+</div>
+
+
+<div class="card-body  pb-1 px-0">
+    <div class="d-flex justify-content-between">
+        <h3 class="card-title fs-6">{{ i.productName }}
+        </h3>
+        {#        <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="lightgray" #}
+        {#             viewbox="0 0 16 16"> #}
+        {#            <path fill-rule="evenodd" #}
+        {#                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path> #}
+        {#        </svg> #}
+    </div>
+    <div class="d-flex align-items-center gap-2 mb-2 position-relative">
+        <p class="card-text fs-5 m-0 kitchen-card-text-price">
+            <strong>{{ money(i.product_price) }}</strong>
+        </p>
+        {#        <p class="card-text text-danger small mb-1 kitchen-card-text-price"> #}
+        {#            <del> #}
+        {#                <strong>250 200 Р.</strong> #}
+        {#            </del> #}
+        {#        </p> #}
+
+    </div>
+
+    <div class="card-params w-100 dropdown">
+        <div class="dropdown-menu dropdown-menu-kitchen p-3 pt-0">
+
+
+            <div class="d-flex flex-column gap-2 mb-2">
+                {% if offer[0].offer_value %}
+                    <p class="text-secondary small mb-0 ">{{ offer[0].offer_value }}</p>
+                {% endif %}
+                {% if offer[0].variation_value %}
+                    <p class="text-secondary small mb-0 ">{{ offer[0].variation_value }}</p>
+                {% endif %}
+                {% if offer[0].modification_value %}
+                    <p class="text-secondary small mb-0 ">{{ offer[0].modification_value }}</p>
+                {% endif %}
+            </div>
+
+            <a
+                    class="btn btn-dark w-100"
+                    href="{{ path('products-product:user.detail', {
+                        'category': i.category_url,
+                        'url': i.url
+                    }) }}">Купить</a>
+        </div>
+    </div>
+
+</div>
+
+

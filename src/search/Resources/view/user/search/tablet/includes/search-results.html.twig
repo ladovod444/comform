@@ -1,0 +1,30 @@
+{% trans_default_domain 'search' %}
+<div class="row row-cols-2 g-2">
+
+    {% if products %}
+        {% set image_path = '/assets/img/blank.svg' %}
+        {% for product in products %}
+
+
+            {{ include(_self|replace({ "search-results.html.twig" : "/search-card.html.twig" })) }}
+
+            {% if product.product_image_ext is defined and product.product_image_ext is not null %}
+                {% set image_path = cdn_image_path(product.product_image, product.product_image_ext, product.product_image_cdn) %}
+            {% endif %}
+
+            {% set path = path('products-product:user.detail', {
+                category: product.category_url,
+                url: product.url,
+                offer: product.product_offer_value,
+                variation: product.product_variation_value,
+                modification: product.product_modification_value,
+                postfix: (product.product_modification_postfix ?: product.product_variation_postfix ?: product.product_offer_postfix ?: null )|replace({ '/': '-' }),
+            }) %}
+
+        {% endfor %}
+
+    {% else %}
+        <div class="no-content">{{ 'search_results.noresults'|trans }}</div>
+    {% endif %}
+
+</div>

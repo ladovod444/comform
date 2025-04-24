@@ -1,0 +1,174 @@
+{% set discount = user_profile_discount(card.product_price) %}
+
+{% set arr_property = card.categorySectionField|json_decode %}
+
+<div data-id='{{ card.id }}' class="card rounded-4 border-0 mb-3">
+
+
+    <div class="card-image-wrap overflow-hidden rounded-4 border" style="height: 200px;">
+
+        <div class="d-flex justify-content-between">
+            <div>
+                <button class="btn btn-link opacity-0 card-favorites"
+                        title="Добавить в избранное"
+                        data-id="{{ card.id }}"
+                >
+                    <img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNCMUI2QkIiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAxLjMxNEMxMi40MzgtMy4yNDggMjMuNTM0IDQuNzM1IDggMTUtNy41MzQgNC43MzYgMy41NjItMy4yNDggOCAxLjMxNHoiPjwvcGF0aD48L3N2Zz4K"
+                         width="16" height="16"
+                         src="/assets/img/empty.png"
+                         class="lazy"
+                         alt="Добавить в избранное"
+                    >
+                </button>
+            </div>
+
+            <div class="mt-2 me-2">
+
+                {% if discount %}
+                    <span class="badge bg-danger rounded-2 me-1">-{{ baks_profile.profile_discount }}%</span>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <a href="{{ path('products-product:user.detail', {
+            category: card.category_url,
+            url: card.url,
+            offer : card.product_offer_value,
+            variation : card.product_variation_value,
+            modification : card.product_modification_value,
+            postfix:  (card.productModificationPostfix ?: card.productVariationPostfix ?: card.productOfferPostfix ?: null )|replace({ '/': '-' })
+        }) }}">
+
+
+            {# Обложка  #}
+            {% set image_path = '/assets/img/blank.svg' %}
+
+            {% if card.product_image_ext is defined and card.product_image_ext is not null %}
+                {% set img_host = card.product_image_cdn == true  ? CDN_HOST : '' %}
+                {% set img_dir = card.product_image %}
+                {% set img_file = (img_host is empty ? '/image.' : '/small.') ~ card.product_image_ext %}
+                {% set image_path = img_host ~ img_dir ~ img_file %}
+            {% endif %}
+
+            {# Свойства, накладываемые на фото #}
+
+            <div class="lazy h-100 bg-cover position-relative" data-bg="{{ image_path }}"
+                 title="{{ card.productName }}">
+                <div class="position-absolute bottom-0 mb-5 ms-3">
+                    {% for name_property in arr_property | filter(preview => preview.field_photo == true) %}
+                        {{ name_property.field_value|call_twig_func(name_property.field_type~'_render') }}
+                    {% endfor %}
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="card-body p-3">
+
+        {% if card.product_price %}
+
+            <small class="small text-decoration-line-through text-danger fw-bold lh-1">
+                {% if discount %}
+                    {{ money(card.product_price, card.product_currency) }}
+                {% endif %}
+            </small>
+
+            <div class="card-price-wrap d-flex justify-content-between align-items-end mb-2">
+
+                {# Стоимость продукта #}
+                <div class="card-price d-flex flex-column align-items-end">
+						<span class="fw-bolder h5 mb-0 lh-1">
+							{{ discount ? money(discount, card.product_currency) : money(card.product_price, card.product_currency) }}
+						</span>
+                </div>
+
+                <button data-href="{{ path('orders-order:user.add', {
+                    product: card.event,
+                    offer : card.product_offer_uid,
+                    variation : card.product_variation_uid,
+                    modification : card.product_modification_uid
+                }) }}"
+                        class="btn btn-sm btn-danger py-0 rounded-3 modal-link add-basket d-flex align-items-center gap-1"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal"
+                        title="Купить"
+                >
+                    <span>купить</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                         class="bi bi-cart3" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                    </svg>
+                </button>
+
+            </div>
+
+        {% else %}
+
+            <small class="small lh-1">&nbsp;</small>
+
+            <div class="card-price-wrap d-flex justify-content-between align-items-end mb-2">
+
+                <div class="card-price d-flex flex-column align-items-end">
+                    <div class="fw-bolder h4 mb-0 lh-1"></div>
+                </div>
+
+                {# Кнопка запроса цены  #}
+                <button class="btn btn-sm btn-danger py-0 rounded-3 w-100"
+                        title="Цена по запросу"
+                >
+                    <span class="px-2">Цена по запросу</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                         class="bi bi-cart3" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                    </svg>
+                </button>
+
+            </div>
+        {% endif %}
+
+
+        <h2 class="card-title mb-1 h6" style='min-height: 2.2rem;'>
+            <a href="{{ path('products-product:user.detail', {
+                category: card.category_url,
+                url: card.url,
+                offer : card.product_offer_value,
+                variation : card.product_variation_value,
+                modification : card.product_modification_value,
+                postfix:  (card.productModificationPostfix ?: card.productVariationPostfix ?: card.productOfferPostfix ?: null )|replace({ '/': '-' })
+            }) }}" class="text-decoration-none text-dark">
+                <small>{{ card.productName }}</small>
+
+                <br>
+
+                {# Значение множественного варианта ТП #}
+                {{ card.product_variation_value|call_twig_func(card.productVariationReference~'_render')
+                ~ card.product_modification_value|call_twig_func(card.product_modification_reference~'_render') }}
+
+                {# Значение торгового предложения #}
+                {{ card.product_offer_value|call_twig_func(card.productOfferReference~'_render') }}
+
+                {# Постфикс модификации #}
+                {{ card.productModificationPostfix }}
+
+
+                {# Свойства, учавствующие в названии #}
+                {% for name_property in arr_property | filter(props => props.field_name == true) %}
+                    {{ name_property.field_value|call_twig_func(name_property.field_type) }}
+                {% endfor %}
+
+            </a>
+        </h2>
+
+        <div class="card-labels d-flex align-items-center gap-2 mt-1">
+            {# Свойства, учавствующие в ПРЕВЬЮ #}
+
+            {% for name_property in arr_property | filter(preview => preview.field_card == true) %}
+                {{ name_property.field_value|call_twig_func(name_property.field_type~'_render') }}
+            {% endfor %}
+
+        </div>
+    </div>
+</div>

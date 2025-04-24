@@ -1,0 +1,31 @@
+<ul class="list-group list-style-none">
+    {% for link in items %}
+        <li class="list-group-item border-0 p-0">
+            {% if isProduct %}
+                <a
+                        class="list-group-item border-0 p-0 small"
+                        href="{{ path( link.is_offer == true ? 'products-product:user.model' : 'products-product:user.detail', {
+                            'category': link.category_url,
+                            'url': link.url
+                        }) }}"
+                >
+                    {{ link.name | raw }}
+                </a>
+
+            {% else %}
+
+                <a
+                        class="list-group-item border-0 p-0 small"
+                        href="{{ path('products-product:user.catalog.category', {'category': link.url}) }}"
+                >
+                    {{ link.name }}
+                </a>
+
+            {% endif %}
+
+        </li>
+
+
+    {% endfor %}
+
+</ul>

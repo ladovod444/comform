@@ -1,0 +1,19 @@
+<div class=" container carousel carousel-dark carousel-fade slide py-3" data-bs-touch="true" data-bs-ride="carousel"{# data-bs-interval="true" #} id="carouselAdBanner">
+            {% set total_items = 2 %}
+
+            <div class="carousel-indicators button-position justify-content-start" style="margin-left: 8%;margin-bottom: 5%;">
+            {% for i in 0..total_items %}
+                <button type="button" data-bs-target="#carouselAdBanner" data-bs-slide-to="{{i}}" class="{{ i == 0 ? 'active' : '' }} " aria-current="true" aria-label="Slide {{i+1}}"></button>
+            {% endfor %}
+            </div>
+
+            <div class="carousel-inner rounded-4" style="height: 320px;">
+           
+                {% for i in 0..total_items %}
+                    <div class="carousel-item {{ i == 0 ? 'active' : '' }} h-100 position-relative rounded-4" style="background: center url(https://placehold.co/1024x350?text=Акционный+баннер{{ i + 1 }})">
+                        
+                    </div>
+                {% endfor %}
+            </div>
+            
+        </div>

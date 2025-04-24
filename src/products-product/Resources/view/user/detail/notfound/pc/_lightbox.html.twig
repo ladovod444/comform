@@ -1,0 +1,138 @@
+{% set img_active = true %}
+
+
+<div class="modal fade lightbox-modal" style="--bs-modal-width: none;" id="lightboxModal" tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered w-100 h-100 m-0 p-0">
+        <div class="modal-content h-auto min-vh-100 rounded-0">
+
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+
+            <div class="modal-body d-flex align-items-center">
+
+                <div id="carouselExampleDark" class="carousel carousel-dark slide w-100" data-bs-ride="carousel">
+
+                    <div id="glass" class="carousel-inner">
+
+
+                        {% for modification_image in product_modification_image | filter(img => img.product_img_ext is defined) %}
+
+                            {# Обложка  #}
+                            {% set image_path = '/assets/img/blank.svg' %}
+
+                            {% if modification_image.product_img_ext is defined and modification_image.product_img_ext is not null %}
+                                {% set img_host =  modification_image.product_img_cdn == true  ? CDN_HOST : '' %}
+                                {% set img_dir = modification_image.product_img %}
+                                {% set img_file = (img_host is empty ? '/image.' : '/small.') ~ modification_image.product_img_ext %}
+                                {% set image_path = img_host ~ img_dir ~ img_file %}
+                            {% endif %}
+
+
+                            <div class="carousel-item {{ img_active ? 'active' }}">
+                                <img src="{{ image_path }}" class="d-block m-auto vh-75 mh-100"
+                                     alt="{{ card.productName }}">
+                            </div>
+
+                            {% set img_active = false %}
+                        {% endfor %}
+
+
+
+                        {% for variation_image in product_variation_image | filter(img => img.product_img_ext is defined) %}
+
+
+                            {# Обложка  #}
+                            {% set image_path = '/assets/img/blank.svg' %}
+
+                            {% if variation_image.product_img_ext is defined and variation_image.product_img_ext is not null %}
+                                {% set img_host =  variation_image.product_img_cdn == true  ? CDN_HOST : '' %}
+                                {% set img_dir = variation_image.product_img %}
+                                {% set img_file = (img_host is empty ? '/image.' : '/large.') ~ variation_image.product_img_ext %}
+                                {% set image_path = img_host ~ img_dir ~ img_file %}
+                            {% endif %}
+
+
+                            <div class="carousel-item {{ img_active ? 'active' }}">
+                                <img src="{{ image_path }}" class="d-block m-auto vh-75 mh-100"
+                                     alt="{{ card.productName }}">
+                            </div>
+
+                            {% set img_active = false %}
+
+                        {% endfor %}
+
+
+
+
+
+                        {% for offer_images in product_offer_images | filter(img => img.product_img_ext is defined) %}
+
+
+                            {# Обложка #}
+                            {% set image_path = '/assets/img/blank.svg' %}
+
+                            {% if offer_images.product_img_ext is defined and offer_images.product_img_ext is not null %}
+                                {% set img_host =  offer_images.product_img_cdn == true  ? CDN_HOST : '' %}
+                                {% set img_dir = offer_images.product_img %}
+                                {% set img_file = (img_host is empty ? '/image.' : '/large.') ~ offer_images.product_img_ext %}
+                                {% set image_path = img_host ~ img_dir ~ img_file %}
+                            {% endif %}
+
+                            <div class="carousel-item {{ img_active ? 'active' }}">
+                                <img src="{{ image_path }}" class="d-block m-auto vh-75 mh-100"
+                                     alt="{{ card.productName }}">
+                            </div>
+
+                            {% set img_active = false %}
+                            {
+                        {% endfor %}
+
+
+                        {% for product_images in product_photo | filter(img => img.product_img_ext is defined) %}
+
+                            {# Обложка #}
+                            {% set image_path = '/assets/img/blank.svg' %}
+
+                            {% if product_images.product_img_ext is defined and product_images.product_img_ext is not null %}
+                                {% set img_host =  product_images.product_img_cdn == true  ? CDN_HOST : '' %}
+                                {% set img_dir = product_images.product_img %}
+                                {% set img_file = (img_host is empty ? '/image.' : '/large.') ~ product_images.product_img_ext %}
+                                {% set image_path = img_host ~ img_dir ~ img_file %}
+                            {% endif %}
+
+
+                            <div class="carousel-item {{ img_active ? 'active' }}">
+                                <img src="{{ image_path }}" class="d-block m-auto vh-75 mh-100"
+                                     alt="{{ card.productName }}">
+                            </div>
+
+                            {% set img_active = false %}
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+                    <button class="carousel-control-prev pe-5" type="button" data-bs-target="#carouselExampleDark"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next ps-5" type="button" data-bs-target="#carouselExampleDark"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

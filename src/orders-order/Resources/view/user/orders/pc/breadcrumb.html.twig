@@ -1,0 +1,56 @@
+{#<nav class="small" style="--bs-breadcrumb-divider: '-';" aria-label="breadcrumb">#}
+{#    <ol class="breadcrumb text-secondary small opacity-75">#}
+{#        <li>#}
+{#            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor"#}
+{#                 class="bi bi-caret-right-fill text-muted me-1" viewBox="0 0 16 16">#}
+{#                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>#}
+{#            </svg>#}
+{#        </li>#}
+
+{#        <li class="breadcrumb-item">#}
+{#            <a href="{{ path('core:user.homepage') }}" class="text-muted"#}
+{#               aria-label="{{ 'breadcrumb.homepage.user'|trans({}, 'pages') }}"#}
+{#               title="{{ 'breadcrumb.homepage.user'|trans({}, 'pages') }}">#}
+{#                {{ 'breadcrumb.homepage.user'|trans({}, 'pages') }}#}
+{#            </a>#}
+{#        </li>#}
+
+
+{#        <li class="breadcrumb-item active text-primary" aria-current="page"#}
+{#            aria-label="195/45 R16 84W"#}
+{#            title="195/45 R16 84W">Ваша корзина#}
+{#        </li>#}
+{#    </ol>#}
+{#</nav>#}
+<section class="container py-3">
+    <h2 class="visually-hidden">Хлебные крошки</h2>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0" style="font-size: 11px;">
+
+
+            <li class="breadcrumb-item">
+                <a href="{{ path('core:user.homepage') }}"
+                   class="text-secondary text-decoration-none"
+                   aria-label="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}"
+                   title="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}">
+                    {{ 'breadcrumb.homepage.user'|trans({}, 'core') }}
+                </a>
+            </li>
+
+            <li class="breadcrumb-item">
+
+                <a href="{{ path('orders-order:user.basket') }}"
+                   class="text-secondary text-decoration-none"
+                   aria-label="Каталог"
+                   title="Каталог">
+                    Ваша корзина
+                </a>
+            </li>
+
+            <li class="breadcrumb-item text-secondary" aria-current="page"
+                aria-label="Ваша корзина"
+                title="Ваша корзина">Оформление заказа
+            </li>
+        </ol>
+    </nav>
+</section>

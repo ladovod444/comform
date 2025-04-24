@@ -1,0 +1,21 @@
+{% extends Template('/public/base.html.twig') %}
+    {% block meta %}
+        <meta http-equiv="Cache-control" content="no-cache">
+    {% endblock %}
+
+{% block title %}
+    Страница регистрации
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/plugins/nice-select2/nice-select2.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {{ include(_self|replace({ "template.html.twig" : baks_settings.device~"/content.html.twig" })) }}
+{% endblock %}
+
+{% block javascript %}
+<script nonce='{{ csp_nonce() }}'  data-src='/assets/plugins/nice-select2/nice-select2.min.js?v={{ version }}' class='lazy'></script>
+
+{% endblock %}

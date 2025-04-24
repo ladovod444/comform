@@ -1,0 +1,10 @@
+<style></style>
+
+{% set isProducts = baks_basket.counter > 0 ? true : false %}
+
+{{ include(_self|replace({ "content.html.twig" : baks_settings.device~"/content.html.twig" })) }}
+
+<script nonce='{{ csp_nonce() }}' async data-src="/assets/js/copy.min.js?v={{ version }}" class="lazy"></script>
+
+
+

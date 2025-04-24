@@ -1,0 +1,46 @@
+<section class="container py-3">
+    <h2 class="visually-hidden">Хлебные крошки</h2>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0" style="font-size: 11px;">
+            {#        <li class="breadcrumb-item"><a class="text-secondary text-decoration-none" href="{{ path('core:user.homepage') }}">Главная</a></li> #}
+            {#        <li class="breadcrumb-item"><a class="text-secondary text-decoration-none" href="#">Другая страница</a></li> #}
+            {#        <li class="breadcrumb-item"><a class="text-secondary text-decoration-none" href="#">Еще одна страница</a></li> #}
+
+            <li class="breadcrumb-item">
+                <a href="{{ path('core:user.homepage') }}"
+                   class="text-secondary text-decoration-none"
+                   aria-label="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}"
+                   title="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}">
+                    {{ 'breadcrumb.homepage.user'|trans({}, 'core') }}
+                </a>
+            </li>
+
+            <li class="breadcrumb-item">
+
+                <a href="{{ path('products-product:user.catalog.index') }}"
+                   class="text-secondary text-decoration-none"
+                   aria-label="Каталог"
+                   title="Каталог">
+                    Каталог
+                </a>
+            </li>
+
+            <li class="breadcrumb-item">
+                <a href="{{ path('products-product:user.catalog.category', { category : card.categoryUrl }) }}"
+                   class="text-secondary text-decoration-none"
+                   aria-label="{{ card.categoryName }}"
+                   title="{{ card.categoryName }}">
+                    {{ card.categoryName }}
+                </a>
+            </li>
+
+            <li class="breadcrumb-item text-secondary text-decoration-none"
+                aria-current="page"
+                aria-label="{{ card.productName }}"
+                title="{{ card.productName }}">
+                {# Значение торгового предложения #}
+                {{ card.productName }}
+            </li>
+        </ol>
+    </nav>
+</section>

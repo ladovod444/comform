@@ -1,0 +1,14 @@
+<div class="modal-dialog modal-dialog-centered justify-content-center">
+
+    <div class="modal-content py-3 border-0 rounded-4">
+
+        <div class="modal-header gap-3 border-0 mb-0 pb-1">
+            <svg class="bi bi-lock" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="lightblue" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"></path></svg>
+            <h2 class="mb-0 fs-6" id="exampleModalToggleLabel">Личный кабинет</h2>
+            <button class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть" type="button"></button>
+        </div>
+        {{ include(_self|replace({ "modal-content.html.twig" : "form/auth.html.twig" }), {form, modal}, with_context = false) }}
+        
+    </div>
+
+</div>

@@ -1,0 +1,114 @@
+{% set price = user_profile_discount(card.product_price) ?: card.product_price %}
+
+{% set oldPrice = user_profile_discount(card.product_old_price) ?: card.product_old_price %}
+
+
+ <div class="col">
+        <div class="card product-card h-100 border-0 p-2 position-relative rounded-4 bg-transparent ">
+
+                {% set image_path = '/assets/img/blank.svg' %}
+
+                {% if card.product_image_ext is defined and card.product_image_ext is not null %}
+                    {% set image_path = cdn_image_path(card.product_image, card.product_image_ext, card.product_images_cdn) %}
+                {% endif %}
+
+
+        {{ include(_self|replace({ "includes/card.html.twig": "form/big_button.html.twig" }), { form : forms[card.product_invariable_id] }) }}
+
+        {# Изображение продукта #}
+            <div class="card-img-top rounded-4 ratio-3x4"
+                style="background: url({{ image_path }}) center no-repeat; background-color:white; ">
+
+              
+                
+                
+
+                <a class="d-block h-100" href="{{ path('products-product:user.detail', {
+                    category: card.category_url,
+                    url: card.product_url,
+                    offer: card.product_offer_value,
+                    variation: card.product_variation_value,
+                    modification: card.product_modification_value
+                    
+                }) }}" aria-label="{{ card.product_trans_name }}">
+                </a>
+
+                {# {{ render_favorite_button(card.product_invariable_id) }} #}
+
+                
+
+            </div>
+
+            <div class="card-body  d-flex flex-column justify-content-between  pb-1 px-0">
+
+                <div>
+                    <div class="d-flex align-items-center justify-content-between mb-2 px-2">
+
+                        <div class="d-flex align-items-center gap-2">
+
+                            <p class="card-text fs-4 m-0" style="font-size:24px!important;">
+
+                                <strong>
+                                    {{ money(price, card.product_currency) }}
+                                </strong>
+                            </p>
+
+                            {% if oldPrice %}
+
+                                <p class="card-text text-secondary fs-11 m-0 fw-bold mb-1">
+                                    <del>{{ money(oldPrice, card.product_currency) }}</del>
+                                </p>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        {# Кнопка для покупки #}
+                        {% include Template('@products-product/public/'~(baks_settings.device)~'/add_to_basket_button.html.twig') with {
+                            'model_event': card.product_event_id,
+                            'product_offer': card.product_offer_id,
+                            'product_variation': card.product_variation_id,
+                            'product_modification': card.product_modification_id,
+                        } only %}
+
+                    </div>
+
+                    <div class="d-flex mb-2">
+                        <a class="text-black text-decoration-none"
+                        href="{{ path('products-product:user.detail', {
+                            category: card.category_url,
+                            url: card.product_url,
+                            offer: card.product_offer_value,
+                            variation: card.product_variation_value,
+                            modification: card.product_modification_value
+                            
+                        }) }}">
+                            <h3 class="card-title fw-bold px-2 text-uppercase mb-0" style="font-size:14px!important;">
+
+                                {# Название продукта #}
+                                {{ card.product_trans_name }}
+                                </br>
+
+                                {# Значение множественного варианта ТП #}
+                                {{ card.product_variation_value|call_twig_func(card.product_variation_reference~'_render')
+                                ~ card.product_modification_value|call_twig_func(card.product_modification_reference~'_render') }}
+
+                                {# Значение торгового предложения #}
+                                {{ card.product_offer_value|call_twig_func(card.product_offer_reference~'_render') }}
+                            </h3>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-between align-items-baseline">
+
+                    <span class="d-block px-2 fs-11 text-success mb-2">
+                        &#183; Есть в наличии
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>

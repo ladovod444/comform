@@ -1,0 +1,48 @@
+{# {{ include(_self|replace({ "content.html.twig": "header.html.twig" })) }} #}
+
+
+<main class="main">
+
+    <section id="orders" class='container shadow p-3 mb-3'>
+
+        <h1 class="h4 text-uppercase fw-bolder mb-3 my-4">Заказ {{ number }}</h1>
+
+        <div class="alert alert-warning" role="alert">
+
+            <div class='d-flex justify-content-between align-items-center'>
+                <div>
+                    <p>Ваш заказ был успешно оформлен и находится в процессе обработки. Наша команда уже начала работу
+                        над ним и постарается выполнить его в кратчайшие сроки.</p>
+
+                    <p>Как только он будет готов к отправке, мы свяжемся с Вами для уточнения деталей доставки или
+                        предоставления необходимой информации.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <a href='{{ path('core:user.homepage') }}' class="btn btn-lg btn-primary text-nowrap w-100">
+            <span class="h6 text-uppercase px-3 basket-text">Продолжить покупки</span><span
+                    class="spinner-border spinner-border-sm vertical-middle d-none"></span>
+        </a>
+
+    </section>
+
+    <section id="products" class='container'>
+        <h1 class="h6 text-uppercase fw-bolder py-2">Детали заказа</h1>
+        {{ include(_self|replace({ "content.html.twig": "products.html.twig" })) }}
+
+        <div class="py-3">
+            Благодарим Вас за выбор нашей компании. Мы ценим оказанное нам доверие и стремимся предоставить Вам
+            наилучший сервис.
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+

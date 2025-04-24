@@ -1,0 +1,17 @@
+<section class="container mb-4">
+    <h2 class="fs-5 mb-3">
+        {{section_name}}
+    </h2>
+    <div class="d-flex gap-2 overflow-auto">
+        {% for i in 1..10 %}
+           
+            {% set random_item = random(1, 5) %}
+                <div class="col-3">
+                    <div class="card border-0" >
+                        <img class="card-img-top rounded-4 mb-1" style="height: 170px ;" src="/assets/comfort/img/{{random_item}}.jpg" alt="Картинка категории {{ i }}">
+                        <p class="m-0">Категория {{ i }}</p>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+</section>

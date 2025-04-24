@@ -1,0 +1,55 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+#set( $ClassName = $NAME.replace("Handler", "") )
+#set( $TRANSPORT = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1-$2").toLowerCase() )
+
+use BaksDev\Core\Entity\AbstractHandler;
+
+final class ${NAME} extends AbstractHandler
+{
+
+	/** @see ${CONTEXT} */
+	public function handle(
+		${ClassName}DTO ${DS}command
+	) : string|${CONTEXT}
+	{
+
+        /** Валидация DTO  */
+        ${DS}this->validatorCollection->add(${DS}command);
+
+        ${DS}this->main = new ${CONTEXT}();
+        ${DS}this->event = new ${CONTEXT}Event();
+
+        try
+        {
+            ${DS}this->preRemove(${DS}command);
+        }
+        catch(\DomainException ${DS}errorUniqid)
+        {
+            return ${DS}errorUniqid->getMessage();
+        }
+
+        /** Валидация всех объектов */
+        if(${DS}this->validatorCollection->isInvalid())
+        {
+            return ${DS}this->validatorCollection->getErrorUniqid();
+        }
+
+        ${DS}this->entityManager->flush();
+
+        /* Отправляем сообщение в шину */
+        ${DS}this->messageDispatch->dispatch(
+            message: new ${CONTEXT}Message(${DS}this->main->getId(), ${DS}this->main->getEvent(), ${DS}command->getEvent()),
+            transport: '${TRANSPORT}'
+        );
+
+        return ${DS}this->main;
+	}
+}

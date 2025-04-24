@@ -1,0 +1,97 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+
+#end
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use BaksDev\Core\Entity\EntityEvent;
+use BaksDev\Core\Entity\EntityState;
+use BaksDev\Core\Type\Locale\Locale;
+use InvalidArgumentException;
+use Symfony\Component\Validator\Constraints as Assert;
+
+#set( $table = $NAME.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
+#set( $EventClass = $NAME.replace("Trans", "Event") )
+/* Перевод ${NAME} */
+
+interface ${NAME}Interface
+{
+    public function getLocal() : Locale;
+    public function getName() : string;
+}
+
+#[ORM\Entity]
+#[ORM\Table(name: '${table}')]
+#[ORM\Index(columns: ['name'])]
+class ${NAME} extends EntityEvent
+{
+    /** Связь на событие */
+    #[Assert\NotBlank]
+    #[Assert\Uuid]
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: ${EventClass}::class, inversedBy: "translate")]
+    #[ORM\JoinColumn(name: 'event', referencedColumnName: "id")]
+	private ${EventClass} ${DS}event;
+
+    /** Локаль */
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 2)]
+    #[ORM\Id]
+    #[ORM\Column(type: Locale::TYPE)]
+	private readonly Locale ${DS}local;
+
+    /** Название */
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 100)]
+    #[ORM\Column(type: Types::STRING)]
+	private string ${DS}name;
+
+    /** Описание */
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+	private ?string ${DS}description;
+
+    public function __construct(${EventClass} ${DS}event) {
+        ${DS}this->event = ${DS}event;
+    }
+
+    public function __toString(): string
+    {
+        return (string) ${DS}this->event;
+    }
+
+    public function getDto(${DS}dto) : mixed
+    {
+        if(${DS}dto instanceof ${NAME}Interface)
+        {
+            return parent::getDto(${DS}dto);
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', ${DS}dto::class));
+    }
+
+    public function setEntity(${DS}dto) : mixed
+    {
+
+        if(${DS}dto instanceof ${NAME}Interface)
+        {
+            return parent::setEntity(${DS}dto);
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', ${DS}dto::class));
+    }
+
+    public function name(Locale ${DS}locale) : ?string
+    {
+        if(${DS}this->local->getLocalValue() === ${DS}locale->getLocalValue())
+        {
+            return ${DS}this->name;
+        }
+
+        return null;
+    }
+}

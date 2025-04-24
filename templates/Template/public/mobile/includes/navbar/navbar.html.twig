@@ -1,0 +1,29 @@
+<nav class="d-flex gap-2">
+
+    {# TODO сделать меню #}
+      <button class="btn btn-dark d-flex align-items-center gap-1" data-bs-target="#Menu" data-bs-toggle="offcanvas"
+            aria-controls="Menu" type="button" aria-label="Кнопка открывания меню">
+        <svg class="bi bi-list" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>
+        </svg>
+    </button>
+
+    {% if baks_search_form is defined and app.request.attributes.get('_route') != 'search:user.search' %}
+
+        {{ include(_self|replace({ "navbar.html.twig" : "search_form.html.twig" })) }}
+
+{#        <div class="input-group">#}
+{#            <input class="form-control border-end-0" style="height: 32px; font-size:10px;"#}
+{#                   aria-label="Сторока поиска" type="text" placeholder="Поиск">#}
+{#            <span class="input-group-text bg-transparent">#}
+{#                <svg class="bi bi-search" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="gray"#}
+{#                     viewBox="0 0 16 16">#}
+{#                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>#}
+{#                </svg>#}
+{#            </span>#}
+{#        </div>#}
+
+    {% endif %}
+</nav>

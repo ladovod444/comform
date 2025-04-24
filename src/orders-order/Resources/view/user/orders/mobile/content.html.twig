@@ -1,0 +1,81 @@
+{# {{ include(_self|replace({ "content.html.twig": "header.html.twig" })) }} #}
+
+<main class="main">
+
+    <section id="orders">
+
+        <div class="container d-flex justify-content-start align-items-center my-4 gap-3">
+
+            <h1 class="h4 text-uppercase fw-bolder mb-0">Корзина</h1>
+
+            <div class="small">
+                <button class="btn btn-sm btn-outline-light text-dark text-decoration-underline small shadow-sm text-muted rounded-3 pt-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-x me-1" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <span class="small">Очистить</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-light container py-3">
+            {% for i in 0..5 %}
+                {{ include(_self|replace({ "content.html.twig": "products.html.twig" })) }}
+            {% endfor %}
+
+            <div class="d-flex align-items-stretch justify-content-end">
+                <span class="small me-3 pt-1">Итого: </span>
+                <span class="fw-bolder h3">38 400 P.</span>
+            </div>
+
+        </div>
+        <div class="container py-3 text-center">
+
+            <button href="#ordering" class="btn btn-danger w-100 text-uppercase mb-3"
+                    title="Оформить заказ"
+                    aria-label="Оформить заказ">
+                Оформить заказ
+            </button>
+
+            <a href="{{ path('core:user.homepage') }}" class="small w-100 text-muted p-3">
+                Продолжить покупки
+            </a>
+
+        </div>
+
+    </section>
+
+    {# ПРОСМОТРЕННЫЕ #}
+    <section id="viewed" class="mt-4 bg-light">
+        <div class="container p-4">
+            <h2 class="text-uppercase me-4 h5 fw-bolder">Просмотренные</h2>
+        </div>
+
+        <div class="d-flex flex-nowrap gap-4 overflow-auto w-100 px-4 pb-3">
+            {% for i in 0..5 %}
+                {{ include(_self|replace({ "content.html.twig": "viewed.html.twig" })) }}
+            {% endfor %}
+        </div>
+    </section>
+
+
+    {# оформление заказа #}
+    <section id="ordering" class="container bg-white pb-3">
+
+        <div class="container d-flex flex-column py-4 small">
+            <h2 class="text-uppercase me-4 h4 fw-bolder m-0">Оформление заказа</h2>
+            <a href="#" class="small" aria-label="Авторизация">Авторизация</a>
+        </div>
+
+        <div class="px-2 py-1">
+            {{ include(_self|replace({ "content.html.twig": "ordering.html.twig" })) }}
+        </div>
+
+    </section>
+
+</main>
+
+
+
+

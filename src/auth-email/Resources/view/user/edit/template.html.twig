@@ -1,0 +1,22 @@
+{% trans_default_domain 'admin.account' %}
+
+{# ---- ШАБЛОН ------------------------------------------------------------ #}
+{% extends Template('/public/base.html.twig') %}
+
+{% block title %}
+    {# Редактировать продукцию #}
+    {{ 'admin.page.edit'|trans }}
+{% endblock %}
+
+
+{# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
+{% block content %}
+    {{ include(_self|replace({ "template.html.twig": baks_settings.device~"/content.html.twig" })) }}
+{% endblock %}
+
+{% block javascript %}
+
+<script nonce='{{ csp_nonce() }}' async  data-src='/assets/js/password.meter.js?v={{ version }}' class='lazy'></script>
+<script nonce='{{ csp_nonce() }}' async  data-src='/assets/auth_email/newedit.min.js?v={{ version }}' class='lazy'></script>
+
+{% endblock %}

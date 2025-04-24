@@ -1,0 +1,10 @@
+<div class="d-flex flex-column justify-content-between nav" style=" height:500px;" id="v-pills-tab" role="tablist">
+    <img style=" height:370px;" src="/assets/comfort/img/vertical-line.svg" alt="Изображение линии" role="tab">
+    {% for i in 0..4 %}
+        {% set _color = ["79553D", "755C48", "BC987E", "755A57", "79443B"] %}
+        <div style="width: 16px; height:16px; background-color: #{{ _color[i] }};"
+             class="rounded-1 {{ i == 0 ? 'active' : '' }} cursor-pointer" id="v-pills-{{ i }}-tab" data-bs-toggle="tab"
+             data-bs-target="#v-pills-{{ i }}" role="tab" aria-controls="v-pills-{{ i }}" aria-selected="true"></div>
+    {% endfor %}
+</div>
+

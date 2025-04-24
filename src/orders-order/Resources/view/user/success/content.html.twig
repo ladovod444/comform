@@ -1,0 +1,6 @@
+<style></style>
+
+{% set isProducts = baks_basket.counter > 0 ? true : false %}
+
+{{ include(_self|replace({ "content.html.twig" : baks_settings.device~"/content.html.twig" })) }}
+	

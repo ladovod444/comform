@@ -1,0 +1,24 @@
+<section class="container mb-1">
+    <h2 class="fs-5 mb-3">
+        Рекомендуем
+    </h2>
+    <div class="d-flex align-items-center gap-3 mb-3">
+        <button class="btn p-0" style="font-size: 14px;">
+            <u>Скидки</u>
+        </button>
+        <button class="btn p-0" style="font-size: 14px;">
+            <u>Новинки</u>
+        </button>
+        <button class="btn p-0" style="font-size: 14px;">
+            <u>Коллекции</u>
+        </button>
+    </div>
+    <div class="d-flex overflow-auto p-0 invisibility-scroll">
+        {% for i in 0..10 %}
+           {% set section_number = 50000%}
+            <div class="col-6">{% include Template('@comfort:Template/'~baks_settings.device~'/includes/card.html.twig') %}</div>
+               
+        {% endfor %}
+</section>
+
+<hr class="m-0">

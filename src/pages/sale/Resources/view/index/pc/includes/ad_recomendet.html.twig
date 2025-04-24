@@ -1,0 +1,29 @@
+<section class="container mb-5">
+    <div class="d-flex align-items-center gap-5 mb-2">
+        <h2 class="fs-4">Рекомендуем</h2>
+        {% for button in buttons %}
+            <button class="btn bg-transparent p-0">
+                <u>{{ button.name }}</u>
+            </button>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-4 pt-3" style="height: 400px;">
+            <img class="rounded-3 h-auto w-100" src="/assets/comfort/img/kitchenRecomendet.jpg"
+                 alt="Изображение рекомендации">
+        </div>
+        <div class="col-8">
+            <div class="row row-cols-4">
+                {% set total_items = 4 %}
+                {% set section_number = 10000 %}
+                {% for i in 1..total_items %}
+                    <div class="col p-1 pt-0">
+                        {% include Template('@Template:user/'~baks_settings.device~'/includes/promo_card.html.twig') %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="mb-5">

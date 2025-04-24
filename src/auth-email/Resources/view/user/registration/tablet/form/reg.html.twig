@@ -1,0 +1,88 @@
+
+{{ form_start(form, { attr: { class: 'd-flex flex-column align-items-center gap-3 px-4 ' } }) }}
+
+<div class="form-group w-100 ">
+
+    {{ form_label(form.email, 'E-mail*',
+        {'label_attr': {
+            'class': 'mb-2 ms-2 fw-medium fs-12'}
+        }) }}
+
+    {{ form_widget(form.email, {
+        attr: { class: 'form-control rounded-5' } }) }}
+
+</div>
+
+<div class="form-group w-100">
+
+    {{ form_label(form.passwordPlain, 'Пароль*',
+        {'label_attr': {
+            'class': 'mb-2 ms-2 fw-medium fs-12'}
+        }) }}
+
+    {{ form_widget(form.passwordPlain, {
+        attr: { class: 'form-control rounded-5' } }) }}
+
+</div>
+
+<div class="form-control-lg d-flex p-0">
+    {{ form_widget(form.agreeTerms, { label: false }) }}
+
+    <label class="form-check-label required small" for="{{ form.agreeTerms.vars.id }}">
+
+    <span class="small">
+        <span class="small ">Согласен с </span>
+        <a href="{{ path('auth-email:user.agree.terms') }}"
+           class="small text-black"
+           aria-label="Пользовательское соглашение"
+           title="Пользовательское соглашение">
+            пользовательским соглашением
+        </a>
+    </span>
+
+    </label>
+</div>
+
+<div class="d-flex gap-3 align-items-center w-100">
+
+    <div class="rounded-4 w-50 lazy bg-cover" data-bg="/captcha/image" style="height: 75px;">
+    </div>
+
+    <div class="w-50">
+
+        {{ form_label(form.code, 'Проверочный код:', {'label_attr': {
+            'class': 'form-label fw-medium ps-2 mb-1 fs-12'}
+        }) }}
+
+
+        {{ form_widget(form.code,
+            { label: false,
+                attr: {
+                'class' : 'form-control rounded-5',
+                'autocomplete' : 'off',
+            }
+            }) }}
+    </div>
+</div>
+
+{# Кнопки регистрация / авторизация #}
+<div class="modal-footer justify-content-between border-0 w-100 px-0 flex-nowrap gap-4">
+
+    {% if modal is defined %}
+        <a class="btn shadow m-0 rounded-5 w-100 fw-medium"
+
+           data-href="{{ path('auth-email:user.login') }}"
+           data-bs-target="#modal">
+            Авторизоваться
+        </a>
+    {% endif %}
+
+    {{ form_widget(form.registration,
+        {
+            label: 'Регистрация',
+            attr: { class: 'btn btn-primary rounded-5 py-2 fw-bold w-100'}}
+    ) }}
+
+</div>
+
+{{ form_end(form) }}

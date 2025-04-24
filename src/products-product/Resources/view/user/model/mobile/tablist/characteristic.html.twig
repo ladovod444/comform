@@ -1,0 +1,32 @@
+<div class="d-flex flex-column gap-3 small">
+
+
+    <div class="d-flex flex-column gap-3">
+
+        {% set odd = 'bg-light' %}
+        {% set even = '' %}
+
+
+        {# Свойства, учавствующие в харкатеристиках #}
+        {% for name_characteristics in  arr_property | filter(props => props.field_public is defined and props.field_public == true and props.field_value != 'false' ) %}
+            <div class="d-flex justify-content-between p-1 rounded-3 {{ cycle([odd, even], loop.index0) }}">
+                <div class="w-50">
+                    {{ name_characteristics.field_trans }}
+                </div>
+                <div class="w-50 d-flex gap-3 align-items-center">
+                    {{ name_characteristics.field_value|call_twig_func(name_characteristics.field_type~'_template') }}
+                </div>
+            </div>
+        {% endfor %}
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+

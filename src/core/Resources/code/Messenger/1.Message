@@ -1,0 +1,64 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+#set( $CONTEXT = $NAME.replace("Message", "") )
+
+final class ${NAME}
+{
+    /**
+     * Идентификатор
+     */
+    private ${CONTEXT}Uid ${DS}id;
+
+    /**
+     * Идентификатор события
+     */
+    private ${CONTEXT}EventUid ${DS}event;
+
+    /**
+     * Идентификатор предыдущего события
+     */
+    private ?${CONTEXT}EventUid ${DS}last;
+
+
+    public function __construct(${CONTEXT}Uid ${DS}id, ${CONTEXT}EventUid ${DS}event, ?${CONTEXT}EventUid ${DS}last = null)
+    {
+        ${DS}this->id = ${DS}id;
+        ${DS}this->event = ${DS}event;
+        ${DS}this->last = ${DS}last;
+    }
+
+
+    /**
+     * Идентификатор
+     */
+    public function getId(): ${CONTEXT}Uid
+    {
+        return ${DS}this->id;
+    }
+
+
+    /**
+     * Идентификатор события
+     */
+    public function getEvent(): ${CONTEXT}EventUid
+    {
+        return ${DS}this->event;
+    }
+
+
+    /**
+     * Идентификатор предыдущего события
+     */
+    public function getLast(): ?${CONTEXT}EventUid
+    {
+        return ${DS}this->last;
+    }
+
+}

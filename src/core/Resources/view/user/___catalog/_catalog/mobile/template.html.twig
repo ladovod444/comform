@@ -1,0 +1,10 @@
+{# ---- ШАБЛОН ------------------------------------------------------------ #}
+{% extends '@Template/default/user/base.html.twig' %}
+
+{% block title %}Продукция{% endblock %}
+
+{# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
+{% block content %}
+    {{ include(_self|replace({ "template.html.twig": "content.html.twig" })) }}
+{% endblock %}
+

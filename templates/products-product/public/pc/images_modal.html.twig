@@ -1,0 +1,58 @@
+{# @var card \BaksDev\Products\Product\Repository\ProductDetailByValue\ProductDetailByValueResult #}
+
+{% if card.productImagesSortByRoot is not null %}
+    {% set photos = card.productImagesSortByRoot %}
+{% else %}
+    {% set photos = ['/assets/img/blank.svg'] %}
+{% endif %}
+
+{# Модалка #}
+<div class="modal fade" id="ModalProductCarousel" tabindex="-1" aria-labelledby="ModalProductCarousel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+
+            <div class="modal-body d-flex align-items-center">
+
+                {# Карусель изображений #}
+                <div id="carouselExample" class="carousel carousel-dark slide w-100">
+                    <div class="carousel-inner">
+
+                        {% for key, photo in photos %}
+
+                            {% set image_path = '/assets/img/blank.svg' %}
+                            {% if photo.product_img_ext is defined and photo.product_img_ext is not null %}
+                                {% set image_path = cdn_image_path(photo.product_img, photo.product_img_ext, photo.product_img_cdn) %}
+                            {% endif %}
+
+                            <div class="carousel-item {{ key == 0 ? 'active' : '' }}">
+                                <img style="height: 50vh; max-height: 100%;"
+                                     src="{{ image_path }}" class="d-block m-auto"
+                                     alt="Изображение товара">
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <button class="carousel-control-prev modal-control-prev" type="button"
+                            data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Предыдущий</span>
+                    </button>
+
+                    <button class="carousel-control-next modal-control-next" type="button"
+                            data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Следующий</span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

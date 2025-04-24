@@ -1,0 +1,736 @@
+<main class="main d-print-none container px-4">
+    <div class="mt-3">
+        {{ include(_self|replace({ "content.html.twig": "breadcrumb.html.twig" })) }}
+    </div>
+
+
+    <h1 class="h3 text-uppercase fw-bolder">
+        {{ card.productName }}
+
+        {# Значение торгового предложения #}
+        {{ card.productOfferValue|call_twig_func(card.productOfferReference~'_render') }}
+
+        {# Значение множественного варианта ТП #}
+        {{ card.product_variation_value|call_twig_func(card.productVariationReference~'_render') }}
+
+        {# Значение модификации множественного варианта ТП #}
+        {{ card.product_modification_value|call_twig_func(card.productModificationReference~'_render') }}
+
+        {# Свойства, учавствующие в названии #}
+        {% for name_property in arr_property | filter(props => props.field_name == true) %}
+            {{ name_property.field_name|call_twig_func(name_property.field_type) }}
+        {% endfor %}
+
+    </h1>
+
+
+    <div class="d-flex align-items-end gap-3">
+
+        {{ include(_self|replace({ "content.html.twig": "rating.html.twig" })) }}
+
+        <span class="small">Артикул: {{ card.productArticle }}</span>
+
+
+        {# <img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNzkgMTkxIj4gPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwxOTEpIHNjYWxlKDAuMSwtMC4xKSIgZmlsbD0iI0ZGQTA0MyIgc3Ryb2tlPSJub25lIj4gPHBhdGggZD0iTTgzNiAxODM4IGMtMTMgLTE4IC0xNiAtNTIgLTE2IC0xNjMgMCAtMTYyIDggLTE4NSA2NCAtMTg1IDYwIDAgNjYgMTggNjYgMTg3IDAgMTMzIC0yIDE1MiAtMTggMTY2IC0yNyAyNSAtNzggMjIgLTk2IC01eiIvPiA8cGF0aCBkPSJNMjk3IDE1NTkgYy0xOSAtMTQgLTI3IC0zMCAtMjcgLTUyIDAgLTI3IDEzIC00NiA4MyAtMTE1IDkwIC05MCAxMTcgLTEwMCAxNTUgLTU5IDM4IDQwIDI5IDYzIC02MCAxNTMgLTQ2IDQ1IC05MiA4NSAtMTA0IDg4IC0xMyA0IC0zMSAtMSAtNDcgLTE1eiIvPiA8cGF0aCBkPSJNMTQxNSAxNTcwIGMtMTEgLTQgLTUzIC00MiAtOTIgLTgzIC01OSAtNjAgLTczIC04MSAtNzMgLTEwNiAwIC0zOCAzMSAtNzEgNjYgLTcxIDI5IDAgMTU1IDExNCAxODAgMTYyIDMxIDYwIC0yMSAxMjMgLTgxIDk4eiIvPiA8cGF0aCBkPSJNNzY1IDEzNjcgYy0xNDcgLTQ5IC0yNTMgLTE1OSAtMjkwIC0zMDIgLTUyIC0yMDIgNDUgLTQxMCAyMzMgLTQ5OCA4NiAtNDAgMjE4IC01MCAzMDMgLTIyIDE4NSA2MCAyOTkgMjE2IDI5OSA0MTAgMCAxMzMgLTQxIDIyNyAtMTM5IDMxOCAtNzkgNzQgLTE0NSAxMDAgLTI2NiAxMDQgLTY0IDIgLTExNCAtMiAtMTQwIC0xMHoiLz4gPHBhdGggZD0iTTQgMTAwNiBjLTMgLTcgLTQgLTM1IC0yIC02MiBsMyAtNDkgMTU1IC0zIGMxNDggLTMgMTU2IC0yIDE3MyAxOSAyMSAyNiAyMiA1OCAxIDg3IC0xNSAyMSAtMjEgMjIgLTE3MCAyMiAtMTIyIDAgLTE1NiAtMyAtMTYwIC0xNHoiLz4gPHBhdGggZD0iTTE0NDIgMTAwOCBjLTE3IC0xNyAtMTUgLTg0IDQgLTEwMiAxMyAtMTMgNDIgLTE2IDE1OSAtMTYgNzkgMCAxNTAgMyAxNTkgNiAyMyA5IDIzIDEwOSAwIDExOCAtMzEgMTIgLTMwOSA3IC0zMjIgLTZ6Ii8+IDxwYXRoIGQ9Ik0zNTIgNTE2IGMtODcgLTg5IC0xMDIgLTEyNSAtNjQgLTE1OCA0NSAtNDAgNTggLTM1IDE1MyA1OSA5NyA5NyAxMDcgMTIyIDY2IDE2MSAtNDIgMzkgLTY2IDMwIC0xNTUgLTYyeiIvPiA8cGF0aCBkPSJNMTI3MiA1ODQgYy0xNiAtMTEgLTIyIC0yNSAtMjIgLTUxIDAgLTMwIDEwIC00NiA3MyAtMTEwIDM5IC00MSA4MiAtNzkgOTUgLTg0IDMyIC0xMiA3MCA2IDgzIDM4IDE1IDM5IC03IDc2IC05MSAxNTggLTcyIDY5IC05NyA3OCAtMTM4IDQ5eiIvPiA8cGF0aCBkPSJNODM2IDM5OCBjLTEzIC0xOCAtMTYgLTUyIC0xNiAtMTYzIDAgLTE2MiA4IC0xODUgNjQgLTE4NSA2MCAwIDY2IDE4IDY2IDE4NyAwIDEzMyAtMiAxNTIgLTE4IDE2NiAtMjcgMjUgLTc4IDIyIC05NiAtNXoiLz4gPC9nPiA8L3N2Zz4="
+			 class="lazy" alt="Летняя" width="18" height="18"> #}
+
+
+        <span class="badge bg-success rounded-2">Новинка</span>
+        <span class="badge bg-danger rounded-2">Акция</span>
+        <span class="badge bg-hit rounded-2">Хит</span>
+        {# <span class="badge bg-light text-muted rounded-2">Модель производится с 1923</span> #}
+    </div>
+
+
+    <div class="d-flex gap-5 mt-5">
+
+        {# LIGHTBOX  #}
+
+        <div class="w-auto">
+
+            {% set product_modification_image = card.product_modification_image|json_decode %}
+            {% set product_variation_image = card.product_variation_image|json_decode %}
+            {% set product_offer_images = card.product_offer_images|json_decode %}
+            {% set product_photo = card.product_photo|json_decode %}
+            {% set root_image = null %}
+
+            {% set unique = [] %}
+            {% set unique_carusel = [] %}
+
+
+            {# Определяем главное фото #}
+            {% for modification_image in product_modification_image | filter(img => img.product_img_root == true and img.product_img_ext is not null) %}
+                {% set root_image = modification_image %}
+
+            {% endfor %}
+
+            {% if root_image is null %}
+                {% for variation_image in product_variation_image | filter(img => img.product_img_root == true and img.product_img_ext is not null) %}
+                    {% set root_image = variation_image %}
+
+                {% endfor %}
+            {% endif %}
+
+            {% if root_image is null %}
+                {% for offer_images in product_offer_images | filter(img => img.product_img_root == true and img.product_img_ext is not null) %}
+                    {% set root_image = offer_images %}
+
+                {% endfor %}
+            {% endif %}
+
+            {% if root_image is null %}
+                {% for product_images in product_photo | filter(img => img.product_img_root == true and img.product_img_ext is not null) %}
+                    {% set root_image = product_images %}
+
+                {% endfor %}
+            {% endif %}
+
+
+
+            {# Обложка #}
+            {% set image_path = '/assets/img/blank.svg' %}
+
+            {% if root_image.product_img_ext is defined and root_image.product_img_ext is not null %}
+                {% set img_host =  root_image.product_img_cdn == true  ? CDN_HOST : '' %}
+                {% set img_dir = root_image.product_img %}
+                {% set img_file = (img_host is empty ? '/image.' : '/medium.') ~ root_image.product_img_ext %}
+                {% set image_path = img_host ~ img_dir ~ img_file %}
+            {% endif %}
+
+
+            <div id="img-product" data-bs-toggle="modal" data-bs-target="#lightboxModal"
+                 class="icon rounded-5 border lazy bg-cover shadow-none" style="width: 350px; height: 350px;"
+                 data-bg="{{ image_path }}"
+                 title="{{ card.productName }}"
+            >
+
+            </div>
+
+
+            {# ДОПОТЛИТЕЛЬНЫЕ ФОТО #}
+
+            <div class="d-flex justify-content-center gap-3 mt-4 ">
+
+
+                {% for modification_image in product_modification_image | filter(img => img.product_img_ext is not null) %}
+
+
+                    {% if modification_image.product_img not in unique %}
+
+                        {% set unique = unique|merge([modification_image.product_img]) %}
+
+                        {# Обложка #}
+                        {% set image_path = '/assets/img/blank.svg' %}
+
+                        {% if modification_image.product_img_ext is defined and modification_image.product_img_ext is not null %}
+                            {% set img_host =  modification_image.product_img_cdn == true  ? CDN_HOST : '' %}
+                            {% set img_dir = modification_image.product_img %}
+                            {% set img_file = (img_host is empty ? '/image.' : '/small.') ~ modification_image.product_img_ext %}
+                            {% set image_path = img_host ~ img_table ~ img_dir ~ img_file %}
+                        {% endif %}
+
+                        <button class="btn btn-link icon bg-cover rounded-4 lazy img-product m-0"
+                                data-bg="{{ image_path }}"
+                                style="width: 70px; height: 70px;"
+                                aria-label="{{ card.productName }}"
+                        ></button>
+
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+
+                {% for variation_image in product_variation_image | filter(img => img.product_img_ext is not null) %}
+
+                    {% if variation_image.product_img not in unique %}
+
+                        {% set unique = unique|merge([variation_image.product_img]) %}
+
+                        {# Обложка #}
+                        {% set image_path = '/assets/img/blank.svg' %}
+
+                        {% if variation_image.product_img_ext is defined and variation_image.product_img_ext is not null %}
+                            {% set img_host =  variation_image.product_img_cdn == true  ? CDN_HOST : '' %}
+                            {% set img_dir = variation_image.product_img %}
+                            {% set img_file = (img_host is empty ? '/image.' : '/min.') ~ variation_image.product_img_ext %}
+                            {% set image_path = img_host ~ img_dir ~ img_file %}
+                        {% endif %}
+
+                        <button class="btn btn-link icon bg-cover rounded-4 lazy img-product m-0"
+                                data-bg="{{ image_path }}"
+                                style="width: 70px; height: 70px;"
+                                aria-label="{{ card.productName }}"
+                        ></button>
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+
+
+
+                {% for offer_images in product_offer_images | filter(img => img.product_img_ext is not null) %}
+
+                    {% if offer_images.product_img not in unique %}
+
+                        {% set unique = unique|merge([offer_images.product_img]) %}
+
+                        {# Обложка #}
+                        {% set image_path = '/assets/img/blank.svg' %}
+
+                        {% if offer_images.product_img_ext is defined and offer_images.product_img_ext is not null %}
+                            {% set img_host =  offer_images.product_img_cdn == true  ? CDN_HOST : '' %}
+                            {% set img_dir = offer_images.product_img %}
+                            {% set img_file = (img_host is empty ? '/image.' : '/min.') ~ offer_images.product_img_ext %}
+                            {% set image_path = img_host ~ img_table ~ img_dir ~ img_file %}
+                        {% endif %}
+
+
+
+
+                        <button class="btn btn-link icon bg-cover rounded-4 lazy img-product m-0"
+                                data-bg="{{ image_path }}"
+                                style="width: 70px; height: 70px;"
+                                aria-label="{{ card.productName }}"
+                        ></button>
+
+
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+
+
+                {% for product_images in product_photo | filter(img => img.product_img_ext is not null) %}
+
+                    {% if product_images.product_img not in unique %}
+
+                        {% set unique = unique|merge([product_images.product_img]) %}
+
+                        {# Обложка #}
+                        {% set image_path = '/assets/img/blank.svg' %}
+
+                        {% if product_images.product_img_ext is defined and product_images.product_img_ext is not null %}
+                            {% set img_host =  product_images.product_img_cdn == true  ? CDN_HOST : '' %}
+                            {% set img_dir = product_images.product_img %}
+                            {% set img_file = (img_host is empty ? '/image.' : '/small.') ~ product_images.product_img_ext %}
+                            {% set image_path = img_host ~ img_table ~ img_dir ~ img_file %}
+                        {% endif %}
+
+                        <button class="btn btn-link icon bg-cover rounded-4 lazy img-product m-0"
+                                data-bg="{{ image_path }}"
+                                style="width: 70px; height: 70px;"
+                                aria-label="{{ card.productName }}"
+                        ></button>
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+
+                {# <button class="btn btn-link icon bg-cover rounded-4 lazy img-product m-0"
+						data-bg="/img/card-img/shina-3.jpg"
+						style="width: 70px; height: 70px;"
+						aria-label="Triangle Sports TH201"
+				></button>
+				
+				<button class="btn btn-link icon bg-cover rounded-4 lazy img-product m-0"
+						data-bg="/img/card-img/shina-4.jpg"
+						style="width: 70px; height: 70px;"
+						aria-label="Triangle Sports TH201"
+				></button> #}
+
+            </div>
+
+            {{ include(_self|replace({ "content.html.twig": "_lightbox.html.twig" })) }}
+
+        </div>
+
+
+        {# ХАРАКТЕРИСТИКИ #}
+
+        <div class="w-100 d-flex flex-column justify-content-between">
+
+
+            {% if
+                (offer is not null and card.productOfferValue is null) or
+                (variation is not null and card.product_variation_value is null) or
+                (modification is not null and card.product_modification_value is null) %}
+
+                <h5>Возможно Вы искали {{ card.productName }}
+
+                    {# Значение торгового предложения #}
+                    {{ card.productOfferValue|call_twig_func(card.productOfferReference) }}
+
+                    {# Значение множественного варианта ТП #}
+                    {# {{ card.product_variation_value|call_twig_func(card.productVariationReference) }} #}
+
+                    {# Значение модификации множественного варианта ТП #}
+                    {# {{ card.product_modification_value|call_twig_func(card.productModificationReference) }} #}
+                </h5>
+
+                {% set order_offer = null %}
+                {% set order_variation = null %}
+                {% set order_modification = null %}
+
+                {% set order_price = null %}
+
+                <div class='d-flex gap-3'>
+                    {% for offer in offers %}
+
+                        {# Торговые предложения, соответствующие запросу #}
+                        {% if card.productOfferValue is not null and card.productOfferValue == offer.productOfferValue %}
+
+
+                            {# {% if order_offer is null %}
+							{{ offer.product_offer_name }}:  {{ offer.productOfferValue|call_twig_func(offer.productOfferReference) }}
+							{% endif %} #}
+
+                            {% if offer.product_variation_name %}
+
+                                {% if offer.product_modification_name %}
+
+
+                                    {% if order_modification is null or order_modification != offer.productOfferValue~offer.product_variation_value~offer.product_modification_value %}
+
+
+                                        <a href='{{ path('products-product:user.detail', {
+                                            url : card.url ,
+                                            offer: offer.productOfferValue,
+                                            variation: offer.product_variation_value,
+                                            modification: offer.product_modification_value
+                                        }) }}' class="btn btn-link btn-sm lh-1 text-decoration-none">
+
+                                            {{ offer.product_variation_value|call_twig_func(offer.category_offer_variation~'_render') ~
+                                            offer.product_modification_value|call_twig_func(offer.category_offer_modification~'_render') }}
+
+                                            {{ offer.productOfferValue|call_twig_func(offer.productOfferReference) }}
+                                        </a>
+
+                                    {% endif %}
+
+                                    {% set order_modification = offer.productOfferValue~offer.product_variation_value~offer.product_modification_value %}
+
+                                {% else %}
+
+                                    {% if order_variation is null or order_variation != offer.productOfferValue~offer.product_variation_value %}
+
+                                        <a href='{{ path('products-product:user.detail', {
+                                            url : card.url ,
+                                            offer: offer.productOfferValue,
+                                            variation: offer.product_variation_value
+                                        }) }}' class="btn btn-link btn-sm lh-1 text-decoration-none">
+                                            {{ offer.productOfferValue|call_twig_func(offer.productOfferReference~'_render') }}
+                                            {{ offer.product_variation_value|call_twig_func(offer.category_offer_variation~'_render') }}
+
+                                        </a>
+
+                                    {% endif %}
+
+                                    {% set order_variation = offer.productOfferValue~offer.product_variation_value %}
+
+                                {% endif %}
+
+                            {% else %}
+
+
+                                {% if order_offer is null or order_offer != offer.productOfferValue %}
+                                    <a href='{{ path('products-product:user.detail', {
+                                        url : card.url ,
+                                        offer: offer.productOfferValue
+                                    }) }}' class="btn btn-link btn-sm lh-1 text-decoration-none">
+                                        {{ offer.productOfferValue|call_twig_func(offer.productOfferReference) }}
+
+                                    </a>
+                                {% endif %}
+
+                                {% set order_offer = offer.productOfferValue %}
+
+                            {% endif %}
+
+                            {#  Расчет минимальной стоимости  #}
+                            {% if order_price is null or (offer.product_price != 0 and order_price > offer.product_price ) %}
+                                {% set order_price = offer.product_price %}
+                            {% endif %}
+
+
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
+
+
+
+
+            {% endif %}
+
+
+            <div class="d-flex justify-content-between mt-3 mb-3">
+                <h3>от {{ money(order_price, card.product_currency) }}</h3>
+                <a href="/" aria-label="Лого" title="Лого">
+                    <img data-src="/logo.webp" src="/assets/img/empty.png" alt="..." height="50" class="lazy">
+                </a>
+            </div>
+
+
+            {# ХАРАКТЕРИСТИКИ  #}
+
+            <div>
+                {# <h3 class="h6 position-absolute" style="margin-top: -2.5rem;">Характеристики:</h3> #}
+                {{ include(_self|replace({ "content.html.twig": "_characteristic.html.twig" })) }}
+            </div>
+
+
+            {#  ТАКЖЕ ВАС МОЖЕТ ЗАИНТЕРЕСОВАТЬ #}
+
+
+            {# ТИЗЕРЫ #}
+            {# {{ include(_self|replace({ "content.html.twig": "teaser.html.twig" })) }} #}
+
+
+            {% set order_offer = null %}
+            {% set order_variation = null %}
+            {% set order_modification = null %}
+
+
+            {% for offer in offers %}
+
+            {# Торговые предложения, соответствующие запросу #}
+            {% if card.productOfferValue is not null and card.productOfferValue != offer.productOfferValue %}
+
+            {% if order_offer is null or order_offer != offer.productOfferValue %}
+
+            {% if order_offer is null %}
+            <h6 class='mt-3'>Также Вас может заинтересовать</h6>
+            <div class='d-flex gap-3'>
+                {% endif %}
+
+                <div>
+                    {{ offer.product_offer_name }}
+                    {{ offer.productOfferValue|call_twig_func(offer.productOfferReference) }}
+                    :
+                </div>
+                {% endif %}
+
+
+                {# {% if order_offer is null %}
+							{{ offer.product_offer_name }}:  {{ offer.productOfferValue|call_twig_func(offer.productOfferReference) }}
+						{% endif %} #}
+
+                {% if offer.product_variation_name %}
+
+                    {% if offer.product_modification_name %}
+
+                        {% if order_modification is null or order_modification != offer.productOfferValue~offer.product_variation_value~offer.product_modification_value %}
+
+                            <a href='{{ path('products-product:user.detail', {
+                                url : card.url ,
+                                offer: offer.productOfferValue,
+                                variation: offer.product_variation_value,
+                                modification: offer.product_modification_value
+                            }) }}' class="btn btn-link btn-sm lh-1 text-decoration-none">
+
+                                {{ offer.product_variation_value|call_twig_func(offer.category_offer_variation~'_render') ~
+                                offer.product_modification_value|call_twig_func(offer.category_offer_modification~'_render') }}
+
+                                {{ offer.productOfferValue|call_twig_func(offer.productOfferReference~'_render') }}
+                            </a>
+
+                        {% endif %}
+
+
+
+                    {% else %}
+
+                        {% if order_variation is null or order_variation != offer.productOfferValue~offer.product_variation_value %}
+
+                            <a href='{{ path('products-product:user.detail', {
+                                url : card.url ,
+                                offer: offer.productOfferValue,
+                                variation: offer.product_variation_value
+                            }) }}' class="btn btn-link btn-sm lh-1 text-decoration-none">
+                                {{ offer.productOfferValue|call_twig_func(offer.productOfferReference~'_render') }}
+                                {{ offer.product_variation_value|call_twig_func(offer.category_offer_variation~'_render') }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+
+                {% else %}
+                    {% if order_offer is null or order_offer != offer.productOfferValue %}
+                        <a href='{{ path('products-product:user.detail', {
+                            url : card.url ,
+                            offer: offer.productOfferValue
+                        }) }}' class="btn btn-link btn-sm lh-1 text-decoration-none">
+                            {{ offer.productOfferValue|call_twig_func(offer.productOfferReference) }}
+                        </a>
+                    {% endif %}
+                {% endif %}
+
+                {#  Расчет минимальной стоимости  #}
+                {% if order_price is null or (offer.product_price != 0 and order_price > offer.product_price ) %}
+                    {% set order_price = offer.product_price %}
+                {% endif %}
+
+                {% set order_offer = offer.productOfferValue %}
+                {% set order_variation = offer.productOfferValue~offer.product_variation_value %}
+                {% set order_modification = offer.productOfferValue~offer.product_variation_value~offer.product_modification_value %}
+
+                {% endif %}
+
+
+
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {# ПОЛНОЕ ОПИСАНИЕ #}
+
+    {% if card.product_preview %}
+        <div class="">
+            <div class="mt-5">
+                {# {{ include(_self|replace({ "content.html.twig": "description.html.twig" })) }} #}
+                {{ card.product_preview|raw }}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if card.product_description %}
+        <div class="accordion d-flex" style="--bs-accordion-btn-focus-box-shadow: none;">
+            <div class="d-flex justify-content-start">
+                <button class="accordion-button btn-link p-0 collapsed" style="--bs-accordion-active-bg: none;"
+                        type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <span class="pe-3">Читать полностью</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="accordion" id="accordionExample">
+
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body px-0">
+                    {{ card.product_description|raw|raw }}
+                </div>
+            </div>
+
+        </div>
+    {% endif %}
+
+
+
+    {# <ul class="nav position-absolute z-index-5 gap-3" id="pills-tab" role="tablist"
+			style="margin-top: -85px; margin-left: 185px;">
+
+			<li class="nav-item" role="presentation">
+				<button class="btn btn-link nav-link rounded-4 px-3 text-white active" id="pills-home-tab"
+						data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-label="По авто"
+						aria-controls="pills-home" aria-selected="true"><span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+							 class="bi bi-car-front-fill" viewBox="0 0 16 16">
+							<path d="M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679c.033.161.049.325.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.807.807 0 0 0 .381-.404l.792-1.848ZM3 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2H6ZM2.906 5.189a.51.51 0 0 0 .497.731c.91-.073 3.35-.17 4.597-.17 1.247 0 3.688.097 4.597.17a.51.51 0 0 0 .497-.731l-.956-1.913A.5.5 0 0 0 11.691 3H4.309a.5.5 0 0 0-.447.276L2.906 5.19Z"></path>
+						</svg>
+					</span><span class="ms-3 text-uppercase fw-bolder">По авто</span></button>
+			</li>
+
+			<li class="nav-item" role="presentation">
+				<button class="btn btn-link nav-link rounded-4 px-3 text-white" id="pills-profile-tab"
+						data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab"
+						aria-label="По параметрам" aria-controls="pills-profile" aria-selected="false" tabindex="-1">
+					<span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+							 class="bi bi-gear-fill" viewBox="0 0 16 16">
+							<path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"></path>
+						</svg>
+					</span><span class="ms-3 text-uppercase fw-bolder">По параметрам</span></button>
+			</li>
+		</ul> #}
+
+    <hr class="mt-5 rounded-circle border-0" style="height: 20px; box-shadow: 0 -20px 20px -6px #000;">
+
+    {# 0 -5px 5px -5px #}
+
+
+    {# <div class="w-100 shadow-lg mt-5 mb-5 bg-body rounded p-5">
+	</div> #}
+
+    <ul class="nav nav-pills d-flex gap-5 pb-4" id="pills-tab" role="tablist">
+
+        <li class="nav-item" role="presentation">
+            <button class="btn nav-link fw-bolder active" id="pills-home-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                    aria-selected="true">
+                <span class="text-uppercase px-3">В наличии <small class="fw-normal small">(12)</small></span>
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="btn nav-link fw-bolder" id="pills-profile-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                    aria-selected="false">
+                <span class="text-uppercase px-3">Нет в наличии <small class="fw-normal small">(15)</small></span>
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="btn nav-link fw-bolder" id="pills-contact-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                    aria-selected="false">
+                <span class="text-uppercase px-3">Доставка</span>
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <a href="#reviews" class="btn nav-link fw-bolder" type="button">
+                <span class="text-uppercase px-3">Отзывы <small class="fw-normal small">(9)</small></span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="d-flex justify-content-between gap-3">
+
+        <div class="tab-content w-75" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+                 tabindex="0">
+
+                <div class="d-flex justify-content-between">
+
+                    <h5 class="text-uppercase fw-bolder py-3">В наличии</h5>
+
+                    <ul class="nav nav-pills d-flex gap-2 py-3" id="radiusTab" role="tablist">
+
+                        <li class="nav-item" role="presentation">
+                            <button class="btn nav-link fw-bolder rounded-4 px-3 active" id="all-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#all-tab-pane" type="button" role="tab" aria-controls="all-tab-pane"
+                                    aria-selected="false">Все
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="btn nav-link fw-bolder rounded-4 px-3" id="R16-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#R16-tab-pane" type="button" role="tab" aria-controls="R16-tab-pane"
+                                    aria-selected="false">R16
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="btn nav-link fw-bolder rounded-4 px-3" id="R17-tab" data-bs-toggle="tab"
+                                    data-bs-target="#R17-tab-pane" type="button" role="tab" aria-controls="R17-tab-pane"
+                                    aria-selected="false">R17
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="btn nav-link fw-bolder rounded-4 px-3" id="R18-tab" data-bs-toggle="tab"
+                                    data-bs-target="#R18-tab-pane" type="button" role="tab" aria-controls="R18-tab-pane"
+                                    aria-selected="false">R18
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="btn nav-link fw-bolder rounded-4 px-3" id="R20-tab" data-bs-toggle="tab"
+                                    data-bs-target="#R20-tab-pane" type="button" role="tab" aria-controls="R20-tab-pane"
+                                    aria-selected="false">R20
+                            </button>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                {{ include(_self|replace({ "content.html.twig": "alternative.html.twig" })) }}
+
+            </div>
+
+
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+                 tabindex="0">
+                <h5 class="text-uppercase fw-bolder py-3">Нет в наличии</h5>
+                {{ include(_self|replace({ "content.html.twig": "alternative.html.twig" })) }}
+            </div>
+
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
+                 tabindex="0">
+                <h5 class="text-uppercase fw-bolder py-3">Доставка</h5>
+                {{ include(_self|replace({ "content.html.twig": "delivery.html.twig" })) }}
+            </div>
+
+        </div>
+
+        <div class="w-25">
+
+            <h5 class="text-uppercase fw-bolder py-3">Характеристики шины</h5>
+
+            {{ include(_self|replace({ "content.html.twig": "_rating.rewiews.html.twig" })) }}
+
+            <a href="#" class="side-bar-image rounded-4 overflow-hidden w-100 mt-4 d-flex"
+               aria-label="Место вашей рекламы"
+               title="Место вашей рекламы"
+            >
+                <img src="/temp/img/reimage.webp" class="w-100" alt="Место вашей рекламы">
+            </a>
+        </div>
+
+    </div>
+
+
+    {# ПРОСТМОРЕННЫЕ #}
+    <section id="viewed" class="mt-4">
+        <div class="rounded-4 bg-light">
+            <h2 class="text-uppercase h5 fw-bolder p-3 pb-2">Просмотренные</h2>
+
+            <div class="w-100 d-flex gap-3 justify-content-between p-3">
+                {% for i in 0..3 %}
+                    {# {% include('@Template/default/user/pc/includes/viewed.html.twig') %} #}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+    <section class="comment mt-4" id="reviews">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <h1 class="h4 text-uppercase fw-bolder mt-2">Отзывы Triangle Sports TH201 </h1>
+
+            <button type="button" class="btn btn-lg btn-danger rounded-4">
+                <span class="h5 text-uppercase mb-0 px-3">Оставить отзыв</span>
+            </button>
+        </div>
+
+        {# РЕЙТИНГ #}
+        <div class="d-flex gap-1 align-items-center">
+            {# {% include '@Template/default/user/pc/includes/rating.html.twig' %} #}
+            <a href="{# {{ path('pages:user.reviews.index') }} #}" class="small ms-3" aria-label="Отзывы"
+               title="Отзывы">36
+                отзывов</a>
+        </div>
+
+        <div class="d-flex flex-column gap-3 mt-3">
+            {% for i in 0..5 %}
+                {# {% include('@Template/default/user/pc/includes/review.html.twig') %} #}
+            {% endfor %}
+        </div>
+
+        <div class="mt-5">
+            {# {% include('@Template/default/user/pc/includes/pagination.html.twig') %} #}
+            {# {{ include(_self|replace({ "content.html.twig": "pagination.html.twig" })) }} #}
+        </div>
+    </section>
+
+</main>
+
+

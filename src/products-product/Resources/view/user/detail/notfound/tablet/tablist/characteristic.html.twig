@@ -1,0 +1,67 @@
+<div class="d-flex flex-column gap-3 small">
+
+    <div class="d-flex justify-content-between p-1 rounded-3 bg-light">
+        <div class="w-50">Производитель</div>
+        <div class="w-50"><a href="#" aria-label="Triangle" title="Triangle">Triangle</a></div>
+    </div>
+
+    <div class="d-flex justify-content-between p-1">
+        <div class="w-50">Модель</div>
+        <div class="w-50"><a href="#" aria-label="Triangle Sports TH201" title="Triangle Sports TH201">Triangle Sports
+                TH201</a></div>
+    </div>
+
+    <div class="d-flex justify-content-between p-1 rounded-3 bg-light">
+        <div class="w-50">Размер</div>
+        <div class="w-50"><a href="#" aria-label="195/45 R16" title="195/45 R16">195/45 R16</a></div>
+    </div>
+
+    <div class="d-flex justify-content-between p-1">
+        <div class="w-50">Тип автомобиля</div>
+        <div class="w-50">Легковые автомобили</div>
+    </div>
+
+    <div class="d-flex justify-content-between p-1 rounded-3 bg-light">
+        <div class="w-50">Сезонность</div>
+        <div class="w-50">
+            Летние шины <img data-src="/temp/img/sun.png" src="/assets/img/empty.png" class="lazy m-1" alt="..."
+                             style="width: 13px; height: 13px;">
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between p-1">
+        <div class="w-50">Индекс нагрузки</div>
+        <div class="w-50">84W</div>
+    </div>
+
+    <div class="d-flex justify-content-between p-1 rounded-3 bg-light">
+        <div class="w-50">Индекс скорости</div>
+        <div class="w-50">T (до 190 км/ч)</div>
+    </div>
+
+    <div class="d-flex justify-content-between p-1">
+        <div class="w-50">Шипы</div>
+        <div class="w-50">Нет</div>
+    </div>
+
+    <div class="d-flex justify-content-between p-1 rounded-3 bg-light">
+        <div class="w-50">Производство</div>
+        <div class="w-50 d-flex gap-3">
+
+            <div>Китай</div>
+
+            <div data-bg="/img/flags/cn.svg" class="lazy circle-25 bg-cover"></div>
+
+            {# <img src="/assets/img/flags/cn.svg" alt="Китай" class="rounded-circle"> #}
+        </div>
+    </div>
+
+    <div class="w-50 d-flex mt-3">
+        <a href="{{ path('core:user.homepage') }}"
+           aria-label="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}"
+           title="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}">
+            <img data-src="/logo.webp" src="/assets/img/empty.png" alt="..." class="lazy img-fluid">
+        </a>
+    </div>
+
+</div>

@@ -1,0 +1,62 @@
+{% set price = user_profile_discount(card.product_price) ?: card.product_price %}
+
+{% set oldPrice = user_profile_discount(card.product_old_price) ?: card.product_old_price %}
+
+
+<tr>
+	<td style="{{ loop.last ? 'border: none;' : '' }}">
+		<div class="d-flex align-items-center justify-content-center gap-2">
+			<div
+				class="">
+
+				{# Обложка  #}
+				{% set image_path = '/assets/img/blank.svg' %}
+				{% if card.product_image_ext is defined and card.product_image_ext is not null %}
+					{% set image_path = cdn_image_path(card.product_image, card.product_image_ext, card.product_images_cdn) %}
+				{% endif %}
+
+				<a href="{{ path('products-product:user.detail', { category: card.category_url, url: card.product_url, offer: card.product_offer_value, variation: card.product_variation_value, modification: card.product_modification_value }) }}" class="icon rounded-4  lazy bg-contain p-1" data-bg="{{ image_path }}" style="width: 65px; height: 65px;"></a>
+
+			</div>
+
+			<div class="">
+
+				<a href="{{ path('products-product:user.detail', { category: card.category_url, url: card.product_url, offer: card.product_offer_value, variation: card.product_variation_value, modification: card.product_modification_value }) }}" class="text-dark  text-uppercase text-decoration-none fs-11">
+
+					{{ card.product_trans_name }}
+
+					{{ card.product_variation_value|call_twig_func(card.product_variation_reference~'_render')
+                    ~ card.product_modification_value|call_twig_func(card.product_modification_reference~'_render') }}
+
+					{{ card.product_offer_value|call_twig_func(card.product_offer_reference~'_render') }}
+				</a>
+			</div>
+		</div>
+
+	</td>
+
+	<td class="align-middle text-center p-0" style="{{ loop.last ? 'border: none;' : '' }}">
+		{%  if card.product_quantity == 0 %}
+			Нет
+		{% elseif card.product_quantity < 20 %}
+			<20 {% else %}>
+				20
+			{% endif %}
+		</td>
+	</td>
+	<td class="align-middle text-center p-0" style="{{ loop.last ? 'border: none;' : '' }}">
+
+		{{ money(price, card.product_currency) }}
+
+		{% if oldPrice %}
+			<span class="fs-11 fw-medium text-secondary">
+				<del>{{ money(oldPrice, card.product_currency) }}</del>
+			</span>
+		{% endif %}
+	</td>
+
+	<td class="align-middle text-center p-0" style="{{ loop.last ? 'border: none;' : '' }}">
+		{{ include(_self|replace({ "card.html.twig": "form/big_button.html.twig" }), { form : forms[card.product_invariable_id] }) }}
+	</td>
+
+</tr>

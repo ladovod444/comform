@@ -1,0 +1,273 @@
+{# {{ include(_self|replace({ "content.html.twig": "header.html.twig" })) }} #}
+
+<main class="main d-print-none">
+
+    <section id="card" class="container mt-3">
+
+        {{ include(_self|replace({ "content.html.twig": "breadcrumb.html.twig" })) }}
+
+        <h1 class="h5 text-uppercase fw-bolder">Triangle Sports TH201 195/45 R16 84W</h1>
+
+        <div class="d-flex align-items-end gap-3 mb-1 small">
+
+            {# РЕЙТИНГ #}
+            <div class="d-flex gap-1 align-items-center">
+                {% include '@Template/default/user/tablet/includes/rating.html.twig' %}
+                <a href="#reviews" class="small ms-2" aria-label="Отзывы" title="Отзывы">9 отзывов</a>
+            </div>
+
+            <span class="small lh-normal ">Артикул: 32123122312 </span>
+
+            <img data-src="/temp/img/sun.png" src="/assets/img/empty.png" class="lazy" alt="..."
+                 style="width: 15px; height: 15px;">
+
+            <span class="badge bg-success rounded-2 mt-1">Новинка</span>
+            <span class="badge bg-hit rounded-2 mt-1">Хит</span>
+            <span class="badge bg-danger rounded-2 mt-1">Акция</span>
+        </div>
+
+        <div class="d-flex justify-content-between gap-2 mt-3 small">
+
+            <div class="w-100 d-flex gap-3">
+
+                <div class="d-flex flex-column gap-2 my-4 w-25 align-items-center">
+
+                    {% for i in 0..3 %}
+
+                        <div class="col-9">
+                            <img data-src="/temp/img/card-img/shina-1.webp" src="/assets/img/empty.png"
+                                 class="lazy img-fluid rounded-4 border" alt="..."
+                            >
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <div class="w-100">
+                    <div class="overflow-hidden rounded-5 border lazy bg-cover" style="height: 320px;"
+                         data-bg="/temp/img/card-img/shina-1.webp"
+                    ></div>
+
+                    {# <img data-src="img/card-img/shina-2.webp" class="lazy" alt="..."> #}
+                </div>
+            </div>
+
+            <div class="w-75 d-flex flex-column align-items-start">
+
+                <div class="position-relative w-75">
+                    <button class="btn btn-link position-absolute top-0 start-100 mt-2 ms-4 pt-2"
+                            aria-label="Добавить в избранное"
+                    >
+                        {# <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+							 class="bi bi-heart-fill" viewBox="0 0 16 16">
+							<path fill-rule="evenodd"
+								  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+						</svg> #}
+
+                        <img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNCMUI2QkIiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAxLjMxNEMxMi40MzgtMy4yNDggMjMuNTM0IDQuNzM1IDggMTUtNy41MzQgNC43MzYgMy41NjItMy4yNDggOCAxLjMxNHoiPjwvcGF0aD48L3N2Zz4K"
+                             width="20" height="20"
+                             src="/assets/img/empty.png"
+                             class="lazy"
+                             alt="Добавить в избранное"
+                        >
+                    </button>
+                </div>
+
+                <div class="mb-2 bg-light rounded-4 w-100 gap-2 px-4 py-4">
+
+                    <div class="d-flex align-items-center justify-content-center gap-3">
+                        <div class="card-price d-flex flex-column align-items-end"><small
+                                    class="small text-decoration-line-through text-danger fw-bold">6 000 Р.</small>
+                            <span
+                                    class="fw-bolder lh-normal h3">4 800 Р.</span>
+                        </div>
+
+                        <span class="badge bg-danger rounded-2 mt-3">
+							<span class="text-uppercase">Скидка 20%</span>
+						</span>
+                    </div>
+
+                    <form action="#" class="d-flex align-items-center position-relative">
+
+                        <button type="button" class="btn">
+                            <span class="h4 text-muted opacity-50">-</span>
+                        </button>
+
+                        <input type="text" value="4" class="form-control form-control mx-1" id="count"
+                               style="width: 50px;">
+
+                        <button type="button" class="btn">
+                            <span class="h5 text-muted opacity-50">+</span>
+                        </button>
+
+                        <button type="button" class="btn btn-primary ms-1">
+                            <span class="h6 text-uppercase px-3">В корзину</span>
+                        </button>
+
+                        {# <button class="btn position-absolute top-0 end-0" type="submit" role="button"
+							aria-label="Поиск по каталогу">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+							 class="bi bi-search text-secondary" viewBox="0 0 16 16">
+							<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+						</svg>
+					</button> #}
+                    </form>
+
+                    <hr class="text-muted opacity-25 mt-3">
+
+                    <div class="d-flex flex-column gap-2 small">
+                        <div class="d-flex gap-3">
+							<span class="text-success fw-bolder">
+								<svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" fill="currentColor"
+                                     class="bi bi-circle-fill me-1" viewBox="0 0 16 16">
+									<circle cx="8" cy="8" r="8"/>
+								</svg>
+
+								В наличии</span>
+                            <span class="text-muted">Более 20 шт.</span>
+                        </div>
+
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-truck me-2 text-secondary"
+                                 viewBox="0 0 16 16">
+                                <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                            </svg>
+                            <a href="#" class="text-secondary"
+                               aria-label="Рассчитать доставку"
+                               title="Рассчитать доставку"
+                            >Рассчитать доставку</a>
+                        </div>
+
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-boxes me-2 text-secondary"
+                                 viewBox="0 0 16 16">
+                                <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z"/>
+                            </svg>
+                            <strong>Опт:</strong> &nbsp; <a href="#" class="text-secondary"
+                                                            aria-label="оптовое предложение"
+                                                            title="оптовое предложение">оптовое предложение</a>
+                        </div>
+
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-info-circle me-2 text-secondary" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                            Самовывоз только для оптовых клиентов.
+                        </div>
+
+                        <span>Расчет стоимости и сроков доставки уточняйте у менеджера.</span>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="characteristic" class="shadow">
+
+        <div class="container d-flex justify-content-between gap-3 py-4 ">
+
+            <div class="w-100">
+                {{ include(_self|replace({ "content.html.twig": "tablist.html.twig" })) }}
+            </div>
+
+            {# МЕСТО ВАШЕЙ РЕКЛАМЫ #}
+
+            <div class="w-100">
+                <a href="#" class=""
+                   aria-label="Место Вашей рекламы">
+                    <img data-src="/temp/img/reimage.webp" src="/assets/img/empty.png" class="lazy w-100 rounded-4"
+                         alt="...">
+                </a>
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <section class="container">
+
+        <div class="my-4 px-2 ">
+            <h2 class="text-uppercase h5 fw-bolder">Альтернатива</h2>
+        </div>
+
+        <div class="small">
+            {{ include(_self|replace({ "content.html.twig": "alternative.html.twig" })) }}
+        </div>
+    </section>
+
+
+    {# АКЦИИ \ СКИДКИ #}
+    <section id="action" class="mt-4">
+
+        <div class="d-flex flex-nowrap gap-3 overflow-auto w-100 p-3">
+            {% for i in 0..5 %}
+                {{ include(_self|replace({ "content.html.twig": "action.html.twig" })) }}
+            {% endfor %}
+        </div>
+
+    </section>
+
+    {# ПРОСМОТРЕННЫЕ #}
+    <section id="viewed" class="container py-3 shadow">
+
+        <div class="row p-3 bg-light mb-3">
+
+            <div class="col-12 pb-2">
+                <h2 class="text-uppercase me-4 h5 fw-bolder">Просмотренные</h2>
+            </div>
+
+            <div class="d-flex flex-nowrap gap-2 overflow-auto w-100 p-3">
+                {% for i in 0..3 %}
+                    {{ include(_self|replace({ "content.html.twig": "viewed.html.twig" })) }}
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+
+
+    <section id="reviews" class="container mt-2">
+
+
+        <div class="d-flex  align-items-center p-2 gap-5">
+
+            <h5 class="text-uppercase fw-bolder mt-2">Отзывы</h5>
+            <a href="#comments" class="small" aria-label="Отзывы" title="Отзывы">9 отзывов</a>
+
+
+            <div class="flex-grow-1 text-end">
+                <button type="button" class="btn btn-primary ms-1 rounded-4 ">
+                    <span class="h6 text-uppercase px-3">Оставить отзыв</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-column gap-3 mt-3">
+
+            {% for i in 0..3 %}
+                {{ include(_self|replace({ "content.html.twig": "reviews.html.twig" })) }}
+            {% endfor %}
+        </div>
+
+        <div class="mt-3">
+            {% include('@Pages/default/user/detail/pagination.html.twig') %}
+        </div>
+
+    </section>
+
+
+</main>
+
+

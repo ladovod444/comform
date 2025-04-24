@@ -1,0 +1,99 @@
+{% import _self as macros %}
+
+{% macro category_card(image_path, category_name, category_url, category_threes) %}
+
+    <div class="card border-0 pe-0" style="width:270px;">
+        <a
+                class="text-decoration-none"
+                href="{{ path('products-product:user.catalog.category', {'category': category_url}) }}"
+        >
+            <img
+                    class="card-img-top rounded-4 mb-1"
+                    style="height: 260px;  "
+                    src="{{ image_path }}" draggable="false"
+                    alt="{{ category_name }}"
+            >
+            <p class="m-0 mt-2 fs-5 text-center text-dark">{{ category_name | upper }}</p>
+        </a>
+    </div>
+
+{% endmacro %}
+
+
+<section class="container mb-5 position-relative">
+    <h2 class="fs-4 mb-4">Дизайнерская мебель от производителя</h2>
+
+    <div class="scroll-container row overflow-x-scroll flex-nowrap pt-2 grabbing" style="height: 320px; ">
+        {% if baks_public_menu is defined %}
+        {% if baks_public_menu|length > 1 %}
+
+        {% set count =  0 %}
+
+        {% for i in baks_public_menu %}
+
+            {% if i.child_category is not null %}
+
+                {% for child in i.child_category|json_decode %}
+
+                    {% if child.child_category_cover_ext is defined and child.child_category_cover_ext is not null %}
+                        {% set image_path =  cdn_image_path(child.child_category_cover_name, child.child_category_cover_ext, child.child_category_cover_cdn) %}
+                    {% endif %}
+
+                    {% set category_threes = [] %}
+
+                    {# child_category_three #}
+                    {% if i.child_category_three is not null %}
+
+                        {% for child_three in i.child_category_three|json_decode|filter(cat =>  cat.category == child.child_category_event) %}
+                            {% set category_threes = category_threes|merge([child_three]) %}
+                        {% endfor %}
+
+                    {% endif %}
+
+
+                    {% if i.child_category_three is null and i.child_products is not null %}
+
+                        {% for child_three in i.child_products|json_decode|filter(prod =>  prod.category == child.child_category_event) %}
+                            {% set category_threes = category_threes|merge([child_three]) %}
+                        {% endfor %}
+
+                    {% endif %}
+                    {% if  category_threes is not empty %}
+                        {% set count = count + 1 %}
+                        {# Передаем значения в макрос для рендеринга элементов меню #}
+                        {{ macros.category_card(image_path, child.child_category_name , child.category_url) }}
+
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+
+                {% if i.products is not null %}
+                    {% set count = count + 1 %}
+                    {% set image_path = '/assets/img/blank.svg' %}
+
+                    {% if i.category_cover_ext is defined and i.category_cover_ext is not null %}
+                        {% set image_path = cdn_image_path(i.category_cover_dir, i.category_cover_ext, i.category_cover_cdn) %}
+                    {% endif %}
+
+
+                    {{ macros.category_card(image_path, i.category_name, i.category_url) }}
+
+                {% endif %}
+            {% endif %}
+
+        {% endfor %}
+    </div>
+
+    {% if count > 4 %}
+        <button class="btn scroll-btn scroll-btn-left position-absolute top-50" id="scroll-leftBig"
+                aria-label="left"><span
+                    class="carousel-control-prev-icon custom-color" aria-hidden="true"></span></button>
+        <button class="btn scroll-btn scroll-btn-right position-absolute top-50" id="scroll-rightBig"
+                aria-label="right">
+            <span class="carousel-control-next-icon custom-color" aria-hidden="true"></span></button>
+    {% endif %}
+    {% endif %}
+    {% endif %}
+</section>
+
+        

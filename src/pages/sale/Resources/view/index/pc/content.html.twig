@@ -1,0 +1,16 @@
+{% trans_default_domain 'homepage.user' %}
+
+<hr>
+<main>
+    {{ include(_self|replace({ "content.html.twig" : "/includes/breadcrumb.html.twig" })) }}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/ad_banner.html.twig" })) }}
+    {% set showBadge = true %}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/promo.html.twig" })) }}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/ad_section.html.twig" })) }}
+    {% set showBadge = false %}
+    {% set buttons = [
+        { name: 'Новинки', url: '#' },
+        { name: 'Коллекции', url: '#' }
+    ] %}
+{#    {{ include(_self|replace({ "content.html.twig" : "/includes/ad_recomendet.html.twig" })) }}#}
+</main>

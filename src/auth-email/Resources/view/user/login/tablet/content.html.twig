@@ -1,0 +1,11 @@
+<hr class="m-0">
+<main>
+    {{ include(_self|replace({ "content.html.twig" : "_includes/breadcrumb.html.twig" })) }}
+
+    {#    {% include Template('@blackdragon:Template/'~baks_settings.device~'/includes/authorization.html.twig') %} #}
+    {{ include(_self|replace({ "content.html.twig" : "_includes/auth.html.twig" })) }}
+
+
+</main>
+
+

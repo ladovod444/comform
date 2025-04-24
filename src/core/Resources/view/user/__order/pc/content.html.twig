@@ -1,0 +1,10 @@
+{% trans_default_domain 'order.user' %}
+
+<hr>
+<main>
+    {{ include(_self|replace({ "content.html.twig" : "/includes/breadcrumb.html.twig" })) }}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/orderForm.html.twig" })) }}
+    {#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/orderForm.html.twig') %} #}
+    {% include Template('@Template:user/'~baks_settings.device~'/includes/feedback.html.twig') %}
+    <hr class="mt-0 mb-5">
+</main>

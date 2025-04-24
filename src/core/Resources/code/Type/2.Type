@@ -1,0 +1,25 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+#set( $UidClass = $NAME.replace("Type", "Uid") )
+
+use BaksDev\Core\Type\UidType\UidType;
+
+final class ${NAME} extends UidType
+{
+	public function getClassType() : string
+	{
+		return ${UidClass}::class;
+	}
+	
+	public function getName() : string
+	{
+		return ${UidClass}::TYPE;
+	}
+}

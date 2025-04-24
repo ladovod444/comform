@@ -1,0 +1,58 @@
+<?php
+
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+#set( $PATH = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1/$2").toLowerCase() )
+#set( $ROLE = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1_$2").toUpperCase() )
+
+
+use BaksDev\Core\Form\Search\SearchDTO;
+use BaksDev\Core\Form\Search\SearchForm;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use BaksDev\Core\Controller\AbstractController;
+use Symfony\Component\Routing\Attribute\Route;
+use BaksDev\Core\Listeners\Event\Security\RoleSecurity;
+use Symfony\Component\HttpKernel\Attribute\AsController;
+
+#[AsController]
+#[RoleSecurity('ROLE_${ROLE}')]
+final class IndexController extends AbstractController
+{
+    #[Route('/admin/${PATH}s/{page<\d+>}', name: 'admin.index', methods: ['GET', 'POST'])]
+    public function index(
+        Request ${DS}request,
+        All${CONTEXT}Interface ${DS}all${CONTEXT},
+        int ${DS}page = 0,
+    ): Response
+    {
+        // Поиск
+        ${DS}search = new SearchDTO();
+        ${DS}searchForm = ${DS}this->createForm(SearchForm::class, ${DS}search);
+        ${DS}searchForm->handleRequest(${DS}request);
+
+
+        // Фильтр
+        // ${DS}filter = new ProductsStocksFilterDTO(${DS}request, ${DS}ROLE_ADMIN ? null : ${DS}this->getProfileUid());
+        // ${DS}filterForm = ${DS}this->createForm(ProductsStocksFilterForm::class, ${DS}filter);
+        // ${DS}filterForm->handleRequest(${DS}request);
+
+        // Получаем список
+        ${DS}${CONTEXT} = ${DS}all${CONTEXT}
+         ->search(${DS}search)
+         ->paginator();
+
+        return ${DS}this->render(
+            [
+                'query' => ${DS}${CONTEXT},
+                'search' => ${DS}searchForm->createView(),
+            ]
+        );
+    }
+}

@@ -1,0 +1,16 @@
+{# @var card \BaksDev\Products\Product\Repository\ProductDetailByValue\ProductDetailByValueResult #}
+
+{# Характеристики модели #}
+{% set properties = card.categorySectionField|filter(v => v.field_value != 'false' and v.field_value != '' and v.field_value != null) %}
+
+<dl class="text-secondary">
+
+	{% for key,property in properties %}
+
+		<dt>{{ property.field_trans }}</dt>
+
+		<dd>{{ property.field_value|call_twig_func(property.field_type~'_template') }}</dd>
+
+	{% endfor %}
+
+</dl>

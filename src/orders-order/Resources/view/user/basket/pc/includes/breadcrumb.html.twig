@@ -1,0 +1,22 @@
+<section class="container py-3 px-0">
+    <h2 class="visually-hidden">Хлебные крошки</h2>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0" style="font-size: 11px;">
+
+
+            <li class="breadcrumb-item">
+                <a href="{{ path('core:user.homepage') }}"
+                   class="text-secondary text-decoration-none"
+                   aria-label="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}"
+                   title="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}">
+                    {{ 'breadcrumb.homepage.user'|trans({}, 'core') }}
+                </a>
+            </li>
+
+            <li class="breadcrumb-item text-secondary" aria-current="page"
+                aria-label="Ваша корзина"
+                title="Ваша корзина">Ваша корзина
+            </li>
+        </ol>
+    </nav>
+</section>

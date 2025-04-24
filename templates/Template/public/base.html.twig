@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.getLocale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Страница мебельной фабрики Comfort-avenue.">
+
+    <title>{% block title %}COMFORT-AVENUE{% endblock %}</title>
+
+   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20128%20128%22%3E%3Ctext%20y=%221.2em%22%20font-size=%2296%22%3E%E2%9A%A0%3C/text%3E%3Ctext%20y=%221.3em%22%20x=%220.2em%22%20font-size=%2276%22%20fill=%22%23fff%22%3Esf%3C/text%3E%3C/svg%3E">
+
+    <link href="/assets/plugins/bootstrap/5.3.3/bootstrap.min.css" rel="stylesheet">
+
+{#    <link href="/assets/css/style.min.css" rel="stylesheet">#}
+
+    <link href="/assets/comfort/css/style.css" rel="stylesheet">
+    <link href="/assets/white-sign/css/style.css" rel="stylesheet">
+
+    <link href="/assets/comfort/font/fonts.css" rel="stylesheet">
+
+    {% block stylesheets %}{% endblock %}
+
+    {% block meta %}{% endblock %}
+
+</head>
+
+<body class="small">
+<h1 class="visually-hidden">Мебельная фабрика Comfort-avenue</h1>
+<button class="btn btn-dark p-3 z-3" id="to-top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+    </svg>
+</button>
+{% block header %}
+    {{ include(_self|replace({ "base.html.twig" : (baks_settings.device ?: 'pc') ~ "/header.html.twig" })) }}
+{% endblock %}
+
+{% block content %}
+    {{ include(_self|replace({ "base.html.twig" : (baks_settings.device ?: 'pc') ~ "/content.html.twig" })) }}
+{% endblock %}
+
+{% block footer %}
+    {{ include(_self|replace({ "base.html.twig" : (baks_settings.device ?: 'pc') ~ "/footer.html.twig" })) }}
+{% endblock %}
+
+
+
+<script nonce="{{ csp_nonce() }}">
+    const $locale = '{{ app.request.getLocale() }}';
+    window.lazyLoadOptions = {};
+</script>
+
+
+<script async nonce="{{ csp_nonce() }}" src='/assets/js/lazyload.min.js?v={{ version }}'></script>
+
+<script
+        nonce="{{ csp_nonce() }}"
+        data-src="/assets/plugins/bootstrap/5.3.3/bootstrap.bundle.min.js"
+        class="lazy"
+></script>
+
+
+<script nonce="{{ csp_nonce() }}" data-src="/assets/comfort/js/toTopBtn.min.js" class="lazy"></script>
+
+<script nonce="{{ csp_nonce() }}" data-src="/assets/comfort/js/scroll.min.js" class="lazy"></script>
+
+<script nonce="{{ csp_nonce() }}" data-src="/assets/comfort/js/main.min.js" class="lazy"></script>
+
+<script nonce="{{ csp_nonce() }}" data-src="/assets/js/script.min.js" class="lazy"></script>
+
+
+{# Избранное #}
+<script async nonce="{{ csp_nonce() }}" data-src='/assets/products-favorite/favorite.min.js?v={{ version }}' class="lazy"></script>
+
+
+<script nonce='{{ csp_nonce() }}'  data-src='/assets/plugins/nice-select2/nice-select2.min.js?v={{ version }}' class='lazy'></script>
+<script nonce="{{ csp_nonce() }}" data-src='/assets/js/search.min.js?v={{ version }}' class="lazy"></script>
+<script nonce="{{ csp_nonce() }}" data-src="/assets/js/radio.input.min.js?v={{ version }}" class="lazy"></script>
+<script nonce="{{ csp_nonce() }}" data-src="/assets/orders-order/modal_basket.min.js?v={{ version }}" class='lazy'></script>
+
+
+{# TOAST УВЕДОМЛЕНИЯ ****************************************************** #}
+{# {% include '@Core/_includes/flash.html.twig' %} #}
+{% include Template('/user/'~ (baks_settings.device ?: 'pc') ~'/includes/flash.html.twig') %}
+{# END УВЕДОМЛЕНИЯ ****************************************************** #}
+
+
+{# Блок модального окна #}
+<div class="modal fade" tabindex="-1" id="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="d-flex justify-content-center w-100">
+            <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Loading...</span></div>
+        </div>
+    </div>
+</div>
+
+{% block javascript %}
+
+{% endblock %}
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<main class="main container ">
+    <section id="favorites">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="h4 text-uppercase fw-bolder py-3 mb-0">Избранное</h2>
+        </div>
+    </section>
+
+    {% if query %}
+        <div class="row row-cols-2 g-2">
+                
+                    {% for card in query %}
+{#                        {{ include(_self|replace({ "content.html.twig": "includes/card.html.twig" })) }}#}
+                        {% include Template('@products-product/public/'~baks_settings.device~'/card-product-result.html.twig') with {product: card, forms} only %}
+                    {% endfor %}
+                
+            </div>
+    {% else %}
+        <p>Здесь пока ничего нет</p>
+    {% endif %}
+</main>

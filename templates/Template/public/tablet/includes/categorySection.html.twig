@@ -1,0 +1,49 @@
+<section class="container">
+          <div class="row">
+        
+            <div class="col-12">
+              <div class="d-flex align-items-center gap-2 justify-content-between mb-3">
+                <div class="d-flex align-items-center gap-4">
+                  <h2 class="fs-5 m-0">{{ sectionTitle }}</h2>
+                  <button class="btn btn-dark d-flex align-items-center gap-1 px-2 py-0 rounded-3"  aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
+                    </svg>
+                      <p class="m-0" style="font-size: 12px; line-height: 20px;">Фильтры</p>
+                  </button>
+                  <button class="btn bg-transparent p-0" style="font-size: 11px;">
+                      <u>Самые популярные</u>
+                      <svg class="bi bi-arrow-down" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="gray" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"></path>
+                      </svg>
+                  </button>
+                </div>
+                <div class="d-flex">
+                  <div class="form-check form-switch d-flex align-items-center" style="font-size: 11px;">
+                      <input class="form-check-input me-2 mt-0" style="width:35px; height:20px;" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                      <label class="form-check-label"  for="flexSwitchCheckDefault">В наличии</label>
+                  </div>
+                </div>
+              </div>
+            
+              {% set total_items = 15 %}
+
+              <div class="row row-cols-4 gy-1">
+              {% set section_number = 5%}
+                {% for i in 0..total_items %}
+                  <div class="col p-1">
+                    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/card.html.twig') %}
+                  </div>
+                {% endfor %}
+
+              </div>
+
+            <div class="d-flex justify-content-center mb-3">
+              <button class="btn btn-outline-dark px-5" style="font-size: 14px; border-color: lightgray;"><strong>Показать еще</strong></button>
+            </div>
+
+          </div>
+          </div>
+</section>
+
+<hr class="mt-0 mb-2">

@@ -1,0 +1,50 @@
+<section class="container py-3">
+    <h2 class="visually-hidden">Хлебные крошки</h2>
+    <nav aria-label="breadcrumb">
+        {#      <ol class="breadcrumb m-0" style="font-size: 11px;"> #}
+        {#        <li class="breadcrumb-item"><a class="text-secondary text-decoration-none" href="{{ path('core:user.homepage') }}">Главная</a></li> #}
+        {#        <li class="breadcrumb-item"><a class="text-secondary text-decoration-none" href="#">Каталог</a></li> #}
+        {#        <li class="breadcrumb-item"><a class="text-secondary text-decoration-none" href="#">Кухни</a></li> #}
+        {#      </ol> #}
+
+
+        <ol class="breadcrumb m-0" style="font-size: 11px;">
+
+            <li class="breadcrumb-item">
+                <a href="{{ path('core:user.homepage') }}"
+                   class="text-secondary text-decoration-none"
+                   aria-label="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}"
+                   title="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}">
+                    {{ 'breadcrumb.homepage.user'|trans({}, 'core') }}
+                </a>
+            </li>
+            {% if category %}
+                <li class="breadcrumb-item">
+
+                    <a href="{{ path('products-product:user.catalog.index') }}"
+                       class="text-secondary text-decoration-none"
+                       aria-label="Каталог"
+                       title="Каталог">
+                        Каталог
+                    </a>
+                </li>
+            {% endif %}
+            {% if category.parent_category_name %}
+                <li class="breadcrumb-item">
+
+                    <a href="{{ path('products-product:user.catalog.category', { category : category.parent_category_url }) }}"
+                       class="text-secondary text-decoration-none"
+                       aria-label="{{ category.parent_category_name }}"
+                       title="{{ category.parent_category_name }}">
+                        {{ category.parent_category_name }}
+                    </a>
+                </li>
+            {% endif %}
+
+            <li class="breadcrumb-item text-secondary text-decoration-none"
+                aria-current="page" aria-label="{{ category.category_name }}"
+                title="{{ category.category_name }}">{{ category.category_name }}
+            </li>
+        </ol>
+    </nav>
+</section>

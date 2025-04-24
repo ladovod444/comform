@@ -1,0 +1,92 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+
+#end
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use BaksDev\Core\Entity\EntityReadonly;
+use Symfony\Component\Validator\Constraints as Assert;
+
+#set( $table = $NAME.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
+
+interface ${NAME}Interface
+{
+    public function getName() : ?string;
+}
+
+/* ${NAME} */
+
+#[ORM\Entity]
+#[ORM\Table(name: '${table}')]
+class ${NAME} extends EntityReadonly
+{
+    /**
+    * Идентификатор Main
+     */
+    #[Assert\NotBlank]
+    #[Assert\Uuid]
+    #[ORM\Id]
+    #[ORM\Column(type: ${NAME}Uid::TYPE)]
+    private ${NAME}Uid ${DS}main;
+
+    /**
+	* Идентификатор События
+	*/
+    #[Assert\NotBlank]
+    #[Assert\Uuid]
+    #[ORM\OneToOne(targetEntity: ${NAME}Event::class, inversedBy: 'readonly_property')]
+    #[ORM\JoinColumn(name: 'event', referencedColumnName: 'id')]
+    private ${NAME}Event ${DS}event;
+
+    /** Свойство */
+    //#[Assert\NotBlank]
+    //#[ORM\Column(type: Types::STRING, length: 100)]
+    //private string ${DS}name;
+
+
+	public function __construct(${NAME}Event ${DS}event)
+    {
+        ${DS}this->event = ${DS}event;
+        ${DS}this->main = ${DS}event->getMain();
+    }
+
+    public function __toString(): string
+    {
+        return (string) ${DS}this->main;
+    }
+
+    public function setEvent(${NAME}Event ${DS}event): self
+    {
+        ${DS}this->event = ${DS}event;
+        return ${DS}this;
+    }
+
+    public function getDto(${DS}dto): mixed
+    {
+        ${DS}dto = is_string(${DS}dto) && class_exists(${DS}dto) ? new ${DS}dto() : ${DS}dto;
+
+        if(${DS}dto instanceof ${NAME}Interface)
+        {
+            return parent::getDto(${DS}dto);
+        }
+
+        throw new \InvalidArgumentException(sprintf('Class %s interface error', ${DS}dto::class));
+    }
+
+
+    public function setEntity(${DS}dto): mixed
+    {
+        if(${DS}dto instanceof ${NAME}Interface || ${DS}dto instanceof self)
+        {
+            return parent::setEntity(${DS}dto);
+        }
+
+        throw new \InvalidArgumentException(sprintf('Class %s interface error', ${DS}dto::class));
+    }
+
+}

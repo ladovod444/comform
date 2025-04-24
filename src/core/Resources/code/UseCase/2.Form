@@ -1,0 +1,41 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+
+#end
+#set( $DTOClass = $NAME.replace("Form", "DTO") )
+#set( $SUBMIT = $NAME.replace("Form", "").replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+final class ${NAME} extends AbstractType
+{
+	public function buildForm(FormBuilderInterface ${DS}builder, array ${DS}options) : void
+	{
+		${DS}builder->add('name', TextType::class, ['required' => false]);
+		
+		/* Сохранить ******************************************************/
+		${DS}builder->add(
+			'${SUBMIT}',
+			SubmitType::class,
+			['label' => 'Save', 'label_html' => true, 'attr' => ['class' => 'btn-primary']]
+		);
+	}
+	
+	public function configureOptions(OptionsResolver ${DS}resolver) : void
+	{
+		${DS}resolver->setDefaults([
+			'data_class' => ${DTOClass}::class,
+			'method' => 'POST',
+             'attr' => ['class' => 'w-100'],
+		]);
+	}
+}

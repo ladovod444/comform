@@ -1,0 +1,16 @@
+user:
+  page: 'Авторизация'
+  btn:
+    save: 'Войти'
+  form:
+    label:
+      email: 'Электронная почта:'
+      password: 'Пароль:'
+  login:
+    error:
+      header: 'Ошибка при авторизации'
+      message: 'Неверные учетные данные'
+  link:
+    breadcrumb:
+      page: 'Вход в личный кабинет'
+

@@ -1,0 +1,276 @@
+{% set domain = app.request.getHttpHost() %}
+
+{% import _self as macros %}
+
+ {# Рендеринг элементов меню в зависимости от условий #}
+{% macro item_card(imageSrc, title, url, items, isProduct, isNotCategory) %}
+
+    {% if isNotCategory %}
+
+        <div class="col d-flex gap-2 border-start">
+
+            {% set product_path = path( items[0].is_offer == true ? 'products-product:user.model' : 'products-product:user.detail', {
+                'category': url,
+                'url': items[0].url
+            }) %}
+
+            <a href="{{ product_path }}">
+                <div
+                        class="rounded-4 lazy bg-cover icon" style="width: 70px; height: 70px;"
+                        data-bg="{{ imageSrc }}"
+                        title="{{ title }}"
+                >
+                </div>
+            </a>
+
+            <div>
+
+                {# Если у корневой категории только продукция без вложенных категорий #}
+                <h5 class="fs-6 fw-bold d-block" style="max-width: 190px;">
+
+                    <a
+                            class="text-dark text-decoration-none text-truncate"
+                            href="{{ product_path }}"
+                    >
+                        {{ title }}
+                    </a>
+                </h5>
+
+                {{ include(_self|replace({ "navbar.html.twig": "items.html.twig" })) }}
+
+            </div>
+        </div>
+
+    {% elseif items is not empty %}
+
+        <div class="col d-flex gap-2 border-start">
+
+            {% set catrgory_path = path('products-product:user.catalog.category', {'category': url}) %}
+
+            <a href="{{ catrgory_path }}">
+                <div
+                        class="rounded-4 lazy bg-cover icon" style="width: 70px; height: 70px;"
+                        data-bg="{{ imageSrc }}"
+                        title="{{ title }}"
+                >
+                </div>
+            </a>
+
+            {# Заглавная категория #}
+
+            <div>
+                <h5 class="fs-6 fw-bold">
+                    <a
+                            class="text-dark text-decoration-none text-truncate"
+                            href="{{ catrgory_path }}"
+                    >
+                        {{ title }}
+                    </a>
+                </h5>
+                {{ include(_self|replace({ "navbar.html.twig": "items.html.twig" })) }}
+            </div>
+        </div>
+
+    {% endif %}
+
+
+{% endmacro %}
+
+ {# Перейти в каталог главной категории #}
+{% macro item_category(title, url) %}
+
+    <a
+            class="text-decoration-none h6 m-0 mb-2"
+            href="{{ path('products-product:user.catalog.category', {'category': url}) }}"
+    >
+        ВСЕ {{ title| upper }}
+    </a>
+
+{% endmacro %}
+
+
+<nav class="container dropdown" id="dropdownMainMenuNav">
+    <ul class="nav nav-pills justify-content-center gap-4 mb-3 fs-6">
+
+        <li class="nav-item">
+            <button class="btn btn-dark dropdown-toggle d-flex align-items-center gap-1 py-1 px-3"
+                    id="dropdownMainMenuBtn">
+                <svg class="bi bi-list" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>
+                </svg>
+                Каталог
+            </button>
+
+            {# Реализация меню каталога #}
+            <div class="dropdown-menu catalog-menu {% if lgScreen %}catalog-menu-lg{% endif %} rounded-4 shadow-lg border-0 px-5 py-3"
+                 id="dropdownMainMenu" aria-labelledby="dropdownMainMenu">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="list-group" id="list-tab" role="tablist">
+
+                            {% if baks_user_menu is defined and baks_user_menu|length > 1 %}
+
+                                {% for i in baks_user_menu %}
+
+                                    {% if i.products is not null or i.child_category is not null %}
+
+                                        <a class="list-group-item list-group-item-action {{ loop.index == 1 ? 'active' : '' }} border-0"
+                                           id="list-{{ loop.index }}-list" data-bs-toggle="list"
+                                           href="#list-{{ loop.index }}" role="tab"
+                                           aria-controls="list-{{ loop.index }}"><strong>{{ i.category_name }}</strong>
+                                        </a>
+                                    {% endif %}
+
+                                    {# move #}
+                                {% endfor %}
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+
+                    <div class="col-9">
+                        <div class="tab-content mb-3" id="nav-tabContent">
+
+                            {% for i in baks_user_menu %}
+
+                                {% set image_path = '/assets/img/blank.svg' %}
+
+                                <div class="tab-pane row row-cols-3 fade {{ loop.index == 1 ? 'show active' : '' }} g-4 m-0"
+                                     id="list-{{ loop.index }}" role="tabpanel"
+                                     aria-labelledby="list-{{ loop.index }}-list">
+
+                                    {# Ссылка на категорию в блоке с элементами #}
+                                    {{ macros.item_category(i.category_name, i.category_url) }}
+
+                                    <hr class="w-100 text-light m-0"/>
+
+
+                                    {# child_category #}
+                                    {% if i.child_category is not null %}
+
+                                        {% set product = false %}
+
+                                        {% for child in i.child_category|json_decode %}
+
+                                            {% if child.child_category_cover_ext is defined and child.child_category_cover_ext is not null %}
+                                                {% set image_path =  cdn_image_path(child.child_category_cover_name, child.child_category_cover_ext, child.child_category_cover_cdn) %}
+                                            {% endif %}
+
+                                            {% set category_threes = [] %}
+
+                                            {# child_category_three #}
+                                            {% if i.child_category_three is not null %}
+
+                                                {% for child_three in i.child_category_three|json_decode|filter(cat =>  cat.category == child.child_category_event) %}
+                                                    {% set category_threes = category_threes|merge([child_three]) %}
+                                                {% endfor %}
+
+                                            {% endif %}
+
+
+                                            {% if i.child_category_three is null and i.child_products is not null %}
+
+                                                {% for child_three in i.child_products|json_decode|filter(prod =>  prod.category == child.child_category_event) %}
+                                                    {% set category_threes = category_threes|merge([child_three]) %}
+                                                {% endfor %}
+
+                                                {% set product = true %}
+
+                                            {% endif %}
+
+
+                                            {# Передаем значения в макрос для рендеринга элементов меню #}
+                                            {{ macros.item_card(image_path, child.child_category_name , child.category_url, category_threes, product) }}
+
+                                            {% set prod = false %}
+
+                                        {% endfor %}
+
+                                    {% else %}
+
+                                        {% if i.products is not null %}
+
+                                            {% for product in i.products|json_decode|filter(prod =>  prod.url is not null) %}
+
+                                                {% set image_path =  cdn_image_path(product.image, product.ext, product.cdn) %}
+
+                                                {# Передаем значения в макрос для рендеринга элементов меню #}
+                                                {{ macros.item_card(image_path, product.name , product.category_url, [
+                                                    {
+                                                        'name': '<span class="btn btn-sm btn-outline-dark border-0">'~(product.is_offer ? 'Выбрать модель' : 'Купить')~'</span>',
+                                                        'url': product.url,
+                                                        'category_url': product.category_url,
+                                                        'is_offer': product.is_offer
+                                                    }
+
+                                                ], true, true) }}
+
+                                            {% endfor %}
+
+                                        {% endif %}
+
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-black py-1 px-4 position-relative" href="{{ path('about:index') }}">
+                О компании
+            </a>
+        </li>
+
+        <li class="nav-item ">
+            <a class="nav-link text-black promotion-btn border border-2 rounded-3 d-flex align-items-center gap-2 py-1 px-4"
+               href="{{ path('sale:index') }}">
+                <svg version="1.1" id="FireIcon" xmlns="http://www.w3.org/2000/svg"
+                     x="0px" y="0px" viewBox="0 0 92.27 122.88"
+                     style="enable-background:new 0 0 92.27 122.88; width: 20px; height:20px;"
+                     xml:space="preserve"><style
+                            type="text/css">.st0 {
+                            fill-rule: evenodd;
+                            clip-rule: evenodd;
+                            fill: #EC6F59;
+                        }
+
+                        .st1 {
+                            fill-rule: evenodd;
+                            clip-rule: evenodd;
+                            fill: #FAD15C;
+                        }</style>
+                    <g>
+                        <path class="st0"
+                              d="M18.61,54.89C15.7,28.8,30.94,10.45,59.52,0C42.02,22.71,74.44,47.31,76.23,70.89 c4.19-7.15,6.57-16.69,7.04-29.45c21.43,33.62,3.66,88.57-43.5,80.67c-4.33-0.72-8.5-2.09-12.3-4.13C10.27,108.8,0,88.79,0,69.68 C0,57.5,5.21,46.63,11.95,37.99C12.85,46.45,14.77,52.76,18.61,54.89L18.61,54.89z"/>
+                        <path class="st1"
+                              d="M33.87,92.58c-4.86-12.55-4.19-32.82,9.42-39.93c0.1,23.3,23.05,26.27,18.8,51.14 c3.92-4.44,5.9-11.54,6.25-17.15c6.22,14.24,1.34,25.63-7.53,31.43c-26.97,17.64-50.19-18.12-34.75-37.72 C26.53,84.73,31.89,91.49,33.87,92.58L33.87,92.58z"/>
+                    </g></svg>
+                Акции</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-black py-1 px-4 position-relative" href="#">Где купить</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-black py-1 px-4 position-relative" href="#">Оплата и доставка</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-black py-1 px-4 position-relative" href="#">Дизайнерам</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-black py-1 px-4 position-relative"
+               href="{{ path('contact:index') }}">Контакты</a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,8 @@
+{# Авторизация #}
+
+{# {{dd}} #}
+
+{% set modal = true  %}
+
+{{ include(_self|replace({ "content.html.twig" : (baks_settings.device)~"/modal-content.html.twig" }), {form, modal}, with_context = false) }}
+

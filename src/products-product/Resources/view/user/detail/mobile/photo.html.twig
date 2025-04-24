@@ -1,0 +1,64 @@
+{# <div class="overflow-hidden rounded-5 border lazy bg-cover" style="height: 250px;"
+	 data-bg="/img/card-img/shina-1.webp"
+> #}
+
+
+{% set product_photo = card.productImages %}
+
+<div id="productPhoto" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-inner rounded-5 border">
+
+        {% for product_images in product_photo | filter(img => img.product_img_ext is defined) | sort((a, b) => a.product_img_root < b.product_img_root) %}
+
+
+            <div class="carousel-item {{ loop.first ? 'active' }}">
+
+                {# Обложка  #}
+                {% set image_path = '/assets/img/blank.svg' %}
+
+                {% if product_images.product_img is defined and product_images.product_img is not null %}
+                    {% set img_host =  product_images.product_img_cdn == true  ? CDN_HOST : '' %}
+                    {% set img_dir = product_images.product_img %}
+                    {% set img_file = (img_host is empty ? '/image.' : '/small.') ~ product_images.product_img_ext %}
+                    {% set image_path = img_host ~ img_dir ~ img_file %}
+                {% endif %}
+
+
+                <div class="rounded-5 lazy bg-contain my-3"
+                     data-bg="{{ image_path }}"
+                     title="{{ card.productName }}"
+                     style="width: 100%; height: 250px; background-image: url('/assets/img/empty.webp');"
+                >
+
+                </div>
+            </div>
+
+        {% endfor %}
+
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#productPhoto" data-bs-slide="prev">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000"
+             class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+            <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z">
+            </path>
+        </svg>
+
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#productPhoto" data-bs-slide="next">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="16"
+             height="16"
+             fill="#000"
+             class="bi bi-caret-right-fill"
+             viewBox="0 0 16 16">
+            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z">
+            </path>
+        </svg>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

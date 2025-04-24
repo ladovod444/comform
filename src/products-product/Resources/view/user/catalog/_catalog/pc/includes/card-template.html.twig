@@ -1,0 +1,18 @@
+{#{% set  offer = i.product_offers | json_decode %}#}
+
+{#{{ dd(i) }}#}
+
+{% set  offer = card.getOfferAgg | json_decode %}
+
+<div class="card card-open  border-0 p-3 position-relative">
+{#    {% if offer|length > 1 and offer[0].offer_value is not null %}#}
+{#        {{ include(_self|replace({ "card-template.html.twig" : "/card-model.html.twig" })) }}#}
+{#    {% else %}#}
+{#        {{ include(_self|replace({ "card-template.html.twig" : "/card-detail.html.twig" })) }}#}
+{#    {% endif %}#}
+
+
+    {% include Template('@products-product/public/'~baks_settings.device~'/card-model-or-product-result.html.twig') with {card} only %}
+
+
+</div>

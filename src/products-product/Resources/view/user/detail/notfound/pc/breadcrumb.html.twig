@@ -1,0 +1,63 @@
+<nav class="small" style="--bs-breadcrumb-divider: '-';" aria-label="breadcrumb">
+    <ol class="breadcrumb text-secondary small opacity-75">
+        <li>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="10"
+                 height="10"
+                 fill="currentColor"
+                 class="bi bi-caret-right-fill text-muted me-1"
+                 viewBox="0 0 16 16">
+                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+            </svg>
+        </li>
+
+        <li class="breadcrumb-item">
+            <a href="{{ path('core:user.homepage') }}"
+               class="text-decoration-none"
+               aria-label="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}"
+               title="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}">
+                {{ 'breadcrumb.homepage.user'|trans({}, 'core') }}
+            </a>
+        </li>
+
+
+        <li class="breadcrumb-item">
+            <a href="{{ path('products-product:user.catalog.category', { category : card.category_url }) }}"
+               class="text-muted"
+               aria-label="{{ card.category_name }}"
+               title="{{ card.category_name }}">
+                {{ card.category_name }}
+            </a>
+        </li>
+
+
+        {% set breadcrumb_active_name = card.productOfferValue|call_twig_func(card.productOfferReference~'_render')
+            ~card.product_variation_value|call_twig_func(card.productVariationReference~'_render')
+            ~card.product_modification_value|call_twig_func(card.productModificationReference~'_render') %}
+
+        {% if breadcrumb_active_name %}
+
+            <li class="breadcrumb-item">
+                <a href="{{ path('products-product:user.model', {
+                    category: card.category_url,
+                    url: card.url }) }}" class="text-muted"
+                   aria-label="{{ card.productName }}"
+                   title="{{ card.productName }}">
+                    {{ card.productName }}
+                </a>
+            </li>
+
+        {% else %}
+            {% set breadcrumb_active_name = card.productName %}
+        {% endif %}
+
+
+        <li class="breadcrumb-item active text-primary"
+            aria-current="page"
+            aria-label="{{ breadcrumb_active_name }}"
+            title="{{ breadcrumb_active_name }}">
+            {# Значение торгового предложения #}
+            {{ breadcrumb_active_name }}
+        </li>
+    </ol>
+</nav>

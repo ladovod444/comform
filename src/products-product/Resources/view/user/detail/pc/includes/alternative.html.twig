@@ -1,0 +1,175 @@
+<div class="border rounded-4 p-3 small">
+
+    {% set current_offer = offers|first %}
+    {% set name_offer = current_offer.product_offer_name %}
+    {% set name_variation = current_offer.product_variation_name %}
+    {% set name_modification = current_offer.product_modification_name %}
+
+
+
+    {% set tablehead %}
+        <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Артикул</th>
+            <th>{{ name_offer }}</th>
+
+            {% if name_variation %}
+                <th>{{ name_variation }}</th>
+            {% endif %}
+
+            {% if name_modification %}
+                <th>{{ name_modification }}</th>
+            {% endif %}
+
+            <th>Наличие</th>
+            <th>Стоимость, шт</th>
+            <th>Купить</th>
+        </tr>
+        </thead>
+    {% endset %}
+
+
+    <div class="tab-content" id="radiusTabContent">
+
+        {# **************************************  #}
+
+        <div class="tab-pane fade show active" id="all-tab-pane" role="tabpanel"
+             aria-labelledby="all-tab" tabindex="0">
+
+            <table class="table table-striped table-borderless">
+
+                {{ tablehead }}
+
+                <tbody>
+
+
+                {% for alt in alternative %}
+
+                    {% set arr_property = alt.categorySectionField %}
+
+                    <tr class="vertical-middle">
+                        <td class="rounded-start-2">
+                            <div class='d-flex gap-3 align-items-center'>
+
+                                <a href="{{ path('products-product:user.detail', { category: alt.categoryUrl, url: alt.productUrl,
+                                    offer : alt.productOfferValue,
+                                    variation : alt.productVariationValue,
+                                    modification : alt.productModificationValue,
+                                    postfix: (alt.productModificationPostfix ?: alt.productVariationPostfix ?: alt.productOfferPostfix ?: null )|replace({ '/': '-' })
+                                }) }}">
+                                    {{ alt.productName }}
+                                </a>
+
+                                <div class='d-flex gap-2 align-items-center'>
+                                    {# Свойства, учавствующие в харкатеристиках #}
+                                    {% for name_property in  arr_property %}
+                                        {{ name_property.field_value|call_twig_func(name_property.field_type~'_render') }}
+                                    {% endfor %}
+
+                                </div>
+
+                                <div>
+                                    {% if date() < alt.productActiveFrom|date_modify("+1 month") %}
+                                        <span class="badge bg-success rounded-2">Новинка</span>
+                                    {% endif %}
+                                </div>
+
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            {{ alt.productArticle }}
+                        </td>
+
+                        <td>
+                            {{ alt.productOfferValue|call_twig_func(alt.productOfferReference) }}
+                            {{ alt.productOfferPostfix }}
+                        </td>
+
+                        {% if name_variation %}
+                            <td>
+                                {{ alt.productVariationValue|call_twig_func(alt.productVariationReference) }}
+                                {{ alt.productVariationPostfix }}
+                            </td>
+                        {% endif %}
+
+                        {% if name_modification %}
+                            <td>
+                                {{ alt.productModificationValue|call_twig_func(alt.productModificationReference) }}
+                                {{ alt.productModificationPostfix }}
+                            </td>
+                        {% endif %}
+
+                        <td>
+
+                            {% if alt.productQuantity >= 20 %}
+                                <span class='text-success fw-bold'>более 20 шт.</span>
+                            {% elseif alt.productQuantity <= 0 %}
+                                <span class='text-danger fw-bold'>нет в наличии</span>
+                            {% else %}
+                                <span class='text-warning fw-bold'>менее 20 шт.</span>
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% set discount_alt = user_profile_discount(alt.productPrice) %}
+
+                            {{ discount_alt ? money(discount_alt, alt.productCurrency) : money(alt.productPrice, alt.productCurrency) }}
+
+                            {#  Пользовательская скидка #}
+                            {% if discount_alt %}
+                                <span class="badge bg-danger rounded-2 ms-1"><span
+                                            class="text-uppercase">-{{ baks_profile.profile_discount }}%</span></span>
+                            {% endif %}
+
+                        </td>
+
+                        <td class="rounded-end-2">
+
+                            {% if alt.productQuantity %}
+                                <a href="{{ path('orders-order:user.add', {
+                                    product: alt.productEvent,
+                                    offer : alt.productOfferUid,
+                                    variation : alt.productVariationUid,
+                                    modification : alt.productModificationUid
+                                }) }}"
+                                   class="btn btn-sm btn-primary rounded-circle modal-link disabled add-basket"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modal"
+                                   title="Купить"
+                                   aria-label="Купить"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                         class="text-white" viewBox="0 0 18 18">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                                    </svg>
+                                </a>
+
+
+                            {% endif %}
+
+
+                            {# <button class="btn btn-link pe-0"
+									aria-label="Добавить в избранное">
+								<img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNCMUI2QkIiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAxLjMxNEMxMi40MzgtMy4yNDggMjMuNTM0IDQuNzM1IDggMTUtNy41MzQgNC43MzYgMy41NjItMy4yNDggOCAxLjMxNHoiPjwvcGF0aD48L3N2Zz4K"
+										class="lazy" width="13" height="13" alt="Добавить в избранное">
+							</button> #}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,41 @@
+{# ---- ШАБЛОН ------------------------------------------------------------ #}
+{% extends Template('/user/base.html.twig') %}
+
+{% block title %}
+    {{ card.productName }}
+
+    {# Значение торгового предложения #}
+    {{ card.productOfferValue|call_twig_func(card.productOfferReference~'_render') }}
+
+    {# Значение множественного варианта ТП #}
+    {{ card.product_variation_value|call_twig_func(card.productVariationReference~'_render') }}
+
+    {# Значение модификации множественного варианта ТП #}
+    {{ card.product_modification_value|call_twig_func(card.productModificationReference~'_render') }}
+{% endblock %}
+
+
+{# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
+{% block content %}
+    {% set arr_property = card.categorySectionField|json_decode %}
+    {{ include(_self|replace({ "template.html.twig":baks_settings.device~"/content.html.twig" })) }}
+{% endblock %}
+
+{% block javascript %}
+<script nonce="{{ csp_nonce() }}">
+    document.querySelectorAll('.img-product').forEach((el) => el.addEventListener('click', () => document.getElementById('img-product').style.backgroundImage = el.style.backgroundImage));
+
+    (document.getElementById('plus'))?.addEventListener('click', () => { document.getElementById('result').value = document.getElementById('result').value * 1 + 1 });
+    (document.getElementById('minus'))?.addEventListener('click', () =>
+    {
+        let result = document.getElementById('result').value;
+        if(result > 1)
+        {
+            document.getElementById('result').value = result * 1 - 1
+        }
+    });
+
+</script>
+
+{% endblock %}
+

@@ -1,0 +1,127 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+
+#end
+use BaksDev\Core\Type\Locale\Locale;
+use BaksDev\Core\Type\Modify\ModifyAction;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use BaksDev\Core\Entity\EntityEvent;
+use BaksDev\Core\Entity\EntityState;
+use InvalidArgumentException;
+use Symfony\Component\Validator\Constraints as Assert;
+
+#set( $table = $NAME.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
+#set( $MainClass = $NAME.replace("Event", "") )
+
+/* ${NAME} */
+
+interface ${NAME}Interface
+{
+	public function getEvent() : ?${NAME}Uid;
+}
+
+#[ORM\Entity]
+#[ORM\Table(name: '${table}')]
+class ${NAME} extends EntityEvent
+{
+    /**
+	* Идентификатор События
+	*/
+    #[Assert\NotBlank]
+    #[Assert\Uuid]
+	#[ORM\Id]
+	#[ORM\Column(type: ${NAME}Uid::TYPE)]
+	private ${NAME}Uid ${DS}id;
+
+	/**
+	* Идентификатор ${MainClass}
+	*/
+	#[Assert\NotBlank]
+    #[Assert\Uuid]
+	#[ORM\Column(type: ${MainClass}Uid::TYPE, nullable: false)]
+	private ?${MainClass}Uid ${DS}main = null;
+
+	/** One To One */
+	//#[ORM\OneToOne(mappedBy: 'event', targetEntity: ${MainClass}Logo::class, cascade: ['all'])]
+	//private ?${MainClass}One ${DS}one = null;
+
+	/**
+	* Модификатор
+	*/
+	#[ORM\OneToOne(mappedBy: 'event', targetEntity: ${MainClass}Modify::class, cascade: ['all'])]
+	private ${MainClass}Modify ${DS}modify;
+
+	/**
+	* Переводы
+	*/
+	//#[ORM\OneToMany(mappedBy: 'event', targetEntity: ${MainClass}Trans::class, cascade: ['all'])]
+	//private Collection ${DS}translate;
+
+
+	public function __construct()
+	{
+		${DS}this->id = new ${NAME}Uid();
+		${DS}this->modify = new ${MainClass}Modify(${DS}this);
+
+	}
+
+	/**
+	* Идентификатор события
+	*/
+
+	public function __clone()
+	{
+		${DS}this->id = clone new ${NAME}Uid();
+	}
+
+	public function __toString() : string
+	{
+		return (string) ${DS}this->id;
+	}
+
+	public function getId() : ${NAME}Uid
+	{
+		return ${DS}this->id;
+	}
+
+	/**
+	* Идентификатор ${MainClass}
+	*/
+	public function setMain(${MainClass}Uid|${MainClass} ${DS}main) : void
+	{
+		${DS}this->main = ${DS}main instanceof ${MainClass} ? ${DS}main->getId() : ${DS}main;
+	}
+
+	public function getMain() : ?${MainClass}Uid
+	{
+		return ${DS}this->main;
+	}
+
+	public function getDto(${DS}dto) : mixed
+	{
+		if(${DS}dto instanceof ${NAME}Interface)
+		{
+			return parent::getDto(${DS}dto);
+		}
+
+		throw new InvalidArgumentException(sprintf('Class %s interface error', ${DS}dto::class));
+	}
+
+	public function setEntity(${DS}dto) : mixed
+	{
+		if(${DS}dto instanceof ${NAME}Interface)
+		{
+			return parent::setEntity(${DS}dto);
+		}
+
+		throw new InvalidArgumentException(sprintf('Class %s interface error', ${DS}dto::class));
+	}
+
+}

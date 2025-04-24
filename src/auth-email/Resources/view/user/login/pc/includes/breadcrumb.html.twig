@@ -1,0 +1,21 @@
+{% trans_default_domain 'user.reg' %}
+
+<section class="container py-4 px-4">
+    <h2 class="visually-hidden">Хлебные крошки</h2>
+    <nav class="d-flex align-items-center gap-2" aria-label="breadcrumb" style="--bs-breadcrumb-divider: '-';">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
+        </svg>
+        <ol class="breadcrumb m-0" style="font-size: 11px;">
+            <li class="breadcrumb-item"><a class="text-secondary" href="{{ path('core:user.homepage') }}">Главная</a>
+            </li>
+
+            <li class="breadcrumb-item active" aria-current="page" title="Вход в личный кабинет">
+                Вход в личный кабинет
+            </li>
+
+        </ol>
+    </nav>
+</section>

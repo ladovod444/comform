@@ -1,0 +1,258 @@
+{# {{ include(_self|replace({ "content.html.twig": "header.html.twig" })) }} #}
+
+<main class="main d-print-none">
+
+
+    <section id="card" class="container mt-4">
+
+        <h1 class="h5 text-uppercase fw-bolder">{{ card.productName }}</h1>
+
+        <div class="d-flex align-items-center gap-2 mb-1 small">
+
+            {#  РЕЙТИНГ #}
+            {# <div class="d-flex gap-1 align-items-center">
+				{% include '@Template/default/user/mobile/includes/rating.html.twig' %}
+				<a href="#reviews" class="small ms-2" aria-label="Отзывы" title="Отзывы">9 отзывов</a>
+			</div> #}
+
+            {% for name_property in  arr_property | filter(props => props.field_card is defined and props.field_card == true) %}
+                {{ name_property.field_value|call_twig_func(name_property.field_type~'_render') }}
+            {% endfor %}
+
+
+            {% if date() < card.productActiveFrom|date_modify("+1 month") %}
+                <span class="badge bg-success rounded-2">Новинка</span>
+            {% endif %}
+
+
+        </div>
+
+        {# <div class="d-flex align-items-end gap-2 mb-3 small">
+        #}{# <span class="small">Арт: 32123122312 </span> #}{#
+        #}{# <span class="badge bg-light text-muted rounded-2">
+				Модель производится с 1923
+			</span> #}{#
+        </div> #}
+
+        {# КАРУСЕЛЬ ФОТО #}
+        {{ include(_self|replace({ "content.html.twig": "photo.html.twig" })) }}
+
+        {# <img data-src="img/card-img/shina-2.webp" class="lazy" alt="..."> #}
+
+
+        <div class="d-flex align-items-center justify-content-between gap-3 m-4">
+
+{#            {{ dd(card) }}#}
+{#            {{ dd(first_price) }}#}
+            <div class="card-price d-flex flex-column align-items-end">
+                {# ЦЕНА #}
+
+
+                {% if  first_price.price == last_price.price %}
+                    <p class="fw-bolder lh-normal h3 mb-0 text-nowrap"><strong>от {{ money(first_price.price) }}</strong></p>
+                    {#        <p class="text-danger small m-0 pt-1"><strong><del>12 200 Р.</del></strong></p> #}
+                {% else %}
+                    <p class="fw-bolder lh-normal h3 mb-0 text-nowrap"><strong>от {{ money(first_price.price, false) }}
+                            - {{ money(last_price.price) }}</strong></p>
+                {% endif %}
+{#                #}
+{#                <span class="fw-bolder lh-normal h3 mb-0 text-nowrap">#}
+{#					от {{ money(card.productPrice) }}#}
+{#				</span>#}
+            </div>
+
+            <div class="w-100">
+
+
+                <a href="{{ path('products-product:user.catalog.category', { category : card.categoryUrl }) }}"
+                   aria-label="{{ card.categoryName }}"
+                   title="{{ card.categoryName }}">
+
+                    {# Обложка #}
+
+{#                    {% set root_image = card.getProductImagesSortByRoot|first %}#}
+{#                    {% set image_path = '/assets/img/blank.svg' %}#}
+
+{#                    {% if root_image.product_img_ext is defined and root_image.product_img_ext is not null %}#}
+{#                        {% set image_path = cdn_image_path(root_image.product_img, root_image.product_img_ext, root_image.product_img_cdn) %}#}
+{#                    {% endif %}#}
+
+                    {% set image_path = '/assets/img/blank.svg' %}
+
+                    {% if card.category_cover_ext is defined and card.category_cover_ext is not null %}
+                        {% set img_host =  card.category_cover_cdn == true  ? CDN_HOST : '' %}
+                        {% set img_dir = card.category_cover_name %}
+                        {% set img_file = (img_host is empty ? '/image.' : '/small.') ~ card.category_cover_ext %}
+                        {% set image_path = img_host ~ img_table ~ img_dir ~ img_file %}
+                    {% endif %}
+
+                    <img data-src="{{ image_path }}"
+                         src="/assets/img/empty.png" alt="{{ card.categoryName }}" class="lazy w-100">
+                </a>
+            </div>
+
+
+            {# <button class="btn btn-link ms-3 pt-3"
+					aria-label="Добавить в избранное"
+			>
+            #}{# <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+					 class="bi bi-heart-fill" viewBox="0 0 16 16">
+					<path fill-rule="evenodd"
+						  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+				</svg> #}{#
+            <img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNCMUI2QkIiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAxLjMxNEMxMi40MzgtMy4yNDggMjMuNTM0IDQuNzM1IDggMTUtNy41MzQgNC43MzYgMy41NjItMy4yNDggOCAxLjMxNHoiPjwvcGF0aD48L3N2Zz4K"
+                 width="20" height="20"
+                 src="/assets/img/empty.png"
+                 class="lazy"
+            >
+        </button> #}
+        </div>
+
+        {# <div class="mb-3">
+			<button type="button" class="btn btn-lg btn-primary ms-1 w-100">
+				<span class="h6 text-uppercase px-3">Добавить в корзину</span>
+			</button>
+		</div> #}
+
+
+    </section>
+
+
+    <section id="tablist">
+        {{ include(_self|replace({ "content.html.twig": "tablist.html.twig" })) }}
+    </section>
+
+
+    {# В наличии #}
+    {% set presence = product_offers|filter(v => v.quantity > 0)|length %}
+
+
+    <section class="container shadow pb-3">
+
+        <div class="pt-4 px-2">
+            <h2 class="text-uppercase h5 fw-bolder">В наличии <small class="fw-normal small text-muted">({{ presence }}
+                    )</small></h2>
+        </div>
+
+        <div class="small">
+
+
+            <div class="tab-content w-100" id="pills-tabContent">
+
+                {% if presence %}
+
+
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                         aria-labelledby="pills-home-tab"
+                         tabindex="0">
+
+                        <div class="d-flex justify-content-between">
+
+
+                            <ul class="nav nav-pills d-flex gap-2 py-2 mt-1" id="radiusTab" role="tablist">
+
+                                <li class="nav-item" role="presentation">
+                                    <button class="btn nav-link fw-bolder rounded-4 px-3 active" id="all-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#all-tab-pane" type="button" role="tab"
+                                            aria-controls="all-tab-pane"
+                                            aria-selected="false">Все
+                                    </button>
+                                </li>
+
+
+                                {% set radius = null %}
+
+                                {% for offers in product_offers %}
+
+                                    {% if radius != offers.offer_value %}
+
+
+                                        <li class="nav-item" role="presentation">
+                                            <button class="btn nav-link fw-bolder rounded-4 px-3"
+                                                    id="Id{{ offers.offer_value }}-tab"
+                                                    data-bs-toggle="tab"
+                                                    data-bs-target="#Id{{ offers.offer_value }}-tab-pane" type="button"
+                                                    role="tab" aria-controls="Id{{ offers.offer_value }}-tab-pane"
+                                                    aria-selected="false">{{ offers.offer_value|call_twig_func(offers.offer_reference) }}
+                                            </button>
+                                        </li>
+
+                                        {% set radius = offers.offer_value %}
+
+
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            </ul>
+
+                        </div>
+
+                        {{ include(_self|replace({ "content.html.twig": "alternative.html.twig" })) }}
+
+                    </div>
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+    </section>
+
+
+    {#  АКЦИИ \ СКИДКИ #}
+    {# <section id="action" class="pt-3">
+
+		<div class="d-flex flex-nowrap gap-3 overflow-auto w-100 p-3">
+			{% for i in 0..5 %}
+				{{ include(_self|replace({ "content.html.twig": "action.html.twig" })) }}
+			{% endfor %}
+		</div>
+
+	</section> #}
+
+    {#  ПРОСМОТРЕННЫЕ #}
+    {# <section id="viewed" class="mt-4 bg-light">
+		<div class="container p-4">
+			<h2 class="text-uppercase me-4 h5 fw-bolder">Просмотренные</h2>
+		</div>
+
+		<div class="d-flex flex-nowrap gap-4 overflow-auto w-100 px-4 pb-3">
+			{% for i in 0..5 %}
+				{{ include(_self|replace({ "content.html.twig": "viewed.html.twig" })) }}
+			{% endfor %}
+		</div>
+	</section> #}
+
+
+    {#  ОТЗЫВЫ #}
+
+    {# <section id="reviews" class="container bg-white pb-3">
+
+		<div class="container d-flex justify-content-between align-items-stretch py-4">
+
+			<div class="lh-normal small">
+				<h2 class="text-uppercase me-4 h6 fw-bolder m-0">отзывы</h2>
+				<a href="#" class="small">12 отзывов</a>
+			</div>
+
+			<button type="button" class="btn btn-sm btn-primary rounded-3"
+					aria-label="Оставить отзыв"
+			>
+				<span class="text-uppercase fw-bolder">Оставить отзыв</span>
+			</button>
+		</div>
+
+		<div class="bg-light rounded-4 px-2 py-1">
+			{{ include(_self|replace({ "content.html.twig": "reviews.html.twig" })) }}
+		</div>
+	</section> #}
+
+
+</main>
+
+
+
+

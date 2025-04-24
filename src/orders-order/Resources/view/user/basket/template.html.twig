@@ -1,0 +1,61 @@
+{% trans_default_domain('user.order') %}
+
+{# ---- ШАБЛОН ------------------------------------------------------------ #}
+{% extends Template('/public/base.html.twig') %}
+
+{% block title %}{{ 'user.page.index'|trans }}{% endblock %}
+
+{# ---- CSS ------------------------------------------------------------ #}
+ {% block stylesheets %}
+     <link rel="preconnect" href="https://api-maps.yandex.ru"/>
+     <link rel="preload"
+           href="https://api-maps.yandex.ru/2.1/?apikey={{ MAPS_YANDEX_API }}&lang={{ app.request.locale|lower }}"/>
+     <link href="/assets/css/original.min.css" rel="stylesheet">
+     <link href="/assets//plugins/datepicker/datepicker.min.css" rel="stylesheet">
+ {% endblock %}
+
+
+{# ---- HEADER-БЛОК ------------------------------------------------------------ #}
+{# {% block header %}
+    {{ include(_self|replace({ "template.html.twig": "header.html.twig" })) }}
+{% endblock %} #}
+
+
+{# ---- LEFT-БЛОК ------------------------------------------------------------ #}
+{# {% block left %} #}
+{#   {% include '@Template/flowers/left.html.twig' %} #}
+{# {% endblock %} #}
+
+{% set isProducts = baks_basket.counter > 0 ? true : false %}
+
+{# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
+{% block content %}
+
+    {{ include(_self|replace({ "template.html.twig" : baks_settings.device~"/content.html.twig" })) }}
+
+    <div class="modal fade" tabindex="-1" id="modal_address" style="z-index: 9999;">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="d-flex justify-content-center w-100">
+                <div class="spinner-border text-light" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{# ---- FOOTER-БЛОК ------------------------------------------------------------ #}
+{# {% block footer %}
+    {{ include(_self|replace({ "template.html.twig": "footer.html.twig" })) }}
+{% endblock %} #}
+
+{% block javascript %}
+<script nonce='{{ csp_nonce() }}' async class='lazy' data-src="https://api-maps.yandex.ru/2.1/?apikey={{ MAPS_YANDEX_API }}&lang={{ app.request.locale|lower }}"></script>
+<script nonce="{{ csp_nonce() }}" async class='lazy' data-src="/assets/orders-order/orders_basket.min.js?v={{ version }}" ></script>
+<script nonce="{{ csp_nonce() }}" src="/assets/users-address/script.min.js?v={{ version }}"></script>
+<script nonce="{{ csp_nonce() }}" async data-src="/assets/plugins/datepicker/datepicker.min.js?v={{ version }}" class="lazy"></script>
+<script nonce='{{ csp_nonce() }}' async  data-src="/assets/js/copy.min.js?v={{ version }}" class="lazy"></script>
+<script nonce='{{ csp_nonce() }}' async  data-src="/assets/comfort/js/order.js?v={{ version }}" class="lazy"></script>
+{% endblock %}

@@ -1,0 +1,36 @@
+/.idea
+/vendor
+/example
+/public
+/migrations
+/config/bundles.php
+#composer.lock
+composer.phar
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/.env
+.env.test
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+/tests
+/bin
+/translations
+/composer.lock
+/symfony.lock
+.php-cs-fixer.dist.php
+phpunit.xml.dist
+###< symfony/framework-bundle ###
+/LICENSE.md
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###

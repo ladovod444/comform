@@ -1,0 +1,12 @@
+{% trans_default_domain 'search' %}
+<div class="row row-cols-4 g-2">
+    {% if result %}
+    {% for product in result %}
+
+{#        {% include Template('@products-product/public/'~baks_settings.device~'/card-in-stock-sm.html.twig') with {product} only %}#}
+        {{ include(_self|replace({ "products-list.html.twig" : "includes/search-card.html.twig" })) }}
+    {% endfor %}
+    {% else %}
+        <div class="no-content">{{ 'search_results.noresults'|trans }}</div>
+    {% endif %}
+</div>

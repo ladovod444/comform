@@ -1,0 +1,322 @@
+<div class="border rounded-4 p-3 small">
+
+
+    {% set tablehead %}
+        <thead>
+        <tr>
+            <th>{{ name_offer }}</th>
+            <th>Артикул</th>
+            <th>Наименование</th>
+
+            {% if name_variation %}
+                <th>{{ name_variation }}</th>
+            {% endif %}
+
+            {% if name_modification %}
+                <th>{{ name_modification }}</th>
+            {% endif %}
+
+            <th>Наличие</th>
+            <th>Стоимость, шт</th>
+            <th>Купить</th>
+        </tr>
+        </thead>
+    {% endset %}
+
+
+    <div class="tab-content" id="radiusTabContent">
+        <div class="tab-pane fade show active" id="all-tab-pane" role="tabpanel"
+             aria-labelledby="all-tab" tabindex="0">
+
+
+            {% set product_offer = product_offers|filter(v => v.quantity > 0) %}
+
+            <table class="table table-striped table-borderless">
+
+                {% if product_offer|length %}
+                    {{ tablehead }}
+                {% endif %}
+
+                <tbody>
+
+
+                {% for offers in product_offer %}
+
+
+                    <tr class="vertical-middle">
+                        <td class="rounded-start-2">
+                            <strong>{{ offers.offer_value|call_twig_func(offers.offer_reference~'_render') }}</strong>
+                        </td>
+                        <td>
+                            {{ offers.article }}
+                        </td>
+
+                        <td>
+                            <div>
+
+                                <a href="{{ path('products-product:user.detail', {
+                                    category: card.categoryUrl,
+                                    url: card.productUrl,
+                                    offer : offers.offer_value,
+                                    variation : offers.variation_value,
+                                    modification : offers.modification_value
+                                }) }}">
+                                    {{ card.productName }}
+                                </a>
+
+                            </div>
+                            <div class="d-flex gap-1">
+                                {# <span class="badge bg-success rounded-2">Новинка</span> #}
+                                {# <span class="badge bg-hit rounded-2 ">Хит</span> #}
+                            </div>
+                        </td>
+
+                        {% if name_variation %}
+                            <td>{{ offers.variation_value|call_twig_func(offers.variation_reference~'_render') }}</td>
+                        {% endif %}
+
+                        {% if name_modification %}
+                            <td>{{ offers.modification_value|call_twig_func(offers.modification_reference~'_render') }}</td>
+                        {% endif %}
+
+
+                        <td>
+
+                            {% if offers.quantity >= 20 %}
+                                <span class='text-success fw-bold'>более 20 шт.</span>
+                            {% else %}
+                                <span class='text-warning fw-bold'>менее 20 шт.</span>
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if offers.price %}
+                                {% set discount_alt = user_profile_discount(offers.price) %}
+
+                                {{ discount_alt ? money(discount_alt, offers.currency) : money(offers.price, offers.currency) }}
+
+                                {#  Пользовательская скидка #}
+                                {% if discount_alt %}
+                                    <span class="badge bg-danger rounded-2 ms-1"><span
+                                                class="text-uppercase">-{{ baks_profile.profile_discount }}%</span></span>
+                                {% endif %}
+                            {% else %}
+                                <span class='text-danger fw-bold'>цена по запросу</span>
+                            {% endif %}
+
+
+                        </td>
+                        {{ dump(_context) }}
+                        <td class="rounded-end-2">
+
+                            {% if offers.price %}
+                                <a href="{{ path('orders-order:user.add', {
+                                    product: card.productEvent,
+                                    offer : offers.offer_uid,
+                                    variation : offers.variation_uid,
+                                    modification : offers.modification_uid
+                                }) }}"
+                                   class="btn btn-sm btn-primary rounded-circle modal-link disabled add-basket"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modal"
+                                   title="Купить"
+                                   aria-label="Купить"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="text-white" viewBox="0 0 18 18">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                                    </svg>
+                                </a>
+
+                            {% endif %}
+
+
+                            {# Добавить в избранное #}
+                            {# <button class="btn btn-link pe-0"
+									aria-label="Добавить в избранное">
+								<img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNCMUI2QkIiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAxLjMxNEMxMi40MzgtMy4yNDggMjMuNTM0IDQuNzM1IDggMTUtNy41MzQgNC43MzYgMy41NjItMy4yNDggOCAxLjMxNHoiPjwvcGF0aD48L3N2Zz4K"
+										class="lazy" width="13" height="13">
+							</button> #}
+                        </td>
+                    </tr>
+                {% else %}
+
+                    <div class="alert alert-warning rounded-4" role="alert">
+                        <div class="d-flex align-items-baseline gap-3">
+                            <div>
+                                <div class="icon rounded-circle bg-contain p-2 bg-primary text-white small"
+                                     style="width: 10px; height: 10px;"><span class="small">!</span></div>
+                            </div>
+                            <div>
+                                К сожалению аналогов товара нет в наличии
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+
+        {% set radius = null %}
+        {% for offers in product_offers %}
+
+            {% if radius != offers.offer_value %}
+
+                {% set radius = offers.offer_value %}
+
+                {% set product_offer = product_offers|filter(v => v.offer_value == radius and v.quantity > 0) %}
+
+                <div class="tab-pane fade " id="Id{{ offers.offer_value }}-tab-pane" role="tabpanel"
+                     aria-labelledby="Id{{ offers.offer_value }}-tab" tabindex="0">
+
+
+                    {% if product_offer|length %}
+
+
+                        <table class="table table-striped table-borderless">
+
+
+                            {{ tablehead }}
+
+                            <tbody>
+
+                            {% for offers in product_offer %}
+
+                                <tr class="vertical-middle">
+                                    <td>
+                                        <strong>{{ offers.offer_value|call_twig_func(offers.offer_reference~'_render') }}</strong>
+                                    </td>
+                                    <td>
+                                        {{ offers.article }}
+                                    </td>
+
+                                    <td>
+                                        <div>
+                                            <a href="{{ path('products-product:user.detail', {
+                                                category: card.categoryUrl,
+                                                url: card.productUrl,
+                                                offer : offers.offer_value,
+                                                variation : offers.variation_value,
+                                                modification : offers.modification_value
+                                            }) }}">
+                                                {{ card.productName }}
+                                            </a>
+                                        </div>
+                                        <div class="d-flex gap-1">
+                                            {# <span class="badge bg-success rounded-2">Новинка</span> #}
+                                            {# <span class="badge bg-hit rounded-2 ">Хит</span> #}
+                                        </div>
+                                    </td>
+
+                                    {% if name_variation %}
+                                        <td>{{ offers.variation_value|call_twig_func(offers.variation_reference~'_render') }}</td>
+                                    {% endif %}
+
+                                    {% if name_modification %}
+                                        <td>{{ offers.modification_value|call_twig_func(offers.modification_reference~'_render') }}</td>
+                                    {% endif %}
+
+
+                                    <td>
+
+
+                                        {% if offers.quantity >= 20 %}
+                                            <span class='text-success fw-bold'>более 20 шт.</span>
+
+                                        {% else %}
+                                            <span class='text-warning fw-bold'>менее 20 шт.</span>
+                                        {% endif %}
+
+                                    </td>
+
+                                    <td>
+
+
+                                        {% if offers.price %}
+                                            {% set discount_alt = user_profile_discount(offers.price) %}
+
+                                            {{ discount_alt ? money(discount_alt, offers.currency) : money(offers.price, offers.currency) }}
+
+                                            {#  Пользовательская скидка #}
+                                            {% if discount_alt %}
+                                                <span class="badge bg-danger rounded-2 ms-1"><span
+                                                            class="text-uppercase">-{{ baks_profile.profile_discount }}%</span></span>
+                                            {% endif %}
+                                        {% else %}
+                                            <span class='text-danger fw-bold'>цена по запросу</span>
+                                        {% endif %}
+
+
+                                    </td>
+
+                                    <td>
+                                        {% if offers.price %}
+
+
+                                            {#                                            <a href="{{ path('orders-order:user.add', { #}
+                                            {#                                                product: card.event, #}
+                                            {#                                                offer : offers.offer_uid, #}
+                                            {#                                                variation : offers.variation_uid, #}
+                                            {#                                                modification : offers.modification_uid #}
+                                            {#                                            }) }}" #}
+                                            {#                                               class="btn btn-sm btn-primary rounded-circle modal-link disabled add-basket" #}
+                                            {#                                               data-bs-toggle="modal" #}
+                                            {#                                               data-bs-target="#modal" #}
+                                            {#                                               title="Купить" #}
+                                            {#                                               aria-label="Купить" #}
+                                            {#                                            > #}
+                                            {#                                                <svg xmlns="http://www.w3.org/2000/svg" #}
+                                            {#                                                     width="16" #}
+                                            {#                                                     height="16" #}
+                                            {#                                                     fill="currentColor" #}
+                                            {#                                                     class="text-white" #}
+                                            {#                                                     viewBox="0 0 18 18"> #}
+                                            {#                                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path> #}
+                                            {#                                                </svg> #}
+                                            {#                                            </a> #}
+
+
+                                        {% endif %}
+
+
+                                    </td>
+                                </tr>
+
+
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+
+                    {% else %}
+
+                        <div class="alert alert-warning rounded-4 mt-3" role="alert">
+                            <div class="d-flex align-items-baseline gap-3">
+                                <div>
+                                    <div class="icon rounded-circle bg-contain p-2 bg-primary text-white small"
+                                         style="width: 10px; height: 10px;"><span class="small">!</span></div>
+                                </div>
+                                <div>
+                                    К сожалению аналогов нет в наличии
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+
+    </div>
+
+</div>

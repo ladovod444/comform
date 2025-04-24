@@ -1,0 +1,22 @@
+{% extends Template('/user/base.html.twig') %}
+
+{% block title %}
+    {{ 'page.example'|trans({}, 'homepage.user') }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/homepage/style.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {{ include(_self|replace({ "template.html.twig" : baks_settings.device~"/content.html.twig" })) }}
+{% endblock %}
+
+{% block javascript %}
+<script nonce='{{ csp_nonce() }}' async data-src='/assets/homepage/script.min.js?v={{ version }}' class='lazy'></script>
+
+<script nonce="{{ csp_nonce() }}" >
+    console.log({{ _self }});
+</script>
+
+{% endblock %}

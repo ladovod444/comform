@@ -1,0 +1,63 @@
+{% trans_default_domain 'user.reg' %}
+
+{{ form_start(form, { attr: { class: 'd-flex flex-column align-items-end p-4 border shadow rounded-3 w-100' } }) }}
+
+<div class="d-flex flex-column gap-4 w-100 small">
+
+    <div class="w-100 d-flex flex-column gap-2">
+        {{ form_row(form.email, {
+            label: 'user.form.label.email'|trans
+        }) }}
+    </div>
+
+    <div class="w-100 d-flex flex-column gap-2">
+        {{ form_row(form.passwordPlain, {
+            label: 'user.form.label.password'|trans,
+            help: 'user.form.help.password'|trans
+        }) }}
+    </div>
+
+    <div class="form-control-sm d-flex p-0">
+
+        {{ form_widget(form.agreeTerms, { label: false }) }}
+
+        <label class="form-check-label required" for="{{ form.agreeTerms.vars.id }}">
+                <span class="small">
+                    {# Согласен с #}
+                    {{ 'user.form.agreterms.label'|trans }}
+                    {# Пользовательское соглашение #}
+                    <a href="{{ path('auth-email:user.agree.terms') }}"
+                       aria-label="{{ 'user.page'|trans({}, 'agree.terms') }}"
+                       title="{{ 'user.page'|trans({}, 'agree.terms') }}"
+                    >
+                        {{ 'user.form.agreterms.link'|trans({}, 'agree.terms') }}
+                    </a>
+                </span>
+        </label>
+    </div>
+
+    <div class="w-100">
+
+        {% if CAPTCHA is defined %}
+            <div id="registration-captcha"
+                 class="frc-captcha position-fixed end-0 bottom-0 m-5 d-none bg-body z-index-5"
+                 data-sitekey="{# {{ CAPTCHA }} #}"
+                 data-start="auto"
+                 data-callback="myCallback"
+                 data-lang="ru"
+            ></div>
+        {% endif %}
+
+        {{ form_row(form.registration, {
+            label: '<span>'~ 'user.btn.register'|trans() ~'</span>
+				<span id="'~form.registration.vars.id~'-progress" class="spinner-border spinner-border-sm d-none"></span>
+			',
+            attr: { class : 'btn btn-lg btn-danger w-100 rounded-3 text-uppercase fw-bolder' }
+        }) }}
+    </div>
+
+</div>
+
+{{ form_end(form) }}
+
+

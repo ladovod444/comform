@@ -1,0 +1,22 @@
+
+
+{% extends Template('/public/base.html.twig') %}
+
+{% block title %}
+	Поиск
+{#	{{ dd(1) }}#}
+
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block content %}
+	{{ include(_self|replace({ "template.html.twig" : baks_settings.device~"/content.html.twig" })) }}
+{% endblock %}
+
+{% block javascript %}
+
+<script nonce='{{ csp_nonce() }}' async  data-src="/assets/orders-order/orders_basket.min.js?v={{ version }}" class='lazy'></script>
+<script nonce='{{ csp_nonce() }}' async  data-src="/assets/orders-order/modal_basket.min.js?v={{ version }}" class='lazy'></script>
+
+{% endblock %}

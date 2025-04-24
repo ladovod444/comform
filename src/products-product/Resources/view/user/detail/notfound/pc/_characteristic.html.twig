@@ -1,0 +1,136 @@
+{% set unique_characteristics = [] %}
+{% set open = true %}
+{% set light = true %}
+
+
+
+	
+	{# Свойства, учавствующие в харкатеристиках #}
+	{% for name_characteristics in  arr_property | filter(props => props.field_public is defined and props.field_public == true) %}
+        {# {{ name_property.f5|call_twig_func(name_property.f3) }} #}
+
+
+        {% if open == true %} <div class="d-flex w-100 gap-3"> {% endif %}
+
+
+        <div class="d-flex justify-content-between w-50 p-2 {{ light ? 'rounded-4 bg-light' }} ">
+            <div class="w-50">
+                {{ name_characteristics.field_trans }}
+            </div>
+            <div class="w-50">
+                {# {% set template = name_characteristics.field_value|call_twig_func(name_characteristics.field_type~'_template') %} #}
+
+                {{ name_characteristics.field_value|call_twig_func(name_characteristics.field_type~'_template') }}
+
+                {# {% if render %}
+					{{ render|raw }}
+				{% else %}
+					{{ name_characteristics.field_value|call_twig_func(name_characteristics.field_type) }}
+				{% endif %} #}
+            </div>
+        </div>
+
+
+        {% if open == false %}
+            </div>
+            </div>
+            <div class="d-flex gap-5 mb-3">
+            {% set open = true %}
+            {% set light = light ? false : true %}
+
+        {% else %}
+            {% set open = false %}
+            {% if loop.last %}
+                </div>
+            {% endif %}
+        {% endif %}
+
+
+
+        {% if loop.last %}
+            </div>
+        {% endif %}
+
+    {% endfor %}
+	
+
+
+
+
+{#
+<div class="d-flex gap-5">
+	<div class="d-flex flex-column w-50 gap-3">
+
+		<div class="d-flex justify-content-between p-2 rounded-4 bg-light">
+			<div class="w-50">Производитель</div>
+			<div class="w-50"><a href="#" aria-label="Triangle" title="Triangle">Triangle</a></div>
+		</div>
+
+		<div class="d-flex justify-content-between p-2">
+			<div class="w-50">Модель</div>
+			<div class="w-50">
+				<a href="#" aria-label="Triangle Sports TH201" title="Triangle Sports TH201">
+					Triangle Sports TH201
+				</a>
+			</div>
+		</div>
+
+		<div class="d-flex justify-content-between p-2 rounded-4 bg-light">
+			<div class="w-50">Тип автомобиля</div>
+			<div class="w-50 d-flex gap-3 align-items-center">
+
+				<img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNDAgMTM0Ij4gPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwxMzQpIHNjYWxlKDAuMSwtMC4xKSIgZmlsbD0iI0ZEN0UxNCIgc3Ryb2tlPSJub25lIj4gPHBhdGggZD0iTTExMDAgMTMzNCBjLTE2MiAtMjUgLTIyNiAtNDcgLTQ1MCAtMTU0IC0xNDcgLTcxIC0yMjQgLTEwMSAtMzc1IC0xNDYgLTIwNCAtNjAgLTI0NSAtNzkgLTI2MyAtMTE5IC04IC0xOCAtMTIgLTEwNSAtMTIgLTI3MyAwIC0yNzIgNCAtMjkzIDYzIC0zMzYgMjYgLTE5IDQyIC0yMSAxODUgLTIxIGwxNTcgMCA3IDUzIGMxNiAxMDkgOTMgMjEyIDE5OCAyNjEgNDcgMjIgNjkgMjYgMTUwIDI2IDgzIDAgMTAyIC0zIDE1MSAtMjggMTA0IC01MSAxODMgLTE1OSAxOTYgLTI2NyBsNiAtNTAgNTgyIDAgNTgyIDAgNyA1MiBjMTUgMTEwIDEwMCAyMjMgMjA0IDI3MSAzOCAxNyA2NiAyMiAxNDIgMjIgODIgMCAxMDMgLTQgMTUyIC0yNyA5NyAtNDUgMTc4IC0xNDYgMTk0IC0yNDEgMTQgLTg1IC0zIC03NyAxNjIgLTc3IDE2NyAwIDE5MCA4IDIzMyA3NiAyMiAzNiAyNCA1MCAyNCAxNTkgMCAxMDggLTIgMTI1IC0yNSAxNzAgLTQ3IDk0IC02NiAxMDIgLTQ0NyAxOTUgLTYxMCAxNDggLTU3MCAxMzUgLTc4OCAyNjAgLTIxNSAxMjQgLTMzMiAxNzAgLTQ3OCAxOTAgLTcyIDkgLTQ5OSAxMiAtNTU3IDR6IG0xNzIgLTE1MSBjMTYgLTE0IDE4IC0zMyAxOCAtMTQwIDAgLTE3OCAyOCAtMTY1IC0zMjkgLTE2MSAtMjY4IDMgLTI5MCA0IC0zMTAgMjIgLTMyIDI5IC0yOCA3NiAxMiAxMTMgMzkgMzcgMjU1IDE1MyAzMTcgMTY5IDI1IDcgOTYgMTMgMTU5IDEzIDkzIDEgMTE4IC0yIDEzMyAtMTZ6IG00NDYgMiBjOTEgLTIyIDE2OSAtNTcgMzMxIC0xNDggMTQ1IC04MiAxNzkgLTExMyAxNTIgLTE0MCAtOSAtOSAtMTA2IC0xMyAtMzc4IC0xNSAtMzMyIC0yIC0zNjcgLTEgLTM4NCAxNCAtMTcgMTUgLTE5IDMzIC0xOSAxNDEgMCA2OCA1IDEzMyAxMCAxNDQgMTAgMTcgMjIgMTkgMTE4IDE5IDU5IDAgMTM1IC03IDE3MCAtMTV6Ii8+IDxwYXRoIGQ9Ik02NzkgNTM3IGMtODggLTMzIC0xNDkgLTk0IC0xNzcgLTE3NiAtMTggLTUzIC0xNCAtMTQwIDkgLTE5MSA0MyAtOTYgMTUxIC0xNzAgMjQ5IC0xNzAgOTQgMCAyMDQgNzEgMjQ2IDE1OCAyMyA0NyAzMCAxNDEgMTUgMTk1IC0zMCAxMDcgLTEzMSAxODYgLTI0NSAxOTMgLTM2IDMgLTc1IC0xIC05NyAtOXogbTE1MSAtMTc0IGM1NSAtNTAgNTYgLTEyNSA0IC0xNzQgLTIwIC0xOSAtMzYgLTI0IC03NiAtMjQgLTQzIDAgLTUzIDQgLTc5IDMzIC0yMyAyNSAtMjkgNDIgLTI5IDc2IDAgOTkgMTA5IDE1MyAxODAgODl6Ii8+IDxwYXRoIGQ9Ik0yNTQ2IDUzNCBjLTcyIC0yMyAtMTQ5IC0xMDMgLTE3MiAtMTc5IC0zOCAtMTMyIDIwIC0yNjEgMTQ2IC0zMjYgNjYgLTM0IDE2NyAtMzMgMjM2IDMgNjUgMzQgMTE2IDkzIDEzNyAxNTkgMzQgMTA1IDEyIDE5NSAtNjcgMjc1IC03OSA3OSAtMTcxIDEwMSAtMjgwIDY4eiBtMTQ0IC0xNTkgYzEwMiAtNTMgNjAgLTIxNSAtNTUgLTIxNSAtMzggMCAtODMgMjYgLTEwMCA2MCAtNTMgMTAzIDUyIDIwOCAxNTUgMTU1eiIvPjwvZz48L3N2Zz4="
+					 class="lazy" alt="Легковые автомобили" width="30" height="26">
+
+				<span>Легковой</span>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="d-flex flex-column w-50 gap-3">
+
+		<div class="d-flex justify-content-between p-2 rounded-4 bg-light">
+			<div class="w-50">Сезонность</div>
+			<div class="w-50 d-flex gap-3 align-items-center">
+
+				<img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNzkgMTkxIj4gPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwxOTEpIHNjYWxlKDAuMSwtMC4xKSIgZmlsbD0iI0ZGQTA0MyIgc3Ryb2tlPSJub25lIj4gPHBhdGggZD0iTTgzNiAxODM4IGMtMTMgLTE4IC0xNiAtNTIgLTE2IC0xNjMgMCAtMTYyIDggLTE4NSA2NCAtMTg1IDYwIDAgNjYgMTggNjYgMTg3IDAgMTMzIC0yIDE1MiAtMTggMTY2IC0yNyAyNSAtNzggMjIgLTk2IC01eiIvPiA8cGF0aCBkPSJNMjk3IDE1NTkgYy0xOSAtMTQgLTI3IC0zMCAtMjcgLTUyIDAgLTI3IDEzIC00NiA4MyAtMTE1IDkwIC05MCAxMTcgLTEwMCAxNTUgLTU5IDM4IDQwIDI5IDYzIC02MCAxNTMgLTQ2IDQ1IC05MiA4NSAtMTA0IDg4IC0xMyA0IC0zMSAtMSAtNDcgLTE1eiIvPiA8cGF0aCBkPSJNMTQxNSAxNTcwIGMtMTEgLTQgLTUzIC00MiAtOTIgLTgzIC01OSAtNjAgLTczIC04MSAtNzMgLTEwNiAwIC0zOCAzMSAtNzEgNjYgLTcxIDI5IDAgMTU1IDExNCAxODAgMTYyIDMxIDYwIC0yMSAxMjMgLTgxIDk4eiIvPiA8cGF0aCBkPSJNNzY1IDEzNjcgYy0xNDcgLTQ5IC0yNTMgLTE1OSAtMjkwIC0zMDIgLTUyIC0yMDIgNDUgLTQxMCAyMzMgLTQ5OCA4NiAtNDAgMjE4IC01MCAzMDMgLTIyIDE4NSA2MCAyOTkgMjE2IDI5OSA0MTAgMCAxMzMgLTQxIDIyNyAtMTM5IDMxOCAtNzkgNzQgLTE0NSAxMDAgLTI2NiAxMDQgLTY0IDIgLTExNCAtMiAtMTQwIC0xMHoiLz4gPHBhdGggZD0iTTQgMTAwNiBjLTMgLTcgLTQgLTM1IC0yIC02MiBsMyAtNDkgMTU1IC0zIGMxNDggLTMgMTU2IC0yIDE3MyAxOSAyMSAyNiAyMiA1OCAxIDg3IC0xNSAyMSAtMjEgMjIgLTE3MCAyMiAtMTIyIDAgLTE1NiAtMyAtMTYwIC0xNHoiLz4gPHBhdGggZD0iTTE0NDIgMTAwOCBjLTE3IC0xNyAtMTUgLTg0IDQgLTEwMiAxMyAtMTMgNDIgLTE2IDE1OSAtMTYgNzkgMCAxNTAgMyAxNTkgNiAyMyA5IDIzIDEwOSAwIDExOCAtMzEgMTIgLTMwOSA3IC0zMjIgLTZ6Ii8+IDxwYXRoIGQ9Ik0zNTIgNTE2IGMtODcgLTg5IC0xMDIgLTEyNSAtNjQgLTE1OCA0NSAtNDAgNTggLTM1IDE1MyA1OSA5NyA5NyAxMDcgMTIyIDY2IDE2MSAtNDIgMzkgLTY2IDMwIC0xNTUgLTYyeiIvPiA8cGF0aCBkPSJNMTI3MiA1ODQgYy0xNiAtMTEgLTIyIC0yNSAtMjIgLTUxIDAgLTMwIDEwIC00NiA3MyAtMTEwIDM5IC00MSA4MiAtNzkgOTUgLTg0IDMyIC0xMiA3MCA2IDgzIDM4IDE1IDM5IC03IDc2IC05MSAxNTggLTcyIDY5IC05NyA3OCAtMTM4IDQ5eiIvPiA8cGF0aCBkPSJNODM2IDM5OCBjLTEzIC0xOCAtMTYgLTUyIC0xNiAtMTYzIDAgLTE2MiA4IC0xODUgNjQgLTE4NSA2MCAwIDY2IDE4IDY2IDE4NyAwIDEzMyAtMiAxNTIgLTE4IDE2NiAtMjcgMjUgLTc4IDIyIC05NiAtNXoiLz4gPC9nPiA8L3N2Zz4="
+					 class="lazy" alt="Летняя" width="20" height="20">
+
+				Летние шины
+			</div>
+		</div>
+
+		<div class="d-flex justify-content-between p-2">
+			<div class="w-50">Шипы</div>
+			<div class="w-50 d-flex gap-3 align-items-center">
+
+				<img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPiA8cGF0aCBmaWxsPSIjRTcwRTM4IiBkPSJNIDExNy41LDE3LjUgQyAxMjYuNDQxLDE1LjY0NzkgMTMzLjk0MSwxNy45ODEyIDE0MCwyNC41QyAxNzUuMDMyLDg0Ljg1MzQgMjEwLjAzMiwxNDUuMTg3IDI0NSwyMDUuNUMgMjQ5LjU3LDIxNi4zOTQgMjQ3LjA3LDIyNS4yMjcgMjM3LjUsMjMyQyAyMzMuNjE5LDIzMy4xOSAyMjkuNjE5LDIzMy44NTcgMjI1LjUsMjM0QyAxNTguNSwyMzQuNjY3IDkxLjUsMjM0LjY2NyAyNC41LDIzNEMgMTAuOTkyLDIzNC45MyAzLjMyNTMsMjI4Ljc2MyAxLjUsMjE1LjVDIDIuMDQ2MzYsMjExLjMxNCAzLjIxMzAyLDIwNy4zMTQgNSwyMDMuNUMgMzkuOTQ2NSwxNDMuOTMzIDc0LjYxMzEsODQuMjY2MSAxMDksMjQuNUMgMTExLjQ0MSwyMS41NDY0IDExNC4yNzUsMTkuMjEzMSAxMTcuNSwxNy41IFogTSAxMjMuNSw0My41IEMgMTI0LjQ5Niw0My40MTQyIDEyNS4zMjksNDMuNzQ3NiAxMjYsNDQuNUMgMTU3LjUxNCw5OC44NjU1IDE4OS4wMTQsMTUzLjE5OSAyMjAuNSwyMDcuNUMgMTU2LjUsMjEwLjE0OCA5Mi40OTk3LDIxMC4xNDggMjguNSwyMDcuNUMgNjAuNjgzNSwxNTMuMTMzIDkyLjM1MDEsOTguNDY2NSAxMjMuNSw0My41IFoiLz4gPHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTSA4MC41LDEzMS41IEMgODYuNDI1NCwxMzEuMTkyIDkyLjI1ODgsMTMxLjUyNSA5OCwxMzIuNUMgOTguNDk5OSwxNDkuODMgOTguNjY2NiwxNjcuMTYzIDk4LjUsMTg0LjVDIDEwMy44MzMsMTg0LjUgMTA5LjE2NywxODQuNSAxMTQuNSwxODQuNUMgMTE0LjMzMywxNjcuNDk3IDExNC41LDE1MC40OTcgMTE1LDEzMy41QyAxMTcuODk0LDEzMi4yMiAxMjEuMDYxLDEzMS41NTQgMTI0LjUsMTMxLjVDIDEyNy43NTIsMTMxLjUyMSAxMzAuOTE5LDEzMS44NTQgMTM0LDEzMi41QyAxMzQuNSwxNDkuODMgMTM0LjY2NywxNjcuMTYzIDEzNC41LDE4NC41QyAxMzkuODMzLDE4NC41IDE0NS4xNjcsMTg0LjUgMTUwLjUsMTg0LjVDIDE1MC4zMzMsMTY3LjE2MyAxNTAuNSwxNDkuODMgMTUxLDEzMi41QyAxNTcuMDc2LDEzMS41MjQgMTYzLjI0MiwxMzEuMTkgMTY5LjUsMTMxLjVDIDE2OS41LDE1NC44MzMgMTY5LjUsMTc4LjE2NyAxNjkuNSwyMDEuNUMgMTM5LjUsMjAxLjUgMTA5LjUsMjAxLjUgNzkuNSwyMDEuNUMgNzkuMTc3NCwxNzguMDkyIDc5LjUxMDgsMTU0Ljc1OCA4MC41LDEzMS41IFoiLz48L3N2Zz4="
+
+					 class="lazy" alt="Шипы" width="20" height="20">
+
+				Есть
+			</div>
+		</div>
+
+		<div class="d-flex justify-content-between p-2 rounded-3 bg-light">
+			<div class="w-50">Производство</div>
+			<div class="w-50 d-flex gap-3 align-items-center">
+				<div data-bg="/img/flags/cn.svg" class="lazy circle-25 bg-cover"></div>
+				<div>Китай</div>
+#}
+{# <img src="/img/flags/cn.svg" alt="Китай" class="rounded-circle"> #}{#
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+</div> #}

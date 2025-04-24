@@ -1,0 +1,31 @@
+<section class="container position-relative">
+    <div class="d-flex align-items-center gap-5 mb-3">
+        <h2 class="fs-4">Рекомендуем</h2>
+        <button class="btn bg-transparent p-0">
+            <u>Похожие товары</u>
+        </button>
+        <button class="btn bg-transparent p-0">
+            <u>Коллекции</u>
+        </button>
+    </div>
+
+    <div class="scroll-container row overflow-x-scroll flex-nowrap invisibility-scroll pt-2" style="height: 485px;">
+        {% set total_items = 10 %}
+        {% set showBadge = false %}
+        {% set section_number = 70000 %}
+        {% for i in 1..total_items %}
+            <div class="col-2 p-1 pt-0">
+                {% include Template('@Template:user/'~baks_settings.device~'/includes/promo_card.html.twig') %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <button class="btn scroll-btn scroll-btn-left position-absolute" id="scroll-left" aria-label="left"><span
+                class="carousel-control-prev-icon custom-color" aria-hidden="true"></span></button>
+    <button class="btn scroll-btn scroll-btn-right position-absolute" id="scroll-right" aria-label="right"><span
+                class="carousel-control-next-icon custom-color" aria-hidden="true"></span></button>
+
+
+</section>
+
+<hr class="mt-0 mb-5">

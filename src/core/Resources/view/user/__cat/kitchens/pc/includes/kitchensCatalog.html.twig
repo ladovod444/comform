@@ -1,0 +1,211 @@
+<section class="container mb-5">
+    <div class="row">
+        <div class="col-3">
+            <h2 class="fs-4 mb-3">Каталог</h2>
+
+            <div class="d-flex flex-column gap-3 mb-5">
+
+                <select class="form-select" aria-label="Тип мебели" data-select="select2">
+                    <option selected disabled hidden>Лофт мебель</option>
+                    {% set total_items = 10 %}
+                    {% for i in 0..total_items %}
+                        <option value="{{ i + 1 }}">Стиль мебели {{ i + 1 }}</option>
+                    {% endfor %}
+                </select>
+
+                <div class="d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <label class="form-label m-0" for="from"><strong>от</strong></label>
+                        <input class="form-control" id="from" type="text">
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <label class="form-label m-0" for="to"><strong>до</strong></label>
+                        <input class="form-control" id="to" type="text">
+                    </div>
+                </div>
+
+                <select class="form-select" aria-label="Материал" data-select="select2">
+                    <option selected disabled hidden>Материал</option>
+                    {% set total_items = 10 %}
+                    {% for i in 0..total_items %}
+                        <option value="{{ i + 1 }}">Материал {{ i + 1 }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="form-select" aria-label="Ширина" data-select="select2">
+                    <option selected disabled hidden>Ширина</option>
+                    {% set total_items = 10 %}
+                    {% for i in 0..total_items %}
+                        <option value="{{ i + 1 }}">Ширина {{ i + 1 }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="form-select" aria-label="Высота" data-select="select2">
+                    <option selected disabled hidden>Высота</option>
+                    {% set total_items = 10 %}
+                    {% for i in 0..total_items %}
+                        <option value="{{ i + 1 }}">Высота {{ i + 1 }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="form-select" aria-label="Глубина" data-select="select2">
+                    <option selected disabled hidden>Глубина</option>
+                    {% set total_items = 10 %}
+                    {% for i in 0..total_items %}
+                        <option value="{{ i + 1 }}">Глубина {{ i + 1 }}</option>
+                    {% endfor %}
+                </select>
+
+                <button class="btn btn-dark">
+                    Подобрать
+                </button>
+
+            </div>
+
+            <div class="d-flex flex-column gap-3">
+                {% set total_items = 2 %}
+                {% for i in 0..total_items %}
+                    <a href="#">
+                        {# {% set random_color = ["f2f0f0", "ffe4d7", "ffd7e4", "ffe4e4", "f2f0e4"][random(0, 4)] %} #}
+                        <img class="d-block w-100 rounded-4"
+                             src="https://placehold.co/250x250?text=Акционный+баннер+{{ i + 1 }}"
+                             alt="Акционный баннер {{ i + 1 }}">
+                    </a>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="col-1">
+            <div class="h-75 border-end"></div>
+        </div>
+
+        <div class="col-8">
+
+            <h3 class="fs-4 fw-normal mb-3">Кухни от мебельной фабрики Comfort Avenue</h3>
+            <p> В Comfort Avenue мы стремимся создавать пространства, которые сочетают в себе элегантность,
+                функциональность и инновационный дизайн. Наша мебель и фурнитура изготавливаются из высококачественных
+                материалов с использованием передовых технологий, гарантируя надежность и долговечность каждого изделия.
+                Наша команда профессионалов внимательно относится к потребностям каждого клиента, предлагая
+                индивидуальные решения и персонализированный подход к каждому проекту. Мы стремимся преодолеть ожидания
+                и создать мебель, которая станет настоящим украшением вашего дома.</p>
+            <p class="mb-5"> Будь то современная кухня, уютная мебель для гостиной или стильная фурнитура, Comfort
+                Avenue гарантирует комфорт и функциональность в каждой детали. Добро пожаловать в мир истинного уюта с
+                Comfort Avenue.</p>
+
+
+            <div class="row row-cols-4 mb-4" style="font-size: 13px;">
+                <div class="col p-1">
+                    <div class="text-center border rounded-4 h-100 pt-4 px-1  position-relative">
+                        <p>
+                            <strong>Свяжитесь с нами и приезжайте к нам в офис</strong>
+                        </p>
+                        <a class="link-danger">
+                            Контакты
+                        </a>
+                        <span class="position-absolute top-0 start-50 translate-middle p-4 bg-white border  rounded-circle">
+                        <span class="visually-hidden">Номер шага</span>
+                      </span>
+                        <span class="position-absolute  start-50 translate-middle fs-4 step-number-position">
+                        1
+                      </span>
+                    </div>
+                </div>
+                <div class="col p-1">
+                    <div class="text-center border rounded-4 h-100 pt-4 px-1 position-relative">
+                        <p>
+                            <strong>Выберите внешний вид</strong>
+                        </p>
+                        <p class="mb-0">
+                            Определитесь с цветом, стилем и внешним видом фасада
+                        </p>
+                        <span class="position-absolute top-0 start-50 translate-middle p-4 bg-white border  rounded-circle">
+                        <span class="visually-hidden">Номер шага</span>
+                      </span>
+                        <span class="position-absolute  start-50 translate-middle fs-4 step-number-position">
+                        2
+                      </span>
+                    </div>
+                </div>
+                <div class="col p-1">
+                    <div class="text-center border rounded-4 h-100 pt-4 px-1 pb-2 position-relative">
+                        <p>
+                            <strong>Замерьте свою кухню</strong>
+                        </p>
+                        <p class="mb-2">
+                            Создайте проект вместе с нашей командой специалистов
+                        </p>
+                        <button class="btn btn-dark py-1 px-3" style="font-size: 16px;">Заказать замер</button>
+                        <span class="position-absolute top-0 start-50 translate-middle p-4 bg-white border  rounded-circle">
+                        <span class="visually-hidden">Номер шага</span>
+                      </span>
+                        <span class="position-absolute  start-50 translate-middle fs-4 step-number-position">
+                        3
+                      </span>
+                    </div>
+                </div>
+                <div class="col p-1">
+                    <div class="text-center border rounded-4 h-100 pt-4 px-1 position-relative">
+                        <p>
+                            <strong>Придем, соберем и установим</strong>
+                        </p>
+                        <p class="mb-0">
+                            Для кухонь от 200 000 р. <br> сборка <strong>бесплатна</strong>
+                        </p>
+                        <span class="position-absolute top-0 start-50 translate-middle p-4 bg-white border  rounded-circle">
+                        <span class="visually-hidden">Номер шага</span>
+                      </span>
+                        <span class="position-absolute  start-50 translate-middle fs-4 step-number-position">
+                        4
+                      </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="d-flex align-items-center gap-4 mb-3 border-top border-bottom py-3">
+                <p class="text-secondary m-0">Сортировать по:</p>
+                <button class="btn bg-transparent p-0" style="font-size: 12px">
+                    <u>Стоимости</u>
+                    <svg class="bi bi-arrow-down" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="gray"
+                         viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"></path>
+                    </svg>
+                </button>
+                <button class="btn bg-transparent p-0" style="font-size: 12px">
+                    <u>Новинкам</u>
+                    <svg class="bi bi-arrow-up" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="gray"
+                         viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"></path>
+                    </svg>
+                </button>
+                <div class="d-flex ">
+                    <div class="form-check form-switch d-flex align-items-center " style="font-size: 11px;">
+                        <input class="form-check-input me-2 mt-0 cursor-pointer" style="width:35px; height:20px;"
+                               type="checkbox" role="switch" id="availableSwitch">
+                        <label class="form-check-label" for="availableSwitch">В наличии</label>
+                    </div>
+                </div>
+            </div>
+
+
+            {% set total_items = 12 %}
+
+            <div class="row row-cols-4 gy-3">
+                {% set section_number = 20000 %}
+                {% for i in 1..20 %}
+                    <div class="col p-1">
+                        {#                    {{ include(_self|replace({ "kitchens-catalog.html.twig" : "/includes/card-template.html.twig" })) }} #}
+                        {% include Template('@core/user/products/'~baks_settings.device~'/includes/card-template.html.twig') %}
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<hr class="mb-5">

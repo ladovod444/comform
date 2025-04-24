@@ -1,0 +1,55 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+
+#end
+
+#set( $EntityModifyClass = $NAME.replace("Listener", "") )
+
+use BaksDev\Core\Type\Ip\IpAddress;
+use BaksDev\Users\User\Entity\User;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
+use Doctrine\ORM\Events;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken;
+
+#[AsEntityListener(event: Events::prePersist, method: 'prePersist', entity: ${EntityModifyClass}::class)]
+final class ${NAME}
+{
+    public function __construct(
+        private readonly RequestStack ${DS}request,
+        private readonly TokenStorageInterface ${DS}token,
+    ) {}
+
+    public function prePersist(${EntityModifyClass} ${DS}data, LifecycleEventArgs ${DS}event): void
+    {
+        ${DS}token = ${DS}this->token->getToken();
+
+        if(${DS}token)
+        {
+            ${DS}data->setUsr(${DS}token->getUser());
+
+            if(${DS}token instanceof SwitchUserToken)
+            {
+                /** @var User ${DS}originalUser */
+                ${DS}originalUser = ${DS}token->getOriginalToken()->getUser();
+                ${DS}data->setUsr(${DS}originalUser);
+            }
+        }
+
+        /* Если пользователь не из консоли */
+        if(${DS}this->request->getCurrentRequest())
+        {
+            ${DS}data->upModifyAgent(
+                new IpAddress(${DS}this->request->getCurrentRequest()->getClientIp()), /* Ip */
+                ${DS}this->request->getCurrentRequest()->headers->get('User-Agent') /* User-Agent */
+            );
+        }
+    }
+}

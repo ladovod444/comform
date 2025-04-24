@@ -1,0 +1,453 @@
+<div class="accordion accordion-flush mt-3" id="catalogFilter">
+    <div class="accordion-item rounded-4 bg-info shadow">
+
+        <h2 id="headingOne">
+            <button class="accordion-button rounded-4 ps-4 pe-2 py-2 border-0 bg-primary shadow-none collapsed"
+                    type="button"
+                    aria-label="Подбор шин"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne">
+
+				<span class=" text-uppercase fw-bold text-white mb-0">
+					Фильтр по параметрам
+				</span>
+            </button>
+        </h2>
+
+        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#catalogFilter">
+
+            <div class="accordion-body">
+
+                <div class="d-flex flex-column gap-3">
+
+                    <div class="d-flex justify-content-between align-items-center gap-2 text-white">
+
+                        <div class="mb-3 w-100">
+                            <label for="oldWidth" class="form-label">Ширина</label>
+                            <select id="oldWidth"
+                                    class="form-select rounded-4 w-100"
+                                    aria-label="Ширина">
+                                <option value="">Неважно</option>
+                                <option value="145">145</option>
+                                <option value="155">155</option>
+                                <option value="165">165</option>
+                                <option value="175" selected="">175</option>
+                                <option value="185">185</option>
+                                <option value="195">195</option>
+                                <option value="205">205</option>
+                                <option value="215">215</option>
+                                <option value="225">225</option>
+                                <option value="235">235</option>
+                                <option value="245">245</option>
+                                <option value="255">255</option>
+                                <option value="265">265</option>
+                                <option value="275">275</option>
+                                <option value="285">285</option>
+                                <option value="295">295</option>
+                                <option value="305">305</option>
+                                <option value="315">315</option>
+                                <option value="325">325</option>
+                            </select>
+                        </div>
+
+                        <span class="pt-3">/</span>
+
+
+                        <div class="mb-3 w-100">
+                            <label for="oldWidth" class="form-label">Профиль</label>
+                            <select id="oldProfile" class="form-select rounded-4 w-75px"
+                                    aria-label="Профиль">
+                                <option value="">Неважно</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                                <option value="55">55</option>
+                                <option value="60">60</option>
+                                <option value="65">65</option>
+                                <option value="70" selected="">70</option>
+                                <option value="75">75</option>
+                                <option value="80">80</option>
+                                <option value="85">85</option>
+                            </select>
+                        </div>
+
+
+                        <span class="pt-3">R</span>
+
+                        <div class="mb-3 w-100">
+                            <label for="oldWidth" class="form-label">Диаметр</label>
+                            <select id="oldRadius" class="form-select rounded-4 w-75px"
+                                    aria-label="Диаметр">
+
+                                <option value="">Неважно</option>
+                                <option value="12">12</option>
+                                <option value="13" selected="">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+
+                    {# БРЕНД #}
+                    <div class="form-group">
+
+                        <select id="brand" name="brand"
+                                class="form-select rounded-4">
+
+                            <option value="" selected disabled>Бренд</option>
+                            <option value="">Неважно</option>
+                            <option value="373">Altenzo</option>
+                            <option value="270">Amtel</option>
+                            <option value="526">Aosen</option>
+                            <option value="630">Aplus</option>
+                            <option value="736">Arivo</option>
+                            <option value="569">Auplus</option>
+                            <option value="388">Austone</option>
+                            <option value="771">Bars</option>
+                            <option value="272">Barum</option>
+                            <option value="271">BFGoodrich</option>
+                            <option value="617">Blacklion</option>
+                            <option value="445">Boto</option>
+                            <option value="273">Bridgestone</option>
+                            <option value="699">Cachland</option>
+                            <option value="743">Centara</option>
+                            <option value="763">Charmhoo</option>
+                            <option value="600">Compasal</option>
+                            <option value="274">Continental</option>
+                            <option value="360">Contyre</option>
+                            <option value="276">Cordiant</option>
+                            <option value="725">CrossLeader</option>
+                            <option value="597">CST</option>
+                            <option value="731">Davanti</option>
+                            <option value="544">Delinte</option>
+                            <option value="726">Delmax</option>
+                            <option value="531">Dmack</option>
+                            <option value="524">Doublecoin</option>
+                            <option value="420">Doublestar</option>
+                            <option value="277">Dunlop</option>
+                            <option value="693">Duraturn</option>
+                            <option value="414">Durun</option>
+                            <option value="748">Dynamo</option>
+                            <option value="534">Evergreen</option>
+                            <option value="375">Falken</option>
+                            <option value="696">Farroad</option>
+                            <option value="682">Firemax</option>
+                            <option value="300">Firestone</option>
+                            <option value="782">Foman</option>
+                            <option value="497">Formula</option>
+                            <option value="437">Fortuna</option>
+                            <option value="712">Fortune</option>
+                            <option value="347">General Tire</option>
+                            <option value="279">Gislaved</option>
+                            <option value="574">GoForm</option>
+                            <option value="834">Goldstone</option>
+                            <option value="348">Goodride</option>
+                            <option value="280">Goodyear</option>
+                            <option value="747">Greentrac</option>
+                            <option value="737">Grenlander</option>
+                            <option value="576">Gripmax</option>
+                            <option value="319">GT Radial</option>
+                            <option value="675">Habilead</option>
+                            <option value="577">Haida</option>
+                            <option value="320">Hankook</option>
+                            <option value="501">Headway</option>
+                            <option value="680">Hemisphere</option>
+                            <option value="724">Herovic</option>
+                            <option value="455">Hifly</option>
+                            <option value="578">Horizon</option>
+                            <option value="715">iLINK</option>
+                            <option value="535">Imperial</option>
+                            <option value="464">Jinyu</option>
+                            <option value="605">Joyroad</option>
+                            <option value="552">Kapsen</option>
+                            <option value="401">Kenda</option>
+                            <option value="321">Kinforest</option>
+                            <option value="341">Kingstar</option>
+                            <option value="281">Kleber</option>
+                            <option value="350">Kormoran</option>
+                            <option value="282">Kumho</option>
+                            <option value="463">Landsail</option>
+                            <option value="631">Lanvigator</option>
+                            <option value="415">Lassa</option>
+                            <option value="638">Laufenn</option>
+                            <option value="427">Leao</option>
+                            <option value="402">LingLong</option>
+                            <option value="302">Marshal</option>
+                            <option value="296">Matador</option>
+                            <option value="339">Maxxis</option>
+                            <option value="700">Mazzini</option>
+                            <option value="283">Michelin</option>
+                            <option value="351">Mickey Thompson</option>
+                            <option value="832">Mileking</option>
+                            <option value="430">Minerva</option>
+                            <option value="551">Mirage</option>
+                            <option value="303">Nankang</option>
+                            <option value="362">Nexen</option>
+                            <option value="409">Nitto</option>
+                            <option value="284">Nokian</option>
+                            <option value="285">Nordman</option>
+                            <option value="556">Nortec</option>
+                            <option value="761">Onyx</option>
+                            <option value="681">Orium</option>
+                            <option value="459">Ovation</option>
+                            <option value="581">Pace</option>
+                            <option value="582">Petlas</option>
+                            <option value="286">Pirelli</option>
+                            <option value="632">Powertrac</option>
+                            <option value="436">Premiorri</option>
+                            <option value="583">Presa</option>
+                            <option value="509">Rapid</option>
+                            <option value="833">Razi</option>
+                            <option value="685">Roadcruza</option>
+                            <option value="760">RoadMarch</option>
+                            <option value="287">Roadstone</option>
+                            <option value="756">RoadX</option>
+                            <option value="499">Rotalla</option>
+                            <option value="658">Royal Black</option>
+                            <option value="764">Saferich</option>
+                            <option value="469">Sailun</option>
+                            <option value="522">Satoya</option>
+                            <option value="324">Sava</option>
+                            <option value="619">Solideal</option>
+                            <option value="587">Starmaxx</option>
+                            <option value="494">Sunfull</option>
+                            <option value="379">Sunny</option>
+                            <option value="708">Sunwide</option>
+                            <option value="633">Taurus</option>
+                            <option value="288">Tigar</option>
+                            <option value="717">Toledo</option>
+                            <option value="523">Torque</option>
+                            <option value="735">Tourador</option>
+                            <option value="304">Toyo</option>
+                            <option value="503">Tracmax</option>
+                            <option value="418">Tri-Ace</option>
+                            <option value="377">Triangle</option>
+                            <option value="407">Tunga</option>
+                            <option value="305">Uniroyal</option>
+                            <option value="405">Viatti</option>
+                            <option value="772">Vittos</option>
+                            <option value="325">Vredestein</option>
+                            <option value="830">Waterfall</option>
+                            <option value="367">WestLake</option>
+                            <option value="641">Windforce</option>
+                            <option value="593">Winrun</option>
+                            <option value="289">Yokohama</option>
+                            <option value="363">Zeetex</option>
+                            <option value="561">Zeta</option>
+                            <option value="291">Барнаул</option>
+                            <option value="292">Белшина</option>
+                            <option value="293">Волтаир</option>
+                            <option value="294">Кама</option>
+                            <option value="295">Киров</option>
+                            <option value="297">Росава</option>
+                        </select>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <label for="rf" class="form-check-label">
+                            <input type="checkbox" class="form-check-input mt-2 rounded-4" name="rf" id="rf">
+                            <span class="custom-control-description me-3 text-white">C/LT, Runflat, Seal, Silent</span>
+
+                            <div class="btn-group dropstart small">
+                                <button type="button"
+                                        class="btn btn-link text-white mb-2 p-0"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                        aria-label="C/LT, Runflat, Seal, Silent"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-question-circle-fill " viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/>
+                                    </svg>
+                                </button>
+
+                                <ul class="dropdown-menu p-3 shadow rounded-4 alert alert-warning lh-normal small"
+                                    style="--bs-dropdown-min-width: 15rem;">
+                                    Безопасная шина — технология, применяемая при производстве
+                                    автомобильных шин, которая позволяет продолжать движение после прокола шины. Такие
+                                    шины
+                                    обладают усиленными боковинами или дополнительным внутренним опорным кольцом.
+                                    Наличие
+                                    специального поддерживающего компонента позволяет им выдерживать вес автомобиля, не
+                                    оседая,
+                                    даже будучи спущенными.
+                                </ul>
+                            </div>
+
+                        </label>
+
+                        {# <div class="btn-group" role="group" aria-label="printer">
+		<div class="btn btn-sm btn-link"
+              role="tooltip"
+			 data-bs-toggle="tooltip"
+			 data-bs-placement="right"
+			 data-bs-original-title="
+						Безопасная шина — технология, применяемая при производстве
+						автомобильных шин, которая позволяет продолжать движение после прокола шины. Такие шины
+						обладают усиленными боковинами или дополнительным внутренним опорным кольцом. Наличие
+						специального поддерживающего компонента позволяет им выдерживать вес автомобиля, не оседая,
+						даже будучи спущенными."
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+				 class="bi bi-question-circle-fill" viewBox="0 0 16 16">
+				<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
+			</svg>
+		</div>
+	</div> #}
+
+
+                        {# <div class="question tooltip tooltipstered"
+					 data-tooltipster="{&quot;delay&quot;: 100, &quot;trigger&quot;: &quot;click&quot;, &quot;interactive&quot;: true, &quot;side&quot;: &quot;right&quot;, &quot;maxWidth&quot;: 400, &quot;contentAsHTML&quot;: true}"
+					 data-tooltip-content="#tooltipRunflat">
+					<svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+						<path d="M256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28zm7.67-24h-16c-6.627 0-12-5.373-12-12v-.381c0-70.343 77.44-63.619 77.44-107.408 0-20.016-17.761-40.211-57.44-40.211-29.144 0-44.265 9.649-59.211 28.692-3.908 4.98-11.054 5.995-16.248 2.376l-13.134-9.15c-5.625-3.919-6.86-11.771-2.645-17.177C185.658 133.514 210.842 116 255.67 116c52.32 0 97.44 29.751 97.44 80.211 0 67.414-77.44 63.849-77.44 107.408V304c0 6.627-5.373 12-12 12zM256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8z"></path>
+					</svg>
+				</div>
+
+				<div class="hidden">
+					<div id="tooltipRunflat">Безопасная шина — технология, применяемая при производстве
+						автомобильных шин, которая позволяет продолжать движение после прокола шины. Такие шины
+						обладают усиленными боковинами или дополнительным внутренним опорным кольцом. Наличие
+						специального поддерживающего компонента позволяет им выдерживать вес автомобиля, не оседая,
+						даже будучи спущенными.
+					</div>
+				</div> #}
+
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <label for="kit" class="form-check-label">
+                            <input type="checkbox" class="form-check-input rounded-3" name="kit" id="kit">
+                            <span class="custom-control-description text-white">От комплекта (4 шт.)</span>
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <label for="sale" class="form-check-label">
+                            <input type="checkbox" class="form-check-input rounded-3" name="sale" id="sale">
+                            <span class="custom-control-description text-white">Спецпредложение</span>
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <label for="now" class="form-check-label">
+                            <input type="checkbox" class="form-check-input rounded-3" name="now" id="now">
+                            <span class="custom-control-description text-white">Забрать сейчас</span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-between mb-3 mt-4">
+
+                    <div class="radio-buttons d-flex gap-2 w-75">
+                        <div class="pe-2">
+                            <label for="all">
+                                <input class="form-check-input visually-hidden" id="all" type="radio"
+                                       name="selection-radio" checked="checked"
+                                       aria-label="Все"
+                                >
+                                <span class="icon icon-sm rounded-3 small px-5">Все</span>
+                            </label>
+                        </div>
+
+                        <div class="">
+                            <label for="sun">
+                                <input class="form-check-input visually-hidden" type="radio" name="selection-radio"
+                                       id="sun"
+                                       aria-label="Летняя"
+                                >
+                                <span class="icon icon-sm rounded-3">
+									{# <img data-src="/img/sun.png" src="/assets/img/empty.png" class="lazy" alt="..."> #}
+
+									<img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNzkgMTkxIj4gPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwxOTEpIHNjYWxlKDAuMSwtMC4xKSIgZmlsbD0iI0ZGQTA0MyIgc3Ryb2tlPSJub25lIj4gPHBhdGggZD0iTTgzNiAxODM4IGMtMTMgLTE4IC0xNiAtNTIgLTE2IC0xNjMgMCAtMTYyIDggLTE4NSA2NCAtMTg1IDYwIDAgNjYgMTggNjYgMTg3IDAgMTMzIC0yIDE1MiAtMTggMTY2IC0yNyAyNSAtNzggMjIgLTk2IC01eiIvPiA8cGF0aCBkPSJNMjk3IDE1NTkgYy0xOSAtMTQgLTI3IC0zMCAtMjcgLTUyIDAgLTI3IDEzIC00NiA4MyAtMTE1IDkwIC05MCAxMTcgLTEwMCAxNTUgLTU5IDM4IDQwIDI5IDYzIC02MCAxNTMgLTQ2IDQ1IC05MiA4NSAtMTA0IDg4IC0xMyA0IC0zMSAtMSAtNDcgLTE1eiIvPiA8cGF0aCBkPSJNMTQxNSAxNTcwIGMtMTEgLTQgLTUzIC00MiAtOTIgLTgzIC01OSAtNjAgLTczIC04MSAtNzMgLTEwNiAwIC0zOCAzMSAtNzEgNjYgLTcxIDI5IDAgMTU1IDExNCAxODAgMTYyIDMxIDYwIC0yMSAxMjMgLTgxIDk4eiIvPiA8cGF0aCBkPSJNNzY1IDEzNjcgYy0xNDcgLTQ5IC0yNTMgLTE1OSAtMjkwIC0zMDIgLTUyIC0yMDIgNDUgLTQxMCAyMzMgLTQ5OCA4NiAtNDAgMjE4IC01MCAzMDMgLTIyIDE4NSA2MCAyOTkgMjE2IDI5OSA0MTAgMCAxMzMgLTQxIDIyNyAtMTM5IDMxOCAtNzkgNzQgLTE0NSAxMDAgLTI2NiAxMDQgLTY0IDIgLTExNCAtMiAtMTQwIC0xMHoiLz4gPHBhdGggZD0iTTQgMTAwNiBjLTMgLTcgLTQgLTM1IC0yIC02MiBsMyAtNDkgMTU1IC0zIGMxNDggLTMgMTU2IC0yIDE3MyAxOSAyMSAyNiAyMiA1OCAxIDg3IC0xNSAyMSAtMjEgMjIgLTE3MCAyMiAtMTIyIDAgLTE1NiAtMyAtMTYwIC0xNHoiLz4gPHBhdGggZD0iTTE0NDIgMTAwOCBjLTE3IC0xNyAtMTUgLTg0IDQgLTEwMiAxMyAtMTMgNDIgLTE2IDE1OSAtMTYgNzkgMCAxNTAgMyAxNTkgNiAyMyA5IDIzIDEwOSAwIDExOCAtMzEgMTIgLTMwOSA3IC0zMjIgLTZ6Ii8+IDxwYXRoIGQ9Ik0zNTIgNTE2IGMtODcgLTg5IC0xMDIgLTEyNSAtNjQgLTE1OCA0NSAtNDAgNTggLTM1IDE1MyA1OSA5NyA5NyAxMDcgMTIyIDY2IDE2MSAtNDIgMzkgLTY2IDMwIC0xNTUgLTYyeiIvPiA8cGF0aCBkPSJNMTI3MiA1ODQgYy0xNiAtMTEgLTIyIC0yNSAtMjIgLTUxIDAgLTMwIDEwIC00NiA3MyAtMTEwIDM5IC00MSA4MiAtNzkgOTUgLTg0IDMyIC0xMiA3MCA2IDgzIDM4IDE1IDM5IC03IDc2IC05MSAxNTggLTcyIDY5IC05NyA3OCAtMTM4IDQ5eiIvPiA8cGF0aCBkPSJNODM2IDM5OCBjLTEzIC0xOCAtMTYgLTUyIC0xNiAtMTYzIDAgLTE2MiA4IC0xODUgNjQgLTE4NSA2MCAwIDY2IDE4IDY2IDE4NyAwIDEzMyAtMiAxNTIgLTE4IDE2NiAtMjcgMjUgLTc4IDIyIC05NiAtNXoiLz4gPC9nPiA8L3N2Zz4="
+                                         width="20" height="20"
+                                         src="/assets/img/empty.png"
+                                         class="lazy"
+                                         alt="Летняя"
+                                    >
+								</span>
+                            </label>
+                        </div>
+
+                        <div class="radio-buttons__item">
+                            <label>
+                                <input class="form-check-input visually-hidden" type="radio" name="selection-radio"
+                                       id="snowflake"
+                                       aria-label="Зимняя"
+                                >
+                                <span class="icon icon-sm rounded-3">
+									{# <img data-src="/img/snowflake.png" src="/assets/img/empty.png" class="lazy" alt="..."> #}
+
+									<img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNzkgMTkxIj4gPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwxOTEpIHNjYWxlKDAuMSwtMC4xKSIgZmlsbD0iIzU3OTVERSIgc3Ryb2tlPSJub25lIj4gPHBhdGggZD0iTTg0OSAxODAzIGMtMTAgLTExIC0xNSAtNTIgLTE3IC0xMjUgLTIgLTU5IC02IC0xMDggLTggLTEwOCAtMyAwIC0zOCAxOCAtNzggNDAgLTgwIDQ0IC0xMTQgNDkgLTEzOSAyMiAtMTggLTIwIC0yMiAtNTkgLTggLTgwIDQgLTggNTcgLTQxIDExNyAtNzYgbDEwOSAtNjIgMyAtMTc4IGMxIC05OSAtMSAtMTc2IC02IC0xNzQgLTUgMSAtNzUgNDEgLTE1NiA4NyBsLTE0NiA4NCAwIDEzNyBjMCAxMjAgLTIgMTM5IC0xOCAxNTMgLTIzIDIxIC02NiAyMiAtODYgMiAtMTYgLTE2IC0yNSAtNjQgLTI5IC0xNTcgbC0yIC01NyAtODMgNTAgYy0xMTYgNjggLTE3MiA2NiAtMTcyIC03IDAgLTQxIDEwIC01MSAxMTAgLTEwOCA0NCAtMjYgODAgLTQ4IDgwIC01MCAwIC0yIC0zNiAtMjUgLTc5IC01MCAtNzggLTQ2IC05MSAtNjAgLTkxIC05NyAwIC0yNiAzNSAtNTkgNjIgLTU5IDEzIDAgNzMgMzAgMTMzIDY2IGwxMTAgNjYgMzAgLTE3IGMxNyAtMTAgODUgLTQ5IDE1MyAtODggNjkgLTM5IDExOSAtNzQgMTE0IC03OSAtMTUgLTE1IC0yODQgLTE2OCAtMjk1IC0xNjggLTYgMCAtNTcgMjggLTExNCA2MSAtNTcgMzQgLTExNSA2MiAtMTI5IDYyIC0zNyAwIC02NiAtMzEgLTYyIC02NyAyIC0yNiAxNCAtMzggNjggLTczIDExNiAtNzUgMTE1IC02MiAxNCAtMTIwIC05OCAtNTUgLTEyNCAtODYgLTEwMyAtMTI1IDI4IC01MyA1OCAtNTAgMTY3IDEyIGw4NyA1MCA1IC05NCBjNCAtNzQgOSAtOTkgMjQgLTExNSAyMyAtMjUgNTMgLTI3IDg0IC01IDIxIDE0IDIyIDIyIDIyIDE1NCBsMCAxMzggMTQwIDgxIGM3NiA0NSAxNDYgODQgMTU1IDg3IDEzIDUgMTUgLTE1IDE1IC0xNzAgbDAgLTE3NSAtNDcgLTI3IGMtMTgzIC0xMDQgLTE4OCAtMTA3IC0xOTEgLTE0MiAtNCAtNDEgMjEgLTcyIDU3IC03MiAxNCAwIDYwIDIwIDEwMSA0NCBsNzUgNDQgNSAtMTE1IGM0IC05OSA4IC0xMTcgMjQgLTEyOSAyNSAtMTggNTcgLTE4IDgyIDAgMTYgMTIgMjAgMzAgMjQgMTMwIGw1IDExNSA3NSAtNDQgYzQxIC0yNCA4NyAtNDQgMTAxIC00NSAzNiAwIDYxIDMxIDU3IDcyIC0zIDM1IC04IDM4IC0xOTAgMTQyIGwtNDggMjcgMCAxNzkgMCAxNzggMTUzIC04OCAxNTIgLTg4IDUgLTE0MiBjNCAtMTI1IDcgLTE0MyAyNCAtMTU2IDI4IC0yMCA2MCAtMTcgODIgNyAxNSAxNiAyMCA0MSAyNCAxMTUgbDUgOTQgODUgLTUwIGM4NiAtNTAgMTE2IC01OCAxNTAgLTQwIDI1IDEzIDM0IDU3IDE3IDg0IC04IDExIC01MyA0MyAtMTAxIDY5IC00NyAyNyAtODYgNTAgLTg2IDUyIDAgMiAzMSAyMiA2OSA0NSA4NyA1MCAxMDEgNjQgMTAxIDk5IDAgMzQgLTI4IDYxIC02MSA2MSAtMTQgMCAtNzQgLTI5IC0xMzUgLTY1IGwtMTExIC02NSAtMTUxIDg3IGMtMTE0IDY3IC0xNDggOTEgLTEzOSA5OSAxNyAxNyAyODAgMTY3IDI5MiAxNjcgNiAwIDU2IC0yOCAxMTMgLTYyIDEwNyAtNjMgMTQ4IC03NCAxNzYgLTQ1IDIwIDIwIDIxIDY4IDAgODggLTggOSAtNDQgMzIgLTc5IDUyIC0zNiAxOSAtNjcgMzkgLTY5IDQzIC0yIDMgMzcgMzEgODcgNjEgODQgNTAgOTIgNTggOTUgODggNCA0MSAtMjEgNzIgLTU3IDcyIC0xNCAwIC02NCAtMjMgLTExMSAtNTAgbC04NSAtNDkgLTggOTYgYy04IDEwNCAtMjIgMTMzIC02MiAxMzMgLTEzIDAgLTMyIC04IC00NCAtMTcgLTE5IC0xNyAtMjEgLTMwIC0yMyAtMTU3IGwtMyAtMTM4IC0xNDUgLTg0IGMtODAgLTQ2IC0xNDggLTg0IC0xNTMgLTg0IC00IDAgLTYgNzkgLTUgMTc2IGwzIDE3NiAxMDkgNjMgYzU5IDM0IDExMiA2OSAxMTcgNzYgMTUgMjMgMTAgNjUgLTkgODIgLTI5IDI2IC01OCAyMSAtMTQzIC0yNyBsLTc5IC00NSAwIDg3IGMwIDkyIC0xMSAxNTAgLTMyIDE2NCAtMjIgMTMgLTY1IDkgLTc5IC05eiIvPiA8L2c+IDwvc3ZnPiA="
+                                         width="20" height="20"
+                                         src="/assets/img/empty.png"
+                                         class="lazy"
+                                         alt="Зимняя"
+                                    >
+								</span>
+                            </label>
+                        </div>
+
+                        <div class="radio-buttons__item">
+                            <label for="snowsun">
+                                <input class="form-check-input visually-hidden" type="radio" name="selection-radio"
+                                       id="snowsun"
+                                       aria-label="Всесезонная"
+                                >
+                                <span class="icon icon-sm rounded-3">
+									{# <img data-src="/img/sun-2.png" src="/assets/img/empty.png" class="lazy" alt="..."> #}
+
+									<img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNzkgMTkxIiA+IDxnIGZpbGw9IiNGRkEwNDMiPiA8cGF0aCBkPSJNIDkwLjUsMS41IEMgOTIuMTY2NywxLjUgOTMuODMzMywxLjUgOTUuNSwxLjVDIDk1LjUsMTQuNSA5NS41LDI3LjUgOTUuNSw0MC41QyA4OS4wMzgxLDM5LjI4NjEgODYuMjA0NywzNS4yODYxIDg3LDI4LjVDIDg2LjQzMDUsMjAuODAzIDg2Ljc2MzgsMTMuMTM2MyA4OCw1LjVDIDg4LjY2MjIsNC4wMTYwOCA4OS40OTU1LDIuNjgyNzUgOTAuNSwxLjUgWiIvPiA8cGF0aCBkPSJNIDM1LjUsMzAuNSBDIDM5LjEwNTUsMzAuNzk4NiA0Mi40Mzg4LDMxLjk2NTMgNDUuNSwzNEMgNTEuNDIxNSwzOC41NzEgNTUuNzU0OCw0NC4yMzc3IDU4LjUsNTFDIDU3LjE5NjUsNTcuNDgzNSA1My41Mjk5LDU5LjQ4MzUgNDcuNSw1N0MgNDIuMDA1Nyw1Mi41MDU0IDM2LjgzOTEsNDcuNjcyIDMyLDQyLjVDIDMxLjMzMzMsMzkuNSAzMS4zMzMzLDM2LjUgMzIsMzMuNUMgMzMuMTQ1MSwzMi4zNjM2IDM0LjMxMTcsMzEuMzYzNiAzNS41LDMwLjUgWiIvPiA8cGF0aCBkPSJNIDg4LjUsNDkuNSBDIDkwLjgzMzMsNDkuNSA5My4xNjY3LDQ5LjUgOTUuNSw0OS41QyA5NS41LDc5LjE2NjcgOTUuNSwxMDguODMzIDk1LjUsMTM4LjVDIDcxLjMxMDMsMTM3LjMzMyA1Ni40NzcsMTI1IDUxLDEwMS41QyA0OS4xNjY4LDczLjUzOSA2MS42NjY4LDU2LjIwNTcgODguNSw0OS41IFoiLz4gPHBhdGggZD0iTSAxMy41LDg1LjUgQyAyMC44Njc1LDg1LjQ2NDEgMjguMjAwOSw4NS45NjQxIDM1LjUsODdDIDQxLjU2ODcsOTEuMjY5NyA0MS45MDIxLDk1LjkzNjQgMzYuNSwxMDFDIDI2LjE2NjcsMTAxLjY2NyAxNS44MzMzLDEwMS42NjcgNS41LDEwMUMgLTEuMDcxOSw5Ni4wNTQ2IC0wLjczODU2NCw5MS4zODc5IDYuNSw4N0MgOS4wMzU2Myw4Ni44MTM4IDExLjM2OSw4Ni4zMTM4IDEzLjUsODUuNSBaIi8+IDxwYXRoIGQ9Ik0gNDguNSwxMzAuNSBDIDU2Ljg4NDgsMTI5LjcxNiA2MC4wNTE1LDEzMy4zODMgNTgsMTQxLjVDIDUyLjUyMTMsMTQ3LjMxIDQ2LjY4NzksMTUyLjgxIDQwLjUsMTU4QyAzNCwxNTguMTY3IDMwLjgzMzMsMTU1IDMxLDE0OC41QyAzMy4zMzMzLDE0NS41IDM1LjY2NjcsMTQyLjUgMzgsMTM5LjVDIDQxLjY5MTksMTM2LjYzNSA0NS4xOTE5LDEzMy42MzUgNDguNSwxMzAuNSBaIi8+IDxwYXRoIGQ9Ik0gOTIuNSwxNDcuNSBDIDkzLjQ5NTksMTQ3LjQxNCA5NC4zMjkyLDE0Ny43NDggOTUsMTQ4LjVDIDk1LjQ5OTksMTYxLjQ5NiA5NS42NjY2LDE3NC40OTYgOTUuNSwxODcuNUMgOTEuNTAwNiwxODcuOTI2IDg5LjAwMDYsMTg2LjI1OSA4OCwxODIuNUMgODcuMzMzMywxNzIuNSA4Ny4zMzMzLDE2Mi41IDg4LDE1Mi41QyA4OS4wMjUsMTUwLjMxMyA5MC41MjUsMTQ4LjY0NiA5Mi41LDE0Ny41IFoiLz4gPHBhdGggZmlsbD0iIzU3OTVERSIgZD0iTSAxNzguNSw0OC41IEMgMTc4LjUsNTAuNSAxNzguNSw1Mi41IDE3OC41LDU0LjVDIDE3Mi4zOCw1OS43MzI3IDE2NS43MTQsNjQuMjMyNyAxNTguNSw2OEMgMTYzLjkxNyw3MC43OTAzIDE2OS4wODQsNzMuOTU3IDE3NCw3Ny41QyAxNzcuNTIyLDg2LjMxMDQgMTc0LjY4OCw5MC4xNDM3IDE2NS41LDg5QyAxNTcuODI4LDg1LjE2NDEgMTUwLjE2Miw4MS4zMzA4IDE0Mi41LDc3LjVDIDEzMi43MzksODIuODg1MSAxMjMuMDcyLDg4LjU1MTcgMTEzLjUsOTQuNUMgMTIzLjAwNCwxMDAuOTk2IDEzMy4wMDQsMTA2LjY2MyAxNDMuNSwxMTEuNUMgMTQ5LjM2NywxMDcuODA2IDE1NS4zNjcsMTA0LjMwNiAxNjEuNSwxMDFDIDE3Mi41OTksOTYuNDU0MSAxNzYuNzY2LDk5Ljk1NDEgMTc0LDExMS41QyAxNjkuNDM3LDExNS4wNiAxNjQuNjA0LDExOC4yMjcgMTU5LjUsMTIxQyAxNjYuMjA0LDEyNC42OCAxNzIuNTM4LDEyOC44NDcgMTc4LjUsMTMzLjVDIDE3OC41LDEzNS44MzMgMTc4LjUsMTM4LjE2NyAxNzguNSwxNDAuNUMgMTc1Ljg5MywxNDQuMzE1IDE3Mi4yMjYsMTQ1LjQ4MiAxNjcuNSwxNDRDIDE2MS45MTgsMTQwLjk2IDE1Ni40MTgsMTM3Ljc5MyAxNTEsMTM0LjVDIDE1MC42NjcsMTQwLjUgMTUwLjMzMywxNDYuNSAxNTAsMTUyLjVDIDE0Ni4zMDgsMTU5LjYzNyAxNDEuNjQxLDE2MC4zMDQgMTM2LDE1NC41QyAxMzUuNjY3LDE0Ni4xNjcgMTM1LjMzMywxMzcuODMzIDEzNSwxMjkuNUMgMTM0Ljc5OCwxMjcuNzQ0IDEzNC4yOTgsMTI2LjA3OCAxMzMuNSwxMjQuNUMgMTI0LjE5OSwxMTkuMTgxIDExNC44NjUsMTEzLjg0NyAxMDUuNSwxMDguNUMgMTA0LjE2NywxMjAuMTY3IDEwNC4xNjcsMTMxLjgzMyAxMDUuNSwxNDMuNUMgMTExLjk0MSwxNDYuNzY2IDExOC4yNzQsMTUwLjI2NiAxMjQuNSwxNTRDIDEzMi42OTIsMTYwLjMzNCAxMzIuMTkyLDE2NS41MDEgMTIzLDE2OS41QyAxMTYuODY1LDE2Ny45MzQgMTExLjE5OSwxNjUuMjY3IDEwNiwxNjEuNUMgMTA0Ljg3OCwxNjguNDQ5IDEwNC4yMTEsMTc1LjQ0OSAxMDQsMTgyLjVDIDEwMC42OTYsMTg4LjQ0NCA5OC4zNjIyLDE4OC40NDQgOTcsMTgyLjVDIDk2LjE3ODEsMTIyLjEzOCA5Ni4zNDQ4LDYxLjgwNDkgOTcuNSwxLjVDIDEwMC4yMzgsMC45NjQ3ODIgMTAyLjA3MiwxLjk2NDc4IDEwMyw0LjVDIDEwNC4xMDgsMTEuMTE1MyAxMDQuNzc1LDE3Ljc4MiAxMDUsMjQuNUMgMTA1LjMwOCwyNS4zMDgxIDEwNS44MDgsMjUuOTc0NyAxMDYuNSwyNi41QyAxMTEuNSwyMy4yNzA5IDExNi44MzMsMjAuNjA0MiAxMjIuNSwxOC41QyAxMjkuMjU0LDIwLjY3OTkgMTMxLjA4NywyNS4wMTMzIDEyOCwzMS41QyAxMjcuMTY3LDMyLjMzMzMgMTI2LjMzMywzMy4xNjY3IDEyNS41LDM0QyAxMTguOTk3LDM4LjA4NjEgMTEyLjMzLDQxLjkxOTQgMTA1LjUsNDUuNUMgMTA0LjMzNCw1Ny4xNTI0IDEwNC4xNjcsNjguODE5MSAxMDUsODAuNUMgMTE0Ljg1LDc0Ljk5NTEgMTI0LjY4NCw2OS42NjE3IDEzNC41LDY0LjVDIDEzNS4xOTksNTQuNTIwMiAxMzUuNjk5LDQ0LjUyMDIgMTM2LDM0LjVDIDE0MC4zMzMsMjkuMTY2NyAxNDQuNjY3LDI5LjE2NjcgMTQ5LDM0LjVDIDE1MC4yMTIsNDEuMDg3IDE1MC44NzksNDcuNzUzNiAxNTEsNTQuNUMgMTU3LjUzNiw0OS42NDg0IDE2NC43MDMsNDUuOTgxNyAxNzIuNSw0My41QyAxNzUuMTU1LDQ0LjQ5NyAxNzcuMTU1LDQ2LjE2MzcgMTc4LjUsNDguNSBaIi8+IDwvZz4gPC9zdmc+IA=="
+                                         width="20" height="20"
+                                         src="/assets/img/empty.png"
+                                         class="lazy"
+                                         alt="Всесезонная"
+                                    >
+
+								</span>
+                            </label>
+                        </div>
+                        <div class="radio-buttons__item">
+                            <label for="ship">
+                                <input class="form-check-input visually-hidden" type="checkbox" name="selection-radio"
+                                       id="ship"
+                                       aria-label="Шипы"
+                                >
+                                <span class="icon icon-sm rounded-3">
+									{# <img data-src="/img/ship.png" src="/assets/img/empty.png" class="lazy" alt="..." > #}
+
+									<img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4NTAgODUwIiA+IDxnPiA8cG9seWdvbiBmaWxsPSIjRkZGRkZGIiBwb2ludHM9IjQxNi44LDIxMS44IDYzNS43LDU5OC41IDE3OC4yLDYwOS42IDM3OC41LDIzMy45ICIvPiA8cGF0aCBkPSJNNDAzLDU2Ny44YzI5LjcsMCw1OS4zLDAsODksMC4xYzMuMSwwLDQuNi0wLjIsNC42LTQuMWMtMC4yLTQ1LjMtMC4yLTkwLjYsMC0xMzUuOWMwLTMuNy0xLjQtNC00LjMtMy45IGMtOS41LDAuMS0xOSwwLjItMjguNS0wLjFjLTMuOC0wLjEtNC42LDEtNC42LDQuN2MwLjIsMzQuMSwwLDY4LjMsMC4yLDEwMi40YzAsMy43LTAuOSw0LjgtNC43LDQuN2MtOS4yLTAuMy0xOC4zLTAuMy0yNy41LDAgYy00LjQsMC4yLTUuNS0wLjktNS41LTUuNGMwLjItMzQsMC4xLTY4LDAuMi0xMDEuOWMwLTMuNS0wLjgtNC41LTQuMy00LjRjLTkuMywwLjMtMTguNywwLjMtMjgsMGMtMy45LTAuMS00LjksMC45LTQuOSw0LjkgYzAuMiwzNC4xLDAuMSw2OC4zLDAuMiwxMDIuNGMwLDMuNS0wLjksNC42LTQuNCw0LjVjLTkuMi0wLjMtMTguMy0wLjMtMjcuNSwwYy00LjQsMC4yLTUuOC0wLjgtNS44LTUuNmMwLjItMzMuOCwwLTY3LjYsMC4yLTEwMS40IGMwLTQuMi0xLjMtNC45LTUtNC44Yy05LjMsMC4yLTE4LjcsMC4yLTI4LDBjLTMuNC0wLjEtNC40LDAuOC00LjQsNC40YzAuMSw0NSwwLjIsOTAsMCwxMzQuOWMwLDQuMiwxLjQsNC43LDUsNC43IEMzNDQuNCw1NjcuNywzNzMuNyw1NjcuOCw0MDMsNTY3Ljh6Ii8+IDxwYXRoIGZpbGw9IiNFNzBFMzgiIGQ9Ik02NTIuOCw1NzYuMUM1OTQuMiw0NzUuNSw1MzYuMSwzNzQuNyw0NzcuNywyNzRjLTEzLjktMjQtMjcuNy00OC4xLTQxLjctNzJjLTcuMy0xMi4zLTE4LTE5LjMtMzIuNy0xOC45IGMwLDAuNSwwLDEsMCwxLjVjMC0wLjUsMC0xLDAtMS41Yy0xNC44LTAuNC0yNS41LDYuNi0zMi43LDE4LjljLTE0LjEsMjMuOS0yNy44LDQ4LTQxLjcsNzJjLTU4LjMsMTAwLjctMTE2LjUsMjAxLjUtMTc1LjEsMzAyLjEgYy0xMi4xLDIwLjgtNS4xLDQyLjcsMTAuMyw1Mi45YzYuOSw0LjYsMTQuNSw2LjIsMjIuNyw2LjNjNTkuMywwLjIsMTE4LjYsMC41LDE3Ny44LDAuOGMxMiwwLjEsMjQsMC4zLDM2LDAuNGMwLjksMCw0LjgsMCw1LjcsMCBjMTItMC4xLDI0LTAuNCwzNi0wLjRjNTkuMy0wLjMsMTE4LjYtMC41LDE3Ny44LTAuOGM4LjEsMCwxNS44LTEuNywyMi43LTYuM0M2NTcuOSw2MTguOCw2NjQuOSw1OTYuOCw2NTIuOCw1NzYuMXogTTYwNC4xLDU4NS43IGMtNjMuOSwwLjMtMTQ0LjksMC42LTIxMC4yLDAuOWMtNjMuOC0wLjMtMTI3LjctMC43LTE5MS41LTAuOWMtMy41LDAtNS0wLjItMi43LTQuMWMyNi41LTQ1LjcsNTMtOTEuNCw3OS40LTEzNy4xIEMzMTguOCwzNzYsMzU4LjUsMzA3LjQsMzk4LDIzOC44YzIuMi0zLjksOC4yLTMuOSwxMC40LDBDNDQ4LDMwNy40LDQ4Ny43LDM3Niw1MjcuNCw0NDQuNWMyNi40LDQ1LjcsNTIuOSw5MS40LDc5LjQsMTM3LjEgQzYwOS4xLDU4NS42LDYwNy42LDU4NS43LDYwNC4xLDU4NS43eiIvPiA8L2c+IDwvc3ZnPiA="
+                                         width="35" height="35"
+                                         src="/assets/img/empty.png"
+                                         class="lazy"
+                                         alt="Шипы"
+                                    >
+
+								</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

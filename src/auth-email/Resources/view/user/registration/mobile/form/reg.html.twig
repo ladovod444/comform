@@ -1,0 +1,108 @@
+{{ form_start(form) }}
+
+<div class="modal-body">
+
+    {# E-mail #}
+    <div class="mb-2">
+        {{ form_label(form.email, 'E-mail*',
+            {'label_attr': {
+                'class': 'form-label fw-medium fs-11 mb-1'}
+            }) }}
+
+        {{ form_widget(form.email, {
+            attr: {
+                class: 'form-control rounded-5 border-0 bg-body-tertiary py-1',
+                style: 'box-shadow: 0px 3px 3px rgba(0,0,0,0.08) inset;',
+            } }) }}
+    </div>
+
+    {# Password #}
+    <div class="mb-3">
+        {{ form_label(form.passwordPlain, 'Пароль*',
+            {'label_attr': {
+                'class': 'form-label fw-medium fs-11 mb-1'}
+            }) }}
+
+        {{ form_widget(form.passwordPlain, {
+            attr: {
+                class: 'form-control rounded-5 border-0 bg-body-tertiary py-1',
+                style: 'box-shadow: 0px 3px 3px rgba(0,0,0,0.08) inset;',
+            } }) }}
+    </div>
+
+</div>
+
+{# Пользовательское соглашение #}
+<div class="d-flex justify-content-start align-items-center gap-3 mb-2 px-4">
+
+    <div class="form-check form-switch">
+        {{ form_widget(form.agreeTerms, {
+            label: false,
+            attr: {
+                class: 'form-check-input',
+                style: 'width: 50px; height: 30px;',
+                role: 'switch',
+            }}) }}
+    </div>
+
+    <div class="form-check-label text-secondary fs-11" for="{{ form.agreeTerms.vars.id }}">
+
+        Согласен с&nbsp;
+        <a href="{{ path('auth-email:user.agree.terms') }}"
+           class="text-primary"
+           aria-label="Пользовательское соглашение"
+           title="Пользовательское соглашение">
+            пользовательским соглашением
+        </a>
+
+    </div>
+</div>
+
+{# Капча #}
+<div class="d-flex justify-content-start align-items-center gap-3 mb-2 px-4">
+
+    <div class="rounded-4 bg-cover lazy"
+         style="
+                 height: 75px; width: 180px;
+                 background-image: url({{ path('captcha:captcha.image', { date: "now"|date("U")} ) }});">
+    </div>
+
+    {#    <img src="{{ path('captcha:captcha.image', { #}
+    {#        date: "now"|date("U") #}
+    {#    }) }}" class="rounded-4 bg-cover" alt=""> #}
+
+    <div class="w-50">
+        {{ form_widget(form.code,
+            { label: false,
+                attr: {
+                autocomplete : 'off',
+                placeholder: 'Проверочный код',
+                style: 'font-size: 11px !important;'
+            }
+            }) }}
+    </div>
+</div>
+
+{# Кнопки регистрация / авторизация #}
+<div class="modal-footer justify-content-between border-0 flex-nowrap gap-4">
+
+    {% if modal is defined %}
+        <a class="btn shadow m-0 rounded-5 w-100 fw-medium fs-12"
+
+           data-href="{{ path('auth-email:user.login') }}"
+           data-bs-target="#modal">
+            Авторизоваться
+        </a>
+    {% endif %}
+
+    {{ form_widget(form.registration,
+        {
+            label: '
+                    <span>'~ 'Регистрация'|trans({}, 'core.btn') ~'</span>
+                    <span class="ms-1 spinner-border spinner-border-sm vertical-middle d-none"></span>',
+            attr: { class: 'btn btn-primary m-0 rounded-5 w-100 fw-medium fs-12'}}
+    ) }}
+
+</div>
+
+{{ form_end(form) }}

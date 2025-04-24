@@ -1,0 +1,26 @@
+<main>
+    {{ include(_self|replace({ "content.html.twig" : "includes/breadcrumb.html.twig" })) }}
+
+    <section class="container">
+
+        <div class="d-flex justify-content-center gap-6 bg-pic-reg py-6">
+
+            <div class="pt-5 pb-5">
+                <div class="border rounded-4 px-4 py-4 bg-white bg-opacity-75 bg-icon-reg position-relative"
+                     style="width: 500px;">
+
+                    <div class="d-flex align-items-center justify-content-between  mb-4">
+                        <h2 class="fs-5 mb-0 text-uppercase fw-bold">
+                            Регистрация
+                        </h2>
+                    </div>
+
+                    {{ include(_self|replace({ "content.html.twig" : "form/reg.html.twig" }), {form}, with_context = false) }}
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+

@@ -1,0 +1,584 @@
+<div class="accordion accordion-flush mt-3" id="catalogFilter">
+    <div class="accordion-item rounded-4 shadow">
+
+        <h2 id="headingOne">
+            <button class="accordion-button rounded-4 ps-4 pe-2 py-2 border-0 bg-primary shadow-none collapsed"
+                    type="button"
+                    aria-label="Подбор шин"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne">
+
+				<span class=" text-uppercase fw-bold text-white mb-0">
+					Фильтр по параметрам
+				</span>
+            </button>
+        </h2>
+
+        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#catalogFilter">
+
+            <div class="accordion-body">
+
+                {{ form_start(filter) }}
+
+
+                {% for field in filter %}
+
+                    {% if field.vars.name == 'filter' %}
+
+
+
+                        <div class="d-flex gap-3">
+
+                            {{ form_widget(field, { label: 'Подобрать '~((products.data|first).category_name is defined ? (products.data|first).category_name) , attr: { class : 'btn-danger w-100 rounded-4 text-uppercase fw-bolder shadow' } }) }}
+
+                            {# <button type="reset" class="btn btn-light rounded-4" aria-label="Сбросить">
+						<span class="small text-uppercase fw-bolder">
+							<svg xmlns="http://www.w3.org/2000/svg"
+									width="16"
+									height="16"
+									fill="currentColor"
+									class="bi bi-arrow-clockwise"
+									viewBox="0 0 16 16">
+								<path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+								<path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+							</svg>
+						</span>
+					</button> #}
+                        </div>
+
+
+
+                    {% else %}
+                        {{ form_row(field, {attr: { 'data-select' : 'false' }}) }}
+                    {% endif %}
+
+                {% endfor %}
+
+
+
+                {{ form_end(filter) }}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{#
+<div class="form-group">
+	<label for="width" class="small">Ширина</label>
+	<select id="width" name="width"
+			class="form-select rounded-4 nice-select">
+
+		<option value="">Неважно</option>
+		<option value="2">2 дм</option>
+		<option value="2,5">2,5 дм</option>
+		<option value="2,75">2,75 дм</option>
+		<option value="2,25">2,25 дм</option>
+		<option value="3">3 дм</option>
+		<option value="3,25">3,25 дм</option>
+		<option value="3,5">3,5 дм</option>
+		<option value="4,6">4,6 дм</option>
+		<option value="4">4 дм</option>
+		<option value="4,1">4,1 дм</option>
+		<option value="5,5">5,5 дм</option>
+		<option value="5">5 дм</option>
+		<option value="6,5">6,5 дм</option>
+		<option value="6">6 дм</option>
+		<option value="7">7 дм</option>
+		<option value="7,5">7,5 дм</option>
+		<option value="8,25">8,25 дм</option>
+		<option value="8,15">8,15 дм</option>
+		<option value="9,5">9,5 дм</option>
+		<option value="9">9 дм</option>
+		<option value="10">10 дм</option>
+		<option value="10,5">10,5 дм</option>
+		<option value="11,2">11,2 дм</option>
+		<option value="11,5">11,5 дм</option>
+		<option value="11">11 дм</option>
+		<option value="12,5">12,5 дм</option>
+		<option value="12">12 дм</option>
+		<option value="13">13 дм</option>
+		<option value="13,6">13,6 дм</option>
+		<option value="14">14 дм</option>
+		<option value="14,9">14,9 дм</option>
+		<option value="15">15 дм</option>
+		<option value="15,5">15,5 дм</option>
+		<option value="16,5">16,5 дм</option>
+		<option value="16,9">16,9 дм</option>
+		<option value="16">16 дм</option>
+		<option value="17,5">17,5 дм</option>
+		<option value="18">18 дм</option>
+		<option value="18,4">18,4 дм</option>
+		<option value="19">19 дм</option>
+		<option value="20">20 дм</option>
+		<option value="20,5">20,5 дм</option>
+		<option value="21">21 дм</option>
+		<option value="21,3">21,3 дм</option>
+		<option value="22">22 дм</option>
+		<option value="23,5">23,5 дм</option>
+		<option value="23">23 дм</option>
+		<option value="24">24 дм</option>
+		<option value="25">25 дм</option>
+		<option value="26,5">26,5 дм</option>
+		<option value="26">26 дм</option>
+		<option value="27">27 дм</option>
+		<option value="28">28 дм</option>
+		<option value="28,1">28,1 дм</option>
+		<option value="29,5">29,5 дм</option>
+		<option value="29">29 дм</option>
+		<option value="30">30 дм</option>
+		<option value="30,5">30,5 дм</option>
+		<option value="31">31 дм</option>
+		<option value="32">32 дм</option>
+		<option value="33">33 дм</option>
+		<option value="34">34 дм</option>
+		<option value="35">35 дм</option>
+		<option value="36">36 дм</option>
+		<option value="37">37 дм</option>
+		<option value="38">38 дм</option>
+		<option value="38,5">38,5 дм</option>
+		<option value="39">39 дм</option>
+		<option value="39,5">39,5 дм</option>
+		<option value="40">40 дм</option>
+		<option value="42">42 дм</option>
+		<option value="45">45 дм</option>
+		<option value="60">60 дм</option>
+		<option value="70">70 мм</option>
+		<option value="75">75 мм</option>
+		<option value="80">80 мм</option>
+		<option value="85">85 мм</option>
+		<option value="90">90 мм</option>
+		<option value="100">100 мм</option>
+		<option value="102">102 мм</option>
+		<option value="104">104 мм</option>
+		<option value="107">107 мм</option>
+		<option value="109">109 мм</option>
+		<option value="110">110 мм</option>
+		<option value="112">112 мм</option>
+		<option value="113">113 мм</option>
+		<option value="115">115 мм</option>
+		<option value="120">120 мм</option>
+		<option value="125">125 мм</option>
+		<option value="130">130 мм</option>
+		<option value="135">135 мм</option>
+		<option value="140">140 мм</option>
+		<option value="145">145 мм</option>
+		<option value="150">150 мм</option>
+		<option value="155">155 мм</option>
+		<option value="160">160 мм</option>
+		<option value="165">165 мм</option>
+		<option value="170">170 мм</option>
+		<option value="175">175 мм</option>
+		<option value="180">180 мм</option>
+		<option value="185">185 мм</option>
+		<option value="190">190 мм</option>
+		<option value="195">195 мм</option>
+		<option value="200">200 мм</option>
+		<option value="205">205 мм</option>
+		<option value="210">210 мм</option>
+		<option value="215">215 мм</option>
+		<option value="225">225 мм</option>
+		<option value="235">235 мм</option>
+		<option value="240">240 мм</option>
+		<option value="245">245 мм</option>
+		<option value="250">250 мм</option>
+		<option value="255">255 мм</option>
+		<option value="260">260 мм</option>
+		<option value="265">265 мм</option>
+		<option value="275">275 мм</option>
+		<option value="280">280 мм</option>
+		<option value="285">285 мм</option>
+		<option value="295">295 мм</option>
+		<option value="300">300 мм</option>
+		<option value="305">305 мм</option>
+		<option value="315">315 мм</option>
+		<option value="325">325 мм</option>
+		<option value="335">335 мм</option>
+		<option value="345">345 мм</option>
+		<option value="355">355 мм</option>
+		<option value="360">360 мм</option>
+		<option value="365">365 мм</option>
+		<option value="375">375 мм</option>
+		<option value="385">385 мм</option>
+		<option value="395">395 мм</option>
+		<option value="400">400 мм</option>
+		<option value="405">405 мм</option>
+		<option value="420">420 мм</option>
+		<option value="425">425 мм</option>
+		<option value="435">435 мм</option>
+		<option value="445">445 мм</option>
+		<option value="500">500 мм</option>
+		<option value="600">600 мм</option>
+		<option value="710">710 мм</option>
+		<option value="800">800 мм</option>
+		<option value="1220">1220 мм</option>
+	</select>
+</div>
+
+<div class="form-group">
+	<label for="profile" class="small">Профиль</label>
+
+	<select id="profile" name="profile"
+			class="form-select rounded-4">
+
+		<option value="">Неважно</option>
+		<option value="3,5">3,5 дм</option>
+		<option value="4,5">4,5 дм</option>
+		<option value="7">7 дм</option>
+		<option value="7,5">7,5 дм</option>
+		<option value="8,5">8,5 дм</option>
+		<option value="8">8 дм</option>
+		<option value="9,5">9,5 дм</option>
+		<option value="9">9 дм</option>
+		<option value="10">10 дм</option>
+		<option value="10,5">10,5 дм</option>
+		<option value="11,5">11,5 дм</option>
+		<option value="11">11 дм</option>
+		<option value="12">12 дм</option>
+		<option value="12,5">12,5 дм</option>
+		<option value="13">13 дм</option>
+		<option value="13,5">13,5 дм</option>
+		<option value="14,5">14,5 дм</option>
+		<option value="14">14 дм</option>
+		<option value="15">15 дм</option>
+		<option value="15,5">15,5 дм</option>
+		<option value="16">16 дм</option>
+		<option value="25">25 %</option>
+		<option value="30">30 %</option>
+		<option value="35">35 %</option>
+		<option value="40">40 %</option>
+		<option value="45">45 %</option>
+		<option value="50">50 %</option>
+		<option value="55">55 %</option>
+		<option value="60">60 %</option>
+		<option value="65">65 %</option>
+		<option value="70">70 %</option>
+		<option value="75">75 %</option>
+		<option value="80">80 %</option>
+		<option value="82">82 %</option>
+		<option value="85">85 %</option>
+		<option value="90">90 %</option>
+		<option value="95">95 %</option>
+		<option value="100">100 %</option>
+		<option value="400">400 %</option>
+	</select></div>
+
+<div class="form-group">
+	<label for="diameter" class="small">Диаметр</label>
+
+	<select id="diameter" name="diameter"
+			class="form-select rounded-4">
+
+		<option value="">Неважно</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15,3">15,3</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="16,5">16,5</option>
+		<option value="17">17</option>
+		<option value="17,5">17,5</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="19,5">19,5</option>
+		<option value="20">20</option>
+		<option value="21">21</option>
+		<option value="22,5">22,5</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+		<option value="24">24</option>
+		<option value="25">25</option>
+		<option value="26,5">26,5</option>
+		<option value="26">26</option>
+		<option value="28">28</option>
+		<option value="30">30</option>
+		<option value="32">32</option>
+		<option value="34">34</option>
+		<option value="38">38</option>
+		<option value="42">42</option>
+		<option value="533">533</option>
+	</select>
+</div>
+
+<div class="form-group">
+	<label for="brand" class="small">Бренд</label>
+
+	<select id="brand" name="brand"
+			class="form-select rounded-4">
+
+		<option value="">Неважно</option>
+		<option value="373">Altenzo</option>
+		<option value="270">Amtel</option>
+		<option value="526">Aosen</option>
+		<option value="630">Aplus</option>
+		<option value="736">Arivo</option>
+		<option value="569">Auplus</option>
+		<option value="388">Austone</option>
+		<option value="771">Bars</option>
+		<option value="272">Barum</option>
+		<option value="271">BFGoodrich</option>
+		<option value="617">Blacklion</option>
+		<option value="445">Boto</option>
+		<option value="273">Bridgestone</option>
+		<option value="699">Cachland</option>
+		<option value="743">Centara</option>
+		<option value="763">Charmhoo</option>
+		<option value="600">Compasal</option>
+		<option value="274">Continental</option>
+		<option value="360">Contyre</option>
+		<option value="276">Cordiant</option>
+		<option value="725">CrossLeader</option>
+		<option value="597">CST</option>
+		<option value="731">Davanti</option>
+		<option value="544">Delinte</option>
+		<option value="726">Delmax</option>
+		<option value="531">Dmack</option>
+		<option value="524">Doublecoin</option>
+		<option value="420">Doublestar</option>
+		<option value="277">Dunlop</option>
+		<option value="693">Duraturn</option>
+		<option value="414">Durun</option>
+		<option value="748">Dynamo</option>
+		<option value="534">Evergreen</option>
+		<option value="375">Falken</option>
+		<option value="696">Farroad</option>
+		<option value="682">Firemax</option>
+		<option value="300">Firestone</option>
+		<option value="782">Foman</option>
+		<option value="497">Formula</option>
+		<option value="437">Fortuna</option>
+		<option value="712">Fortune</option>
+		<option value="347">General Tire</option>
+		<option value="279">Gislaved</option>
+		<option value="574">GoForm</option>
+		<option value="834">Goldstone</option>
+		<option value="348">Goodride</option>
+		<option value="280">Goodyear</option>
+		<option value="747">Greentrac</option>
+		<option value="737">Grenlander</option>
+		<option value="576">Gripmax</option>
+		<option value="319">GT Radial</option>
+		<option value="675">Habilead</option>
+		<option value="577">Haida</option>
+		<option value="320">Hankook</option>
+		<option value="501">Headway</option>
+		<option value="680">Hemisphere</option>
+		<option value="724">Herovic</option>
+		<option value="455">Hifly</option>
+		<option value="578">Horizon</option>
+		<option value="715">iLINK</option>
+		<option value="535">Imperial</option>
+		<option value="464">Jinyu</option>
+		<option value="605">Joyroad</option>
+		<option value="552">Kapsen</option>
+		<option value="401">Kenda</option>
+		<option value="321">Kinforest</option>
+		<option value="341">Kingstar</option>
+		<option value="281">Kleber</option>
+		<option value="350">Kormoran</option>
+		<option value="282">Kumho</option>
+		<option value="463">Landsail</option>
+		<option value="631">Lanvigator</option>
+		<option value="415">Lassa</option>
+		<option value="638">Laufenn</option>
+		<option value="427">Leao</option>
+		<option value="402">LingLong</option>
+		<option value="302">Marshal</option>
+		<option value="296">Matador</option>
+		<option value="339">Maxxis</option>
+		<option value="700">Mazzini</option>
+		<option value="283">Michelin</option>
+		<option value="351">Mickey Thompson</option>
+		<option value="832">Mileking</option>
+		<option value="430">Minerva</option>
+		<option value="551">Mirage</option>
+		<option value="303">Nankang</option>
+		<option value="362">Nexen</option>
+		<option value="409">Nitto</option>
+		<option value="284">Nokian</option>
+		<option value="285">Nordman</option>
+		<option value="556">Nortec</option>
+		<option value="761">Onyx</option>
+		<option value="681">Orium</option>
+		<option value="459">Ovation</option>
+		<option value="581">Pace</option>
+		<option value="582">Petlas</option>
+		<option value="286">Pirelli</option>
+		<option value="632">Powertrac</option>
+		<option value="436">Premiorri</option>
+		<option value="583">Presa</option>
+		<option value="509">Rapid</option>
+		<option value="833">Razi</option>
+		<option value="685">Roadcruza</option>
+		<option value="760">RoadMarch</option>
+		<option value="287">Roadstone</option>
+		<option value="756">RoadX</option>
+		<option value="499">Rotalla</option>
+		<option value="658">Royal Black</option>
+		<option value="764">Saferich</option>
+		<option value="469">Sailun</option>
+		<option value="522">Satoya</option>
+		<option value="324">Sava</option>
+		<option value="619">Solideal</option>
+		<option value="587">Starmaxx</option>
+		<option value="494">Sunfull</option>
+		<option value="379">Sunny</option>
+		<option value="708">Sunwide</option>
+		<option value="633">Taurus</option>
+		<option value="288">Tigar</option>
+		<option value="717">Toledo</option>
+		<option value="523">Torque</option>
+		<option value="735">Tourador</option>
+		<option value="304">Toyo</option>
+		<option value="503">Tracmax</option>
+		<option value="418">Tri-Ace</option>
+		<option value="377">Triangle</option>
+		<option value="407">Tunga</option>
+		<option value="305">Uniroyal</option>
+		<option value="405">Viatti</option>
+		<option value="772">Vittos</option>
+		<option value="325">Vredestein</option>
+		<option value="830">Waterfall</option>
+		<option value="367">WestLake</option>
+		<option value="641">Windforce</option>
+		<option value="593">Winrun</option>
+		<option value="289">Yokohama</option>
+		<option value="363">Zeetex</option>
+		<option value="561">Zeta</option>
+		<option value="291">Барнаул</option>
+		<option value="292">Белшина</option>
+		<option value="293">Волтаир</option>
+		<option value="294">Кама</option>
+		<option value="295">Киров</option>
+		<option value="297">Росава</option>
+	</select></div>
+
+<div class="form-group">
+	<label for="season" class="small">Сезон</label>
+	<select id="season" name="season"
+			class="form-select rounded-4">
+
+		<option value="">Неважно</option>
+		<option value="1">Летние</option>
+		<option value="2">Зимние</option>
+		<option value="3">Всесезонные</option>
+	</select>
+</div>
+
+<div class="form-group">
+	<label for="spikes" class="small">Шипы</label>
+	<select id="spikes" name="spikes"
+			class="form-select rounded-4"
+	>
+		<option value="">Неважно</option>
+		<option value="1">Есть</option>
+		<option value="2">Нет</option>
+	</select>
+</div>
+
+<div class="form-check form-check-inline">
+	<label for="rf" class="form-check-label">
+		<input type="checkbox" class="form-check-input mt-2 rounded-4" name="rf" id="rf">
+		<span class="custom-control-description me-3">C/LT, Runflat, Seal, Silent</span>
+
+		<div class="btn-group dropend ">
+			<button type="button"
+					class="btn btn-link text-primary mb-2 p-0" data-bs-toggle="dropdown"
+					aria-expanded="false"
+					aria-label="C/LT, Runflat, Seal, Silent"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+					 class="bi bi-question-circle-fill " viewBox="0 0 16 16">
+					<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
+				</svg>
+			</button>
+
+			<ul class="dropdown-menu p-3 shadow rounded-4 alert alert-warning lh-normal"
+				style="--bs-dropdown-min-width: 35rem;">
+				Безопасная шина — технология, применяемая при производстве
+				автомобильных шин, которая позволяет продолжать движение после прокола шины. Такие шины
+				обладают усиленными боковинами или дополнительным внутренним опорным кольцом. Наличие
+				специального поддерживающего компонента позволяет им выдерживать вес автомобиля, не оседая,
+				даже будучи спущенными.
+			</ul>
+		</div>
+	</label>
+#}
+{# <div class="btn-group" role="group" aria-label="printer">
+		<div class="btn btn-sm btn-link"
+			 data-bs-toggle="tooltip"
+              role="tooltip"
+			 data-bs-placement="right"
+			 data-bs-original-title="
+						Безопасная шина — технология, применяемая при производстве
+						автомобильных шин, которая позволяет продолжать движение после прокола шины. Такие шины
+						обладают усиленными боковинами или дополнительным внутренним опорным кольцом. Наличие
+						специального поддерживающего компонента позволяет им выдерживать вес автомобиля, не оседая,
+						даже будучи спущенными."
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+				 class="bi bi-question-circle-fill" viewBox="0 0 16 16">
+				<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
+			</svg>
+		</div>
+	</div> #}{#
+#}
+{# <div class="question tooltip tooltipstered"
+					 data-tooltipster="{&quot;delay&quot;: 100, &quot;trigger&quot;: &quot;click&quot;, &quot;interactive&quot;: true, &quot;side&quot;: &quot;right&quot;, &quot;maxWidth&quot;: 400, &quot;contentAsHTML&quot;: true}"
+					 data-tooltip-content="#tooltipRunflat">
+					<svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+						<path d="M256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28zm7.67-24h-16c-6.627 0-12-5.373-12-12v-.381c0-70.343 77.44-63.619 77.44-107.408 0-20.016-17.761-40.211-57.44-40.211-29.144 0-44.265 9.649-59.211 28.692-3.908 4.98-11.054 5.995-16.248 2.376l-13.134-9.15c-5.625-3.919-6.86-11.771-2.645-17.177C185.658 133.514 210.842 116 255.67 116c52.32 0 97.44 29.751 97.44 80.211 0 67.414-77.44 63.849-77.44 107.408V304c0 6.627-5.373 12-12 12zM256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8z"></path>
+					</svg>
+				</div>
+
+				<div class="hidden">
+					<div id="tooltipRunflat">Безопасная шина — технология, применяемая при производстве
+						автомобильных шин, которая позволяет продолжать движение после прокола шины. Такие шины
+						обладают усиленными боковинами или дополнительным внутренним опорным кольцом. Наличие
+						специального поддерживающего компонента позволяет им выдерживать вес автомобиля, не оседая,
+						даже будучи спущенными.
+					</div>
+				</div> #}{#
+</div>
+
+<div class="form-check form-check-inline">
+	<label for="kit" class="form-check-label">
+		<input type="checkbox" class="form-check-input rounded-3" name="kit" id="kit">
+		<span class="custom-control-description">От комплекта (4 шт.)</span>
+	</label>
+</div>
+
+<div class="form-check form-check-inline">
+	<label for="sale" class="form-check-label">
+		<input type="checkbox" class="form-check-input rounded-3" name="sale" id="sale">
+		<span class="custom-control-description">Спецпредложение</span>
+	</label>
+</div>
+
+<div class="form-check form-check-inline">
+	<label for="now" class="form-check-label">
+		<input type="checkbox" class="form-check-input rounded-3" name="now" id="now">
+		<span class="custom-control-description">Забрать сейчас</span>
+	</label>
+</div>
+
+<div class="form-submit">
+	<button type="button" class="btn btn-danger w-100 rounded-4" aria-label="Подобрать шины"
+	><span class="small text-uppercase fw-bolder">Подобрать шины</span></button>
+</div>
+#}
+
+

@@ -1,0 +1,32 @@
+<section class="container mb-5">
+          <div class="d-flex align-items-center gap-5 mb-3">
+            <h2 class="fs-4">Рекомендуем</h2>
+            <button class="btn bg-transparent p-0">
+              <u>Скидки</u>
+            </button>
+            <button class="btn bg-transparent p-0">
+              <u>Новинки</u>
+            </button>
+            <button class="btn bg-transparent p-0">
+              <u>Коллекции</u>
+            </button>
+          </div>
+          <div class="row">
+            <div class="col-4 pt-3" style="height: 400px;">
+              <img class="rounded-3 h-auto w-100" src="assets/comfort/img/kitchenRecomendet.jpg" alt="Изображение рекомендации">
+            </div>
+            <div class="col-8">
+              <div class="row row-cols-4">
+              {% set total_items = 4 %}
+              {% set section_number = 1000 %}
+                {% for i in 1..total_items %}
+                <div class="col p-1 pt-0">
+                  {% include Template('@homepage:index/'~baks_settings.device~'/includes/card.html.twig') %}
+                </div>
+              {% endfor %}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="mb-5">

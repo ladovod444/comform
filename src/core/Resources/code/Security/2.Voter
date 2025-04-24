@@ -1,0 +1,31 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+#set( $VOTER = $NAME.replace("Voter", "").toUpperCase() )
+
+use BaksDev\Users\Profile\Group\Security\RoleInterface;
+use BaksDev\Users\Profile\Group\Security\VoterInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+
+#[AutoconfigureTag('baks.security.voter')]
+final class ${NAME} implements VoterInterface
+{
+    public const VOTER = '${VOTER}';
+
+    /** Метод возвращает правило, конкатенируя ROLE + VOTER */
+    public static function getVoter(): string
+    {
+        return Role::ROLE.'_'.self::VOTER;
+    }
+
+    public function equals(RoleInterface ${DS}role): bool
+    {
+        return ${DS}role->getRole() === Role::ROLE;
+    }
+}

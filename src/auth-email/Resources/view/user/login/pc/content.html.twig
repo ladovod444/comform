@@ -1,0 +1,48 @@
+<main>
+    {{ include(_self|replace({ "content.html.twig" : "includes/breadcrumb.html.twig" })) }}
+
+    <section class="container">
+
+        <div class="d-flex justify-content-center gap-6 bg-pic">
+
+            <div class="pt-5 pb-5">
+                <div class="border rounded-4 px-4 py-4 bg-white bg-opacity-75 bg-arrow position-relative"
+                     style="width: 500px;">
+
+                    <div class="d-flex align-items-center justify-content-between  mb-4">
+                        <h2 class="fs-5 mb-0 text-uppercase fw-bold">
+                            Вход в личный кабинет
+                        </h2>
+
+                        <button class="btn btn shadow rounded-5 fs-12 text-decoration-underline">
+                            <a href="{{ path('auth-email:user.registration') }}"
+                               class="text-black">
+                                Регистрация
+                            </a>
+                        </button>
+
+                    </div>
+
+                    {{ include(_self|replace({ "content.html.twig" : "form/auth.html.twig" }), {form}, with_context = false) }}
+
+                    {% if constant('BaksDev\\Auth\\Telegram\\BaksDevAuthTelegramBundle::PATH') is defined %}
+                        <a class="btn shadow m-0 rounded-5 w-100 fw-medium"
+                           data-href="{{ path('auth-telegram:user.auth') }}"
+                           data-bs-target="#modal">
+                            <img src="/assets/white-sign/img/telegram.svg" alt="telegram">
+                        </a>
+                    {% endif %}
+
+                </div>
+            </div>
+
+            {#            <div> #}
+            {#                <img class="w-100" src="/assets/white-sign/img/logo.png" style="height: 135px;" #}
+            {#                     alt="Логотип компании"> #}
+            {#            </div> #}
+
+        </div>
+    </section>
+
+</main>
+

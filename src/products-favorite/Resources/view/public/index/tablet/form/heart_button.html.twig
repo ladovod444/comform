@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+{% set inv = field_value(form.invariable) %}
+
+{{ form_widget(form.invariable, { attr: { value: inv } }) }}
+
+{{ form_widget(form.products_favorite, {
+    class: 'btn btn-sm btn-link text-decoration-underline small text-muted delete-product',
+    label: '
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+     fill="currentColor"
+     alt="Добавить в избранное"
+     data-invariable="'~ inv ~'"
+     class="'~ color_tag ~'" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+</svg>
+			',
+    attr: { 'class': 'favorite border-0' }, type: 'button' }) }}
+
+{{ form_end(form) }}
+
+{#<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"#}
+{#     fill="currentColor"#}
+{#     alt="Добавить в избранное"#}
+{#     data-invariable="'~ inv ~'"#}
+{#     class="favorite '~ color_tag ~'" viewBox="0 0 16 16">#}
+{#    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>#}
+{#</svg>#}

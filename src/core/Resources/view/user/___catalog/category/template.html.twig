@@ -1,0 +1,31 @@
+{# ---- ШАБЛОН ------------------------------------------------------------ #}
+{% extends Template('/user/base.html.twig') %}
+
+{% block title %}
+    {% if category.parent_category_name %}
+        {{ category.parent_category_name }}
+    {% endif %}
+    {{ category.category_name }}
+
+{% endblock %}
+
+{# ---- CSS ------------------------------------------------------------ #}
+ {% block stylesheets %}
+     <link href="/assets/plugins/nice-select2/nice-select2.min.css" rel="stylesheet">
+ {% endblock %}
+
+{# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
+{% block content %}
+    {{ include(_self|replace({ "category/template.html.twig": '_catalog/'~baks_settings.device~"/content.html.twig" })) }}
+{% endblock %}
+
+
+ {% block javascript %}
+ <script nonce='{{ csp_nonce() }}' async data-src='/assets/plugins/nice-select2/nice-select2.min.js?v={{ version }}'
+             class='lazy'></script>
+     <script nonce='{{ csp_nonce() }}' async data-src='/assets/js/radio.input.min.js?v={{ version }}'
+             class='lazy'></script>
+     <script nonce='{{ csp_nonce() }}' async data-src='/assets/products_product/category.filter.min.js?v={{ version }}'
+             class='lazy'></script>
+ {% endblock %}
+

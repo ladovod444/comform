@@ -1,0 +1,145 @@
+{# {{ include(_self|replace({ "content.html.twig": "header.html.twig" })) }} #}
+
+
+<main class="main d-print-none">
+
+    <section id="product-filter" class="selection-box container my-4">
+        {{ include(_self|replace({ "content.html.twig": "filter.html.twig" })) }}
+    </section>
+
+    <section class="cards-box container">
+
+        <div class="d-flex gap-4 small align-items-end">
+            <h1 class="text-uppercase h4 fw-bolder mb-0 me-5">Каталог шин</h1>
+
+            <span class="text-muted">Сортировать по:</span>
+
+            <button type="button" class="btn btn-link btn-sm p-0 dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                <span class="small">Цене</span>
+            </button>
+
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Дешевые</a></li>
+                <li><a class="dropdown-item" href="#">Дорогие</a></li>
+            </ul>
+
+            <a href="#" class="btn btn-link btn-sm p-0"><span class="small">Скидке</span></a>
+            <a href="#" class="btn btn-link btn-sm p-0"><span class="small">Популярности</span></a>
+            <a href="#" class="btn btn-link btn-sm p-0"><span class="small">Обновлению</span></a>
+            <a href="#" class="btn btn-link btn-sm p-0"><span class="small">Отзывам</span></a>
+
+        </div>
+
+        <div class="d-flex flex-wrap mt-3">
+            {# {% for i in 0..7 %}
+				<div class="w-25">
+            #}{# {{ include(_self|replace({ "content.html.twig": "card.html.twig" })) }} #}{#
+            {% include('@Template/default/user/tablet/includes/card.html.twig') %}
+        </div>
+    {% endfor %} #}
+
+            <button class="btn btn-primary m-auto rounded-3 text-uppercase fw-bolder my-4"
+                    aria-label="Показать еще"
+            >
+                Показать еще
+            </button>
+
+        </div>
+
+    </section>
+
+    {# ПРОСМОТРЕННЫЕ #}
+    <section id="viewed" class="container">
+
+        <div class="row p-3 bg-light mb-3">
+
+            <div class="col-12 pb-2">
+                <h2 class="text-uppercase me-4 h5 fw-bolder">Просмотренные</h2>
+            </div>
+
+            <div class="d-flex flex-nowrap gap-2 overflow-auto w-100 p-3">
+                {# {% for i in 0..3 %}
+                #}{# {{ include(_self|replace({ "content.html.twig": "viewed.html.twig" })) }} #}{#
+                {% include('@Template/default/user/tablet/includes/viewed.html.twig') %}
+            {% endfor %} #}
+            </div>
+        </div>
+
+    </section>
+
+
+    <section id="leader" class="container">
+
+        <div class="block-heading my-4">
+            <h2 class="text-uppercase h5 fw-bolder">Лидеры продаж</h2>
+        </div>
+
+        <div class="d-flex justify-content-between gap-3 mt-3">
+            <div class="w-100">
+                {# ЛИДЕРЫ ПРОДАЖ #}
+                {# {{ include(_self|replace({ "content.html.twig": "leader.html.twig" })) }} #}
+                {# {% include('@Template/default/user/tablet/includes/leader.html.twig') %} #}
+            </div>
+
+            {# МЕСТО ВАШЕЙ РЕКЛАМЫ #}
+            <div class="w-100 rounded-4">
+                <img src="/img/adimage.webp" class="rounded-4 d-block m-auto w-100" alt="...">
+            </div>
+
+        </div>
+    </section>
+
+
+    {# АКЦИИ \ СКИДКИ #}
+    <section id="action" class="mt-4 pb-3 shadow">
+
+        <div class="d-flex flex-nowrap gap-3 overflow-auto w-100 p-3">
+            {# {% for i in 0..5 %}
+            #}{# {{ include(_self|replace({ "content.html.twig": "action.html.twig" })) }} #}{#
+            {% include('@Template/default/user/tablet/includes/action.html.twig') %}
+        {% endfor %} #}
+        </div>
+
+    </section>
+
+    {# SEO ТЕКСТ #}
+    <section id="viewed" class="container p-4">
+
+        <h3 class="text-uppercase me-4 h5 fw-bolder my-4">Заголовок</h3>
+
+        <p>Товарищи! Начало повседневной работы по формированию позиции представляет собой интересный эксперимент
+            проверки системы обучения кадров, соответствует насущным потребностям. Разнообразный и богатый опыт
+            постоянное информационно-пропагандистское обеспечение нашей деятельности требуют определения и уточнения
+            направлений прогрессивного развития. Не следует, однако забывать, что дальнейшее развитие различных форм
+            деятельности представляет собой интересный эксперимент проверки существенных финансовых и административных
+            условий. Равным образом новая модель организационной деятельности в значительной степени обуславливает
+            создание систем массового участия. Идейные соображения высшего порядка, а также сложившаяся структура
+            организации в значительной степени обуславливает создание модели развития. Значимость этих проблем настолько
+            очевидна, что консультация с широким активом требуют от нас анализа позиций, занимаемых участниками в
+            отношении поставленных задач.
+        </p>
+        <p>Равным образом дальнейшее развитие различных форм деятельности играет важную роль в формировании позиций,
+            занимаемых участниками в отношении поставленных задач. Не следует, однако забывать, что постоянное
+            информационно-пропагандистское обеспечение нашей деятельности влечет за собой процесс внедрения и
+            модернизации систем массового участия. Не следует, однако забывать, что постоянное
+            информационно-пропагандистское обеспечение нашей деятельности способствует подготовки и реализации
+            существенных финансовых и административных условий.
+        </p>
+        <p>Не следует, однако забывать, что рамки и место обучения кадров обеспечивает широкому кругу (специалистов)
+            участие в формировании модели развития. Не следует, однако забывать, что консультация с широким активом
+            представляет собой интересный эксперимент проверки системы обучения кадров, соответствует насущным
+            потребностям. С другой стороны рамки и место обучения кадров представляет собой интересный эксперимент
+            проверки форм развития. Разнообразный и богатый опыт сложившаяся структура организации способствует
+            подготовки и реализации позиций, занимаемых участниками в отношении поставленных задач. Товарищи!
+            Сложившаяся структура организации обеспечивает широкому кругу (специалистов) участие в формировании
+            направлений прогрессивного развития. Повседневная практика показывает, что сложившаяся структура организации
+            играет важную роль в формировании форм развития.
+        </p>
+
+    </section>
+
+
+</main>
+
+

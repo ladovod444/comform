@@ -1,0 +1,163 @@
+{# ---- ШАБЛОН ------------------------------------------------------------ #}
+{% extends Template('/public/base.html.twig') %}
+
+
+
+{#   #}
+
+{% set arr_property = card.categorySectionField %}
+{% set product_offers = card.productOffers %}
+
+
+{% set current_offer = product_offers|first %}
+{% set name_offer = current_offer.offer_name %}
+{% set name_variation = current_offer.variation_name %}
+{% set name_modification = current_offer.modification_name %}
+
+{% set first_price = product_offers|sort((a, b) => a.price <=> b.price)|filter(v => v.price is not null)|first %}
+{% set last_price = product_offers|sort((a, b) => a.price <=> b.price)|filter(v => v.price is not null)|last %}
+
+
+
+
+{% if card.productSeoTitle %}
+    {% set PRODUCT_NAME = card.productSeoTitle|trans({
+        '%PRODUCT_NAME%' : card.productName,
+        '%PRODUCT_OFFER%' : null,
+        '%PRODUCT_VARIATION%' : null,
+        '%PRODUCT_MOD%' : null,
+    })|trim %}
+{% else %}
+    {% set PRODUCT_NAME = card.productName %}
+{% endif %}
+
+
+{% if card.productSeoDescription %}
+    {% set PRODUCT_DESC = card.productSeoDescription|trans({
+        '%PRODUCT_NAME%' : card.productName,
+        '%PRODUCT_OFFER%' : '',
+        '%PRODUCT_VARIATION%' : '',
+        '%PRODUCT_MOD%' : '',
+    })|trim %}
+{% else %}
+    {% set PRODUCT_DESC = card.productPreview|striptags %}
+{% endif %}
+
+{% if card.productSeoKeywords %}
+    {% set PRODUCT_KEYWORDS = card.productSeoKeywords|trans({
+        '%PRODUCT_NAME%' : card.productName,
+        '%PRODUCT_OFFER%' : '',
+        '%PRODUCT_VARIATION%' : '',
+        '%PRODUCT_MOD%' : '',
+    })|replace({ ' ,': null })|trim %}
+{% else %}
+    {% set PRODUCT_KEYWORDS = 'Купить по выгодной цене ' ~ card.productName ~ ' от ' ~ money(first_price.price) %}
+{% endif %}
+
+
+{% block title %}{{ PRODUCT_NAME }}{% endblock %}
+
+{% block description %}{{ PRODUCT_DESC }}{% endblock %}
+
+{% block keywords %}{{ PRODUCT_KEYWORDS }}{% endblock %}
+
+
+{% block meta %}
+
+
+    <link rel="canonical" href="{{ absolute_url(path('products-product:user.model', {
+        category : card.categoryUrl,
+        url : card.productUrl
+    })) }}">
+
+    {% set root_image = card.getProductImagesSortByRoot|first %}
+    {% set image_path = '/assets/img/blank.svg' %}
+
+    {% if root_image.product_img_ext is defined and root_image.product_img_ext is not null %}
+        {% set image_path = cdn_image_path(root_image.product_img, root_image.product_img_ext, root_image.product_img_cdn) %}
+    {% endif %}
+
+{#    {% set product_modification_image = card.product_modification_image|json_decode %}#}
+{#    {% set product_variation_image = card.product_variation_image|json_decode %}#}
+{#    {% set product_offer_images = card.product_offer_images|json_decode %}#}
+{#    {% set product_photo = card.product_photo|json_decode %}#}
+{#    {% set root_image = null %}#}
+
+{#    #}{# Определяем главное фото #}
+{#    {% for modification_image in product_modification_image | filter(img =>  img.product_img_root is defined and img.product_img_root == true) %}#}
+{#        {% set root_image = modification_image %}#}
+{#    {% endfor %}#}
+
+{#    {% if root_image is null %}#}
+{#        {% for variation_image in product_variation_image | filter(img => img.product_img_root is defined and img.product_img_root == true) %}#}
+{#            {% set root_image = variation_image %}#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
+
+{#    {% if root_image is null %}#}
+{#        {% for offer_images in product_offer_images | filter(img => img.product_img_root is defined and img.product_img_root == true) %}#}
+{#            {% set root_image = offer_images %}#}
+
+{#        {% endfor %}#}
+{#    {% endif %}#}
+
+{#    {% if root_image is null %}#}
+{#        {% for product_images in product_photo | filter(img => img.product_img_root is defined and img.product_img_root == true) %}#}
+{#            {% set root_image = product_images %}#}
+
+{#        {% endfor %}#}
+{#    {% endif %}#}
+
+
+{#    #}{# Обложка #}
+{#    {% set image_path = '/logo.webp' %}#}
+
+{#    {% if root_image.product_img_ext is defined and root_image.product_img_ext is not null %}#}
+{#        {% set img_host =  root_image.product_img_cdn == true  ? CDN_HOST : '' %}#}
+{#        {% set img_dir = root_image.product_img %}#}
+{#        {% set img_file = (img_host is empty ? '/image.' : '/small.') ~ root_image.product_img_ext %}#}
+{#        {% set image_path = img_host ~ img_dir ~ img_file %}#}
+{#    {% endif %}#}
+
+{#    {{ dd(image_path) }}#}
+
+    <meta property="og:locale" content="{{ app.request.getLocale() }}_{{ app.request.getLocale()|upper }}">
+    <meta property="og:type" content="product">
+    <meta property="og:site_name" content="{{ app.request.host }}">
+    <meta property="og:title" content="{{ PRODUCT_NAME }}">
+    <meta property="og:description"
+          content="Купить по выгодной цене {{ card.productName }} от {{ money(first_price.price) }}">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image"
+          content="{{ absolute_url( image_path ) }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@https://{{ app.request.host }}">
+    <meta name="twitter:title" content="{{ PRODUCT_NAME }}">
+    <meta name="twitter:description"
+          content="Купить по выгодной цене {{ card.productName }} от {{ money(first_price.price) }}">
+    <meta name="twitter:image:src"
+          content="{{ absolute_url( image_path ) }}">
+
+
+{% endblock %}
+
+
+{# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
+{% block content %}
+    {{ include(_self|replace({ "template.html.twig":baks_settings.device~"/content.html.twig" })) }}
+{% endblock %}
+
+
+{% block javascript %}
+<script nonce='{{ csp_nonce() }}' async  data-src="/assets/orders-order/modal_basket.min.js?v={{ version }}" class='lazy'></script>
+
+<script nonce='{{ csp_nonce() }}' async  data-src="/assets/js/scroll.min.js?v={{ version }}" class='lazy'></script>
+
+<script nonce="{{ csp_nonce() }}">
+document.querySelectorAll('.img-product').forEach((el) => el.addEventListener('click', () => document.getElementById('img-product').style.backgroundImage = el.style.backgroundImage ));
+</script>
+
+
+{% endblock %}
+

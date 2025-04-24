@@ -1,0 +1,99 @@
+{% set products = info.order_products|json_decode %}
+
+    {% for card in products %}
+
+
+        <div class="d-flex border-bottom mb-3 pb-3">
+
+
+            {# Обложка #}
+            {% set image_path = '/assets/img/blank.svg' %}
+
+            {% if card.product_image_ext is defined and card.product_image_ext is not null %}
+                {% set img_host =  card.product_image_cdn == true  ? CDN_HOST : '' %}
+                {% set img_dir = card.product_image %}
+                {% set img_file = (img_host is empty ? '/image.' : '/small.') ~ card.product_image_ext %}
+                {% set image_path = img_host ~ img_dir ~ img_file %}
+            {% endif %}
+
+            <div class="me-3">
+
+                <a href="{{ path('products-product:user.detail', {
+                    url : card.product_url ,
+                    offer: card.product_offer_value,
+                    variation: card.product_variation_value,
+                    modification: card.product_modification_value
+                }) }}" class="icon rounded-4 mb-2 lazy bg-contain p-1"
+                   data-bg="{{ image_path }}"
+                   style="width: 75px; height: 75px;"
+                ></a>
+
+
+            </div>
+
+
+            <div class="d-flex flex-column">
+
+                <div class="d-flex justify-content-between">
+                    <div class="w-75 lh-normal small">
+
+                        <a href="{{ path('products-product:user.detail', {
+                            url : card.product_url ,
+                            offer: card.product_offer_value,
+                            variation: card.product_variation_value,
+                            modification: card.product_modification_value
+                        }) }}" class="text-dark me-3 text-uppercase">
+
+                            {{ card.product_name }}
+
+                            {{ card.product_variation_value|call_twig_func(card.product_variation_reference) ~
+                            card.product_modification_value|call_twig_func(card.product_modification_reference) }}
+
+                            {{ card.product_offer_value|call_twig_func(card.product_offer_reference) }}
+
+                        </a>
+
+                        {# <div class="small text-muted py-2">Артикул: {{ card.product_article }}</div> #}
+                    </div>
+
+
+                    {# TODO: Добавить в избранное  #}
+                    {# <button class="btn btn-link py-0 align-items-baseline"
+					aria-label="Добавить в избранное"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+					 class="bi bi-heart-fill" viewBox="0 0 16 16">
+					<path fill-rule="evenodd"
+						  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+				</svg>
+			</button> #}
+
+                </div>
+
+                <div class="d-flex flex-column">
+
+
+                    {% set summ = (card.product_total * card.product_price) %}
+
+                    {% set discount = user_profile_discount(summ) %}
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        {% set discount = user_profile_discount(summ) %}
+
+                        <strong class="h5 mb-0">
+                            {{ discount ? money(discount, card.product_price_currency) : money(summ, card.product_price_currency) }}
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% endfor %}

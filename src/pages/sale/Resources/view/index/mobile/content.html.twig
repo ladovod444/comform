@@ -1,0 +1,16 @@
+{% trans_default_domain 'homepage.user' %}
+
+<main>
+    {% set total_items = 1 %}
+{#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/ad.html.twig') %}#}
+    {% set sectionTitle = "Акции" %}
+{#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/categorySection.html.twig') %}#}
+    {% set sectionTitle = "Спецпредложения" %}
+{#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/specialSection.html.twig') %}#}
+{#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/recomendet.html.twig') %}#}
+
+    {{ include(_self|replace({ "content.html.twig" : "/includes/ad_banner.html.twig" })) }}
+    {% set showBadge = true %}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/promo.html.twig" })) }}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/ad_section.html.twig" })) }}
+</main>

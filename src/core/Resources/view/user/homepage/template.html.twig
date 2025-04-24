@@ -1,0 +1,21 @@
+{% set lgScreen = false %}
+{% extends Template('/public/base.html.twig') %}
+
+{% block title %}
+    {{ 'page.example'|trans({}, 'homepage.user') }}
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link href="/assets/plugins/nice-select2/nice-select2.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+    {{ include(_self|replace({ "template.html.twig" : baks_settings.device~"/content.html.twig" })) }}
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

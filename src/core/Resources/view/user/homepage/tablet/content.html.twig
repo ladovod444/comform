@@ -1,0 +1,15 @@
+{% trans_default_domain 'homepage.user' %}
+
+<main>
+    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/carousel.html.twig') %}
+    {% set section_name = "Дизайнерская мебель от производителя" %}
+    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/slider.html.twig') %}
+    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/catalog.html.twig') %}
+    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/recomendet.html.twig') %}
+    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/about.html.twig') %}
+    <hr>
+    {% set section_name = "Производство" %}
+    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/sliderWithOutTitle.html.twig') %}
+    <hr class="mb-0">
+</main>
+

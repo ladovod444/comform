@@ -1,0 +1,58 @@
+<?php
+
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+#set( $PATH = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1/$2").toLowerCase() )
+#set( $SUBMIT = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
+#set( $ROLE = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1_$2").toUpperCase() )
+#set( $DOMAIN = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1.$2").toLowerCase() )
+#set( $MODULE = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1-$2").toLowerCase() )
+
+use BaksDev\Core\Controller\AbstractController;
+use BaksDev\Core\Listeners\Event\Security\RoleSecurity;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpKernel\Attribute\AsController;
+
+#[AsController]
+#[RoleSecurity('ROLE_${ROLE}_NEW')]
+final class NewController extends AbstractController
+{
+    #[Route('/admin/${PATH}/new', name: 'admin.newedit.new', methods: ['GET', 'POST'])]
+    public function news(
+        Request ${DS}request,
+        ${CONTEXT}Handler ${DS}${CONTEXT}Handler,
+    ): Response {
+        ${DS}${CONTEXT}DTO = new ${CONTEXT}DTO();
+
+        // Форма
+        ${DS}form = ${DS}this->createForm(${CONTEXT}Form::class, ${DS}${CONTEXT}DTO, [
+            'action' => ${DS}this->generateUrl('${MODULE}:admin.newedit.new'),
+        ]);
+        ${DS}form->handleRequest(${DS}request);
+
+        if (${DS}form->isSubmitted() && ${DS}form->isValid() && ${DS}form->has('${SUBMIT}'))
+        {
+            ${DS}handle = ${DS}${CONTEXT}Handler->handle(${DS}${CONTEXT}DTO);
+
+            ${DS}this->addFlash
+            (
+                'page.new',
+                ${DS}handle instanceof ${CONTEXT} ? 'success.new' : 'danger.new',
+                '${DOMAIN}.admin',
+                ${DS}handle
+            );
+
+            return ${DS}handle instanceof ${CONTEXT} ? ${DS}this->redirectToRoute('${MODULE}:admin.index') : ${DS}this->redirectToReferer();
+        }
+
+        return ${DS}this->render(['form' => ${DS}form->createView()]);
+    }
+}

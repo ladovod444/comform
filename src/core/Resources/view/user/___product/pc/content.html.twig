@@ -1,0 +1,8 @@
+{% trans_default_domain 'product.user' %}
+
+<hr>
+<main>
+    {{ include(_self|replace({ "content.html.twig" : "/includes/breadcrumb.html.twig" })) }}
+    {% include Template('@core:user/'~baks_settings.device~'/includes/productCard.html.twig') %}
+    {% include Template('@Template/user/'~baks_settings.device~'/includes/kitchens_recomendet.html.twig') %}
+</main>

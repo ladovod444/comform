@@ -1,0 +1,79 @@
+<?php
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+#set( $MODULE = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1-$2").toLowerCase() )
+#set( $ROLE = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1_$2").toUpperCase() )
+
+use BaksDev\Menu\Admin\Command\Upgrade\MenuAdminInterface;
+use BaksDev\Menu\Admin\Type\SectionGroup\Group\Collection\MenuAdminSectionGroupCollectionInterface;
+use BaksDev\Users\Profile\Group\Security\RoleInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+
+/**
+ * Класс добавляет ссылку модуля в выпадающее меню для
+ */
+#[AutoconfigureTag('baks.security.role')]
+#[AutoconfigureTag('baks.menu.admin')]
+final class Role implements RoleInterface, MenuAdminInterface
+{
+    public const ROLE = 'ROLE_${ROLE}';
+
+    public function getRole(): string
+    {
+        return self::ROLE;
+    }
+
+    /* * Добавляем раздел в меню администрирования. */
+
+    /** Метод возвращает PATH раздела */
+    public function getPath(): string
+    {
+        return '${MODULE}:admin.index';
+    }
+
+    /**
+     * Метод возвращает секцию, в которую помещается ссылка на раздел.
+     */
+    public function getGroupMenu(): MenuAdminSectionGroupCollectionInterface|bool
+    {
+        /**
+         * TODO: Указать группу (секцию) выпадающего списка
+         * @example
+         * <code> return new MenuGroupSettings(); </code>
+         */
+        return false;
+    }
+
+    /**
+     * Метод возвращает позицию, в которую располагается ссылка в секции меню.
+     */
+    public function getSortMenu(): int
+    {
+        /**
+         * TODO: Указать порядок в выпадающем списке. Число должны быть на 1 больше заголовка Header
+         */
+        return 431;
+    }
+
+    /**
+     * Метод возвращает флаг "Показать в выпадающем меню".
+     */
+    public function getDropdownMenu(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Метод возвращает флаг "Модальное окно" (клик по ссылке вызывает модальное окно, вместо редиректа).
+     */
+    public function getModal(): bool
+    {
+        return false;
+    }
+
+}

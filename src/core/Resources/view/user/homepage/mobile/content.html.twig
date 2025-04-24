@@ -1,0 +1,22 @@
+{% trans_default_domain 'homepage.user' %}
+
+{#{{ dd(_context) }}#}
+<main>
+
+    {{ include(_self|replace({ "content.html.twig" : "/includes/carousel.html.twig" })) }}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/slider_section.html.twig" })) }}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/catalog.html.twig" })) }}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/recommended.html.twig" })) }}
+
+    {% include Template('@Template:public/'~baks_settings.device~'/includes/about.html.twig') %}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/production.html.twig" })) }}
+
+{#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/carousel.html.twig') %}#}
+{#    {% set section_name = "Дизайнерская мебель от производителя" %}#}
+{#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/slider.html.twig') %}#}
+{#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/catalog.html.twig') %}#}
+{#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/recomendet.html.twig') %}#}
+{#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/about.html.twig') %}#}
+{#    {% set section_name = "Производство" %}#}
+{#    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/sliderWithOutTitle.html.twig') %}#}
+</main>

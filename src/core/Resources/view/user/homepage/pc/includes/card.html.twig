@@ -1,0 +1,191 @@
+<div class="card card-open  border-0 p-3 positiom-relative">
+
+    {% if product is defined %}
+
+        {% set image_path = '/assets/img/blank.svg' %}
+
+        {% if product.product_image_ext is defined and product.product_image_ext is not null %}
+            {% set image_path = cdn_image_path(product.product_image, product.product_image_ext, product.product_image_cdn) %}
+        {% endif %}
+
+{#        {% set random_item = random(1, 3) %}#}
+
+        <img class="card-img-top rounded-3 show-card-image" style="height: 170px;"
+             src="{{ image_path }}" alt="{{ product.product_name }}">
+
+        {# Слайдер для ховера #}
+{#        <div id="carouselCardHover{{ k + section_number }}"#}
+        <div class="carousel slide carousel-fade show-card-carousel" style="height: 170px;">
+
+            {#            <div class="carousel-indicators m-0"> #}
+            {#                <button type="button" data-bs-target="#carouselCardHover{{ k + section_number }}" #}
+            {#                        data-bs-slide-to="0" class="active m-0" aria-current="true" aria-label="Slide 1"></button> #}
+            {#                <button type="button" data-bs-target="#carouselCardHover{{ k + section_number }}" #}
+            {#                        data-bs-slide-to="1" class="m-0" aria-label="Slide 2"></button> #}
+            {#                <button type="button" data-bs-target="#carouselCardHover{{ k + section_number }}" #}
+            {#                        data-bs-slide-to="2" class="m-0" aria-label="Slide 3"></button> #}
+            {#            </div> #}
+
+            <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                    <a href="{{ path('products-product:user.detail', {
+                        'category': product.category_url,
+                        'url': product.url,
+                        'offer': product.product_offer_value,
+                        'variation': product.product_variation_value,
+                        'modification': product.product_modification_value,
+                    }) }}"><img src="{{ image_path }}" class="d-block w-100  h-100 rounded-3"
+                                alt="Изображение товара">
+                    </a>
+                </div>
+
+                {#                <div class="carousel-item h-100"> #}
+                {#                    <img src="/assets/comfort/img/{{ 2 }}.jpg" class="d-block w-100 h-100 rounded-3" #}
+                {#                         alt="Изображение товара"> #}
+                {#                </div> #}
+                {#                <div class="carousel-item h-100"> #}
+                {#                    <img src="/assets/comfort/img/{{ 3 }}.jpg" class="d-block w-100 h-100 rounded-3" #}
+                {#                         alt="Изображение товара"> #}
+                {#                </div> #}
+            </div>
+
+        </div>
+
+        {#        <div class="card-body  pb-1 px-0"> #}
+        {#            <div class="d-flex justify-content-between"> #}
+        {#                <a class="h6 text-decoration-none" #}
+        {#                   href="{{ path('products-product:user.detail', { #}
+        {#                       'category': product.category_url, #}
+        {#                       'url': product.url #}
+        {#                   }) }}"> #}
+        {#                    {{ product.product_name }} #}
+        {#                </a> #}
+        {#                #}{#                <h3 class="card-title fs-6"></h3> #}
+        {#                #}{#                <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="lightgray" #}
+        {#                #}{#                     viewBox="0 0 16 16"> #}
+        {#                #}{#                    <path fill-rule="evenodd" #}
+        {#                #}{#                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path> #}
+        {#                #}{#                </svg> #}
+        {#            </div> #}
+        {#            <div class="d-flex align-items-center gap-2 mb-2"> #}
+        {#                <p class="card-text fs-5 m-0"><strong>{{ money(product.product_price) }}</strong></p> #}
+        {#                <p class="card-text text-danger small m-0"> #}
+        {#                    #}{#                    <del>12 200 Р.</del> #}
+        {#                </p> #}
+        {#            </div> #}
+
+
+        {#            #}{#            <div class="d-flex"> #}
+        {#            #}{#                {% for j in 1..4 %} #}
+        {#            #}{#                    <div class="form-check"> #}
+        {#            #}{#                        {% set random_color = ["f2f0f0", "ffe4d7", "ffd7e4", "ffe4e4", "f2f0e4"][random(0, 4)] %} #}
+        {#            #}{#                        <input class="form-check-input" type="radio" name="flexRadioDisabled" #}
+        {#            #}{#                               id="colorButton{{ k ~ j ~ section_number }}" aria-label="Выбор цвета" #}
+        {#            #}{#                               style="width:16px; height:16px; background-color:#{{ random_color }};"> #}
+        {#            #}{#                        <label class="form-check-label" for="colorButton{{ k ~ j ~ section_number }}"></label> #}
+        {#            #}{#                    </div> #}
+        {#            #}{#                {% endfor %} #}
+        {#            #}{#            </div> #}
+
+
+        {#            <div class="card-params w-100 dropdown"> #}
+        {#                <div class="dropdown-menu p-3 "> #}
+        {#                    <p class="card-params-title border-top pt-2">Размеры</p> #}
+        {#                    <ul class="list-group flex-row justify-content-between mb-2 lh-1"> #}
+        {#                        <li class="list-group-item border-0 p-0 card-params-list-item small"><strong>150 см</strong><br><span #}
+        {#                                    class="text-secondary">Длина</span></li> #}
+        {#                        <li class="list-group-item border-0 p-0 card-params-list-item small"><strong>x</strong></li> #}
+        {#                        <li class="list-group-item border-0 p-0 card-params-list-item small"><strong>150 см</strong><br><span #}
+        {#                                    class="text-secondary">Ширина</span></li> #}
+        {#                        <li class="list-group-item border-0 p-0 card-params-list-item small"><strong>x</strong></li> #}
+        {#                        <li class="list-group-item border-0 p-0 card-params-list-item small"><strong>150 см</strong><br><span #}
+        {#                                    class="text-secondary">Высота</span></li> #}
+        {#                    </ul> #}
+        {#                    <a #}
+        {#                            class="btn btn-dark w-100" #}
+        {#                            href="{{ path('products-product:user.detail', { #}
+        {#                                'category': product.category_url, #}
+        {#                                'url': product.url #}
+        {#                            }) }}" #}
+        {#                    > #}
+        {#                        Купить #}
+        {#                    </a> #}
+        {#                </div> #}
+        {#            </div> #}
+        {#            #}{# <div class="dropdown"> #}
+
+        {#            <ul class="dropdown-menu" > #}
+        {#                <p>sfghfghfs</p> #}
+        {#                <li><a class="dropdown-item" href="#">Действие</a></li> #}
+        {#                <li><a class="dropdown-item" href="#">Другое действие</a></li> #}
+        {#                <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li> #}
+        {#            </ul> #}
+        {#        </div> #}
+        {#        </div> #}
+        <div class="card-body  pb-1 px-0">
+            <div class="d-flex justify-content-between">
+                <a class="card-title fs-6 text-decoration-none"
+                   href="{{ path('products-product:user.detail', {
+                       'category': product.category_url,
+                       'url': product.url,
+                       'offer': product.product_offer_value,
+                       'variation': product.product_variation_value,
+                       'modification': product.product_modification_value,
+                   }) }}">{{ product.product_name }}
+                </a>
+
+                {#        <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="lightgray" #}
+                {#             viewbox="0 0 16 16"> #}
+                {#            <path fill-rule="evenodd" #}
+                {#                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path> #}
+                {#        </svg> #}
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-2 position-relative">
+                <p class="card-text fs-5 m-0 kitchen-card-text-price">
+                    <strong>{{ money(product.product_price) }}</strong>
+                </p>
+                {% if  product.product_old_price is not null and  product.product_old_price < product.product_price %}
+                    <p class="card-text text-danger small mb-1 kitchen-card-text-price">
+                        <del>
+                            <strong>{{ money(product.product_old_price) }}</strong>
+                        </del>
+                    </p>
+                {% endif %}
+            </div>
+
+            <div class="card-params w-100 dropdown">
+                <div class="dropdown-menu  p-3 pt-0">
+
+
+                    {% if product.product_offer_value %}
+                        <p class="text-secondary small mb-1 ">{{ product.product_offer_value|call_twig_func(product.product_offer_reference~'_render') }}</p>
+                    {% endif %}
+                    {% if product.product_variation_value %}
+                        <p class="text-secondary small mb-1 ">{{ product.product_variation_value|call_twig_func(product.product_variation_reference~'_render') }}</p>
+                    {% endif %}
+                    {% if product.product_modification_value %}
+                        <p class="text-secondary small mb-1 ">{{ product.product_modification_value|call_twig_func(product.product_modification_reference~'_render') }}</p>
+                    {% endif %}
+
+                    <a
+                            class="btn btn-dark w-100 "
+                            href="{{ path('orders-order:user.add', {
+                                product: product.event,
+                                offer : product.product_offer_uid,
+                                variation : product.product_variation_uid,
+                                modification : product.product_modification_uid
+                            }) }}"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modal"
+                    >
+                        Купить
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+</div>
+

@@ -1,0 +1,82 @@
+{% set lgScreen = false %}
+<header >
+        <div class="container d-flex align-items-center justify-content-between p-2">
+
+            <div class="d-flex align-items-center">
+                <svg class="bi bi-geo-alt" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"></path>
+                  <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path>
+                </svg>
+                <select class="form-select form-select-sm border-0 text-decoration-underline" aria-label="Выбор города">
+                  <option selected>Москва</option>
+                  {% set total_items = 20 %}
+                    {% for i in 0..total_items %}
+                        <option value="{{i + 1}}">Город {{ i + 1}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <a class="text-decoration-none text-black fw-bolder" href="tel:+7(123)456-78-90">
+                    +7 (800) 555 35 35 <span class="fw-normal text-secondary small">(Бесплатно по всей России)</span>
+                </a>
+            </div>
+
+
+
+            <a href="{{ path('core:user.homepage') }}" style="width: 235px; height: auto;">
+                <img class="w-100" src="/assets/comfort/img/logo.png" alt="Логотип компании">
+            </a>
+
+
+{#            <div class="input-group" style="width: 300px; ">#}
+{#                <input class="form-control border-end-0 " style="height: 30px; font-size:10px;" aria-label="Строка поиска" type="text" placeholder="Поиск">#}
+{#                <span class="input-group-text bg-transparent">#}
+{#                    <svg class="bi bi-search" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">#}
+{#                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>#}
+{#                    </svg>#}
+{#                </span>#}
+{#            </div>#}
+
+
+            {% if baks_search_form is defined and app.request.attributes.get('_route') != 'search:user.search' %}
+
+                {{ include(_self|replace({ "header.html.twig" : "includes/search_form.html.twig" })) }}
+
+            {% endif %}
+
+
+            <div class="d-flex justify-content-between align-items-center gap-2">
+
+                <a class="link-dark" href="{{ path('products-favorite:public.index') }}" aria-label="Иконка Избранное">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                    </svg>
+                </a>
+                <a class="link-dark" href="{{ path('orders-order:user.basket') }}" aria-label="Иконка Корзина">
+                    <svg class="bi bi-bag" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"></path>
+                    </svg>
+                </a>
+                <a class="link-dark" data-href="{{ path('auth-email:user.login') }}" data-bs-toggle="modal" data-bs-target="#modal" title="Авторизация" aria-label="Икона личного кабинета" role="button">
+                    <svg class="bi bi-key" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8m4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5"></path>
+                        <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0"></path>
+                    </svg>
+                </a>
+            </div>
+
+
+        </div>
+
+        <hr class="mt-0 mb-3">
+
+
+{#        {% include Template('user/'~baks_settings.device~'/includes/navbar/navbar.html.twig') %}#}
+
+
+    {% include Template('@products-category:public/navbar/'~baks_settings.device~'/navbar.html.twig') %}
+
+
+    </header>
+

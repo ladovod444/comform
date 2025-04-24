@@ -1,0 +1,11 @@
+<div class="row row-cols-3 g-2 shadow-lg p-3">
+	{% for product in result %}
+
+		{#            {% include Template('@products-product/public/'~baks_settings.device~'/card-in-stock-sm.html.twig') with {product} only %}#}
+
+		{{ include(_self|replace({ "products-list.html.twig" : "includes/search-card.html.twig" })) }}
+
+{#		        {% include Template('@products-product/public/'~baks_settings.device~'/card-product-result.html.twig') with { product } only %}#}
+
+	{% endfor %}
+</div>

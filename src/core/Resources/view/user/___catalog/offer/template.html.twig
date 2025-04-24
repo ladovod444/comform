@@ -1,0 +1,47 @@
+{# ---- ШАБЛОН ------------------------------------------------------------ #}
+{% extends Template('/user/base.html.twig') %}
+
+{% block title %}Продукция{% endblock %}
+
+{# ---- CSS ------------------------------------------------------------ #}
+ {% block stylesheets %}
+     <link href="/assets/plugins/nice-select2/nice-select2.min.css" rel="stylesheet">
+ {% endblock %}
+
+{# ---- HEADER-БЛОК ------------------------------------------------------------ #}
+{# {% block header %}
+    {{ include(_self|replace({ "template.html.twig": "header.html.twig" })) }}
+{% endblock %} #}
+
+{# ---- LEFT-БЛОК ------------------------------------------------------------ #}
+{# {% block left %} #}
+{#   {% include '@Template/flowers/left.html.twig' %} #}
+{# {% endblock %} #}
+
+{# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
+{% block content %}
+
+    {{ include(_self|replace({ "offer/template.html.twig": '_catalog/'~baks_settings.device~"/content.html.twig" })) }}
+
+
+    {# CSS #}
+    <div style="display: none !important;"
+         class="tooltip bs-tooltip-bottom bs-tooltip-start bs-tooltip-end tooltip-inner form-label form-check-input form-check form-check-label radio-buttons flex-grow-1 gap-2 align-items-center align-items-end badge bg-cover bg-danger bg-hit bg-success bi bi-cart3 border btn btn-danger btn-link btn-sm card-body card-favorites card-image-wrap card-img-top card-labels card-price card-price-wrap card-title d-flex flex-column fw-bold fw-bolder gap-1 gap-2 h5 h6 justify-content-between lazy lh-1 mb-0 mb-2 me-1 me-2 ms-1 mt-2 opacity-0 overflow-hidden p-3 pb-1 px-2 py-0 rounded-2 rounded-3 rounded-5 rounded-circle small text-danger text-dark text-decoration-line-through text-decoration-none position-sticky z-index-3 me-5 alert alert-warning gap-4 p-0 align-items-end text-muted opacity-25"></div>
+
+{% endblock %}
+
+
+{# ---- FOOTER-БЛОК ------------------------------------------------------------ #}
+{# {% block footer %}
+    {{ include(_self|replace({ "template.html.twig": "footer.html.twig" })) }}
+{% endblock %} #}
+
+ {% block javascript %}
+ <script nonce='{{ csp_nonce() }}' async data-src='/assets/plugins/nice-select2/nice-select2.min.js?v={{ version }}'
+             class='lazy'></script>
+     <script nonce='{{ csp_nonce() }}' async data-src='/assets/js/radio.input.min.js?v={{ version }}'
+             class='lazy'></script>
+     <script nonce='{{ csp_nonce() }}' async data-src='/assets/products_product/category.filter.min.js?v={{ version }}'
+             class='lazy'></script>
+ {% endblock %}
+

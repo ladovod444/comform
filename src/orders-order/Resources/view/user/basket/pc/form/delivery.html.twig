@@ -1,0 +1,112 @@
+{% trans_default_domain('user.order') %}
+
+<div id='user_delivery'>
+
+
+    <div class="d-flex justify-content-between">
+
+        <div class="w-50">
+            {{ form_label(form.usr.delivery.deliveryDate, 'Дата доставки заказа'|trans) }}: *
+        </div>
+        <div class="w-100 mb-3">
+            <div class="w-50 input-group mb-3">
+
+			<span class="input-group-text">
+				<svg xmlns="http://www.w3.org/2000/svg"
+                     width="16"
+                     height="16"
+                     fill="currentColor"
+                     class="bi bi-calendar3"
+                     viewBox="0 0 16 16">
+				  <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+				  <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+				</svg>
+			</span>
+
+                {{ form_widget(form.usr.delivery.deliveryDate) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+
+        <div class="w-50">
+            <label>Способ доставки: *</label>
+        </div>
+        <div class="w-100 mb-3">
+
+            {% for delivery in form.usr.delivery.delivery %}
+
+                <div class='d-flex align-items-center gap-1'>
+                    {{ form_widget(delivery, {attr: {class: 'form-check-input order-input'}}) }}
+
+                    <div class='mb-1'>
+                        {% if delivery.vars.attr['data-price'] %}
+                            <strong>({{ money((delivery.vars.attr['data-price'] * 100), delivery.vars.attr['data-currency'] ) }}
+                                )</strong>
+
+                            {% if delivery.vars.attr['data-excess'] %}
+                                &nbsp;<span
+                                    class="badge text-bg-danger">+ {{ money((delivery.vars.attr['data-excess'] * 100), delivery.vars.attr['data-currency'] ) }} за 1 км</span>
+                            {% endif %}
+
+                        {% else %}
+                            <strong>(бесплатно)</strong>
+                        {% endif %}
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% if form.usr.delivery.delivery.vars.help %}
+
+        <div class="alert alert-secondary opacity-50 lh-1 small rounded-2 p-2" role="alert">
+            {{ form.usr.delivery.delivery.vars.help }}
+        </div>
+        <hr >
+    {% endif %}
+
+    {% for delivery_field in form.usr.delivery.field %}
+
+        <div class="d-flex justify-content-between">
+            <div class="w-50 d-flex gap-3">
+
+                {% if delivery_field.value.vars.help %}
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="16" height="16"
+                         fill="currentColor"
+                         class="text-muted mt-1" viewBox="0 0 16 16"
+
+                         role="tooltip"
+                         data-bs-toggle="tooltip"
+                         data-bs-placement="bottom"
+                         data-bs-original-title="{{ delivery_field.value.vars.help }}"
+
+                    >
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/>
+                    </svg>
+
+                {% endif %}
+
+                {{ form_label(delivery_field.value) }}
+
+            </div>
+
+            <div class="w-100">
+                {{ form_widget(delivery_field.field, { attr: { class : 'rounded-3' }}) }}
+                {{ form_widget(delivery_field.value, { attr: { class : 'rounded-3' }}) }}
+            </div>
+        </div>
+
+    {% endfor %}
+
+    {# {{ form_row(form.usr.delivery.geocode) }} #}
+    {{ form_row(form.usr.delivery.latitude) }}
+    {{ form_row(form.usr.delivery.longitude) }}
+
+</div>

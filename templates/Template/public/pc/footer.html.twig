@@ -1,0 +1,72 @@
+ <footer class="container mb-5">
+      <h2 class="fs-4 mb-4">Доставка по всей России</h2>
+      <div class="row">
+        <div class="col-5">
+          <p>Чтобы заказать нашу продукцию, свяжитесь с нашим менеджером по телефону
+            или через форму <a class="link-dark fw-medium" href="{{ path('contact:index') }}">обратной связи</a>
+          </p>
+
+          <div class="row mb-5">
+            <div class="col-4">
+              <ul class="list-group">
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">О компании</li>
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">Каталог</li>
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">Покупателям</li>
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">Производство</li>
+              </ul>
+            </div> 
+            <div class="col-4">
+              <ul class="list-group">
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">Контакты</li>
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">Доставка</li>
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">Оплата</li>
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">Дизайнерам</li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <ul class="list-group">
+                <li class="list-group-item px-0 pt-0 border-0 text-nowrap text-secondary">Политика конфиденциальности</li>
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">Оферта для физ.лиц</li>
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">Оферта для юр.лиц</li>
+                <li class="list-group-item px-0 pt-0 border-0 text-secondary">Сотрудничество</li>
+              </ul>
+            </div>
+          </div>
+          <p class="m-0 text-secondary">&copy; Copyright 2024. All rights reserved.</p>
+        </div>
+        <div class="col-1 p-0"></div>
+        <div class="col-3 pe-5 border-end border-3 border-black">
+          <div class="mb-5">
+            <p><strong>Принимаем заказы </strong> <br> ежедневно  с 9:00 до 22:00</p>
+            <p><strong>Доставка заказов</strong> <br> с 9:00 до 22:00</p>
+          </div>
+          <p><strong>Получать наши акции <br>и предложения:</strong></p>
+          <div class="input-group border rounded-3" style="height: 35px; padding: 1px;">
+            <input class="form-control h-100 border-0" style="font-size:12px;" aria-label="Форма подписки на новости" type="text" placeholder="blabla@gmail.com">
+            <button class="btn btn-dark d-flex align-items-center h-100 rounded-3 px-4">Отправить</button>
+          </div>
+        </div>
+        <div class="col-3 px-4 d-flex flex-column align-items-center justify-content-between gap-3">
+          <div class="d-flex flex-column align-items-center text-center gap-2 bg-light rounded-3 p-3 px-4">
+            <p class="small mb-1">г.Химки, ул.Лавочкина, 13к2</p>
+            <a class="text-decoration-none text-black fw-bolder" href="tel:+7(123)456-78-90">
+              +7 (800) 555 35 35 <span class="fw-normal text-secondary small"> <br>(Бесплатно по всей России)</span>
+            </a>
+            <a class="text-decoration-none text-black small" href="mailto:{{ email }}">
+              <span><u>{{ email }}</u></span>
+            </a>
+          </div>
+          <a href="#" aria-label="Ссыдка на главную страницу">
+            <img  style="width: 212px" src="/assets/comfort/img/logo.png" alt="Логотип компании">
+          </a>
+          <a class="link-dark" data-href="/login" data-bs-toggle="modal" data-bs-target="#modal" title="Авторизация" role="button">
+            <svg class="bi bi-key me-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8m4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5"></path>
+                <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0"></path>
+            </svg>
+            <u>Войти в личный кабинет</u>
+          </a>
+        </div>
+      </div>
+	
+    </footer>

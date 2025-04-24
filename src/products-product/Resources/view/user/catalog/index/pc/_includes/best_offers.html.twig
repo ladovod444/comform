@@ -1,0 +1,23 @@
+{# БЛОК ЛУЧШИЕ ПРЕДЛОЖЕНИЯ #}
+
+<div class="pt-2" style="margin-bottom: 51px">
+    <h6 class="fs-18 text-uppercase fw-bold" style="margin-bottom: 30px">
+        Лучшие предложения
+    </h6>
+    <ol class="list-group list-group-numbered rounded-4 p-2" style="background-color: #f8f9fa;">
+
+        {% for offer in bestOffers %}
+            <li class="list-group-item border-0 list-group-item-action bg-transparent small"
+                style="width: max-content;">
+                <a class="text-black text-decoration-none"
+                   href="{{ path('products-product:user.model', {
+                       category: offer.category_url,
+                       url: offer.url
+                   }) }}">
+                    {{ offer.product_name }}
+                </a></li>
+        {% endfor %}
+
+    </ol>
+</div>
+

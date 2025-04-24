@@ -1,0 +1,58 @@
+{{ form_start(form) }}
+
+<div class="modal-body  px-5">
+
+    <div class="mb-3">
+        {{ form_label(form.email, 'E-mail*',
+            {'label_attr': {
+                'class': 'form-label fw-medium'}
+            }) }}
+
+        {{ form_widget(form.email, {
+            attr: {
+                class: 'form-control rounded-5 border-0 bg-body-tertiary py-2',
+                style: 'box-shadow: 0px 3px 3px rgba(0,0,0,0.08) inset;'
+            } }) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.password, 'Пароль*',
+            {'label_attr': {
+                'class': 'form-label fw-medium'}
+            }) }}
+
+        {{ form_widget(form.password, {
+            attr: {
+                class: 'form-control rounded-5 border-0 bg-body-tertiary py-2',
+                style: 'box-shadow: 0px 3px 3px rgba(0,0,0,0.08) inset;'
+            } }) }}
+    </div>
+
+</div>
+
+<div class="modal-footer justify-content-between border-0 px-5 flex-nowrap gap-4">
+
+    {% if modal is defined %}
+        <a class="btn shadow m-0 rounded-5 w-100 fw-medium"
+           data-href="{{ path('auth-email:user.registration') }}"
+           data-bs-target="#modal"
+        >
+
+            Регистрация
+        </a>
+    {% endif %}
+
+    {{ form_widget(form.login,
+        {
+            label: '
+                    <span>'~ 'Войти'|trans({}, 'core.btn') ~'</span>
+                    <span class="ms-1 spinner-border spinner-border-sm vertical-middle d-none"></span>
+                ',
+            attr: { class: 'btn btn-primary m-0 rounded-5 w-100 fw-medium'},
+
+        }
+    ) }}
+
+</div>
+
+{{ form_end(form) }}

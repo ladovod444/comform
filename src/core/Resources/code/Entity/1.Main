@@ -1,0 +1,69 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+
+#end
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
+
+#set( $table = $NAME.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
+
+/* ${NAME} */
+
+#[ORM\Entity]
+#[ORM\Table(name: '${table}')]
+class ${NAME}
+{
+    /**
+    * Идентификатор сущности
+    */
+    #[Assert\NotBlank]
+    #[Assert\Uuid]
+    #[ORM\Id]
+    #[ORM\Column(type: ${NAME}Uid::TYPE)]
+    private ${NAME}Uid ${DS}id;
+
+	/**
+	* Идентификатор события
+	*/
+	#[Assert\NotBlank]
+    #[Assert\Uuid]
+	#[ORM\Column(type: ${NAME}EventUid::TYPE, unique: true)]
+	private ${NAME}EventUid ${DS}event;
+
+	public function __construct()
+	{
+		${DS}this->id = new ${NAME}Uid();
+	}
+
+	public function __toString(): string
+    {
+        return (string) ${DS}this->id;
+    }
+
+	/**
+	* Идентификатор
+	*/
+	public function getId() : ${NAME}Uid
+	{
+		return ${DS}this->id;
+	}
+
+	/**
+	* Идентификатор события
+	*/
+	public function getEvent() : ${NAME}EventUid
+	{
+		return ${DS}this->event;
+	}
+
+	public function setEvent(${NAME}EventUid|${NAME}Event ${DS}event) : void
+	{
+		${DS}this->event = ${DS}event instanceof ${NAME}Event ? ${DS}event->getId() : ${DS}event;
+	}
+}

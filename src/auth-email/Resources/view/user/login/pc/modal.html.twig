@@ -1,0 +1,77 @@
+{% trans_default_domain 'user.login' %}
+
+<div class="modal-dialog modal-dialog-centered" style="--bs-modal-width: 700px;">
+
+    <div class="modal-content p-3 border-bottom border-5 border-dark">
+        {{ form_start(form) }}
+        <div class="modal-header border-0">
+            <h3 class="modal-title text-uppercase h4 fw-bold">Авторизуйтесь</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+
+        <div class="modal-body">
+            <div class="d-flex justify-content-between gap-3">
+                <div class="w-100">
+                    {{ form_label(form.email, 'user.form.label.email', { attr: { class: 'mb-0' } }) }}
+                    {{ form_widget(form.email, { attr : { class: 'rounded-3' } }) }}
+                </div>
+                <div class="w-100">
+                    {{ form_label(form.password, 'user.form.label.password', { attr: { tabindex : "-1", class: 'mb-0' } }) }}
+                    {{ form_widget(form.password, { attr : { class: 'rounded-3' } }) }}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer border-0 d-flex flex-grow-3">
+
+            <ul class="d-flex gap-3 list-unstyled">
+                <li>
+                    <a href="{{ path('auth-email:user.registration') }}" class="text-decoration-none"
+                       aria-label="Регистация"> {{ 'user.page'|trans({}, 'user.reg') }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('auth-email:user.restore') }}" class="text-decoration-none"
+                       aria-label="Забыли пароль?">{{ 'user.form.label.question'|trans({}, 'user.restore') }}  </a>
+                </li>
+            </ul>
+
+            {# <button type="submit" class="btn btn-danger btn-lg ms-auto ">Войти</button> #}
+
+            {{ form_widget(form.login, {
+                label: '<span>'~ 'user.btn.save'|trans() ~'</span>
+                            <span id="'~form.login.vars.id~'-progress" class="spinner-border spinner-border-sm d-none"></span>
+                        ',
+                attr: { class : 'btn btn-lg btn-dark rounded-3 text-uppercase fw-bolder ms-auto' }
+            }) }}
+
+        </div>
+
+
+        <div class="d-flex justify-content-center gap-3 border-top">
+
+            {% if constant('BaksDev\\Auth\\Telegram\\Type\\Event\\AccountTelegramEventUid::TYPE') is defined %}
+
+                <div class="mt-3">
+                    <a href="{{ path('auth-telegram:user.auth') }}"
+                       class="btn btn-link btn-sm modal-link"
+                       title="Авторизация Telegram"
+                    >
+                        <span class="icon rounded-2 mb-2 ">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="25"
+                                     height="25"
+                                     fill="currentColor"
+                                     class="text-primary" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906q-1.168.486-4.666 2.01-.567.225-.595.442c-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294q.39.01.868-.32 3.269-2.206 3.374-2.23c.05-.012.12-.026.166.016s.042.12.037.141c-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8 8 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629q.14.092.27.187c.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.4 1.4 0 0 0-.013-.315.34.34 0 0 0-.114-.217.53.53 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09"/>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            {% endif %}
+
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+</div>

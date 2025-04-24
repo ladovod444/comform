@@ -1,0 +1,68 @@
+ <div class="card card-open  border-0 p-3 positiom-relative">
+    {% if showBadge %}
+    <span class="position-absolute badge-position badge z-3 shake-on-hover">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92.27 122.88" style="enable-background:new 0 0 92.27 122.88; width: 20px; height:20px;" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#EC6F59;} .st1{fill-rule:evenodd;clip-rule:evenodd;fill:#FAD15C;}</style><g><path class="st0" d="M18.61,54.89C15.7,28.8,30.94,10.45,59.52,0C42.02,22.71,74.44,47.31,76.23,70.89 c4.19-7.15,6.57-16.69,7.04-29.45c21.43,33.62,3.66,88.57-43.5,80.67c-4.33-0.72-8.5-2.09-12.3-4.13C10.27,108.8,0,88.79,0,69.68 C0,57.5,5.21,46.63,11.95,37.99C12.85,46.45,14.77,52.76,18.61,54.89L18.61,54.89z"/><path class="st1" d="M33.87,92.58c-4.86-12.55-4.19-32.82,9.42-39.93c0.1,23.3,23.05,26.27,18.8,51.14 c3.92-4.44,5.9-11.54,6.25-17.15c6.22,14.24,1.34,25.63-7.53,31.43c-26.97,17.64-50.19-18.12-34.75-37.72 C26.53,84.73,31.89,91.49,33.87,92.58L33.87,92.58z"/></g></svg>
+        <span class="visually-hidden">Иконка акции</span>
+    </span>
+    {% endif %}
+    {% set random_item = random(1, 5) %}
+    <img class="card-img-top rounded-3 show-card-image" style="height: 170px;" src="/assets/comfort/img/{{random_item}}.jpg" alt="Изображение товара {{i}}">
+    {# Слайдер для ховера #}
+        <div id="carouselPromoCard{{i + section_number}}" class="carousel slide carousel-fade show-card-carousel" style="height: 170px;">
+            <div class="carousel-indicators m-0">
+                <button type="button" data-bs-target="#carouselPromoCard{{i + section_number}}" data-bs-slide-to="0" class="active m-0" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselPromoCard{{i + section_number}}" data-bs-slide-to="1" class="m-0" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselPromoCard{{i + section_number}}" data-bs-slide-to="2" class="m-0" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">    
+                    <img src="/assets/comfort/img/{{random_item}}.jpg" class="d-block w-100  h-100 rounded-3" alt="Изображение товара">
+                </div>
+                <div class="carousel-item h-100">
+                    <img src="/assets/comfort/img/{{2}}.jpg" class="d-block w-100 h-100 rounded-3" alt="Изображение товара">
+                </div>
+                <div class="carousel-item h-100">
+                    <img src="/assets/comfort/img/{{3}}.jpg" class="d-block w-100 h-100 rounded-3" alt="Изображение товара">
+                </div>
+            </div>
+        </div>    
+    {#  #}
+    <div class="card-body  pb-1 px-0">
+        <div class="d-flex justify-content-between">
+        <h3 class="card-title fs-6">Товар {{i}}</h3>
+        <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="lightgray" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
+        </svg>
+        </div>
+        <div class="d-flex align-items-center gap-2 mb-2">
+            <p class="card-text fs-5 m-0"><strong>8 500 Р.</strong></p>
+            <p class="card-text text-danger small m-0"><del>12 200 Р.</del></p>
+        </div>
+
+
+        <div class="d-flex">
+            {% for j in 1..4 %}
+            <div class="form-check">
+            {% set random_color = ["f2f0f0", "ffe4d7", "ffd7e4", "ffe4e4", "f2f0e4"][random(0, 4)] %}
+                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="colorsRadioButton{{ i ~ j ~ section_number}}" aria-label="Выбор цвета" style="width:16px; height:16px; background-color:#{{random_color}};">
+                <label class="form-check-label" for="colorsRadioButton{{ i ~ j ~ section_number}}"></label>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        <div class="card-params w-100 dropdown">
+            <div class="dropdown-menu dropdown-menu-promo p-3 ">
+                <p class="card-params-title border-top pt-2">Размеры</p>
+                <ul class="list-group flex-row justify-content-between mb-2 lh-1">
+                    <li class="list-group-item border-0 p-0 card-params-list-item small"> <strong>150 см</strong><br><span class="text-secondary">Длина</span></li>
+                    <li class="list-group-item border-0 p-0 card-params-list-item small"> <strong>x</strong></li>
+                    <li class="list-group-item border-0 p-0 card-params-list-item small"> <strong>150 см</strong><br><span class="text-secondary">Ширина</span></li>
+                    <li class="list-group-item border-0 p-0 card-params-list-item small"> <strong>x</strong></li>
+                    <li class="list-group-item border-0 p-0 card-params-list-item small"> <strong>150 см</strong><br><span class="text-secondary">Высота</span></li>
+                </ul>
+                <button class="btn btn-dark w-100">Купить</button>
+            </div>
+        </div>
+    </div>
+    </div>

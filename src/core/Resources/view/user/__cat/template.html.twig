@@ -1,0 +1,26 @@
+{% set lgScreen = true %}
+{% extends Template('@Template:user/base.html.twig') %}
+
+{% block title %}
+    {{ 'page.products'|trans({}, 'products.user') }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/comfort/css/style.css" rel="stylesheet">
+    <link href="/assets/plugins/nice-select2/nice-select2.min.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+    {{ category }}
+    {#    {{ include(_self|replace({ "template.html.twig" :  category~ "/" ~baks_settings.device~"/content.html.twig"})) }} #}
+{% endblock %}
+
+{% block javascript %}
+
+<script nonce="{{ csp_nonce() }}" data-src="/assets/comfort/js/scroll.js" class="lazy"></script>
+<script nonce="{{ csp_nonce() }}" data-src="/assets/comfort/js/main.js" class="lazy"></script>
+<script nonce='{{ csp_nonce() }}'  data-src='/assets/plugins/nice-select2/nice-select2.min.js?v={{ version }}' class='lazy'></script>
+
+
+{% endblock %}

@@ -1,0 +1,229 @@
+{% if card.productQuantity %}
+
+    <div class="d-flex align-items-center justify-content-center gap-3 my-3">
+        <div class="card-price d-flex flex-column align-items-end">
+
+            {# Расчет стоимости с учетом скидки #}
+            {% set discount_price = user_profile_discount(card.productPrice) %}
+
+            {% if discount_price %}
+
+                <small class="small text-decoration-line-through text-danger fw-bold">
+                    {{ money(card.productPrice, card.productCurrency) }}
+                </small>
+
+            {% else %} &nbsp; {% endif %}
+
+            {# ЦЕНА #}
+            <span class="fw-bolder lh-normal h3 mb-0">
+					{{ discount_price ? money(discount_price, card.productCurrency) : money(card.productPrice, card.productCurrency) }}
+				</span>
+        </div>
+
+        {% if baks_profile.profile_discount is defined and baks_profile.profile_discount is not null %}
+            <span class="badge bg-danger rounded-2 mt-3">
+				<span class="text-uppercase">
+					Скидка {{ baks_profile.profile_discount }}%
+				</span>
+			</span>
+        {% endif %}
+
+        <button class="btn btn-link ms-3 pt-3"
+                aria-label="Добавить в избранное"
+                data-id='{{ card.productId }}'
+        >
+            <img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNCMUI2QkIiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAxLjMxNEMxMi40MzgtMy4yNDggMjMuNTM0IDQuNzM1IDggMTUtNy41MzQgNC43MzYgMy41NjItMy4yNDggOCAxLjMxNHoiPjwvcGF0aD48L3N2Zz4K"
+                 width="20" height="20"
+                 src="/assets/img/empty.png"
+                 class="lazy"
+                 alt="Добавить в избранное"
+            >
+        </button>
+    </div>
+
+
+    {{ form_start(basket, { attr: { class : 'd-flex justify-content-between align-items-center position-relative order-basket mb-3' } }) }}
+
+    <div class='mb-3 '>
+        <button type='button' class="btn btn-lg btn-link text-decoration-none"
+                aria-label="Отнять количество" id="minus"
+        >
+            <span class="h4 text-muted opacity-50">-</span>
+        </button>
+    </div>
+
+
+    {% set default_count = card.productQuantity < 4 ? card.productQuantity : 4 %}
+
+    {{ form_row(basket.price.total, { label : false,
+        attr: {
+            style : 'width: 60px;',
+            class:  'form-control-lg mx-1 total',
+            value : default_count,
+            'data-max': card.productQuantity,
+            'data-discount' : baks_profile.profile_discount is defined ? baks_profile.profile_discount,
+            'data-currency' : card.productCurrency,
+            'aria-label' : 'Количество в заказе'
+        }
+    }) }}
+
+
+    <div class='mb-3'>
+        <button type='button' class="btn btn-lg btn-link text-decoration-none"
+                aria-label="Добавить количество" id="plus"
+        >
+            <span class="h5 text-muted opacity-50">+</span>
+        </button>
+    </div>
+
+
+
+    <div class="mb-3">
+        <button
+                type="submit"
+                class="btn btn-lg btn-primary text-nowrap">
+            <span class="h6 text-uppercase px-3 basket-text">В корзину</span>
+            <span class="spinner-border spinner-border-sm vertical-middle d-none"></span>
+        </button>
+    </div>
+
+
+    {{ form_end(basket) }}
+
+
+
+{% else %}
+
+
+    <form action="#" class='my-3'>
+        <button type="button" class="btn btn-lg btn-primary ms-1 w-100"
+                aria-label="Узнать о поступлении"
+        >
+            <span class="h6 text-uppercase px-3">Узнать о поступлении</span>
+        </button>
+    </form>
+
+
+
+    {% set order_offer = null %}
+    {% set order_variation = null %}
+    {% set order_modification = null %}
+
+    {% set order_price = null %}
+    {% set offer_search = card.productOfferValue is defined ? card.productOfferValue %}
+
+
+    {% set search_text %}
+
+        <div class='container mb-3'>
+
+        <div class=''>Возможно Вы искали
+            {{ card.productName }}:
+        </div>
+        <div class='d-flex flex-wrap gap-3'>
+    {% endset %}
+
+
+    {% for offer in offers %}
+
+
+        {# Торговые предложения, соответствующие запросу #}
+        {% if offer.product_offer_value == card.productOfferValue %}
+
+
+            {% if offer.product_variation_name %}
+
+                {% if offer.product_modification_name %}
+
+                    {# Показываем модификацию, если не равен текущему  #}
+                    {% if card.productModificationValue != offer.product_modification_value %}
+
+                        {% if search_text %}
+                            {{ search_text }}
+                            {% set search_text = false %}
+                        {% endif %}
+
+
+                        <a href='{{ path('products-product:user.detail', {
+                            url : card.url ,
+                            offer: offer.product_offer_value,
+                            variation: offer.product_variation_value,
+                            modification: offer.product_modification_value
+                        }) }}' class="btn btn-link btn-sm lh-1 text-decoration-none">
+
+                            {{ offer.product_variation_value|call_twig_func(offer.product_variation_reference~'_render') ~
+                            offer.product_modification_value|call_twig_func(offer.product_modification_reference~'_render') }}
+
+                            {{ offer.product_offer_value|call_twig_func(offer.product_offer_reference~'_render') }}
+                        </a>
+
+
+
+                    {% endif %}
+
+                {% else %}
+
+
+
+                    {# Показываем вариант, если он не равен текущему  #}
+                    {% if card.productVariationValue != offer.product_variation_value %}
+
+                        {% if search_text %}
+                            {{ search_text }}
+                            {% set search_text = false %}
+                        {% endif %}
+
+                        <a href='{{ path('products-product:user.detail', {
+                            category: card.categoryUrl,
+                            url : card.productUrl ,
+                            offer: offer.product_offer_value,
+                            variation: offer.product_variation_value
+                        }) }}' class="btn btn-link btn-sm lh-1 text-decoration-none">
+                            {{ offer.product_offer_value|call_twig_func(offer.product_offer_reference~'_render') }}
+                            {{ offer.product_variation_value|call_twig_func(offer.product_variation_reference~'_render') }}
+
+                        </a>
+                    {% endif %}
+
+
+                {% endif %}
+
+            {% else %}
+
+
+                {% if order_offer is null or order_offer != offer.product_offer_value %}
+
+                    {% if search_text %}
+                        {{ search_text }}
+                        {% set search_text = false %}
+                    {% endif %}
+
+                    <a href='{{ path('products-product:user.detail', {
+                        url : card.url ,
+                        offer: offer.product_offer_value
+                    }) }}' class="btn btn-link btn-sm lh-1 text-decoration-none">
+                        {{ offer.product_offer_value|call_twig_func(offer.product_offer_reference) }}
+
+                    </a>
+                {% endif %}
+
+                {% set order_offer = offer.product_offer_value %}
+
+            {% endif %}
+
+            {#  Расчет минимальной стоимости  #}
+            {% if order_price is null or (offer.product_price != 0 and order_price > offer.product_price ) %}
+                {% set order_price = offer.product_price %}
+            {% endif %}
+
+
+        {% endif %}
+
+    {% endfor %}
+
+    {% if search_text == false %}
+        </div>
+        </div>
+    {% endif %}
+
+{% endif %}

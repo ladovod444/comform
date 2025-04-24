@@ -1,0 +1,70 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+use BaksDev\Core\Type\UidType\Uid;
+use Symfony\Component\Uid\AbstractUid;
+
+#set( $type = $NAME.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
+
+final class ${NAME} extends Uid
+{
+	/** Тестовый идентификатор */
+	public const TEST = '0188a99f-03ce-7df6-8775-19226c67fd66';
+
+    public const TYPE = '${type}';
+
+    private mixed ${DS}attr;
+
+    private mixed ${DS}option;
+
+    private mixed ${DS}property;
+
+    private mixed ${DS}characteristic;
+
+
+    public function __construct(
+        AbstractUid|string|null ${DS}value = null,
+        mixed ${DS}attr = null,
+        mixed ${DS}option = null,
+        mixed ${DS}property = null,
+        mixed ${DS}characteristic = null,
+    )
+    {
+        parent::__construct(${DS}value);
+
+        ${DS}this->attr = ${DS}attr;
+        ${DS}this->option = ${DS}option;
+        ${DS}this->property = ${DS}property;
+        ${DS}this->characteristic = ${DS}characteristic;
+    }
+
+
+    public function getAttr(): mixed
+    {
+        return ${DS}this->attr;
+    }
+
+
+    public function getOption(): mixed
+    {
+        return ${DS}this->option;
+    }
+
+
+    public function getProperty(): mixed
+    {
+        return ${DS}this->property;
+    }
+
+    public function getCharacteristic(): mixed
+    {
+        return ${DS}this->characteristic;
+    }
+
+}

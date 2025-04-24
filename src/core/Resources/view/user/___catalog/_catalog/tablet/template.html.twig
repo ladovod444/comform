@@ -1,0 +1,15 @@
+{# ---- ШАБЛОН ------------------------------------------------------------ #}
+{% extends '@Template/default/user/base.html.twig' %}
+{% block title %}Каталог{% endblock %}
+
+
+{# ---- КОНТЕНТ-БЛОК ------------------------------------------------------------ #}
+{% block content %}
+    {{ include(_self|replace({ "template.html.twig": "content.html.twig" })) }}
+{% endblock %}
+
+ {% block javascript %}
+ <script nonce='{{ csp_nonce() }}' async data-src="/plugins/nice-select2/nice-select2.min.js?v={{ version }}"
+             class="lazy"></script>
+ {% endblock %}
+

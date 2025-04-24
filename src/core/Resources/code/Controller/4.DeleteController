@@ -1,0 +1,63 @@
+<?php
+
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+#set( $PATH = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1/$2").toLowerCase() )
+#set( $SUBMIT = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
+#set( $ROLE = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1_$2").toUpperCase() )
+#set( $DOMAIN = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1.$2").toLowerCase() )
+
+use BaksDev\Core\Controller\AbstractController;
+use BaksDev\Core\Listeners\Event\Security\RoleSecurity;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpKernel\Attribute\AsController;
+
+#[AsController]
+#[RoleSecurity('ROLE_${ROLE}_DELETE')]
+final class DeleteController extends AbstractController
+{
+    #[Route('/admin/${PATH}/delete/{id}', name: 'admin.delete', methods: ['GET', 'POST'])]
+    public function delete(
+        Request ${DS}request,
+        #[MapEntity] ${CONTEXT}Event ${DS}${CONTEXT}Event,
+        ${CONTEXT}DeleteHandler ${DS}${CONTEXT}DeleteHandler,
+    ): Response
+    {
+
+        ${DS}${CONTEXT}DeleteDTO = new ${CONTEXT}DeleteDTO();
+        ${DS}${CONTEXT}Event->getDto(${DS}${CONTEXT}DeleteDTO);
+        ${DS}form = ${DS}this->createForm(${CONTEXT}DeleteForm::class, ${DS}${CONTEXT}DeleteDTO, [
+            'action' => ${DS}this->generateUrl('${CONTEXT}:admin.delete', ['id' => ${DS}${CONTEXT}DeleteDTO->getEvent()]),
+        ]);
+        ${DS}form->handleRequest(${DS}request);
+
+        if (${DS}form->isSubmitted() && ${DS}form->isValid() && ${DS}form->has('${SUBMIT}_delete'))
+        {
+            ${DS}handle = ${DS}${CONTEXT}DeleteHandler->handle(${DS}${CONTEXT}DeleteDTO);
+
+            ${DS}this->addFlash
+            (
+                'page.delete',
+                ${DS}handle instanceof ${CONTEXT} ? 'success.delete' : 'danger.delete',
+                '${DOMAIN}.admin',
+                ${DS}handle
+            );
+
+            return ${DS}handle instanceof ${CONTEXT} ? ${DS}this->redirectToRoute('${CONTEXT}:admin.index') : ${DS}this->redirectToReferer();
+        }
+
+        return ${DS}this->render([
+                'form' => ${DS}form->createView(),
+                'name' => ${DS}${CONTEXT}Event->getNameByLocale(${DS}this->getLocale()), // название согласно локали
+            ]);
+    }
+}

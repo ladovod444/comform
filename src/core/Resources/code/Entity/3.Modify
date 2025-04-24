@@ -1,0 +1,132 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+
+#end
+
+#set( $table = $NAME.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
+#set( $EventClass = $NAME.replace("Modify", "Event") )
+
+use BaksDev\Core\Type\Modify\Modify\ModifyActionNew;
+use BaksDev\Core\Type\Modify\Modify\ModifyActionUpdate;
+use BaksDev\Users\User\Entity\User;
+use BaksDev\Users\User\Type\Id\UserUid;
+use BaksDev\Core\Entity\EntityEvent;
+use BaksDev\Core\Entity\EntityState;
+use BaksDev\Core\Type\Ip\IpAddress;
+use BaksDev\Core\Type\Modify\ModifyAction;
+use DateTimeImmutable;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use InvalidArgumentException;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/* Модификаторы событий ${NAME} */
+
+interface ${NAME}Interface
+{
+   public function getAction() : ModifyAction;
+}
+
+#[ORM\Entity]
+#[ORM\Table(name: '${table}')]
+#[ORM\Index(columns: ['action'])]
+class ${NAME} extends EntityEvent
+{
+    /** ID события */
+    #[Assert\NotBlank]
+    #[Assert\Uuid]
+    #[ORM\Id]
+    #[ORM\OneToOne(inversedBy: 'modify', targetEntity: ${EventClass}::class)]
+    #[ORM\JoinColumn(name: 'event', referencedColumnName: 'id')]
+    private ${EventClass} ${DS}event;
+
+    /** Модификатор */
+    #[Assert\NotBlank]
+    #[ORM\Column(type: ModifyAction::TYPE)]
+    private ModifyAction ${DS}action;
+
+    /** Дата */
+    #[Assert\NotBlank]
+    #[ORM\Column(name: 'mod_date', type: Types::DATETIME_IMMUTABLE)]
+    private DateTimeImmutable ${DS}modDate;
+
+    /** ID пользователя  */
+    #[ORM\Column(type: UserUid::TYPE, nullable: true)]
+    private ?UserUid ${DS}usr = null;
+
+    /** Ip адресс */
+    #[Assert\NotBlank]
+    #[ORM\Column(type: IpAddress::TYPE)]
+    private IpAddress ${DS}ip;
+
+    /** User-agent */
+    #[Assert\NotBlank]
+    #[ORM\Column(type: Types::TEXT)]
+    private string ${DS}agent;
+
+
+    public function __construct(${EventClass} ${DS}event)
+    {
+        ${DS}this->event = ${DS}event;
+        ${DS}this->modDate = new DateTimeImmutable();
+        ${DS}this->ip = new IpAddress('127.0.0.1');
+        ${DS}this->agent = 'console';
+        ${DS}this->action = new ModifyAction(ModifyActionNew::class);
+    }
+
+	public function __clone() : void
+	{
+		${DS}this->modDate = new DateTimeImmutable();
+		${DS}this->action = new ModifyAction(ModifyActionUpdate::class);
+		${DS}this->ip = new IpAddress('127.0.0.1');
+		${DS}this->agent = 'console';
+	}
+
+	public function __toString(): string
+    {
+        return (string) ${DS}this->event;
+    }
+
+    public function getDto(${DS}dto) : mixed
+    {
+        if(${DS}dto instanceof ${NAME}Interface)
+        {
+            return parent::getDto(${DS}dto);
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', ${DS}dto::class));
+    }
+
+    public function setEntity(${DS}dto) : mixed
+    {
+        if(${DS}dto instanceof ${NAME}Interface)
+        {
+            return parent::setEntity(${DS}dto);
+        }
+
+        throw new InvalidArgumentException(sprintf('Class %s interface error', ${DS}dto::class));
+    }
+
+
+    public function upModifyAgent(IpAddress ${DS}ip, string ${DS}agent) : void
+    {
+        ${DS}this->ip = ${DS}ip;
+        ${DS}this->agent = ${DS}agent;
+        ${DS}this->modDate = new DateTimeImmutable();
+    }
+
+    public function setUsr(UserUid|User|null ${DS}usr) : void
+    {
+        ${DS}this->usr = ${DS}usr instanceof User ? ${DS}usr->getId() : ${DS}usr;
+    }
+
+    public function equals(mixed ${DS}action) : bool
+    {
+        return ${DS}this->action->equals(${DS}action);
+    }
+}

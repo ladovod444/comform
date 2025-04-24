@@ -1,0 +1,164 @@
+{% set arr_property = card.categorySectionField %}
+
+
+
+<main class="main container  mb-5">
+
+
+    {{ include(_self|replace({ "content.html.twig": "/includes/breadcrumb.html.twig" })) }}
+
+
+    {#    <h1 class="h3 text-uppercase fw-bolder"> #}
+    {#        {{ card.productName }} #}
+    {#    </h1> #}
+
+    {#    <div class="d-flex align-items-center gap-3"> #}
+
+    {# TODO: Озывы и рейтинг  #}
+    {# {{ include(_self|replace({ "content.html.twig": "rating.html.twig" })) }} #}
+
+
+    {# Свойства, учавствующие в превью карточки #}
+    {#    {% for name_property in  arr_property | filter(props => props.field_card is defined and props.field_card == true) %} #}
+    {#        {{ name_property.field_value|call_twig_func(name_property.field_type~'_render') }} #}
+    {#    {% endfor %} #}
+
+    {#    #}{# Если дата начала активности меньше 1 месяца - НОВИНКА  #}
+    {#            {% if date() < card.productActiveFrom|date_modify("+1 month") %} #}
+    {#                <span class="badge bg-success rounded-2">Новинка</span> #}
+    {#            {% endif %} #}
+
+    {# <span class="badge bg-danger rounded-2">Акция</span> #}
+    {# <span class="badge bg-hit rounded-2">Хит</span> #}
+    {# <span class="badge bg-light text-muted rounded-2">Модель производится с 1923</span> #}
+    {#    </div> #}
+
+
+    {#    <div class="d-flex gap-5 mt-5"> #}
+
+    {# LIGHTBOX  #}
+
+
+    {# ГЛАВНОЕ ФОТО #}
+
+{#    {% set product_modification_image = card.product_modification_image|json_decode %}#}
+{#    {% set product_variation_image = card.product_variation_image|json_decode %}#}
+{#    {% set product_offer_images = card.product_offer_images|json_decode %}#}
+    {% set product_photo = card.ProductImages %}
+{#    {% set root_image = null %}#}
+
+{#    #}{# Определяем главное фото #}
+{#    {% for modification_image in product_modification_image | filter(img =>  img.product_img_root is defined and img.product_img_root == true) %}#}
+{#        {% set root_image = modification_image %}#}
+{#    {% endfor %}#}
+
+{#    {% if root_image is null %}#}
+{#        {% for variation_image in product_variation_image | filter(img => img.product_img_root is defined and img.product_img_root == true) %}#}
+{#            {% set root_image = variation_image %}#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
+
+{#    {% if root_image is null %}#}
+{#        {% for offer_images in product_offer_images | filter(img => img.product_img_root is defined and img.product_img_root == true) %}#}
+{#            {% set root_image = offer_images %}#}
+
+{#        {% endfor %}#}
+{#    {% endif %}#}
+
+{#    {% if root_image is null %}#}
+{#        {% for product_images in product_photo | filter(img => img.product_img_root is defined and img.product_img_root == true) %}#}
+{#            {% set root_image = product_images %}#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
+
+
+
+{#    #}{# Обложка  #}
+{#    {% set image_path = '/assets/img/blank.svg' %}#}
+
+{#    {% if root_image.product_img_ext is defined and root_image.product_img_ext is not null %}#}
+{#        {% set img_host = root_image.product_img_cdn == true  ? CDN_HOST : '' %}#}
+{#        {% set img_dir = root_image.product_img %}#}
+{#        {% set img_file = (img_host is empty ? '/image.' : '/medium.') ~ root_image.product_img_ext %}#}
+{#        {% set image_path = img_host ~ img_dir ~ img_file %}#}
+{#    {% endif %}#}
+
+
+
+{#    #}{# ДОПОЛНИТЕЛЬНЫЕ ФОТО #}
+
+{#    {% for modification_image in product_modification_image | filter(img => img.product_img_ext is defined) | sort((a, b) => a.product_img_root < b.product_img_root) %}#}
+
+{#        #}{# Обложка  #}
+{#        {% set image_path = '/assets/img/blank.svg' %}#}
+
+{#        {% if modification_image.product_img_ext is defined and modification_image.product_img_ext is not null %}#}
+{#            {% set img_host = modification_image.product_img_cdn == true  ? CDN_HOST : '' %}#}
+{#            {% set img_dir = modification_image.product_img %}#}
+{#            {% set img_file = (img_host is empty ? '/image.' : '/medium.') ~ modification_image.product_img_ext %}#}
+{#            {% set image_path = img_host ~ img_dir ~ img_file %}#}
+{#        {% endif %}#}
+
+{#    {% endfor %}#}
+
+
+{#    {% for variation_image in product_variation_image | filter(img => img.product_img_ext is defined) | sort((a, b) => a.product_img_root < b.product_img_root) %}#}
+
+
+{#        #}{# Обложка  #}
+{#        {% set image_path = '/assets/img/blank.svg' %}#}
+
+{#        {% if variation_image.product_img_ext is defined and variation_image.product_img_ext is not null %}#}
+{#            {% set img_host = variation_image.product_img_cdn == true  ? CDN_HOST : '' %}#}
+{#            {% set img_dir = variation_image.product_img %}#}
+{#            {% set img_file = (img_host is empty ? '/image.' : '/medium.') ~ variation_image.product_img_ext %}#}
+{#            {% set image_path = img_host ~ img_dir ~ img_file %}#}
+{#        {% endif %}#}
+
+{#    {% endfor %}#}
+
+
+{#    {% for offer_images in product_offer_images | filter(img => img.product_img_ext is defined) %}#}
+
+
+{#        #}{# Обложка  #}
+{#        {% set image_path = '/assets/img/blank.svg' %}#}
+
+{#        {% if offer_images.product_img_ext is defined and offer_images.product_img_ext is not null %}#}
+{#            {% set img_host = offer_images.product_img_cdn == true  ? CDN_HOST : '' %}#}
+{#            {% set img_dir = offer_images.product_img %}#}
+{#            {% set img_file = (img_host is empty ? '/image.' : '/medium.') ~ offer_images.product_img_ext %}#}
+{#            {% set image_path = img_host ~ img_dir ~ img_file %}#}
+{#        {% endif %}#}
+
+{#    {% endfor %}#}
+
+{#    #}{# Минимальная цена торговых предложений  #}
+
+{#    #}{# Обложка  #}
+{#    {% set image_path = '/assets/img/blank.svg' %}#}
+
+{#    {% if card.category_cover_ext is defined and card.category_cover_ext is not null %}#}
+{#        {% set img_host = card.category_cover_cdn == true  ? CDN_HOST : '' %}#}
+{#        {% set img_dir = card.category_cover_dir %}#}
+{#        {% set img_file = (img_host is empty ? '/image.' : '/small.') ~ card.category_cover_ext %}#}
+{#        {% set image_path = img_host ~ img_dir ~ img_file %}#}
+{#    {% endif %}#}
+
+
+    {% set root_image = card.getProductImagesSortByRoot|first %}
+    {% set image_path = '/assets/img/blank.svg' %}
+
+    {% if root_image.product_img_ext is defined and root_image.product_img_ext is not null %}
+        {% set image_path = cdn_image_path(root_image.product_img, root_image.product_img_ext, root_image.product_img_cdn) %}
+    {% endif %}
+
+    {{ include(_self|replace({ "content.html.twig" : "/includes/product-card.html.twig" })) }}
+    {#    {% include Template('@core:user/'~baks_settings.device~'/includes/product-card.html.twig') %} #}
+
+
+    {{ include(_self|replace({ "content.html.twig": "/includes/alternative.html.twig" })) }}
+
+</main>
+
+

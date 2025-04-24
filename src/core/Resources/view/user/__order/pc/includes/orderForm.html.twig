@@ -1,0 +1,148 @@
+<section class="container pt-2">
+    <div class="d-flex align-items-center gap-5 mb-5">
+        <h2 class="fs-4 mb-1">
+            Оформление заказа
+        </h2>
+        <a href="" class="text-black fw-medium fs-6 ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-key me-2"
+                 viewBox="0 0 16 16">
+                <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+                <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+            </svg>
+            Авторизоваться
+        </a>
+    </div>
+
+    <form class="row justify-content-between fw-medium border-bottom pb-5 mb-5">
+        <div class="col-3 d-flex flex-column ">
+
+            <div class="">
+                <label for="Region" class="form-label">Регион получателя*</label>
+                <select id="Region" class="form-select" data-select="select2">
+                    <option selected>Название региона</option>
+                    <option>...</option>
+                </select>
+            </div>
+
+            <div class="">
+                <label for="locality" class="form-label">Населенный пункт*</label>
+                <select id="locality" class="form-select" data-select="select2">
+                    <option selected>Название населенного пункта</option>
+                    <option>...</option>
+                </select>
+            </div>
+
+            <div class="">
+                <label for="address" class="form-label">Адрес доставки*</label>
+                <input type="text" class="form-control" id="address">
+            </div>
+
+        </div>
+
+        <div class="col-3 d-flex flex-column gap-3">
+
+            <div class="">
+                <label for="Name" class="form-label">Ваше имя*</label>
+                <input type="text" class="form-control" id="Name">
+            </div>
+
+            <div class="">
+                <label for="Telephone" class="form-label">Телефон*</label>
+                <input type="text" class="form-control" id="Telephone">
+            </div>
+
+            <div class="">
+                <label for="Email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="Email">
+            </div>
+
+        </div>
+
+        <div class="col-3">
+            <div class="d-flex flex-column h-100">
+                <label for="Сomment" class="form-label">Комментарий к заказу</label>
+                <textarea class="form-control h-100" style="resize: none;" id="Сomment"></textarea>
+            </div>
+        </div>
+
+    </form>
+
+
+    <h3 class="fs-6 mb-5">
+        Способы оплаты и доставки
+    </h3>
+    <div class="row  fw-medium">
+        <div class="col-4 me-5">
+            <div class="form-check ">
+                <input class="form-check-input order-input" type="radio" name="Payment" id="flexRadioCashToCourier"
+                       checked>
+                <label class="form-check-label" for="flexRadioCashToCourier">
+                    Наличными курьеру
+                </label>
+            </div>
+            <p class="text-secondary mb-2 text-nowrap" style="font-size:12px;">
+                Оплата производится наличными деньгами, в момент получения заказа. <br> Подтверждением вашей оплаты
+                является фискальный кассовый чек, <br> вручаемый во время получения и оплаты заказа.
+            </p>
+            <div class="form-check">
+                <input class="form-check-input order-input" type="radio" name="Payment" id="flexRadioDTerminal">
+                <label class="form-check-label" for="flexRadioDTerminal">
+                    Оплата через терминал
+                </label>
+            </div>
+        </div>
+
+        <div class="col-4 me-4">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="form-check ">
+                    <input class="form-check-input order-input" type="radio" name="Delivery"
+                           id="flexRadioDeliveryMoscow" checked>
+                    <label class="form-check-label" for="flexRadioDeliveryMoscow">
+                        Доставка по Москве курьером
+                    </label>
+                </div>
+                <p class="mb-1 fw-normal">
+                    1 999 р.
+                </p>
+            </div>
+            <p class="text-secondary mb-2" style="font-size:12px;">
+                Доставка по Москве крупногабаритного товара осуществляется курьером на автомобилях .. Доставка в
+                пределах МКАД
+            </p>
+            <div class="form-check mb-2">
+                <input class="form-check-input order-input" type="radio" name="Delivery" id="flexRadioDeliveryRF">
+                <label class="form-check-label" for="flexRadioDeliveryRF">
+                    Доставка по РФ до терминала ТК в Москве
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input order-input" type="radio" name="Delivery" id="flexRadioSelf">
+                <label class="form-check-label" for="flexRadioSelf">
+                    Самовывоз Химки (бесплатно)
+                </label>
+            </div>
+        </div>
+
+        <div class="col-3 px-0 price-width">
+            <div class="w-100 px-4 pt-4 pb-1 bg-light rounded-4">
+                <div class="d-flex align-items-center justify-content-between fw-bold">
+                    <p class="fs-5">Итого</p>
+                    <p class="fs-4">158 000 р.</p>
+                </div>
+                <form action="#">
+                    <button class="btn btn-dark py-2 mb-2  w-100" style="font-weight: 500;">
+                        Оформить заказ
+                    </button>
+                </form>
+                <p class="text-secondary" style="font-size:11px;">
+                    Нажимая на кнопку «Оформить заказ» Вы соглашаетесь
+                    с условиями
+                    <a href="#" class="text-secondary">пользовательского соглашения.</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<hr class="mt-4">

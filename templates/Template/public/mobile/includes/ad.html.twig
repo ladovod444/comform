@@ -1,0 +1,8 @@
+<section class="container mb-4">
+  {% for i in 1..total_items %}
+    <a  href="#">
+      {# {% set random_color = ["f2f0f0", "ffe4d7", "ffd7e4", "ffe4e4", "f2f0e4"][random(0, 4)] %} #}
+      <img class="d-block w-100 rounded-4 mb-2" src="https://placehold.co/280x280?text=Акционный+баннер" alt="Акционный баннер{{ i }}">
+    </a>
+  {% endfor %}
+</section>

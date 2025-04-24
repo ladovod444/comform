@@ -1,0 +1,100 @@
+<section class="container py-3">
+    <div class="carousel carousel-fade slide mb-3" data-bs-touch="true" data-bs-ride="carousel" id="carouselKitchen">
+        {% set total_items = 2 %}
+
+        <div class="carousel-indicators button-position justify-content-start" style="margin-left: 8%;">
+        {% for i in 0..total_items %}
+            <button type="button" data-bs-target="#carouselKitchen" data-bs-slide-to="{{i}}" class="{{ i == 0 ? 'active' : '' }} " aria-current="true" aria-label="Slide {{i+1}}"></button>
+        {% endfor %}
+        </div>
+
+        <div class="carousel-inner rounded-4" style="height: 320px;">
+        
+            {% for i in 0..total_items %}
+                <div class="carousel-item {{ i == 0 ? 'active' : '' }} h-100 position-relative rounded-4" style="background: center url(/assets/comfort/img/kitchenBanner.webp)">
+                    <div class="carousel-caption carousel-caption-mobile carousel-caption-tablet text-light mb-5">
+                        <h2 class="ms-5">Наименование кухни {{i + 1}}</h2>
+                        <p class="fs-6 ms-5">Описание кухни {{i + 1}} </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <h3 class="fs-5 fw-normal mb-3">Кухни от мебельной фабрики <br> Comfort Avenue</h3>
+    <p class="small"> В Comfort Avenue мы стремимся создавать пространства, которые сочетают в себе элегантность, функциональность и инновационный дизайн. Наша мебель и фурнитура изготавливаются из высококачественных материалов с использованием передовых технологий, гарантируя надежность и долговечность каждого изделия. </p>
+    <p class="mb-5 small" > Наша команда профессионалов внимательно относится к потребностям каждого клиента, предлагая индивидуальные решения и персонализированный подход к каждому проекту. Мы стремимся преодолеть ожидания и создать мебель, которая станет настоящим украшением вашего дома.</p>
+
+    
+    <div class="row row-cols-4  px-1" style="font-size: 12px;">
+        <div class="col p-1">
+        <div class="text-center border rounded-4 h-100 px-1  position-relative" style="padding-top: 40px;">
+            <p class=>
+            <strong>Свяжитесь с нами и&nbsp;приезжайте к нам <br> в офис</strong>
+            </p>
+            <a class="link-danger">
+            Контакты
+            </a>
+            <span class="position-absolute top-0 start-50 translate-middle p-4 bg-white border  rounded-circle">
+            <span class="visually-hidden">Номер шага</span>
+            </span>
+            <span class="position-absolute  start-50 translate-middle fs-4 step-number-position">
+            1
+            </span>
+        </div>
+        </div>
+        <div class="col p-1">
+        <div class="text-center border rounded-4 h-100 px-1 position-relative" style="padding-top: 40px;">
+            <p class=>
+            <strong>Выберите внешний вид</strong>
+            </p>
+            <p class="mb-0">
+            Определитесь с цветом, стилем и внешним видом фасада
+            </p>
+            <span class="position-absolute top-0 start-50 translate-middle p-4 bg-white border  rounded-circle">
+            <span class="visually-hidden">Номер шага</span>
+            </span>
+            <span class="position-absolute  start-50 translate-middle fs-4 step-number-position">
+            2
+            </span>
+        </div>
+        </div>
+        <div class="col p-1">
+        <div class="text-center border rounded-4 h-100 pt-4 px-1 pb-2 position-relative">
+            <p class=''>
+            <strong>Замерьте свою кухню</strong>
+            </p>
+            <p  class="mb-2">
+            Создайте проект вместе с нашей командой специалистов
+            </p>
+            <button class="btn btn-dark py-1 px-3" style="font-size: 14px;">Заказать замер</button>
+            <span class="position-absolute top-0 start-50 translate-middle p-4 bg-white border  rounded-circle">
+            <span class="visually-hidden">Номер шага</span>
+            </span>
+            <span class="position-absolute  start-50 translate-middle fs-4 step-number-position">
+            3
+            </span>
+        </div>
+        </div>
+        <div class="col p-1">
+        <div class="text-center border rounded-4 h-100 px-1 position-relative"style="padding-top: 40px;"> 
+            <p class=>
+            <strong>Придем, соберем и&nbsp;установим</strong>
+            </p>
+            <p  class="mb-0">
+            Для кухонь от 200 000 р. <br> сборка <strong>бесплатна</strong>
+            </p>
+            <span class="position-absolute top-0 start-50 translate-middle p-4 bg-white border  rounded-circle">
+            <span class="visually-hidden">Номер шага</span>
+            </span>
+            <span class="position-absolute  start-50 translate-middle fs-4 step-number-position">
+            4
+            </span>
+        </div>
+        </div>
+    </div>
+
+</section>
+
+<hr class="mt-0 mb-3">

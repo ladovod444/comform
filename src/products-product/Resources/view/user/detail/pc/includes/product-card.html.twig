@@ -1,0 +1,317 @@
+{% set totalitems = 5 %}
+
+<section class="container pb-5">
+    <div class="row">
+        <div class="col-8 pe-4">
+
+            <div class="carousel slide"
+                 id="productPageCarousel"
+                 data-bs-wrap="true"
+                 style="height: 541px; margin-bottom: 140px">
+
+                <div class="carousel-inner mb-2 h-100 rounded-4">
+                    {% for k,product_images in product_photo | filter(img => img.product_img_ext is defined) | sort((a, b) => a.product_img_root < b.product_img_root) %}
+
+                        {# Обложка  #}
+                        {% set image_path = '/assets/img/blank.svg' %}
+
+                        {% if product_images.product_img_ext is defined and product_images.product_img_ext is not null %}
+                            {% set img_host = product_images.product_img_cdn == true  ? CDN_HOST : '' %}
+                            {% set img_dir = product_images.product_img %}
+                            {% set img_file = (img_host is empty ? '/image.' : '/medium.') ~ product_images.product_img_ext %}
+                            {% set image_path = img_host ~ img_dir ~ img_file %}
+                        {% endif %}
+
+                        <div class="carousel-item {{ k == 0 ? 'active' : '' }}  ">
+                            <img src="{{ image_path }}" class="w-100" alt="Изображение товара">
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <button class="carousel-control-prev"
+                        aria-label="Кнопка переключения слайда"
+                        type="button"
+                        data-bs-target="#productPageCarousel"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+
+                <button class="carousel-control-next"
+                        aria-label="Кнопка переключения слайда"
+                        type="button"
+                        data-bs-target="#productPageCarousel"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+
+                <div class="carousel-indicators product-carousel-indicators">
+                    {% for k,product_images in product_photo | filter(img => img.product_img_ext is defined) | sort((a, b) => a.product_img_root < b.product_img_root) %}
+
+
+                        {# Обложка  #}
+                        {% set image_path = '/assets/img/blank.svg' %}
+
+                        {% if product_images.product_img_ext is defined and product_images.product_img_ext is not null %}
+                            {% set img_host = product_images.product_img_cdn == true  ? CDN_HOST : '' %}
+                            {% set img_dir = product_images.product_img %}
+                            {% set img_file = (img_host is empty ? '/image.' : '/medium.') ~ product_images.product_img_ext %}
+                            {% set image_path = img_host ~ img_dir ~ img_file %}
+                        {% endif %}
+
+                        <button type="button" class="{{ k == 0 ? 'active' : '' }} "
+                                data-bs-target="#productPageCarousel"
+                                data-bs-slide-to="{{ k }}">
+                            <div class=" rounded-3 icon bg-contain lazy"
+                                 data-bg="{{ image_path }}"
+                                 alt="{{ PRODUCT_NAME }}">
+                            </div>
+                        </button>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <ul class="list-group list-group-horizontal productCadr-tabs-gap px-3 mb-2" id="pills-tab" role="tablist">
+                {% if card.productDescription %}
+                    <li class="list-group-item border-0 p-0" role="presentation">
+                        <button class="btn active p-0 productCardTabs text-decoration-underline"
+                                id="pills-description-tab"
+                                data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab"
+                                aria-controls="pills-description" aria-selected="true">Описание
+                        </button>
+                    </li>
+                {% endif %}
+                {#                <li class="list-group-item border-0 p-0" role="presentation"> #}
+                {#                    <button class="btn p-0 productCardTabs text-decoration-underline" id="pills-props-tab" #}
+                {#                            data-bs-toggle="pill" data-bs-target="#pills-props" type="button" role="tab" #}
+                {#                            aria-controls="pills-props" aria-selected="false">Характеристики #}
+                {#                    </button> #}
+                {#                </li> #}
+                <li class="list-group-item border-0 p-0" role="presentation">
+                    <button class="btn p-0 productCardTabs text-decoration-underline" id="pills-delivery-tab"
+                            data-bs-toggle="pill" data-bs-target="#pills-delivery" type="button" role="tab"
+                            aria-controls="pills-delivery" aria-selected="false">Доставка
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active flex-column " id="pills-description" role="tabpanel"
+                     aria-labelledby="pills-description-tab" tabindex="0">
+                    <p class="mb-4">
+                        {{ card.productDescription|raw }}
+                    </p>
+                </div>
+                {#                <div class="tab-pane fade bg-light flex-column gap-5 p-5" id="pills-props" role="tabpanel" #}
+                {#                     aria-labelledby="pills-props-tab" tabindex="0"> #}
+                {#                    <div class="d-flex"> #}
+                {#                        <div class="col-4 back-image border-end border-2 border-black" style="height: 220px;"> #}
+
+                {#                        </div> #}
+                {#                        <div class="col-2 fw-medium align-content-center ps-2"> #}
+                {#                            80 #}
+                {#                        </div> #}
+                {#                        <div class="col-6 d-flex"> #}
+                {#                            <div class="col-8 align-content-end"> #}
+                {#                                <ul class="list-unstyled fw-medium m-0"> #}
+                {#                                    {% for i in 1..7 %} #}
+                {#                                        <li class="list-group-item {{ i == 7 ? 'mb-0' : 'mb-2' }}"> #}
+                {#                                            Характеристика {{ i }} #}
+                {#                                        </li> #}
+                {#                                    {% endfor %} #}
+                {#                                </ul> #}
+                {#                            </div> #}
+                {#                            <div class="col-4 align-content-end"> #}
+                {#                                <ul class="list-unstyled text-nowrap m-0"> #}
+                {#                                    {% for i in 1..7 %} #}
+                {#                                        <li class="list-group-item {{ i == 7 ? 'mb-0' : 'mb-2' }}"> #}
+                {#                                            Значение {{ i }} #}
+                {#                                        </li> #}
+                {#                                    {% endfor %} #}
+                {#                                </ul> #}
+                {#                            </div> #}
+                {#                        </div> #}
+                {#                    </div> #}
+
+                {#                    <div class="d-flex"> #}
+                {#                        <div class="col-6 d-flex"> #}
+                {#                            <div class="col-6"> #}
+                {#                                <ul class="list-unstyled fw-medium mb-0"> #}
+                {#                                    {% for i in 1..3 %} #}
+                {#                                        <li class="list-group-item {{ i == 3 ? 'mb-0' : 'mb-2' }}"> #}
+                {#                                            Характеристика {{ i }} #}
+                {#                                        </li> #}
+                {#                                    {% endfor %} #}
+                {#                                </ul> #}
+                {#                            </div> #}
+                {#                            <div class="col-6"> #}
+                {#                                <ul class="list-unstyled  mb-0"> #}
+                {#                                    {% for i in 1..3 %} #}
+                {#                                        <li class="list-group-item {{ i == 3 ? 'mb-0' : 'mb-2' }}"> #}
+                {#                                            Значение {{ i }} #}
+                {#                                        </li> #}
+                {#                                    {% endfor %} #}
+                {#                                </ul> #}
+                {#                            </div> #}
+                {#                        </div> #}
+                {#                        <div class="col-6 d-flex"> #}
+                {#                            <div class="col-8"> #}
+                {#                                <ul class="list-unstyled fw-medium mb-0"> #}
+                {#                                    {% for i in 1..3 %} #}
+                {#                                        <li class="list-group-item {{ i == 3 ? 'mb-0' : 'mb-2' }} "> #}
+                {#                                            Характеристика {{ i }} #}
+                {#                                        </li> #}
+                {#                                    {% endfor %} #}
+                {#                                </ul> #}
+                {#                            </div> #}
+                {#                            <div class="col-4"> #}
+                {#                                <ul class="list-unstyled text-nowrap mb-0"> #}
+                {#                                    {% for i in 1..3 %} #}
+                {#                                        <li class="list-group-item {{ i == 3 ? 'mb-0' : 'mb-2' }}"> #}
+                {#                                            Значение {{ i }} #}
+                {#                                        </li> #}
+                {#                                    {% endfor %} #}
+                {#                                </ul> #}
+                {#                            </div> #}
+                {#                        </div> #}
+                {#                    </div> #}
+
+                {#                </div> #}
+                <div class="tab-pane fade" id="pills-delivery" role="tabpanel" aria-labelledby="pills-delivery-tab"
+                     tabindex="0">
+                </div>
+            </div>
+        </div>
+        <div class="col-4 sticky-top" style="height:max-content!important;">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="fs-4 mb-1">
+                    {{ card.productName }}
+                </h2>
+                {#                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#eeeeee" class="bi bi-heart-fill" #}
+                {#                     viewBox="0 0 16 16"> #}
+                {#                    <path fill-rule="evenodd" #}
+                {#                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/> #}
+                {#                </svg> #}
+            </div>
+            <p class="text-secondary">
+
+            </p>
+            {#      <div class="d-flex mb-2"> #}
+            {#            {% for i in 1..4 %} #}
+            {#            <div class="form-check"> #}
+            {#            {% set random_color = ["f2f0f0", "ffe4d7", "ffd7e4", "ffe4e4", "f2f0e4"][random(0, 4)] %} #}
+            {#                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="colorProductButton{{ i }}" aria-label="Выбор цвета" style="width:16px; height:16px; background-color:#{{random_color}};"> #}
+            {#                <label class="form-check-label" for="colorProductButton{{ i }}"></label> #}
+            {#            </div> #}
+            {#            {% endfor %} #}
+            {#      </div> #}
+            <div class="d-flex gap-2 mb-2 lh-1">
+
+                <p class="fs-3 m-0"><strong>{{ money(card.productPrice) }}</strong></p>
+                {% if card.productOldPrice > card.productPrice %}
+                    <p class="text-danger small m-0 pt-1"><strong>
+                            <del>{{ money(card.productOldPrice) }}</del>
+                        </strong></p>
+                {% endif %}
+            </div>
+
+            {# В наличии #}
+            {#        {% set presence = product_offers|filter(v => v.quantity > 0)|length %} #}
+            {#      <p class="text-success small fw-medium"> #}
+            {#        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16"> #}
+            {#         <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/> #}
+            {#        </svg> #}
+            {#        В наличии: {{ presence }}. #}
+            {#      </p> #}
+            <hr>
+
+            <h3 class="fs-6 fw-bold mb-3">
+                Основные характеристики
+            </h3>
+            <div class="row">
+                <div class="col-5  fw-medium">
+                    {% if card.productOfferValue is defined %}
+                        <p class="mb-2">
+                            Модель
+                        </p>
+                        <p class="mb-2">
+                            {{ card.productOfferName }}
+                        </p>
+                    {% endif %}
+                    {# Свойства, учавствующие в харкатеристиках #}
+                    {% for name_property in  arr_property | filter(props => props.field_public is defined and props.field_public == true  and props.field_value and props.field_value != 'false') %}
+                        <p class="w-50">
+                            {{ name_property.field_trans }}
+                        </p>
+                    {% endfor %}
+                </div>
+                <div class="col">
+                    {% if card.productOfferValue is defined %}
+                        <p class="mb-2">
+                            <a href="{{ path('products-product:user.model', { category: card.categoryUrl, url: card.productUrl }) }}"
+                               class="text-muted"
+                               aria-label="{{ card.productName }}"
+                               title="{{ card.productName }}">
+                                {{ card.productName }}
+                            </a>
+                        </p>
+                        <p class="mb-2">
+                            {{ card.productOfferValue|call_twig_func(card.productOfferReference~'_render') }}
+                        </p>
+                    {% endif %}
+                    {# Свойства, учавствующие в харкатеристиках #}
+                    {% for name_property in  arr_property | filter(props => props.field_public is defined and props.field_public == true  and props.field_value and props.field_value != 'false') %}
+                        <p class="w-50 d-flex gap-3 align-items-start">
+                            {{ name_property.field_value|call_twig_func(name_property.field_type~'_render') }}
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+            <hr>
+
+            <div class="mb-4">
+                <a class="btn btn-dark w-50 fw-medium"
+                   data-bs-toggle="modal"
+                   data-bs-target="#modal"
+                   href="{{ path('orders-order:user.add', {
+                       product: card.productEvent,
+                       offer : card.productOfferUid,
+                       variation : card.productVariationUid,
+                       modification : card.productModificationUid
+                   }) }}">
+                    Купить
+                </a>
+
+                {#                <button class="btn btn-dark w-50 fw-medium" #}
+                {#                        data-scroll="pills-tabContent" #}
+                {#                        data-scroll-position="top" #}
+                {#                > #}
+                {#                    Купить #}
+                {#                </button> #}
+                {#          <button class="btn text-decoration-underline w-50"> #}
+                {#            Купить в 1 клик #}
+                {#          </button> #}
+            </div>
+            <div class="bg-light p-3 pb-4 rounded-4">
+                <p class="fw-bold fs-6 d-flex align-items-center gap-2 mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-bus-front" viewBox="0 0 16 16">
+                        <path d="M5 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm8 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-6-1a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Zm1-6c-1.876 0-3.426.109-4.552.226A.5.5 0 0 0 3 4.723v3.554a.5.5 0 0 0 .448.497C4.574 8.891 6.124 9 8 9c1.876 0 3.426-.109 4.552-.226A.5.5 0 0 0 13 8.277V4.723a.5.5 0 0 0-.448-.497A44.303 44.303 0 0 0 8 4Zm0-1c-1.837 0-3.353.107-4.448.22a.5.5 0 1 1-.104-.994A44.304 44.304 0 0 1 8 2c1.876 0 3.426.109 4.552.226a.5.5 0 1 1-.104.994A43.306 43.306 0 0 0 8 3Z"/>
+                        <path d="M15 8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1V2.64c0-1.188-.845-2.232-2.064-2.372A43.61 43.61 0 0 0 8 0C5.9 0 4.208.136 3.064.268 1.845.408 1 1.452 1 2.64V4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v3.5c0 .818.393 1.544 1 2v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V14h6v1.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2c.607-.456 1-1.182 1-2V8ZM8 1c2.056 0 3.71.134 4.822.261.676.078 1.178.66 1.178 1.379v8.86a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 11.5V2.64c0-.72.502-1.301 1.178-1.379A42.611 42.611 0 0 1 8 1Z"/>
+                    </svg>
+                    Доставка
+                </p>
+                <p class="text-secondary ps-4 mb-1">
+                    Информация по доставке расчитывается в соответствии с основными <a href="#"
+                                                                                       class="link text-secondary">тарифами</a>
+                </p>
+                <a href="#" class="icon-link link-dark link-underline-dark ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-question-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                    </svg>
+                    Задать вопрос
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

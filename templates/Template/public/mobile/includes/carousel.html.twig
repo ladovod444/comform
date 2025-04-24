@@ -1,0 +1,33 @@
+
+ <div class=" container carousel  carousel-fade slide mb-4" data-bs-touch="true" data-bs-ride="carousel" id="carouselMain">
+{% set total_items = 2 %}
+            
+            <div class="carousel-indicators button-position justify-content-start" style="margin-left: 10%;">
+            {% for i in 0..total_items %}
+                <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="{{i}}" class="{{ i == 0 ? 'active' : '' }} " aria-current="true" aria-label="Slide {{i+1}}"></button>
+            {% endfor %}
+            </div>
+
+            <div class="carousel-inner rounded-4" style="height: 300px;">
+            
+                {% for i in 0..total_items %}
+                    {% set random_item = random(1, 3) %}
+                    <div class="carousel-item {{ i == 0 ? 'active' : '' }} h-100 position-relative rounded-4">
+                        <img class="d-block " src="/assets/comfort/img/carousel/{{random_item}}.jpg" alt="Изображение {{ i + 1 }}">
+                        <div class="carousel-caption carousel-caption-mobile text-light ">
+                            <h2 class="ms-4">Наименование товара</h2>
+                            <p class="fs-6 ms-4">Описание товара </p>
+                        </div>
+                    </div>
+            {% endfor %}
+            </div>
+            
+            <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselMain" type="button">
+                {# <span class="carousel-control-prev-icon" aria-hidden="true"></span> #}
+                <span class="visually-hidden">Предыдущий</span>
+            </button>
+            <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselMain" type="button">
+                {# <span class="carousel-control-next-icon" aria-hidden="true"></span> #}
+                <span class="visually-hidden">Следующий</span>
+            </button>
+        </div>
