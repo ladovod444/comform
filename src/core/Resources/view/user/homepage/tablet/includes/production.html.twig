@@ -1,0 +1,26 @@
+<section class="container mb-4 position-relative">
+    <h2 class="fs-4 mb-4">Производство</h2>
+
+    <div class="d-flex gap-2 overflow-auto invisibility-scroll">
+        {% set total_items = 10 %}
+        {% for i in 0..total_items %}
+
+            <div class="col-3">
+                <div class="card border-0 pe-0">
+                    {% set random_item = random(5, 7) %}
+                    <img class="card-img-top rounded-4 mb-1" style="height: 160px;"
+                         src="/assets/comfort/img/production/{{ random_item }}.jpg"
+                         alt="Изображение производства {{ i + 1 }}">
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+    <button class="btn scroll-btn scroll-btn-left position-absolute top-50" id="scroll-leftProd" aria-label="left"><span
+                class="carousel-control-prev-icon custom-color" aria-hidden="true"></span></button>
+    <button class="btn scroll-btn scroll-btn-right position-absolute top-50" id="scroll-rightProd" aria-label="right">
+        <span class="carousel-control-next-icon custom-color" aria-hidden="true"></span></button>
+
+
+</section>

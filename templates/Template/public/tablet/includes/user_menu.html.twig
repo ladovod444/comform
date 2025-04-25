@@ -1,0 +1,129 @@
+<button class="btn btn-link btn-sm h-25 lh-1 text-decoration-none"
+        id="user-menu"
+        data-bs-container="body"
+        data-bs-toggle="popover"
+        data-bs-placement="bottom"
+        data-bs-trigger_="onfocus"
+        data-bs-trigger="click"
+        {# data-bs-content="Bottom popover" #}
+        style="width: 50px;"
+>
+    <div class="icon rounded-circle bg-contain lazy p-1"
+            {#         data-bg="{{ baks_profile.user_profile_avatar is defined ? baks_profile.user_profile_avatar : '/assets/img/blank.svg' }}" #}
+         data-bg="{{ baks_profile.user_profile_avatar is defined ? baks_profile.user_profile_avatar : '/assets/white-sign/img/logo_user.png' }}"
+         style="width: 30px; height: 30px;">
+    </div>
+
+</button>
+
+<div id="user-menu-title" class="d-none">
+
+    <div class="dropdown">
+
+        <div class="w-100 float-start text-start btn btn-link text-decoration-none w-100">
+
+            <a href="{{ path('auth-email:user.edit') }}" class="text-decoration-none w-100"
+               title="{{ 'user.page.edit'|trans({}, 'user.account') }}">
+                {{ baks_profile.user_profile_username is defined ? baks_profile.user_profile_username }}
+            </a>
+
+            {# Тип профиля пользователя #}
+            {% if baks_profile.user_profile_type is defined %}
+                <span class="badge bg-light text-dark fw-bolder px-2 py-1">
+                            {{ baks_profile.user_profile_type }}
+                        </span>
+            {% endif %}
+
+            {% if baks_profile.user_profile_contact is defined %}
+                <div class="text-muted small">
+                    {{ baks_profile.user_profile_contact }}
+                </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <ul class="leader list-group list-group-flush w-100 small">
+
+    </ul>
+
+</div>
+
+<div id="user-menu-content" class="d-none">
+
+    <ul class="leader list-group list-group-flush w-100">
+        <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 text-truncate rounded-4">
+
+            <a class="text-decoration-none text-dark w-100"
+               href="{{ path('users-profile-user:user.index') }}">
+                Профили
+            </a>
+
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 text-truncate rounded-4">
+
+            <a href="{{ path('orders-order:user.orders',
+                { status: 'new' 
+                } ) }}"
+               class="text-decoration-none text-dark w-100">
+                Список заказов
+            </a>
+
+        </li>
+
+        {% if app.user.administration %}
+
+            <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 text-truncate rounded-4">
+
+                <a href="{{ path('core:admin.homepage') }}"
+                   class="text-decoration-none text-dark w-100 fw-normal lh-normal"
+                   title="Администрирование">
+                    Администрирование
+                </a>
+            </li>
+
+        {% endif %}
+
+        <li class="list-group">
+            <hr>
+        </li>
+
+        {% if baks_basket is defined %}
+
+            <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 text-truncate rounded-4">
+
+                <a href="{{ path('orders-order:user.basket') }}"
+                   class="text-decoration-none text-dark w-100 fw-normal lh-normal"
+                   title="Корзина">
+                    Корзина
+                </a>
+
+                {% if baks_basket.counter > 0 %}
+                    <span class="badge bg-primary rounded-pill lh-normal">{{ baks_basket.counter }}</span>
+                {% endif %}
+
+            </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+            <li class="list-group-item d-flex justify-content-between bg-transparent border-0 text-truncate rounded-4">
+                <a class="text-decoration-none text-dark w-100"
+                   href="{{ app.request.pathInfo }}?authority=_exit">
+                    Выйти из пользователя
+                </a>
+            </li>
+        {% endif %}
+
+        <li class="list-group-item d-flex justify-content-between bg-transparent border-0 text-truncate rounded-4">
+            <a href="{{ path('auth-email:user.logout') }}"
+               class="text-decoration-none text-dark w-100"
+               title="Выход">
+                Выход
+            </a>
+        </li>
+
+    </ul>
+</div>
+

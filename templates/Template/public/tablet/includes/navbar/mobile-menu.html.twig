@@ -1,0 +1,376 @@
+{% import _self as macros %}
+
+
+{% set image_path = '/assets/img/blank.svg' %}
+ {# Рендеринг элементов меню в зависимости от условий #}
+{% macro item_card(imageSrc, title, url, items, isProduct, isNotCategory) %}
+
+    {% if isNotCategory %}
+
+        <div class="col d-flex gap-2 border-start">
+
+            {% set product_path = path( items[0].is_offer == true ? 'products-product:user.model' : 'products-product:user.detail', {
+                'category': url,
+                'url': items[0].url
+            }) %}
+
+            <a href="{{ product_path }}">
+                <div
+                        class="rounded-4 lazy bg-cover icon" style="width: 70px; height: 70px;"
+                        data-bg="{{ imageSrc }}"
+                        title="{{ title }}"
+                >
+                </div>
+            </a>
+
+            <div>
+
+                {# Если у корневой категории только продукция без вложенных категорий #}
+                <h5 class="fs-6 fw-bold d-block" style="max-width: 190px;">
+
+                    <a
+                            class="text-dark text-decoration-none text-truncate"
+                            href="{{ product_path }}"
+                    >
+                        {{ title }}
+                    </a>
+                </h5>
+
+                {{ include(_self|replace({ "navbar.html.twig": "items.html.twig" })) }}
+
+            </div>
+        </div>
+
+    {% elseif items is not empty %}
+
+        <div class="col d-flex gap-2 border-start">
+
+            {% set catrgory_path = path('products-product:user.catalog.category', {'category': url}) %}
+
+            <a href="{{ catrgory_path }}">
+                <div
+                        class="rounded-4 lazy bg-cover icon" style="width: 70px; height: 70px;"
+                        data-bg="{{ imageSrc }}"
+                        title="{{ title }}"
+                >
+                </div>
+            </a>
+
+            {# Заглавная категория #}
+
+            <div>
+                <h5 class="fs-6 fw-bold">
+                    <a
+                            class="text-dark text-decoration-none text-truncate"
+                            href="{{ catrgory_path }}"
+                    >
+                        {{ title }}
+                    </a>
+                </h5>
+                {{ include(_self|replace({ "navbar.html.twig": "items.html.twig" })) }}
+            </div>
+        </div>
+
+    {% endif %}
+
+
+{% endmacro %}
+
+
+
+
+{% macro item_category(title, i) %}
+
+    {#    <a class="btn text-black d-flex align-items-center" #}
+    {#       href="{{ path('products-product:user.catalog.category', {'category': url}) }}"> #}
+    {#        #}{#        ВСЕ {{ title| upper }} #}
+    {#        {{ title| upper }} #}
+    {#    </a> #}
+
+    <li class="list-group-item border-0 p-0">
+        <button class="btn d-flex align-items-center px-0" style="font-size: 14px;"
+                data-bs-target="#Menu{{ i }}"
+                data-bs-toggle="offcanvas" aria-controls="Menu{{ i }}" type=button>
+            <strong>{{ title }}</strong>
+        </button>
+    </li>
+
+
+{% endmacro %}
+
+
+
+{# menu top #}
+<div class="offcanvas offcanvas-start" id="Menu" aria-labelledby="offcanvasExampleLabel" tabindex="-1">
+
+
+    <div class="offcanvas-header gap-2 pb-0">
+        <button class="btn btn-close d-flex align-items-center gap-1 p-0 m-0 h-100" data-bs-dismiss="offcanvas"
+                aria-label="Закрыть" type="button" style="background-color: black; opacity: 1; width: 45px;"></button>
+        <div class="input-group"><input class="form-control border-end-0" style="height: 32px; font-size:10px;"
+                                        aria-label="Сторока поиска" type="text" placeholder="Поиск"><span
+                    class="input-group-text bg-transparent"><svg class="bi bi-search" xmlns="http://www.w3.org/2000/svg"
+                                                                 width="12" height="12" fill="gray" viewBox="0 0 16 16"><path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path></svg></span>
+        </div>
+    </div>
+
+    <div class="offcanvas-body">
+
+        <h2 class=fs-5>Каталог</h2>
+
+        {# TODO сделать вывод меню #}
+        <ul class="list-group p-2 border-top border-bottom rounded-0">
+
+
+            {% for i, val in baks_public_menu %}
+                {#            {{ val.category_name }} #}
+
+                {% if val.child_category is not null  or  val.child_products is not null  or  val.child_category_three is not null or  val.products is not null %}
+                     {{ macros.item_category(val.category_name, i) }}
+                {% endif %}
+
+            {% endfor %}
+
+        </ul>
+
+
+        <ul class="list-group list-style-none p-2 gap-1" style="font-size: 12px;">
+            <li class=nav-item><a class="nav-link text-black" href="#">О компании</a>
+            <li class="nav-item "><a class="nav-link text-black" href=/comfort/sale> Акции</a>
+            <li class=nav-item><a class="nav-link text-black" href="#">Где купить</a>
+            <li class=nav-item><a class="nav-link text-black" href="#">Оплата и доставка</a>
+            <li class=nav-item><a class="nav-link text-black" href="#">Дизайнерам</a>
+            <li class=nav-item><a class="nav-link text-black" href=/comfort/contact>Контакты</a>
+        </ul>
+        <div class="p-3 d-flex flex-column gap-1 border-top"><a class="text-decoration-none text-black fw-bolder"
+                                                                href="tel:+7(123)456-78-90"
+                                                                style="font-size: 14px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
+                     class="bi bi-telephone me-2" viewBox="0 0 16 16">
+                    <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                </svg>
+                <strong>+7 (800) 555 35 35</strong></a><a class="text-decoration-none text-black"
+                                                          href="mailto:нашапочта@gmail.com" style="font-size: 14px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor class="bi bi-at me-2"
+                     viewBox="0 0 16 16">
+                    <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"/>
+                </svg>
+                <u>Напишите нам</u></a></div>
+
+    </div>
+</div>
+
+
+{# test menu first #}
+
+
+
+{% for i, val in baks_public_menu %}
+
+
+
+    {# TODO Если есть дочерняя подкатегория, то выводим ее название и товары #}
+    {# Иначе выводим только список товаров #}
+
+    {# ЕСТЬ дочерняя подкатегория #}
+    <div class="offcanvas offcanvas-start" id="Menu{{ i }}" aria-labelledby="offcanvasExampleLabel1" tabindex="-1">
+        <div class="offcanvas-header gap-2 pb-0">
+            <button class="btn btn-close d-flex align-items-center gap-1 p-0 m-0 h-100" data-bs-dismiss="offcanvas"
+                    aria-label="Закрыть" type="button"
+                    style="background-color: black; opacity: 1; width: 45px;"></button>
+            <div class="input-group"><input class="form-control border-end-0" style="height: 32px; font-size:10px;"
+                                            aria-label="Сторока поиска" type="text" placeholder="Поиск"><span
+                        class="input-group-text bg-transparent"><svg class="bi bi-search"
+                                                                     xmlns="http://www.w3.org/2000/svg"
+                                                                     width="12" height="12" fill="gray"
+                                                                     viewBox="0 0 16 16"><path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path></svg></span>
+            </div>
+        </div>
+        <div class="offcanvas-body">
+            <button class="btn d-flex align-items-center gap-1" data-bs-target="#Menu" data-bs-toggle="offcanvas"
+                    aria-controls="Menu" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                    <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"></path>
+                </svg>
+                <strong>{{ val.category_name }}</strong></button>
+
+            {# Подкатегория #}
+
+            {% if val.child_category is not null %}
+
+                {% for child in val.child_category|json_decode %}
+                    <div class="d-flex border-top p-3">
+
+                        {% set image_path = '/assets/img/blank.svg' %}
+                        {% if child.child_category_cover_ext is defined and child.child_category_cover_ext is not null %}
+                            {% set image_path =  cdn_image_path(child.child_category_cover_name, child.child_category_cover_ext, child.child_category_cover_cdn) %}
+                        {% endif %}
+
+                        <img class="rounded-4 p-2 lazy" style="width: 70px; height: 70px;" data-src="{{ image_path }}"
+                             alt="Изображение категории">
+                        <ul class="list-group">
+
+                            <h3 class="list-group-item border-0 p-0">
+
+                                <li class="list-group-item border-0 p-0">
+                                    <a class="btn d-flex align-items-center py-0" style="font-size: 14px;"
+                                       href="{{ path('products-product:user.catalog.category', {'category': child.category_url}) }}">
+                                        {{ child.child_category_name }}
+                                    </a>
+
+                                </li>
+
+                            </h3>
+                            {# ТОВАРЫ #}
+                            {% if val.child_products is not null %}
+                                {% for product in val.child_products|json_decode|filter(prod =>  prod.url is not null) %}
+
+                                    {% set image_path =  cdn_image_path(product.image, product.ext, product.cdn) %}
+
+                                    {% set product_path = path( product.is_offer == true ? 'products-product:user.model' : 'products-product:user.detail', {
+                                        'category': product.category_url,
+                                        'url': product.url
+                                    }) %}
+
+
+                                    {% if product.category_url ==  child.category_url %}
+                                        <li class="list-group-item border-0 p-0">
+                                            <a class="btn d-flex align-items-center py-0" style="font-size: 12px;"
+                                               href="{{ product_path }}" type="button">{{ product.name }}</a>
+                                        </li>
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            {% endif %}
+
+                            {# TODO получить child_category у child #}
+                            {% if val.child_category_three is not null %}
+                                {% for child_three in val.child_category_three|json_decode|filter(cat =>  cat.category == child.child_category_event) %}
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item border-0 p-0">
+                                            <a class="btn d-flex align-items-center py-0" style="font-size: 12px;"
+                                               href="{{ path('products-product:user.catalog.category', {'category': child_three.url}) }}">
+                                                {{ child_three.child_category_name }}
+                                            </a>
+
+                                        </li>
+                                    </ul>
+
+                                {% endfor %}
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                {% endfor %}
+
+
+            {# Только товары #}
+            {% else %}
+
+                {% if val.products is not null %}
+
+                    {% for product in val.products|json_decode|filter(prod =>  prod.url is not null) %}
+
+                        {% set image_path = cdn_image_path(product.image, product.ext, product.cdn) %}
+
+                        {% set product_path = path( product.is_offer == true ? 'products-product:user.model' : 'products-product:user.detail', {
+                            'category': product.category_url,
+                            'url': product.url
+                        }) %}
+
+
+{#                        {{ image_path }}#}
+{#                        {{ product.image }}#}
+                        <div class="d-flex border-top p-3">
+                            <img class="rounded-4 p-2 lazy"
+                                 style="width: 70px; height: 70px;"
+                                 data-src="{{ image_path }}"
+{#                                 src="{{ image_path }}"#}
+                                 alt="Изображение товара"
+
+                            >
+
+                            <ul class="list-group">
+                                <li class="list-group-item border-0 p-0">
+                                    <a class="btn d-flex align-items-center py-0" style="font-size: 12px;"
+                                       href="{{ product_path }}" type="button">
+                                        {{ product.name }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endif %}
+
+
+
+
+            {#            <div class="d-flex border-top p-3"><img class="rounded-4 p-2" style="width: 70px; height: 70px;" #}
+            {#                                                    src="/assets/comfort/img/1.jpg" alt="Изображение категории"> #}
+            {#                <ul class="list-group"><h3 class="list-group-item border-0 p-0"><a class="btn d-flex align-items-center" #}
+            {#                                                                                   style="font-size: 14px;" #}
+            {#                                                                                   href="/comfort/kitchens">Подкатегория #}
+            {#                            2</a></h3> #}
+            {#                    <li class="list-group-item border-0 p-0"><a class="btn d-flex align-items-center py-0" #}
+            {#                                                                style="font-size: 12px;" href="/comfort/productPage" #}
+            {#                                                                type="button">Тип товара 1</a></li> #}
+            {#                    <li class="list-group-item border-0 p-0"><a class="btn d-flex align-items-center py-0" #}
+            {#                                                                style="font-size: 12px;" href="/comfort/productPage" #}
+            {#                                                                type="button">Тип товара 2</a></li> #}
+            {#                    <li class="list-group-item border-0 p-0"><a class="btn d-flex align-items-center py-0" #}
+            {#                                                                style="font-size: 12px;" href="/comfort/productPage" #}
+            {#                                                                type="button">Тип товара 3</a></li> #}
+            {#                </ul> #}
+            {#            </div> #}
+            {#            <div class="d-flex border-top p-3"><img class="rounded-4 p-2" style="width: 70px; height: 70px;" #}
+            {#                                                    src="/assets/comfort/img/1.jpg" alt="Изображение категории"> #}
+            {#                <ul class="list-group"><h3 class="list-group-item border-0 p-0"><a class="btn d-flex align-items-center" #}
+            {#                                                                                   style="font-size: 14px;" #}
+            {#                                                                                   href="/comfort/kitchens">Подкатегория #}
+            {#                            3</a></h3> #}
+            {#                    <li class="list-group-item border-0 p-0"><a class="btn d-flex align-items-center py-0" #}
+            {#                                                                style="font-size: 12px;" href="/comfort/productPage" #}
+            {#                                                                type="button">Тип товара 1</a></li> #}
+            {#                    <li class="list-group-item border-0 p-0"><a class="btn d-flex align-items-center py-0" #}
+            {#                                                                style="font-size: 12px;" href="/comfort/productPage" #}
+            {#                                                                type="button">Тип товара 2</a></li> #}
+            {#                    <li class="list-group-item border-0 p-0"><a class="btn d-flex align-items-center py-0" #}
+            {#                                                                style="font-size: 12px;" href="/comfort/productPage" #}
+            {#                                                                type="button">Тип товара 3</a></li> #}
+            {#                </ul> #}
+            {#            </div> #}
+
+
+            <div class="p-3 d-flex flex-column gap-1 border-top"><a class="text-decoration-none text-black fw-bolder"
+                                                                    href="tel:+7(123)456-78-90"
+                                                                    style="font-size: 14px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-telephone me-2" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"></path>
+                    </svg>
+                    <strong>+7 (800) 555 35 35</strong></a><a class="text-decoration-none text-black"
+                                                              href="mailto:нашапочта@gmail.com"
+                                                              style="font-size: 14px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-at me-2"
+                         viewBox="0 0 16 16">
+                        <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"></path>
+                    </svg>
+                    <u>Напишите нам</u></a></div>
+        </div>
+    </div>
+
+    {#    {% endif %} #}
+
+{% endfor %}
+
+

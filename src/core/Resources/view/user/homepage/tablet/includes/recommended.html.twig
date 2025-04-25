@@ -1,0 +1,111 @@
+<section class="container mb-1">
+    <div class="d-flex align-items-center gap-5 mb-3"><h2 class="fs-4">Рекомендуем</h2>
+        <button class="btn bg-transparent p-0"><u>Скидки</u></button>
+        <button class="btn bg-transparent p-0"><u>Новинки</u></button>
+        <button class="btn bg-transparent p-0"><u>Коллекции</u></button>
+    </div>
+    <div class="row">
+{#        <div class="col-4 pt-3" style="height: 400px;">#}
+{#            <img class="rounded-3 h-auto w-100"#}
+{#                src="assets/comfort/img/kitchenRecomendet.jpg"#}
+{#                alt="Изображение рекомендации">#}
+{#        </div>#}
+
+        <div class="col-12">
+            <div class="row row-cols-4">
+
+
+                {% for product in promoProducts %}
+{#                    {% include Template('@products-product/public/'~baks_settings.device~'/card-model-or-product-result.html.twig') with {card} only %}#}
+                    {% include Template('@products-product/public/'~baks_settings.device~'/card-product-result.html.twig') with {product} only %}
+                {% endfor %}
+
+
+{#                <div class="col p-1 pt-0">#}
+{#                    <div class="card card-open border-0 p-3 positiom-relative"><img#}
+{#                                class="card-img-top rounded-3 show-card-image" style="height: 170px;"#}
+{#                                src="/assets/comfort/img/3.jpg" alt="Изображение товара 1">#}
+{#                        <div id="carouselCardHover1001" class="carousel slide carousel-fade show-card-carousel"#}
+{#                             style="height: 170px;">#}
+{#                            <div class="carousel-indicators m-0">#}
+{#                                <button type="button" data-bs-target="#carouselCardHover1001" data-bs-slide-to="0"#}
+{#                                        class="active m-0" aria-current="true" aria-label="Slide 1"></button>#}
+{#                                <button type="button" data-bs-target="#carouselCardHover1001" data-bs-slide-to="1"#}
+{#                                        class="m-0" aria-label="Slide 2"></button>#}
+{#                                <button type="button" data-bs-target="#carouselCardHover1001" data-bs-slide-to="2"#}
+{#                                        class="m-0" aria-label="Slide 3"></button>#}
+{#                            </div>#}
+{#                            <div class="carousel-inner h-100">#}
+{#                                <div class="carousel-item active h-100"><img src="/assets/comfort/img/3.jpg"#}
+{#                                                                             class="d-block w-100 h-100 rounded-3"#}
+{#                                                                             alt="Изображение товара"></div>#}
+{#                                <div class="carousel-item h-100"><img src="/assets/comfort/img/2.jpg"#}
+{#                                                                      class="d-block w-100 h-100 rounded-3"#}
+{#                                                                      alt="Изображение товара"></div>#}
+{#                                <div class="carousel-item h-100"><img src="/assets/comfort/img/3.jpg"#}
+{#                                                                      class="d-block w-100 h-100 rounded-3"#}
+{#                                                                      alt="Изображение товара"></div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="card-body pb-1 px-0">#}
+{#                            <div class="d-flex justify-content-between"><h3 class="card-title fs-6">Товар 1</h3>#}
+{#                                <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width="20" height="20"#}
+{#                                     fill="lightgray" viewBox="0 0 16 16">#}
+{#                                    <path fill-rule="evenodd"#}
+{#                                          d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>#}
+{#                                </svg>#}
+{#                            </div>#}
+{#                            <div class="d-flex align-items-center gap-2 mb-2"><p class="card-text fs-5 m-0"><strong>8#}
+{#                                        500 Р.</strong></p>#}
+{#                                <p class="card-text text-danger small m-0">#}
+{#                                    <del>12 200 Р.</del>#}
+{#                                </p>#}
+{#                            </div>#}
+{#                            <div class="d-flex">#}
+{#                                <div class="form-check"><input class="form-check-input" type="radio"#}
+{#                                                               name="flexRadioDisabled" id="colorButton111000"#}
+{#                                                               aria-label="Выбор цвета"#}
+{#                                                               style="width:16px; height:16px; background-color:#f2f0f0;"><label#}
+{#                                            class="form-check-label" for="colorButton111000"></label></div>#}
+{#                                <div class="form-check"><input class="form-check-input" type="radio"#}
+{#                                                               name="flexRadioDisabled" id="colorButton121000"#}
+{#                                                               aria-label="Выбор цвета"#}
+{#                                                               style="width:16px; height:16px; background-color:#f2f0e4;"><label#}
+{#                                            class="form-check-label" for="colorButton121000"></label></div>#}
+{#                                <div class="form-check"><input class="form-check-input" type="radio"#}
+{#                                                               name="flexRadioDisabled" id="colorButton131000"#}
+{#                                                               aria-label="Выбор цвета"#}
+{#                                                               style="width:16px; height:16px; background-color:#f2f0e4;"><label#}
+{#                                            class="form-check-label" for="colorButton131000"></label></div>#}
+{#                                <div class="form-check"><input class="form-check-input" type="radio"#}
+{#                                                               name="flexRadioDisabled" id="colorButton141000"#}
+{#                                                               aria-label="Выбор цвета"#}
+{#                                                               style="width:16px; height:16px; background-color:#f2f0e4;"><label#}
+{#                                            class="form-check-label" for="colorButton141000"></label></div>#}
+{#                            </div>#}
+{#                            <div class="card-params w-100 dropdown">#}
+{#                                <div class="dropdown-menu p-3 "><p class="card-params-title border-top pt-2">Размеры</p>#}
+{#                                    <ul class="list-group flex-row justify-content-between mb-2 lh-1">#}
+{#                                        <li class="list-group-item border-0 p-0 card-params-list-item small"><strong>150#}
+{#                                                см</strong><br><span class="text-secondary">Длина</span></li>#}
+{#                                        <li class="list-group-item border-0 p-0 card-params-list-item small">#}
+{#                                            <strong>x</strong></li>#}
+{#                                        <li class="list-group-item border-0 p-0 card-params-list-item small"><strong>150#}
+{#                                                см</strong><br><span class="text-secondary">Ширина</span></li>#}
+{#                                        <li class="list-group-item border-0 p-0 card-params-list-item small">#}
+{#                                            <strong>x</strong></li>#}
+{#                                        <li class="list-group-item border-0 p-0 card-params-list-item small"><strong>150#}
+{#                                                см</strong><br><span class="text-secondary">Высота</span></li>#}
+{#                                    </ul>#}
+{#                                    <button class="btn btn-dark w-100">Купить</button>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+
+            </div>
+        </div>
+    </div>
+</section>

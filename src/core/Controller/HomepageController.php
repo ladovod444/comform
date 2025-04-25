@@ -3,7 +3,7 @@
 
 namespace Core\Controller;
 
-use BaksDev\Products\Product\Repository\Cards\ProductPromo\ProductPromoRepository;
+use BaksDev\Products\Product\Repository\Cards\ProductPromo\ProductPromoInterface;
 use Core\Repository\PageProduct\PageProductInterface;
 
 use BaksDev\Core\Controller\AbstractController;
@@ -32,7 +32,7 @@ final class HomepageController extends AbstractController
     public function index(
         PageProductInterface $liderProduct,
         ModelOrProductInterface $modelOrProduct,
-        ProductPromoRepository $productPromoRepository,
+        ProductPromoInterface $productPromoRepository,
         KernelInterface $appKernel,
     ): Response
     {
