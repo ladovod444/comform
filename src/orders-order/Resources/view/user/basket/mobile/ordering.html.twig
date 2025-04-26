@@ -21,7 +21,7 @@
 
         {% else %}
 
-            {% if app.user.profile.id is null %}
+            {% if app.user is not null %}
                 {% set block_user = true %}
 
 

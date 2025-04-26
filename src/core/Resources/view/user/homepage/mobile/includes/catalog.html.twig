@@ -64,9 +64,10 @@
                 {% set section_number = 5 %}
 
                 {% for k, card in cards %}
-                    <div class="col p-1">
+                    <div class="col p-0 ps-1 ">
 
                         {% include Template('@products-product/public/'~baks_settings.device~'/card-model-or-product-result.html.twig') with {card} only %}
+
                     </div>
                 {% endfor %}
 
@@ -76,8 +77,7 @@
                 <a href="{{ path('products-product:user.catalog.index') }}" class="btn btn-outline-dark px-5" style="font-size: 14px; border-color: lightgray;">
                     <strong>Показать еще</strong></a>
             </div>
-
-
+            
         </div>
         {#        </div> #}
     </div>

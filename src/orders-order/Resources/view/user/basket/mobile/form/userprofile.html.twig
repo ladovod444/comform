@@ -4,12 +4,14 @@
 
 {# <h5>Данные получателя</h5> #}
 
+{% if form.usr.userProfile.type is defined and form.usr.userProfile.type is not null %}
 <div class="d-flex justify-content-between">
-    <div class="w-50"><label>Пип профиля: *</label></div>
+    <div class="w-50"><label>Тип профиля: *</label></div>
     <div class="w-75 d-flex gap-3">
         {{ form_row(form.usr.userProfile.type) }}
     </div>
 </div>
+{% endif %}
 
 
 <div class="d-flex flex-column gap-3" id='user_profile'>

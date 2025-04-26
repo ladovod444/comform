@@ -16,7 +16,7 @@
 
     <div class="me-3">
 
-        <a href="{{ path('products-product:user.detail', {
+        <a href="{{ path('products-product:user.detail', { category: card.category_url,
             url : card.product_url ,
             offer: card.product_offer_value,
             variation: card.product_variation_value,
@@ -35,7 +35,7 @@
         <div class="d-flex justify-content-between">
             <div class="w-75 lh-normal small">
 
-                <a href="{{ path('products-product:user.detail', {
+                <a href="{{ path('products-product:user.detail', { category: card.category_url,
                     url : card.product_url ,
                     offer: card.product_offer_value,
                     variation: card.product_variation_value,

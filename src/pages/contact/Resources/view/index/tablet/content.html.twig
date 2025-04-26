@@ -1,8 +1,13 @@
 {% trans_default_domain 'homepage.user' %}
 
+<hr>
 <main>
-    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/breadcrumb.html.twig') %}
-    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/contactSection.html.twig') %}
-    {% include Template('@comfort:Template/'~baks_settings.device~'/includes/feedback.html.twig') %}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/breadcrumb.html.twig" })) }}
+    {{ include(_self|replace({ "content.html.twig" : "/includes/contactSection.html.twig" })) }}
+    {#    {% include Template('/user/contact/'~baks_settings.device~'/includes/breadcrumb.html.twig') %} #}
+    {#    {% include Template('/user/contact/'~baks_settings.device~'/includes/contactSection.html.twig') %} #}
+    <hr class="mb-5">
+    {% include Template('@Template:public/'~baks_settings.device~'/includes/feedback.html.twig') %}
 </main>
 
+<hr class="mb-5">

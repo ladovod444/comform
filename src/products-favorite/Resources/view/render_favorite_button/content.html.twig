@@ -1,4 +1,8 @@
-{{ form_start(form) }}
+{{ form_start(form, {
+    'attr': {
+        'class': 'w-111'
+    }
+}) }}
 
     {% set inv = field_value(form.invariable) %}
 

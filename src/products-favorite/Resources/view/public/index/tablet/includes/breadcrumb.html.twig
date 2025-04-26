@@ -8,17 +8,16 @@
         </li>
 
         <li class="breadcrumb-item">
-            <a href="{{ path('core:user.homepage') }}" class="text-muted"
-               aria-label="{{ 'breadcrumb.homepage.user'|trans({}, 'pages') }}"
-               title="{{ 'breadcrumb.homepage.user'|trans({}, 'pages') }}">
-                {{ 'breadcrumb.homepage.user'|trans({}, 'pages') }}
+            <a class="text-secondary text-decoration-none" href="{{ path('core:user.homepage') }}">
+                Главная
             </a>
         </li>
 
 
-        <li class="breadcrumb-item active text-primary" aria-current="page"
-            aria-label="Ваша корзина"
-            title="Ваша корзина">Ваша корзина
+        <li class="breadcrumb-item active"
+            aria-current="page"
+            title="Избранное">
+            Избранное
         </li>
     </ol>
 </nav>

@@ -1,0 +1,35 @@
+{# БЛОК "КАТЕГОРИИ" #}
+
+<section class="container py-3 ">
+
+    <ul class="d-flex flex-wrap p-0 "
+        id="v-pills-tab"
+        role="tablist"
+        aria-orientation="vertical">
+
+        {% set parent_active = false %}
+
+        {% for category in categories %}
+
+            <li class="list-group-item bg-transparent border-0 text-truncate  " style="min-width: 25%;">
+                <a href="{{ path('products-product:user.catalog.category', { category : category.category_url }) }}"
+                   class="d-flex align-items-center justify-content-center fw-medium text-black text-uppercase rounded-5 fs-18 text-decoration-none py-3 gap-2 ps-2">
+
+                    <div class="icon m-0 rounded-3 bg-contain lazy p-1 shadow"
+                         style="width: 110px; height: 80px"
+                         data-bg="{{ cdn_image_path(
+                             name: category.category_cover_image,
+                             ext: category.category_cover_ext,
+                             cdn: category.category_cover_cdn,
+                         ) }}">
+                    </div>
+
+{#                    {{ category.category_name }}#}
+
+                </a>
+            </li>
+
+        {% endfor %}
+    </ul>
+    <hr>
+</section>
