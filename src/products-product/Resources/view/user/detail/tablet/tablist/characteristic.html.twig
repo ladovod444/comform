@@ -1,67 +1,175 @@
+{% set iterate = 1 %}
+{% set odd = 'bg-light' %}
+{% set even = '' %}
+
+
 <div class="d-flex flex-column gap-3 small">
 
-    <div class="d-flex justify-content-between p-1 rounded-3 bg-light">
-        <div class="w-50">Производитель</div>
-        <div class="w-50"><a href="#" aria-label="Triangle" title="Triangle">Triangle</a></div>
+
+    <div class="d-flex flex-column gap-3">
+
+
+        {# Торговое предложение #}
+        {% if card.productOfferValue %}
+
+
+            {% set iterate = iterate + 1 %}
+
+            <div class="d-flex justify-content-between p-2 rounded-4 {{ cycle([odd, even], iterate) }}">
+                <div class="w-50">
+                    Модель
+                </div>
+                <div class="w-50 d-flex gap-3 align-items-center">
+                    {# Модель #}
+                    <a href="{{ path('products-product:user.model', {
+                        category: card.categoryUrl, url: card.productUrl }) }}"
+                       class="text-muted"
+                       aria-label="{{ card.productName }}"
+                       title="{{ card.productName }}">
+                        {{ card.productName }}
+                    </a>
+                </div>
+            </div>
+
+            {% set iterate = iterate + 1 %}
+
+            <div class="d-flex justify-content-between p-1 rounded-3 {{ cycle([odd, even], iterate) }}">
+                <div class="w-50">
+                    {# Название торгового предложения #}
+                    {{ card.productOfferName }}
+                </div>
+                <div class="w-50 d-flex gap-3 align-items-center">
+                    {# Значение торгового предложения #}
+                    {{ card.productOfferValue|call_twig_func(card.productOfferReference~'_render') }}
+                </div>
+            </div>
+
+        {% endif %}
+
+        {% if card.productOfferPostfix %}
+
+            {% set iterate = iterate + 1 %}
+
+            <div class="d-flex flex-column gap-3">
+
+                <div class="d-flex justify-content-between p-1 rounded-3 {{ cycle([odd, even], iterate) }}">
+                    <div class="w-50">
+                        {# Название модификации #}
+                        {{ card.productOfferNamePostfix }}
+                    </div>
+                    <div class="w-50 d-flex gap-3 align-items-center">
+                        {# Значение модификации множественного варианта ТП #}
+                        {{ card.productOfferPostfix }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+
+
+
+
+        {# Множественный вариант  #}
+        {% if card.productVariationValue %}
+
+            {% set iterate = iterate + 1 %}
+
+            <div class="d-flex flex-column gap-3">
+
+                <div class="d-flex justify-content-between p-1 rounded-3 {{ cycle([odd, even], iterate) }}">
+                    <div class="w-50">
+                        {# Название множественного варианта ТП #}
+                        {{ card.productVariationName }}
+                    </div>
+                    <div class="w-50 d-flex gap-3 align-items-center">
+                        {# Значение множественного варианта ТП #}
+                        {{ card.productVariationValue|call_twig_func(card.productVariationReference) }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+        {% if card.productVariationPostfix %}
+
+            {% set iterate = iterate + 1 %}
+
+            <div class="d-flex flex-column gap-3">
+
+                <div class="d-flex justify-content-between p-1 rounded-3 {{ cycle([odd, even], iterate) }}">
+                    <div class="w-50">
+                        {# Название модификации #}
+                        {{ card.product_variation_name_postfix }}
+                    </div>
+                    <div class="w-50 d-flex gap-3 align-items-center">
+                        {# Значение модификации множественного варианта ТП #}
+                        {{ card.productVariationPostfix }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+
+        {# Модификация множественного варианта  #}
+        {% if card.productModificationValue %}
+
+            {% set iterate = iterate + 1 %}
+
+            <div class="d-flex flex-column gap-3">
+
+                <div class="d-flex justify-content-between p-1 rounded-3 {{ cycle([odd, even], iterate) }}">
+                    <div class="w-50">
+                        {# Название модификации #}
+                        {{ card.productModificationName }}
+                    </div>
+                    <div class="w-50 d-flex gap-3 align-items-center">
+                        {# Значение модификации множественного варианта ТП #}
+                        {{ card.productModificationValue|call_twig_func(card.productModificationReference~'_render') }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+        {% if card.productModificationPostfix %}
+
+            {% set iterate = iterate + 1 %}
+
+            <div class="d-flex flex-column gap-3">
+
+                <div class="d-flex justify-content-between p-1 rounded-3 {{ cycle([odd, even], iterate) }}">
+                    <div class="w-50">
+                        {# Название модификации #}
+                        {{ card.product_modification_name_postfix }}
+                    </div>
+                    <div class="w-50 d-flex gap-3 align-items-center">
+                        {# Значение модификации множественного варианта ТП #}
+                        {{ card.productModificationPostfix }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+        {# Свойства, учавствующие в харкатеристиках #}
+        {% for name_property in  arr_property | filter(props => props.field_public is defined and props.field_public == true  and props.field_value and props.field_value != 'false') %}
+
+            {% set iterate = iterate + 1 %}
+
+            <div class="d-flex justify-content-between align-items-center p-1 rounded-3 {{ cycle([odd, even], iterate) }}">
+                <div class="w-50">
+                    {{ name_property.field_trans }}
+                </div>
+                <div class="w-50 d-flex gap-3 align-items-center">
+                    {{ name_property.field_value|call_twig_func(name_property.field_type~'_template') }}
+                </div>
+            </div>
+
+        {% endfor %}
+
     </div>
 
-    <div class="d-flex justify-content-between p-1">
-        <div class="w-50">Модель</div>
-        <div class="w-50"><a href="#" aria-label="Triangle Sports TH201" title="Triangle Sports TH201">Triangle Sports
-                TH201</a></div>
-    </div>
-
-    <div class="d-flex justify-content-between p-1 rounded-3 bg-light">
-        <div class="w-50">Размер</div>
-        <div class="w-50"><a href="#" aria-label="195/45 R16" title="195/45 R16">195/45 R16</a></div>
-    </div>
-
-    <div class="d-flex justify-content-between p-1">
-        <div class="w-50">Тип автомобиля</div>
-        <div class="w-50">Легковые автомобили</div>
-    </div>
-
-    <div class="d-flex justify-content-between p-1 rounded-3 bg-light">
-        <div class="w-50">Сезонность</div>
-        <div class="w-50">
-            Летние шины <img data-src="/temp/img/sun.png" src="/assets/img/empty.png" class="lazy m-1" alt="..."
-                             style="width: 13px; height: 13px;">
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-between p-1">
-        <div class="w-50">Индекс нагрузки</div>
-        <div class="w-50">84W</div>
-    </div>
-
-    <div class="d-flex justify-content-between p-1 rounded-3 bg-light">
-        <div class="w-50">Индекс скорости</div>
-        <div class="w-50">T (до 190 км/ч)</div>
-    </div>
-
-    <div class="d-flex justify-content-between p-1">
-        <div class="w-50">Шипы</div>
-        <div class="w-50">Нет</div>
-    </div>
-
-    <div class="d-flex justify-content-between p-1 rounded-3 bg-light">
-        <div class="w-50">Производство</div>
-        <div class="w-50 d-flex gap-3">
-
-            <div>Китай</div>
-
-            <div data-bg="/img/flags/cn.svg" class="lazy circle-25 bg-cover"></div>
-
-            {# <img src="/img/flags/cn.svg" alt="Китай" class="rounded-circle"> #}
-        </div>
-    </div>
-
-    <div class="w-50 d-flex mt-3">
-        <a href="{{ path('core:user.homepage') }}"
-           aria-label="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}"
-           title="{{ 'breadcrumb.homepage.user'|trans({}, 'core') }}">
-            <img data-src="/logo.webp" src="/assets/img/empty.png" alt="..." class="lazy img-fluid">
-        </a>
-    </div>
 
 </div>

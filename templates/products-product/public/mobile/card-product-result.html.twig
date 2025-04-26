@@ -121,6 +121,46 @@
 
             </div>
 
+            {# Кнопка для покупки + цвет #}
+            <div class="d-flex justify-content-between">
+
+                <div class="d-flex" style="visibility: hidden;">
+                    <div class="form-check d-flex align-items-center"><input class="form-check-input" type="radio"
+                                                                             name="flexRadioDisabled" id="flexRadio115"
+                                                                             style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                             aria-label="Кнопка выбора цвета"><label
+                                class="form-check-label" for="flexRadio115"></label></div>
+                    <div class="form-check d-flex align-items-center"><input class="form-check-input" type="radio"
+                                                                             name="flexRadioDisabled" id="flexRadio125"
+                                                                             style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                             aria-label="Кнопка выбора цвета"><label
+                                class="form-check-label" for="flexRadio125"></label></div>
+                    <div class="form-check d-flex align-items-center"><input class="form-check-input" type="radio"
+                                                                             name="flexRadioDisabled" id="flexRadio135"
+                                                                             style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                             aria-label="Кнопка выбора цвета"><label
+                                class="form-check-label" for="flexRadio135"></label></div>
+                    <div class="form-check d-flex align-items-center"><input class="form-check-input" type="radio"
+                                                                             name="flexRadioDisabled" id="flexRadio145"
+                                                                             style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                             aria-label="Кнопка выбора цвета"><label
+                                class="form-check-label" for="flexRadio145"></label></div>
+                </div>
+
+                {% if product.productQuantity != false and product.productQuantity > 0 %}
+
+                    {# Кнопка для покупки #}
+                    {% include Template('@products-product/public/'~(baks_settings.device)~'/add_to_basket_button.html.twig') with {
+
+                        'product_event': product.productEvent,
+                        'product_offer': product.productOfferUid,
+                        'product_variation': product.productVariationUid,
+                        'product_modification': product.productModificationUid,
+                    } only %}
+
+                {% endif %}
+            </div>
+
 
             <div class="d-flex justify-content-between align-items-baseline">
 

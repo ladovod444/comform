@@ -90,233 +90,257 @@
 {# {% endif %} #}
 
 
-<div
-        class="card card-open border-0 p-3 positiom-relative ">
+{#<div class="card border-0 p-2 positiom-relative">#}
 
-    {# Изображение модели #}
-    <div class="card-img-top card-grid  ratio-3x4">
-{#        {% if card_type == 'product' %}#}
-{#            <div class="position-absolute" style="z-index: 1024">#}
-{#                {{ render_favorite_button(card.invariable|first) }}#}
+{#    #}{# Изображение модели #}
+{#    <div class="card-img-top card-grid  ratio-3x4">#}
+{#        <div id="carouselCardHover-{{ card.productId }}"#}
+{#             class="carousel carousel-dark slide carousel-fade show-card-carousel ratio-3x4 h-100">#}
+{#            <div class="carousel-indicators">#}
+{#                {% if images|length > 1 %}#}
+
+
+{#                    {% for k, image  in images %}#}
+{#                        <button type="button" data-bs-target="#carouselCardHover-{{ card.productId }}"#}
+{#                                data-bs-slide-to="{{ k }}" class="{{ loop.first ? 'active' : '' }}" aria-current="true"#}
+{#                                aria-label="Slide {{ k }}"></button>#}
+{#                    {% endfor %}#}
+{#                {% endif %}#}
 {#            </div>#}
-{#        {% endif %}#}
+
+{#            <div class="carousel-inner h-100 rounded-4">#}
+
+{#                {% for image in images %}#}
+
+{#                    <div class="carousel-item h-100 {{ loop.first ? 'active' : '' }} lazy bg-cover"#}
+{#                         data-bg="{{ cdn_image_path(image.img, image.img_ext, image.img_cdn) }}">#}
+
+{#                        <a href="{{ card_url }}" class="d-block h-100 ">#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    #}
+{#                {% else %}#}
+
+{#                    <div class="carousel-item h-100 active lazy bg-cover" data-bg="/assets/img/blank.svg">#}
+{#                        <a href="{{ card_url }}" class="d-block h-100 "></a>#}
+{#                    </div>#}
+
+{#                {% endfor %}#}
+
+{#            </div>#}
+
+{#        </div>#}
 
 
-        {# {% if card_type == 'product' %}
-														            <div class="position-absolute" style="z-index: 1024">
-														                {{ render_favorite_button(card.invariable|json_decode|first) }}
-														            </div>
-														        {% endif %}
-														
-														        <a class="d-block h-100 rounded-4 bg-cover show-card-image lazy" data-bg="{{ image_path }}"
-														           href="{{ card_url }}"
-														           aria-label="{{ card.productName }}"> #}
-
-        {# @TODO  #}
-        {#            <div class="position-absolute" style="top: 53% !important; left: 10% !important"> #}
-        {#                {% for field in card_fields %} #}
-        {#                    {% if field.field_photo == true %} #}
-        {#                        {{ field.field_value|call_twig_func(field.field_type~'_render') }} #}
-        {#                    {% endif %} #}
-        {#                {% endfor %} #}
-        {#            </div> #}
-
-        {# </a> #}
-
-        {# Слайдер для ховера #}
+{#    </div>#}
 
 
-        <div id="carouselCardHover-{{ card.productId }}"
-             class="carousel carousel-dark slide carousel-fade show-card-carousel ratio-3x4 h-100">
-            <div class="carousel-indicators">
-                {% if images|length > 1 %}
+{#    #}{# КАРТОЧКИ #}
+{#    <div class="card-body pb-1 px-0">#}
+
+{#        <div>#}
+{#            <div class="d-flex align-items-center justify-content-between mb-2 px-2">#}
+{#            </div>#}
+
+{#            <div class="d-flex justify-content-between">#}
+
+{#                <h3 class="card-title fs-6">#}
+{#                    <a class="card-title fs-6 text-decoration-none"#}
+{#                       href="{{ card_url }}">{{ card_name }}#}
+{#                    </a>#}
+{#                </h3>#}
+
+{#                {% if card_type == 'product' %}#}
+{#                    <div class="position-relative" style="z-index: 1024;">#}
+{#                        {{ render_favorite_button(card.invariable|first) }}#}
+{#                    </div>#}
+{#                {% endif %}#}
+
+{#            </div>#}
+
+{#            #}{# Цена #}
+{#            <div class="d-flex align-items-center gap-2 mb-2 position-relative">#}
+{#                <p class="card-text fs-5 m-0 kitchen-card-text-price">#}
+{#                    <strong>#}
+{#                        {% if card_type == 'product' %}#}
+{#                            {{ money(price, card.productCurrency) }}#}
+{#                        {% elseif card_type == 'model' %}#}
+{#                            от#}
+{#                            {{ money(price, card.productCurrency) }}#}
+{#                        {% endif %}#}
+{#                    </strong>#}
+{#                </p>#}
+{#            </div>#}
 
 
-                    {% for k, image  in images %}
-                        <button type="button" data-bs-target="#carouselCardHover-{{ card.productId }}"
-                                data-bs-slide-to="{{ k }}" class="{{ loop.first ? 'active' : '' }}" aria-current="true"
-                                aria-label="Slide {{ k }}"></button>
-                    {% endfor %}
-                {% endif %}
-            </div>
-
-            <div class="carousel-inner h-100 rounded-4">
-
-                {% for image in images %}
-
-                    <div class="carousel-item h-100 {{ loop.first ? 'active' : '' }} lazy bg-cover"
-                         data-bg="{{ cdn_image_path(image.img, image.img_ext, image.img_cdn) }}">
-
-                        <a href="{{ card_url }}" class="d-block h-100 ">
-                        </a>
-                    </div>
+{#            <div class="card-params w-100 dropdown position-absolute">#}
+{#                <div class="dropdown-menu p-3 pt-0 w-100">#}
+{#                    #}{#                    <p class="text-secondary small mb-1 ">1200х3000</p> #}
+{#                    #}{#                    <p class="text-secondary small mb-1 ">ЛДСП</p> #}
 
 
-                    {#                    <div class="carousel-item h-100 {{ loop.first ? 'active' : '' }} lazy"> #}
-                    {#                        <a #}
-                    {#                                href="{{ card_url }}"> #}
-                    {#                            <img #}
-                    {#                                    src="{{ cdn_image_path(image.img, image.img_ext, image.img_cdn) }}" #}
-                    {#                                    class="d-block w-100 h-100 rounded-3" alt="Изображение товара"> #}
-                    {#                        </a> #}
-                    {#                    </div> #}
+{#                    #}{# Значение множественного варианта ТП #}
+{#                    <p class="text-secondary small mb-1 ">#}
+{#                        {{ card.productVariationValue|call_twig_func(card.productVariationReference~'_render') }}#}
+{#                    </p>#}
+
+{#                    <p class="text-secondary small mb-1 ">#}
+{#                        {{ card.productModificationValue|call_twig_func(card.productModificationReference~'_render') }}#}
+
+{#                    </p>#}
+
+{#                    #}{# Значение торгового предложения #}
+{#                    <p class="text-secondary small mb-1 ">#}
+{#                        {{ card.productOfferValue|call_twig_func(card.productOfferReference~'_render') }}#}
+{#                    </p>#}
+
+{#                    #}{# Постфикс #}
+{#                    <p class="text-secondary small mb-1 ">#}
+{#                        {{ card_postfix|replace({ '/': '-' }) }}#}
+{#                    </p>#}
+
+{#                    {% for field in card.categorySectionField %}#}
+{#                        {% if field.field_photo == false %}#}
+{#                            <p class="text-secondary small mb-1 ">{{ field.field_value|call_twig_func(field.field_type~'_render') }}</p>#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+
+
+{#                    #}{#                    <a class="btn btn-dark w-100" #}
+{#                    #}{#                       href="/basket/add/?product=01945f99-8611-70c1-bf5c-5a62542099d3&amp;offer=01945f99-8612-728e-ad93-13f83208d503&amp;variation=01945f99-8612-728e-ad93-13f8322de9bf" #}
+{#                    #}{#                       data-bs-toggle="modal" data-bs-target="#modal"> #}
+{#                    #}{#                        Купить #}
+{#                    #}{#                    </a> #}
+
+{#                    #}{# Кнопка покупки #}
+{#                    {% if card_type == 'product' %}#}
+
+{#                        <div class="d-flex">#}
+{#                            #}{# Кнопка для покупки #}
+{#                            {% include Template('@products-product/public/'~(baks_settings.device)~'/add_to_basket_button.html.twig') with {#}
+
+{#                                'product_event': card.productEvent,#}
+{#                                'product_offer': card_offer,#}
+{#                                'product_variation': card_variation,#}
+{#                                'product_modification': card_modification,#}
+{#                            } only %}#}
+{#                        </div>#}
+
+{#                    {% endif %}#}
+
+
+{#                </div>#}
+{#            </div>#}
+
+
+{#            #}{# Наличие #}
+{#            <div class="d-flex justify-content-between align-items-baseline">#}
+{#                {% if card.productQuantity > 0 %}#}
+{#                    <span class="d-block px-2 fs-11 text-success mb-2">#}
+{#					    &#9675; Есть в наличии#}
+{#				    </span>#}
+{#                {% else %}#}
+{#                    <span class="d-block px-2 fs-11 text-danger mb-2">#}
+{#					    &#9675; Нет в наличии#}
+{#				    </span>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
 
 
 
-                {% else %}
+<div class="card border-0 p-2 positiom-relative">
 
-                    <div class="carousel-item h-100 active lazy bg-cover" data-bg="/assets/img/blank.svg">
-                        <a href="{{ card_url }}" class="d-block h-100 "></a>
-                    </div>
+    {% set image = images|first %}
+    {% set image_path = cdn_image_path(image.img, image.img_ext, image.img_cdn) %}
 
-                {% endfor %}
+    <img class="card-img-top rounded-4 lazy" style="height: 140px;" data-src="{{ image_path }}" alt="Изображение товара 2">
 
-            </div>
+    <div class="card-body pb-1 px-0">
+        <div class="d-flex justify-content-between">
+
+            <h3 class="card-title" style="font-size: 12px">
+                <a class="card-title fs-6 text-decoration-none"
+                   href="{{ card_url }}">
+                    {{ card_name }}
+                </a>
+            </h3>
+
+            {% if card_type == 'product' %}
+                {{ render_favorite_button(card.invariable|first) }}
+            {% endif %}
+
 
         </div>
 
-
-    </div>
-
-
-    {# КАРТОЧКИ #}
-    <div class="card-body pb-1 px-0">
-
-        <div>
-            <div
-                    class="d-flex align-items-center justify-content-between mb-2 px-2">
-
-
-                {# Кнопка покупки #}
-                {#                {% if card_type == 'product' %} #}
-
-                {#                    <div #}
-                {#                            class="d-flex"> #}
-                {#                        #}{# Кнопка для покупки #}
-                {#                        {% include Template('@products-product/public/'~(baks_settings.device)~'/add_to_basket_button.html.twig') with { #}
-                {#                            'model_event': card.productEvent, #}
-                {#                            'product_offer': card_offer, #}
-                {#                            'product_variation': card_variation, #}
-                {#                            'product_modification': card_modification, #}
-                {#                        } only %} #}
-                {#                    </div> #}
-
-                {#                {% endif %} #}
-
-            </div>
-
-            {# Название #}
-            {#            <div class="d-flex mb-2"> #}
-            {#                <a class="text-black text-decoration-none" href="{{ card_url }}"> #}
-            {#                    <h3 class="card-title fw-bold px-2 text-uppercase mb-0" style="font-size:14px!important;"> #}
-            {#                        {{ card_name }} #}
-            {#                    </h3> #}
-            {#                </a> #}
-            {#            </div> #}
-
-            <div class="d-flex justify-content-between">
-
-                <h3 class="card-title fs-6">
-                    <a class="card-title fs-6 text-decoration-none"
-                       href="{{ card_url }}">{{ card_name }}
-                    </a>
-                </h3>
-
-                {% if card_type == 'product' %}
-                    <div class="position-relative" style="z-index: 1024;">
-                        {{ render_favorite_button(card.invariable|first) }}
-                    </div>
-                {% endif %}
-
-            </div>
-
-            {# Цена #}
-            <div class="d-flex align-items-center gap-2 mb-2 position-relative">
-                <p class="card-text fs-5 m-0 kitchen-card-text-price">
-                    <strong>
-                        {% if card_type == 'product' %}
-                            {{ money(price, card.productCurrency) }}
-                        {% elseif card_type == 'model' %}
-                            от
-                            {{ money(price, card.productCurrency) }}
-                        {% endif %}
-                    </strong>
-                </p>
-            </div>
-
-
-            <div class="card-params w-100 dropdown position-absolute">
-                <div class="dropdown-menu p-3 pt-0 w-100">
-                    {#                    <p class="text-secondary small mb-1 ">1200х3000</p> #}
-                    {#                    <p class="text-secondary small mb-1 ">ЛДСП</p> #}
-
-
-                    {# Значение множественного варианта ТП #}
-                    <p class="text-secondary small mb-1 ">
-                        {{ card.productVariationValue|call_twig_func(card.productVariationReference~'_render') }}
-                    </p>
-
-                    <p class="text-secondary small mb-1 ">
-                        {{ card.productModificationValue|call_twig_func(card.productModificationReference~'_render') }}
-
-                    </p>
-
-                    {# Значение торгового предложения #}
-                    <p class="text-secondary small mb-1 ">
-                        {{ card.productOfferValue|call_twig_func(card.productOfferReference~'_render') }}
-                    </p>
-
-                    {# Постфикс #}
-                    <p class="text-secondary small mb-1 ">
-                        {{ card_postfix|replace({ '/': '-' }) }}
-                    </p>
-
-                    {% for field in card.categorySectionField %}
-                        {% if field.field_photo == false %}
-                            <p class="text-secondary small mb-1 ">{{ field.field_value|call_twig_func(field.field_type~'_render') }}</p>
-                        {% endif %}
-                    {% endfor %}
-
-
-                    {#                    <a class="btn btn-dark w-100" #}
-                    {#                       href="/basket/add/?product=01945f99-8611-70c1-bf5c-5a62542099d3&amp;offer=01945f99-8612-728e-ad93-13f83208d503&amp;variation=01945f99-8612-728e-ad93-13f8322de9bf" #}
-                    {#                       data-bs-toggle="modal" data-bs-target="#modal"> #}
-                    {#                        Купить #}
-                    {#                    </a> #}
-
-                    {# Кнопка покупки #}
+        <div class="d-flex">
+            <p class="card-text m-0 me-1" style="font-size: 16px">
+                <strong>
                     {% if card_type == 'product' %}
-
-                        <div class="d-flex">
-                            {# Кнопка для покупки #}
-                            {% include Template('@products-product/public/'~(baks_settings.device)~'/add_to_basket_button.html.twig') with {
-
-                                'product_event': card.productEvent,
-                                'product_offer': card_offer,
-                                'product_variation': card_variation,
-                                'product_modification': card_modification,
-                            } only %}
-                        </div>
-
+                        {{ money(price, card.productCurrency) }}
+                    {% elseif card_type == 'model' %}
+                        от
+                        {{ money(price, card.productCurrency) }}
                     {% endif %}
+                </strong>
+            </p>
+        </div>
 
+        <div class="d-flex justify-content-between">
 
-                </div>
+            <div class="d-flex" style="visibility: hidden;">
+                <div class="form-check d-flex align-items-center"><input class="form-check-input" type="radio"
+                                                                         name="flexRadioDisabled" id="flexRadio115"
+                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                         aria-label="Кнопка выбора цвета"><label
+                            class="form-check-label" for="flexRadio115"></label></div>
+                <div class="form-check d-flex align-items-center"><input class="form-check-input" type="radio"
+                                                                         name="flexRadioDisabled" id="flexRadio125"
+                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                         aria-label="Кнопка выбора цвета"><label
+                            class="form-check-label" for="flexRadio125"></label></div>
+                <div class="form-check d-flex align-items-center"><input class="form-check-input" type="radio"
+                                                                         name="flexRadioDisabled" id="flexRadio135"
+                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                         aria-label="Кнопка выбора цвета"><label
+                            class="form-check-label" for="flexRadio135"></label></div>
+                <div class="form-check d-flex align-items-center"><input class="form-check-input" type="radio"
+                                                                         name="flexRadioDisabled" id="flexRadio145"
+                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                         aria-label="Кнопка выбора цвета"><label
+                            class="form-check-label" for="flexRadio145"></label></div>
             </div>
 
 
-            {# Наличие #}
-            <div class="d-flex justify-content-between align-items-baseline">
-                {% if card.productQuantity > 0 %}
-                    <span class="d-block px-2 fs-11 text-success mb-2">
+            {# Кнопка покупки #}
+            {% if card_type == 'product' %}
+                {# Кнопка для покупки #}
+                {% include Template('@products-product/public/'~(baks_settings.device)~'/add_to_basket_button.html.twig') with {
+
+                    'product_event': card.productEvent,
+                    'product_offer': card_offer,
+                    'product_variation': card_variation,
+                    'product_modification': card_modification,
+                } only %}
+            {% endif %}
+
+        </div>
+
+        {# Наличие #}
+        <div class="d-flex justify-content-between align-items-baseline">
+            {% if card.productQuantity > 0 %}
+                <span class="d-block px-2 fs-11 text-success mb-2">
 					    &#9675; Есть в наличии
 				    </span>
-                {% else %}
-                    <span class="d-block px-2 fs-11 text-danger mb-2">
+            {% else %}
+                <span class="d-block px-2 fs-11 text-danger mb-2">
 					    &#9675; Нет в наличии
 				    </span>
-                {% endif %}
-            </div>
+            {% endif %}
         </div>
+
     </div>
+
 </div>

@@ -3,6 +3,12 @@
         <div class="col-3">
             <h2 class="fs-4 mb-3">Каталог</h2>
 
+
+            {# Фильтр #}
+
+            {{ include(_self|replace({ "kitchens-catalog.html.twig" : "form/model_filter.html.twig" })) }}
+
+
             <div class="d-flex flex-column gap-3 mb-5">
 
                 <select class="form-select" aria-label="Тип мебели" data-select="select2">

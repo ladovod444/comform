@@ -1,0 +1,151 @@
+{% set productFields = filter.children|filter((v, k) => k != 'filter' and k != '_token' and v.rendered == false) %}
+{% set properiesFields = productFields|filter((v, k) => k != 'offer' and k != 'variation' and k != 'modification' and k != 'category') %}
+
+{#{{ dd(filter) }}#}
+
+<div class="border p-3 rounded-5 mb-4">
+
+    {{ form_start(filter) }}
+
+    {# Селекты фильтрации #}
+    {% if filter.offer is defined %}
+        <div>
+            {{ form_label(filter.offer, null,
+                {'label_attr': {
+                    'class': 'form-label ps-2 fw-bold'}
+                }) }}
+
+            {{ form_widget(filter.offer, {
+                attr: { class: 'form-select rounded-5 fs-14 mb-1 text-secondary mb-3', 'data-select' : 'select2', 'aria-label' : "Значение диаметра" } }) }}
+        </div>
+    {% endif %}
+
+    {% if filter.variation is defined %}
+        <div>
+            {{ form_label(filter.variation, null,
+                {'label_attr': {
+                    'class': 'form-label ps-2 fw-bold'}
+                }) }}
+
+            {{ form_widget(filter.variation, {
+                attr: { class: 'form-select rounded-5 fs-14 mb-1 text-secondary mb-3', 'data-select' : 'select2', 'aria-label' : "Значение ширины" } }) }}
+        </div>
+    {% endif %}
+
+    {% if filter.modification is defined %}
+        <div>
+            {{ form_label(filter.modification, null,
+                {'label_attr': {
+                    'class': 'form-label ps-2 fw-bold'}
+                }) }}
+
+            {{ form_widget(filter.modification, {
+                attr: { class: 'form-select rounded-5 fs-14 mb-1 text-secondary mb-3', 'data-select' : 'select2', 'aria-label' : "Значение профиля" } }) }}
+        </div>
+    {% endif %}
+
+    <div>
+
+        {# Кнопки фильтрации по свойствам #}
+        {% for field in properiesFields %}
+
+            <div class="d-flex align-items-center justify-content-between w-50 mt-3">
+                {# Множественный выбор #}
+                {% if field.children|length > 0 %}
+
+                    {# Тип поля для рендеринга твиг функцией #}
+                    {% set fieldType = field.vars.block_prefixes|filter(v => 'field' in v)|first %}
+
+                    {% for button in field %}
+
+                        {% if loop.index == 1 %}
+
+                            {# Стили для первого элемента - выбрать все #}
+                            {% set labelClass = 'btn-all text-decoration-underline m-0 px-2 fw-medium rounded-3' %}
+                        {% else %}
+
+                            {# Стили для фильтра по конкретному свойству #}
+                            {% set labelClass = 'd-flex btn p-1 border-0' %}
+                        {% endif %}
+
+                        <input id="{{ button.vars.id }}"
+                               name="{{ field_name(button) }}"
+                               value="{{ field_value(button) }}"
+                                {{ field_value(button) is empty ? 'checked="checked"' : '' }}
+                               class="btn-check"
+                               type="radio">
+
+                        <label class="{{ labelClass }}"
+                               for="{{ button.vars.id }}"
+                               style="font-size: 14px;">
+
+                            {% if field_value(button) is empty %}
+                                Все
+                            {% else %}
+
+                                <span class="icon icon-sm rounded-5">
+                                    {{ field_value(button)|call_twig_func(fieldType~'_render') }}
+                                </span>
+
+                            {% endif %}
+                        </label>
+                    {% endfor %}
+
+                {% endif %}
+
+                {# Единственный выбор #}
+                {% if field.children|length == 0 %}
+
+                    {% set fieldType = field.vars.block_prefixes|filter(v => 'field' in v)|first %}
+
+                    <input id="{{ field.vars.id }}"
+                           name="{{ field_name(field) }}"
+                           value="{{ field_value(field) }}"
+                            {#  class="form-check-input visually-hidden" #}
+                           class="btn-check"
+                           type="checkbox">
+
+                    <label class="d-flex btn p-1 border-0"
+                           for="{{ field.vars.id }}">
+
+                        <span class="icon icon-sm rounded-5">
+
+                            {% set value = field.vars.value ? 'true' : 'false' %}
+
+                            {{ value|call_twig_func(fieldType~'_render') }}
+
+                        </span>
+
+                    </label>
+
+                {% endif %}
+
+            </div>
+        {% endfor %}
+
+    </div>
+
+    {{ form_widget(filter.filter,
+        {
+            label: 'Подобрать',
+            attr: { class: 'btn btn-primary rounded-5 px-3 py-2 fw-medium mt-3 w-100'}}
+    ) }}
+
+    {{ form_end(filter) }}
+
+</div>
+
+<style>
+    .btn-check:checked + .btn {
+        > .icon {
+            border: none !important;
+            box-shadow: none !important;
+            background-color: #68b4f4;
+        }
+    }
+
+    .btn-check:checked + .btn-all {
+        box-shadow: none !important;
+        background-color: #68b4f4;
+    }
+</style>
