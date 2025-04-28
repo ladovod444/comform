@@ -1,6 +1,39 @@
 <section class="container mb-5">
     <div class="row">
         <div class="col-4">
+
+            {# FILTER #}
+
+{#            {{ dd(filters) }}#}
+            {{ dump(furniture_select) }}
+
+            {{ form_start(furniture_select) }}
+
+            <div class="d-flex flex-column gap-3 mb-5">
+                <div class="w-100">
+
+{#                    {{ form_row(furniture_select.category) }}#}
+{#                    {{ form_row(furniture_select.filter) }}#}
+
+{#                    {{ form_label(furniture_select.category, 'Категория:', {'label_attr': {#}
+{#                        'class': 'form-label ps-2 fw-bold'}#}
+{#                    }) }}#}
+
+{#                    {{ form_widget(furniture_select.category, {#}
+{#                        label: 'Категория:',#}
+{#                        placeholder: 'Выберите категорию ...',#}
+{#                        attr: { 'data-select' : 'select2', class: 'form-select rounded-5 fs-14 mb-1' } })#}
+{#                    }}#}
+
+                </div>
+
+            </div>
+
+
+            {{ form_end(furniture_select) }}
+
+
+
             {#            <h2 class="fs-4 mb-3">Каталог</h2> #}
 
             {#            <div class="d-flex flex-column gap-3 mb-5"> #}

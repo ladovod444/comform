@@ -1,6 +1,6 @@
 {% if card.productQuantity %}
 
-    <div class="d-flex align-items-center justify-content-center gap-3 my-3">
+    <div class="d-flex gap-2 mb-3 lh-1">
         <div class="card-price d-flex flex-column align-items-end">
 
             {# Расчет стоимости с учетом скидки #}
@@ -28,68 +28,7 @@
 			</span>
         {% endif %}
 
-        <button class="btn btn-link ms-3 pt-3"
-                aria-label="Добавить в избранное"
-                data-id='{{ card.productId }}'
-        >
-            <img data-src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNCMUI2QkIiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAxLjMxNEMxMi40MzgtMy4yNDggMjMuNTM0IDQuNzM1IDggMTUtNy41MzQgNC43MzYgMy41NjItMy4yNDggOCAxLjMxNHoiPjwvcGF0aD48L3N2Zz4K"
-                 width="20" height="20"
-                 src="/assets/img/empty.png"
-                 class="lazy"
-                 alt="Добавить в избранное"
-            >
-        </button>
     </div>
-
-
-    {{ form_start(basket, { attr: { class : 'd-flex justify-content-between align-items-center position-relative order-basket mb-3' } }) }}
-
-    <div class='mb-3 '>
-        <button type='button' class="btn btn-lg btn-link text-decoration-none"
-                aria-label="Отнять количество" id="minus"
-        >
-            <span class="h4 text-muted opacity-50">-</span>
-        </button>
-    </div>
-
-
-    {% set default_count = card.productQuantity < 4 ? card.productQuantity : 4 %}
-
-    {{ form_row(basket.price.total, { label : false,
-        attr: {
-            style : 'width: 60px;',
-            class:  'form-control-lg mx-1 total',
-            value : default_count,
-            'data-max': card.productQuantity,
-            'data-discount' : baks_profile.profile_discount is defined ? baks_profile.profile_discount,
-            'data-currency' : card.productCurrency,
-            'aria-label' : 'Количество в заказе'
-        }
-    }) }}
-
-
-    <div class='mb-3'>
-        <button type='button' class="btn btn-lg btn-link text-decoration-none"
-                aria-label="Добавить количество" id="plus"
-        >
-            <span class="h5 text-muted opacity-50">+</span>
-        </button>
-    </div>
-
-
-
-    <div class="mb-3">
-        <button
-                type="submit"
-                class="btn btn-lg btn-primary text-nowrap">
-            <span class="h6 text-uppercase px-3 basket-text">В корзину</span>
-            <span class="spinner-border spinner-border-sm vertical-middle d-none"></span>
-        </button>
-    </div>
-
-
-    {{ form_end(basket) }}
-
 
 
 {% else %}
@@ -227,3 +166,5 @@
     {% endif %}
 
 {% endif %}
+
+<hr class="mt-0 mb-3">

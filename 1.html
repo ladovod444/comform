@@ -10,6 +10,7 @@
     <link href="/assets/plugins/bootstrap/5.3.3/bootstrap.min.css" rel=stylesheet>
     <link href="/assets/comfort/css/style.css" rel=stylesheet>
     <link href="/assets/plugins/nice-select2/nice-select2.min.css" rel=stylesheet>
+    <link href="/assets/comfort/font/fonts.css" rel=stylesheet>
 </head>
 <body class=small><h1 class=visually-hidden>Мебельная фабрика Comfort-avenue</h1>
 <button class="btn btn-dark p-3 z-3" id=to-top>
@@ -74,8 +75,7 @@
                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path></svg></span>
             </div>
         </div>
-        <div class=offcanvas-body>
-            <h2 class=fs-5>Каталог</h2>
+        <div class=offcanvas-body><h2 class=fs-5>Каталог</h2>
             <ul class="list-group p-2 border-top border-bottom rounded-0">
                 <li class="list-group-item border-0 p-0">
                     <button class="btn d-flex align-items-center px-0" style="font-size: 14px;" data-bs-target="#Menu1"
@@ -126,21 +126,6 @@
                 <u>Напишите нам</u></a></div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="offcanvas offcanvas-start" id=Menu1 aria-labelledby=offcanvasExampleLabel1 tabindex=-1>
         <div class="offcanvas-header gap-2 pb-0">
             <button class="btn btn-close d-flex align-items-center gap-1 p-0 m-0 h-100" data-bs-dismiss=offcanvas
@@ -659,210 +644,635 @@
     </div>
 </header>
 <main>
-    <section class="container pb-2">
-        <div class="row ">
-            <div class="col-12 pb-2">
-                <div class="carousel slide"
-                     id=carouselProductPage
-                     data-bs-wrap=true
-                >
-                    <div class="carousel-inner mb-2 h-100 rounded-4">
-                        <div class="carousel-item active "><img src="/assets/comfort/img/productCardImage.webp"
-                                                                class=w-100 alt="Изображение товара"></div>
-                        <div class="carousel-item "><img src="/assets/comfort/img/productCardImage.webp" class=w-100
-                                                         alt="Изображение товара"></div>
-                        <div class="carousel-item "><img src="/assets/comfort/img/productCardImage.webp" class=w-100
-                                                         alt="Изображение товара"></div>
-                        <div class="carousel-item "><img src="/assets/comfort/img/productCardImage.webp" class=w-100
-                                                         alt="Изображение товара"></div>
-                        <div class="carousel-item "><img src="/assets/comfort/img/productCardImage.webp" class=w-100
-                                                         alt="Изображение товара"></div>
-                    </div>
-                    <div class="carousel-indicators ">
-                        <button type=button class="active "
-                                aria-label="Кнопка переключения слайда"
-                                data-bs-target="#carouselProductPage"
-                                data-bs-slide-to=0></button>
-                        <button type=button class=" "
-                                aria-label="Кнопка переключения слайда"
-                                data-bs-target="#carouselProductPage"
-                                data-bs-slide-to=1></button>
-                        <button type=button class=" "
-                                aria-label="Кнопка переключения слайда"
-                                data-bs-target="#carouselProductPage"
-                                data-bs-slide-to=2></button>
-                        <button type=button class=" "
-                                aria-label="Кнопка переключения слайда"
-                                data-bs-target="#carouselProductPage"
-                                data-bs-slide-to=3></button>
-                        <button type=button class=" "
-                                aria-label="Кнопка переключения слайда"
-                                data-bs-target="#carouselProductPage"
-                                data-bs-slide-to=4></button>
-                    </div>
-                </div>
+    <div class=" container carousel carousel-fade slide mb-4" data-bs-touch=true data-bs-ride=carousel id=carouselMain>
+        <div class="carousel-indicators button-position justify-content-start" style="margin-left: 10%;">
+            <button type=button data-bs-target="#carouselMain" data-bs-slide-to=0 class="active " aria-current=true
+                    aria-label="Slide 1"></button>
+            <button type=button data-bs-target="#carouselMain" data-bs-slide-to=1 class=" " aria-current=true
+                    aria-label="Slide 2"></button>
+            <button type=button data-bs-target="#carouselMain" data-bs-slide-to=2 class=" " aria-current=true
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner rounded-4" style="height: 300px;">
+            <div class="carousel-item active h-100 position-relative rounded-4"><img class="d-block "
+                                                                                     src="/assets/comfort/img/carousel/1.jpg"
+                                                                                     alt="Изображение 1">
+                <div class="carousel-caption carousel-caption-mobile text-light "><h2 class=ms-4>Наименование
+                    товара</h2>
+                    <p class="fs-6 ms-4">Описание товара </p></div>
             </div>
-            <div class="col-12 border-bottom pb-3" style="height:max-content!important;">
-                <div class="d-flex align-items-center justify-content-between"><h2 class="fs-4 mb-1"> Название товара
-                </h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill="#eeeeee" class="bi bi-heart-fill"
-                         viewBox="0 0 16 16">
-                        <path fill-rule=evenodd
-                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                    </svg>
-                </div>
-                <p class="text-success fw-medium mb-3" style="font-size: 10px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor class="bi bi-check-lg"
-                         viewBox="0 0 16 16">
-                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                    </svg>
-                    В наличии N шт.
-                </p>
-                <div class="d-flex gap-2 mb-3 lh-1"><p class="fs-3 m-0"><strong>8 500 Р.</strong></p>
-                    <p class="text-danger small m-0 pt-1" style="font-size: 10px;"><strong>
-                        <del>12 200 Р.</del>
-                    </strong></p>
-                </div>
-                <div class="d-flex mb-2">
-                    <div class=form-check><input class=form-check-input type=radio name=flexRadioDisabled id=flexRadio1
-                                                 aria-label="Выбор цвета"
-                                                 style="width:16px; height:16px; background-color:#f2f0e4;"><label
-                            class=form-check-label for=flexRadio1></label></div>
-                    <div class=form-check><input class=form-check-input type=radio name=flexRadioDisabled id=flexRadio2
-                                                 aria-label="Выбор цвета"
-                                                 style="width:16px; height:16px; background-color:#ffe4e4;"><label
-                            class=form-check-label for=flexRadio2></label></div>
-                    <div class=form-check><input class=form-check-input type=radio name=flexRadioDisabled id=flexRadio3
-                                                 aria-label="Выбор цвета"
-                                                 style="width:16px; height:16px; background-color:#f2f0f0;"><label
-                            class=form-check-label for=flexRadio3></label></div>
-                    <div class=form-check><input class=form-check-input type=radio name=flexRadioDisabled id=flexRadio4
-                                                 aria-label="Выбор цвета"
-                                                 style="width:16px; height:16px; background-color:#f2f0e4;"><label
-                            class=form-check-label for=flexRadio4></label></div>
-                </div>
-                <hr class="mt-0 mb-3">
-                <h3 class="fw-bold mb-3" style="font-size: 14px;"> Основные характеристики
-                </h3>
-                <div class=row>
-                    <div class="col-7 small fw-medium"><p class=mb-1> Размер (Ш x В x Г)
-                    </p>
-                        <p class=mb-1> Материал
-                        </p>
-                        <p class=mb-0> Цвет
-                        </p></div>
-                    <div class="col small"><p class=mb-1> 129 х 210 х 28 см
-                    </p>
-                        <p class=mb-1> ЛДСП, ХДФ
-                        </p>
-                        <p class=mb-0> Графит
-                        </p></div>
-                </div>
-                <hr>
-                <div class="mb-2 text-center">
-                    <button class="col-12 btn btn-dark fw-medium mb-1"> Купить
-                    </button>
-                    <button class="btn text-decoration-underline " style="font-size: 12px;"> Купить в 1 клик
-                    </button>
-                </div>
-                <div class="bg-light p-3 rounded-4">
-                    <p class="fw-bold d-flex align-items-center gap-4 mb-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
-                             class="bi bi-bus-front" viewBox="0 0 16 16">
-                            <path d="M5 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm8 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-6-1a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Zm1-6c-1.876 0-3.426.109-4.552.226A.5.5 0 0 0 3 4.723v3.554a.5.5 0 0 0 .448.497C4.574 8.891 6.124 9 8 9c1.876 0 3.426-.109 4.552-.226A.5.5 0 0 0 13 8.277V4.723a.5.5 0 0 0-.448-.497A44.303 44.303 0 0 0 8 4Zm0-1c-1.837 0-3.353.107-4.448.22a.5.5 0 1 1-.104-.994A44.304 44.304 0 0 1 8 2c1.876 0 3.426.109 4.552.226a.5.5 0 1 1-.104.994A43.306 43.306 0 0 0 8 3Z"/>
-                            <path d="M15 8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1V2.64c0-1.188-.845-2.232-2.064-2.372A43.61 43.61 0 0 0 8 0C5.9 0 4.208.136 3.064.268 1.845.408 1 1.452 1 2.64V4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v3.5c0 .818.393 1.544 1 2v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V14h6v1.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2c.607-.456 1-1.182 1-2V8ZM8 1c2.056 0 3.71.134 4.822.261.676.078 1.178.66 1.178 1.379v8.86a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 11.5V2.64c0-.72.502-1.301 1.178-1.379A42.611 42.611 0 0 1 8 1Z"/>
-                        </svg>
-                        Доставка
-                    </p>
-                    <div class="mb-1 d-flex align-items-center gap-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
-                             class="bi bi-bus-front opacity-0" viewBox="0 0 16 16">
-                            <path d="M5 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm8 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-6-1a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H7Zm1-6c-1.876 0-3.426.109-4.552.226A.5.5 0 0 0 3 4.723v3.554a.5.5 0 0 0 .448.497C4.574 8.891 6.124 9 8 9c1.876 0 3.426-.109 4.552-.226A.5.5 0 0 0 13 8.277V4.723a.5.5 0 0 0-.448-.497A44.303 44.303 0 0 0 8 4Zm0-1c-1.837 0-3.353.107-4.448.22a.5.5 0 1 1-.104-.994A44.304 44.304 0 0 1 8 2c1.876 0 3.426.109 4.552.226a.5.5 0 1 1-.104.994A43.306 43.306 0 0 0 8 3Z"/>
-                            <path d="M15 8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1V2.64c0-1.188-.845-2.232-2.064-2.372A43.61 43.61 0 0 0 8 0C5.9 0 4.208.136 3.064.268 1.845.408 1 1.452 1 2.64V4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v3.5c0 .818.393 1.544 1 2v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V14h6v1.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2c.607-.456 1-1.182 1-2V8ZM8 1c2.056 0 3.71.134 4.822.261.676.078 1.178.66 1.178 1.379v8.86a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 11.5V2.64c0-.72.502-1.301 1.178-1.379A42.611 42.611 0 0 1 8 1Z"/>
-                        </svg>
-                        <p class="text-secondary small mb-1 ">
-                            Информация по доставке <br> расчитывается в соответствии<br> с основными <a href="#"
-                                                                                                        class="link text-secondary">тарифами</a>
-                        </p></div>
-                    <a href="#" class="icon-link link-dark link-underline-dark gap-4 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
-                             class="bi bi-question-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
-                        </svg>
-                        Задать вопрос
-                    </a></div>
+            <div class="carousel-item h-100 position-relative rounded-4"><img class="d-block "
+                                                                              src="/assets/comfort/img/carousel/2.jpg"
+                                                                              alt="Изображение 2">
+                <div class="carousel-caption carousel-caption-mobile text-light "><h2 class=ms-4>Наименование
+                    товара</h2>
+                    <p class="fs-6 ms-4">Описание товара </p></div>
+            </div>
+            <div class="carousel-item h-100 position-relative rounded-4"><img class="d-block "
+                                                                              src="/assets/comfort/img/carousel/2.jpg"
+                                                                              alt="Изображение 3">
+                <div class="carousel-caption carousel-caption-mobile text-light "><h2 class=ms-4>Наименование
+                    товара</h2>
+                    <p class="fs-6 ms-4">Описание товара </p></div>
             </div>
         </div>
-        <div class=pt-2>
-            <ul class="list-group list-group-horizontal productCadr-tabs-gap px-3 mb-3" id=pills-tab role=tablist>
-                <li class="list-group-item border-0 p-0" role=presentation>
-                    <button class="btn active p-0 productCardTabs text-decoration-underline " style="font-size: 12px;"
-                            id=pills-descr-tab data-bs-toggle=pill data-bs-target="#pills-descr" type=button role=tab
-                            aria-controls=pills-descr aria-selected=true>Описание
-                    </button>
-                <li class="list-group-item border-0 p-0" role=presentation>
-                    <button class="btn p-0 productCardTabs text-decoration-underline " style="font-size: 12px;"
-                            id=pills-props-tab data-bs-toggle=pill data-bs-target="#pills-props" type=button role=tab
-                            aria-controls=pills-props aria-selected=false>Характеристики
-                    </button>
-                <li class="list-group-item border-0 p-0" role=presentation>
-                    <button class="btn p-0 productCardTabs text-decoration-underline " style="font-size: 12px;"
-                            id=pills-delivery-tab data-bs-toggle=pill data-bs-target="#pills-delivery" type=button
-                            role=tab aria-controls=pills-delivery aria-selected=false>Доставка
-                    </button>
-            </ul>
-            <div class=tab-content id=pills-tabContent style="min-height: 320px;">
-                <div class="tab-pane fade show active flex-column small" id=pills-descr role=tabpanel
-                     aria-labelledby=pills-descr-tab tabindex=0><p class="mb-3 "> В этом комоде гармонично сочетаются
-                    лаконичный дизайн, продуманные габариты и концептуальная гравировка на фасадах. Данная модель
-                    оснащена двумя просторными секциями с полками по бокам и тремя выдвижными ящиками по центру. Комод
-                    станет удачной находкой для любителей утонченного стиля и функциональной мебели.
-                </p>
-                    <p class="fw-medium mb-3 ">Особенности:</p>
-                    <ul class=ps-3>
-                        <li>
-                            Более 2500 вариантов исполнения, не влияющих на стоимость и срок изготовления;
-                        <li>
-                            Усиленные каркасы ящиков из ЛДСП выдерживают вес до 25 кг;
-                        <li>
-                            Полки выполнены из прочного ЛДСП и выдерживают вес до 30 кг;
-                    </ul>
-                </div>
-                <div class="tab-pane fade bg-light flex-column small gap-4 p-4 rounded-4" id=pills-props role=tabpanel
-                     aria-labelledby=pills-props-tab tabindex=0>
-                    <div class="d-flex ">
-                        <div class="col-10 back-image back-image-sm border-end border-2 border-black"
-                             style="height: 170px;"></div>
-                        <div class="col-2 fw-medium align-content-center ps-2"> 80
-                        </div>
-                    </div>
-                    <div class=d-flex>
-                        <div class="col-12 d-flex">
-                            <div class=col-8>
-                                <ul class="list-unstyled fw-medium mb-0">
-                                    <li class="list-group-item mb-2"> Характеристика 1
-                                    <li class="list-group-item mb-2"> Характеристика 2
-                                    <li class="list-group-item mb-0"> Характеристика 3
-                                </ul>
-                            </div>
-                            <div class=col-4>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="list-group-item mb-2"> Значение 1
-                                    <li class="list-group-item mb-2"> Значение 2
-                                    <li class="list-group-item mb-0"> Значение 3
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id=pills-delivery role=tabpanel aria-labelledby=pills-delivery-tab
-                     tabindex=0>...
-                </div>
+        <button class=carousel-control-prev data-bs-slide=prev data-bs-target="#carouselMain" type=button><span
+                class=visually-hidden>Предыдущий</span></button>
+        <button class=carousel-control-next data-bs-slide=next data-bs-target="#carouselMain" type=button><span
+                class=visually-hidden>Следующий</span></button>
+    </div>
+    <section class="container mb-4"><h2 class="fs-5 mb-3"> Дизайнерская мебель от производителя</h2>
+        <div class="d-flex gap-2 overflow-auto">
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/4.jpg" alt="Картинка категории 1">
+                    <p class=m-0>Категория 1</p></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/4.jpg" alt="Картинка категории 2">
+                    <p class=m-0>Категория 2</p></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/4.jpg" alt="Картинка категории 3">
+                    <p class=m-0>Категория 3</p></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/2.jpg" alt="Картинка категории 4">
+                    <p class=m-0>Категория 4</p></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/3.jpg" alt="Картинка категории 5">
+                    <p class=m-0>Категория 5</p></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/3.jpg" alt="Картинка категории 6">
+                    <p class=m-0>Категория 6</p></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/2.jpg" alt="Картинка категории 7">
+                    <p class=m-0>Категория 7</p></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/1.jpg" alt="Картинка категории 8">
+                    <p class=m-0>Категория 8</p></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/4.jpg" alt="Картинка категории 9">
+                    <p class=m-0>Категория 9</p></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/2.jpg" alt="Картинка категории 10">
+                    <p class=m-0>Категория 10</p></div>
             </div>
         </div>
     </section>
-    <hr class="m-0 mb-3">
+    <section class="container mb-4">
+        <div class=row>
+            <div class=col-12>
+                <div class="d-flex align-items-center gap-2 justify-content-start mb-3"><h2 class="fs-5 m-0">
+                    Каталог</h2>
+                    <button class="btn btn-dark d-flex align-items-center gap-1 px-2 py-0" aria-expanded=false
+                            style="line-height: 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
+                             class="bi bi-sliders" viewBox="0 0 16 16">
+                            <path fill-rule=evenodd
+                                  d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
+                        </svg>
+                        <p class=m-0 style="font-size: 11px;">Фильтры</p></button>
+                </div>
+                <div class="d-flex align-items-center justify-content-between gap-3 mb-1">
+                    <button class="btn bg-transparent p-0" style="font-size: 12px;"><u>Самые популярные</u>
+                        <svg class="bi bi-arrow-down" xmlns="http://www.w3.org/2000/svg" width=16 height=16
+                             fill=lightgray viewBox="0 0 16 16">
+                            <path fill-rule=evenodd
+                                  d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"></path>
+                        </svg>
+                    </button>
+                    <div class="form-check form-switch d-flex align-items-center" style="font-size: 12px;"><input
+                            class="form-check-input me-2" style="width:50px; height:25px;" type=checkbox role=switch
+                            id=flexSwitchCheckDefault><label class=form-check-label for=flexSwitchCheckDefault>В
+                        наличии</label></div>
+                </div>
+                <div class="row row-cols-2 gy-1">
+                    <div class="col p-0 ps-1 ">
+                        <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
+                                                                              style="height: 140px;"
+                                                                              src="/assets/comfort/img/5.jpg"
+                                                                              alt="Изображение товара 1">
+                            <div class="card-body pb-1 px-0">
+                                <div class="d-flex justify-content-between"><h3 class=card-title
+                                                                                style="font-size: 12px">Товар 1</h3>
+                                    <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width=20 height=20
+                                         fill=lightgray viewBox="0 0 16 16">
+                                        <path fill-rule=lightgray
+                                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
+                                    </svg>
+                                </div>
+                                <div class="d-flex "><p class="card-text m-0 me-1" style="font-size: 16px"><strong>8 500
+                                    Р.</strong></p>
+                                    <p class="card-text text-danger mt-1" style="font-size: 8px"><strong>
+                                        <del>12 200 Р.</del>
+                                    </strong></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class=d-flex>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio015
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio015></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio025
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio025></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio035
+                                                                                                 style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio035></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio045
+                                                                                                 style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio045></label></div>
+                                    </div>
+                                    <button class="btn btn-dark d-flex p-1"
+                                            aria-label="Кнопка добавления товара в корзину">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
+                                             class="bi bi-bag" viewBox="0 0 16 16">
+                                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col p-0 pe-1 ">
+                        <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
+                                                                              style="height: 140px;"
+                                                                              src="/assets/comfort/img/1.jpg"
+                                                                              alt="Изображение товара 2">
+                            <div class="card-body pb-1 px-0">
+                                <div class="d-flex justify-content-between"><h3 class=card-title
+                                                                                style="font-size: 12px">Товар 2</h3>
+                                    <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width=20 height=20
+                                         fill=lightgray viewBox="0 0 16 16">
+                                        <path fill-rule=lightgray
+                                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
+                                    </svg>
+                                </div>
+                                <div class="d-flex "><p class="card-text m-0 me-1" style="font-size: 16px"><strong>8 500
+                                    Р.</strong></p>
+                                    <p class="card-text text-danger mt-1" style="font-size: 8px"><strong>
+                                        <del>12 200 Р.</del>
+                                    </strong></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class=d-flex>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio115
+                                                                                                 style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio115></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio125
+                                                                                                 style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio125></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio135
+                                                                                                 style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio135></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio145
+                                                                                                 style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio145></label></div>
+                                    </div>
+                                    <button class="btn btn-dark d-flex p-1"
+                                            aria-label="Кнопка добавления товара в корзину">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
+                                             class="bi bi-bag" viewBox="0 0 16 16">
+                                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col p-0 ps-1 ">
+                        <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
+                                                                              style="height: 140px;"
+                                                                              src="/assets/comfort/img/1.jpg"
+                                                                              alt="Изображение товара 3">
+                            <div class="card-body pb-1 px-0">
+                                <div class="d-flex justify-content-between"><h3 class=card-title
+                                                                                style="font-size: 12px">Товар 3</h3>
+                                    <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width=20 height=20
+                                         fill=lightgray viewBox="0 0 16 16">
+                                        <path fill-rule=lightgray
+                                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
+                                    </svg>
+                                </div>
+                                <div class="d-flex "><p class="card-text m-0 me-1" style="font-size: 16px"><strong>8 500
+                                    Р.</strong></p>
+                                    <p class="card-text text-danger mt-1" style="font-size: 8px"><strong>
+                                        <del>12 200 Р.</del>
+                                    </strong></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class=d-flex>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio215
+                                                                                                 style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio215></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio225
+                                                                                                 style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio225></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio235
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio235></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio245
+                                                                                                 style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio245></label></div>
+                                    </div>
+                                    <button class="btn btn-dark d-flex p-1"
+                                            aria-label="Кнопка добавления товара в корзину">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
+                                             class="bi bi-bag" viewBox="0 0 16 16">
+                                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col p-0 pe-1 ">
+                        <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
+                                                                              style="height: 140px;"
+                                                                              src="/assets/comfort/img/3.jpg"
+                                                                              alt="Изображение товара 4">
+                            <div class="card-body pb-1 px-0">
+                                <div class="d-flex justify-content-between"><h3 class=card-title
+                                                                                style="font-size: 12px">Товар 4</h3>
+                                    <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width=20 height=20
+                                         fill=lightgray viewBox="0 0 16 16">
+                                        <path fill-rule=lightgray
+                                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
+                                    </svg>
+                                </div>
+                                <div class="d-flex "><p class="card-text m-0 me-1" style="font-size: 16px"><strong>8 500
+                                    Р.</strong></p>
+                                    <p class="card-text text-danger mt-1" style="font-size: 8px"><strong>
+                                        <del>12 200 Р.</del>
+                                    </strong></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class=d-flex>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio315
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio315></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio325
+                                                                                                 style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio325></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio335
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio335></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio345
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio345></label></div>
+                                    </div>
+                                    <button class="btn btn-dark d-flex p-1"
+                                            aria-label="Кнопка добавления товара в корзину">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
+                                             class="bi bi-bag" viewBox="0 0 16 16">
+                                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#"><img class="d-block w-100 rounded-4 mb-2"
+                                 src="https://placehold.co/250x200?text=Акционный+баннер" alt="Акционный баннер"></a>
+                <div class="row row-cols-2 gy-1">
+                    <div class="col p-0 ps-1 ">
+                        <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
+                                                                              style="height: 140px;"
+                                                                              src="/assets/comfort/img/4.jpg"
+                                                                              alt="Изображение товара 1">
+                            <div class="card-body pb-1 px-0">
+                                <div class="d-flex justify-content-between"><h3 class=card-title
+                                                                                style="font-size: 12px">Товар 1</h3>
+                                    <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width=20 height=20
+                                         fill=lightgray viewBox="0 0 16 16">
+                                        <path fill-rule=lightgray
+                                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
+                                    </svg>
+                                </div>
+                                <div class="d-flex "><p class="card-text m-0 me-1" style="font-size: 16px"><strong>8 500
+                                    Р.</strong></p>
+                                    <p class="card-text text-danger mt-1" style="font-size: 8px"><strong>
+                                        <del>12 200 Р.</del>
+                                    </strong></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class=d-flex>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio01500
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio01500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio02500
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio02500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio03500
+                                                                                                 style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio03500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio04500
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio04500></label></div>
+                                    </div>
+                                    <button class="btn btn-dark d-flex p-1"
+                                            aria-label="Кнопка добавления товара в корзину">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
+                                             class="bi bi-bag" viewBox="0 0 16 16">
+                                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col p-0 pe-1 ">
+                        <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
+                                                                              style="height: 140px;"
+                                                                              src="/assets/comfort/img/5.jpg"
+                                                                              alt="Изображение товара 2">
+                            <div class="card-body pb-1 px-0">
+                                <div class="d-flex justify-content-between"><h3 class=card-title
+                                                                                style="font-size: 12px">Товар 2</h3>
+                                    <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width=20 height=20
+                                         fill=lightgray viewBox="0 0 16 16">
+                                        <path fill-rule=lightgray
+                                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
+                                    </svg>
+                                </div>
+                                <div class="d-flex "><p class="card-text m-0 me-1" style="font-size: 16px"><strong>8 500
+                                    Р.</strong></p>
+                                    <p class="card-text text-danger mt-1" style="font-size: 8px"><strong>
+                                        <del>12 200 Р.</del>
+                                    </strong></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class=d-flex>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio11500
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio11500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio12500
+                                                                                                 style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio12500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio13500
+                                                                                                 style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio13500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio14500
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio14500></label></div>
+                                    </div>
+                                    <button class="btn btn-dark d-flex p-1"
+                                            aria-label="Кнопка добавления товара в корзину">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
+                                             class="bi bi-bag" viewBox="0 0 16 16">
+                                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col p-0 ps-1 ">
+                        <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
+                                                                              style="height: 140px;"
+                                                                              src="/assets/comfort/img/5.jpg"
+                                                                              alt="Изображение товара 3">
+                            <div class="card-body pb-1 px-0">
+                                <div class="d-flex justify-content-between"><h3 class=card-title
+                                                                                style="font-size: 12px">Товар 3</h3>
+                                    <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width=20 height=20
+                                         fill=lightgray viewBox="0 0 16 16">
+                                        <path fill-rule=lightgray
+                                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
+                                    </svg>
+                                </div>
+                                <div class="d-flex "><p class="card-text m-0 me-1" style="font-size: 16px"><strong>8 500
+                                    Р.</strong></p>
+                                    <p class="card-text text-danger mt-1" style="font-size: 8px"><strong>
+                                        <del>12 200 Р.</del>
+                                    </strong></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class=d-flex>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio21500
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio21500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio22500
+                                                                                                 style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio22500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio23500
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio23500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio24500
+                                                                                                 style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio24500></label></div>
+                                    </div>
+                                    <button class="btn btn-dark d-flex p-1"
+                                            aria-label="Кнопка добавления товара в корзину">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
+                                             class="bi bi-bag" viewBox="0 0 16 16">
+                                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col p-0 pe-1 ">
+                        <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
+                                                                              style="height: 140px;"
+                                                                              src="/assets/comfort/img/4.jpg"
+                                                                              alt="Изображение товара 4">
+                            <div class="card-body pb-1 px-0">
+                                <div class="d-flex justify-content-between"><h3 class=card-title
+                                                                                style="font-size: 12px">Товар 4</h3>
+                                    <svg class="bi bi-heart-fill" xmlns="http://www.w3.org/2000/svg" width=20 height=20
+                                         fill=lightgray viewBox="0 0 16 16">
+                                        <path fill-rule=lightgray
+                                              d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
+                                    </svg>
+                                </div>
+                                <div class="d-flex "><p class="card-text m-0 me-1" style="font-size: 16px"><strong>8 500
+                                    Р.</strong></p>
+                                    <p class="card-text text-danger mt-1" style="font-size: 8px"><strong>
+                                        <del>12 200 Р.</del>
+                                    </strong></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class=d-flex>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio31500
+                                                                                                 style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio31500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio32500
+                                                                                                 style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio32500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio33500
+                                                                                                 style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio33500></label></div>
+                                        <div class="form-check d-flex align-items-center"><input class=form-check-input
+                                                                                                 type=radio
+                                                                                                 name=flexRadioDisabled
+                                                                                                 id=flexRadio34500
+                                                                                                 style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                                 aria-label="Кнопка выбора цвета"><label
+                                                class=form-check-label for=flexRadio34500></label></div>
+                                    </div>
+                                    <button class="btn btn-dark d-flex p-1"
+                                            aria-label="Кнопка добавления товара в корзину">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width=16 height=16 fill=currentColor
+                                             class="bi bi-bag" viewBox="0 0 16 16">
+                                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                    <button class="btn btn-outline-dark px-5" style="font-size: 14px; border-color: lightgray;"><strong>Показать
+                        еще</strong></button>
+                </div>
+                <a href="#"><img class="d-block w-100 rounded-4 mb-2"
+                                 src="https://placehold.co/250x200?text=Акционный+баннер" alt="Акционный баннер"></a>
+            </div>
+        </div>
+    </section>
     <section class="container mb-1"><h2 class="fs-5 mb-3"> Рекомендуем
     </h2>
         <div class="d-flex align-items-center gap-3 mb-3">
@@ -874,7 +1284,7 @@
             <div class=col-6>
                 <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
                                                                       style="height: 140px;"
-                                                                      src="/assets/comfort/img/4.jpg"
+                                                                      src="/assets/comfort/img/5.jpg"
                                                                       alt="Изображение товара 1">
                     <div class="card-body pb-1 px-0">
                         <div class="d-flex justify-content-between"><h3 class=card-title style="font-size: 12px">Товар
@@ -897,21 +1307,21 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio0150000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio0150000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio0250000
-                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio0250000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio0350000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio0350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
@@ -958,28 +1368,28 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio1150000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio1150000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio1250000
-                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffe4e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio1250000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio1350000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio1350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio1450000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio1450000></label></div>
                             </div>
@@ -996,7 +1406,7 @@
             <div class=col-6>
                 <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
                                                                       style="height: 140px;"
-                                                                      src="/assets/comfort/img/4.jpg"
+                                                                      src="/assets/comfort/img/2.jpg"
                                                                       alt="Изображение товара 3">
                     <div class="card-body pb-1 px-0">
                         <div class="d-flex justify-content-between"><h3 class=card-title style="font-size: 12px">Товар
@@ -1026,21 +1436,21 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio2250000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio2250000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio2350000
-                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio2350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio2450000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio2450000></label></div>
                             </div>
@@ -1057,7 +1467,7 @@
             <div class=col-6>
                 <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
                                                                       style="height: 140px;"
-                                                                      src="/assets/comfort/img/2.jpg"
+                                                                      src="/assets/comfort/img/4.jpg"
                                                                       alt="Изображение товара 4">
                     <div class="card-body pb-1 px-0">
                         <div class="d-flex justify-content-between"><h3 class=card-title style="font-size: 12px">Товар
@@ -1087,14 +1497,14 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio3250000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio3250000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio3350000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio3350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
@@ -1118,7 +1528,7 @@
             <div class=col-6>
                 <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
                                                                       style="height: 140px;"
-                                                                      src="/assets/comfort/img/1.jpg"
+                                                                      src="/assets/comfort/img/4.jpg"
                                                                       alt="Изображение товара 5">
                     <div class="card-body pb-1 px-0">
                         <div class="d-flex justify-content-between"><h3 class=card-title style="font-size: 12px">Товар
@@ -1141,21 +1551,21 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio4150000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio4150000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio4250000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio4250000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio4350000
-                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio4350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
@@ -1179,7 +1589,7 @@
             <div class=col-6>
                 <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
                                                                       style="height: 140px;"
-                                                                      src="/assets/comfort/img/1.jpg"
+                                                                      src="/assets/comfort/img/5.jpg"
                                                                       alt="Изображение товара 6">
                     <div class="card-body pb-1 px-0">
                         <div class="d-flex justify-content-between"><h3 class=card-title style="font-size: 12px">Товар
@@ -1202,7 +1612,7 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio5150000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio5150000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
@@ -1216,7 +1626,7 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio5350000
-                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio5350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
@@ -1263,28 +1673,28 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio6150000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio6150000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio6250000
-                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio6250000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio6350000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio6350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio6450000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio6450000></label></div>
                             </div>
@@ -1324,21 +1734,21 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio7150000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio7150000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio7250000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                                         style="width:14px; height:14px; background-color:#ffe4e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio7250000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio7350000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio7350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
@@ -1362,7 +1772,7 @@
             <div class=col-6>
                 <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
                                                                       style="height: 140px;"
-                                                                      src="/assets/comfort/img/2.jpg"
+                                                                      src="/assets/comfort/img/4.jpg"
                                                                       alt="Изображение товара 9">
                     <div class="card-body pb-1 px-0">
                         <div class="d-flex justify-content-between"><h3 class=card-title style="font-size: 12px">Товар
@@ -1385,28 +1795,28 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio8150000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio8150000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio8250000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio8250000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio8350000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio8350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio8450000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio8450000></label></div>
                             </div>
@@ -1423,7 +1833,7 @@
             <div class=col-6>
                 <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
                                                                       style="height: 140px;"
-                                                                      src="/assets/comfort/img/1.jpg"
+                                                                      src="/assets/comfort/img/4.jpg"
                                                                       alt="Изображение товара 10">
                     <div class="card-body pb-1 px-0">
                         <div class="d-flex justify-content-between"><h3 class=card-title style="font-size: 12px">Товар
@@ -1446,28 +1856,28 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio9150000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio9150000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio9250000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio9250000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio9350000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio9350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio9450000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio9450000></label></div>
                             </div>
@@ -1484,7 +1894,7 @@
             <div class=col-6>
                 <div class="card border-0 p-2 positiom-relative"><img class="card-img-top rounded-4"
                                                                       style="height: 140px;"
-                                                                      src="/assets/comfort/img/4.jpg"
+                                                                      src="/assets/comfort/img/1.jpg"
                                                                       alt="Изображение товара 11">
                     <div class="card-body pb-1 px-0">
                         <div class="d-flex justify-content-between"><h3 class=card-title style="font-size: 12px">Товар
@@ -1514,21 +1924,21 @@
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio10250000
-                                                                                         style="width:14px; height:14px; background-color:#ffe4e4;"
+                                                                                         style="width:14px; height:14px; background-color:#ffe4d7;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio10250000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio10350000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
+                                                                                         style="width:14px; height:14px; background-color:#ffd7e4;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio10350000></label></div>
                                 <div class="form-check d-flex align-items-center"><input class=form-check-input
                                                                                          type=radio
                                                                                          name=flexRadioDisabled
                                                                                          id=flexRadio10450000
-                                                                                         style="width:14px; height:14px; background-color:#f2f0e4;"
+                                                                                         style="width:14px; height:14px; background-color:#f2f0f0;"
                                                                                          aria-label="Кнопка выбора цвета"><label
                                         class=form-check-label for=flexRadio10450000></label></div>
                             </div>
@@ -1544,6 +1954,74 @@
             </div>
     </section>
     <hr class=m-0>
+    <section class="container pt-3 mb-5"><h2 class="fs-5 mb-4">О компании</h2>
+        <h3 style="font-size: 16px">Comfort-Avenue</h3>
+        <p class=fw-bolder style="font-size: 12px">Добро пожаловать в Comfort Avenue – вашу уникальную дверь к миру
+            комфорта и
+            функциональности в вашем доме. </p>
+        <p style="font-size: 12px">Мы специализируемся на создании высококачественных кухонь,
+            фурнитуры для кухни и мебели для дома, предлагая широкий ассортимент
+            продукции, которая удовлетворит даже самые изысканные вкусы и потребности.
+        </p>
+        <p style="font-size: 12px">В Comfort Avenue мы стремимся создавать пространства, которые сочетают в себе
+            элегантность,
+            функциональность и инновационный дизайн.
+        </p>
+        <button class="btn mb-3 px-0" style="font-size: 12px"><strong class=me-2>Читать далее</strong>
+            <svg xmlns="http://www.w3.org/2000/svg" width=12 height=12 fill=lightgray class="bi bi-caret-down"
+                 viewBox="0 0 16 16">
+                <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+            </svg>
+        </button>
+        <img class="rounded-3 h-auto w-100" src="https://placehold.co/300x200?text=Место+для+видео"
+             alt="Заглушка для видео"></section>
+    <section class="container mb-1">
+        <h2 class="fs-5 mb-3"> Производство
+    </h2>
+        <div class="d-flex gap-2 overflow-auto invisibility-scroll">
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/3.jpg" alt="Картинка категории 1"></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/4.jpg" alt="Картинка категории 2"></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/2.jpg" alt="Картинка категории 3"></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/3.jpg" alt="Картинка категории 4"></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/5.jpg" alt="Картинка категории 5"></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/3.jpg" alt="Картинка категории 6"></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/2.jpg" alt="Картинка категории 7"></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/2.jpg" alt="Картинка категории 8"></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/1.jpg" alt="Картинка категории 9"></div>
+            </div>
+            <div class=col-5>
+                <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"
+                                                src="/assets/comfort/img/4.jpg" alt="Картинка категории 10"></div>
+            </div>
+        </div>
+    </section>
+    <hr class="mt-0 mb-2">
 </main>
 <footer class="container py-3" style="font-size:12px"><h2 class=fs-5> Доставка по всей России
 </h2>
@@ -1600,18 +2078,18 @@
         <u>Войти</u></a></div>
     <div><p class="m-0 text-secondary" style="font-size:10px;">&copy; Copyright 2024. All rights reserved.</p></div>
 </footer>
-<script nonce="xgulyVD9Eg1lSULCF3gptxvWYFo="> const $locale = 'ru';
+<script nonce="6I8STv6GKsAbDkTOCxKJIwW8T8k="> const $locale = 'ru';
 window.lazyLoadOptions = {};</script>
-<script async nonce="xgulyVD9Eg1lSULCF3gptxvWYFo=" src='/assets/js/lazyload.min.js?v=YHhQgvFMcX'></script>
+<script async nonce="6I8STv6GKsAbDkTOCxKJIwW8T8k=" src='/assets/js/lazyload.min.js?v=YHhQgvFMcX'></script>
 <script
-        nonce="xgulyVD9Eg1lSULCF3gptxvWYFo="
+        nonce="6I8STv6GKsAbDkTOCxKJIwW8T8k="
         data-src="/assets/plugins/bootstrap/5.3.3/bootstrap.bundle.min.js"
         class=lazy
 ></script>
-<script nonce="xgulyVD9Eg1lSULCF3gptxvWYFo=" data-src="/assets/comfort/js/toTopBtn.js" class=lazy></script>
-<script nonce="xgulyVD9Eg1lSULCF3gptxvWYFo=" data-src="/assets/comfort/js/scroll.js" class=lazy></script>
-<script nonce='xgulyVD9Eg1lSULCF3gptxvWYFo=' data-src='/assets/plugins/nice-select2/nice-select2.min.js?v=YHhQgvFMcX'
+<script nonce="6I8STv6GKsAbDkTOCxKJIwW8T8k=" data-src="/assets/comfort/js/toTopBtn.js" class=lazy></script>
+<script nonce="6I8STv6GKsAbDkTOCxKJIwW8T8k=" data-src="/assets/comfort/js/main.js" class=lazy></script>
+<script nonce="6I8STv6GKsAbDkTOCxKJIwW8T8k=" data-src="/assets/comfort/js/scroll.js" class=lazy></script>
+<script nonce='6I8STv6GKsAbDkTOCxKJIwW8T8k=' data-src='/assets/plugins/nice-select2/nice-select2.min.js?v=YHhQgvFMcX'
         class='lazy'></script>
-<script nonce="xgulyVD9Eg1lSULCF3gptxvWYFo=" data-src="/assets/comfort/js/main.js" class=lazy></script>
 </body>
 </html>

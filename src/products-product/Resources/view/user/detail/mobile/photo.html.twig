@@ -5,9 +5,10 @@
 
 {% set product_photo = card.productImages %}
 
-<div id="productPhoto" class="carousel slide" data-bs-ride="carousel">
+<div class="col-12 pb-2">
+    <div id="productPhoto" class="carousel slide" data-bs-ride="carousel">
 
-    <div class="carousel-inner rounded-5 border">
+    <div class="carousel-inner mb-2 h-100 rounded-4">
 
         {% for product_images in product_photo | filter(img => img.product_img_ext is defined) | sort((a, b) => a.product_img_root < b.product_img_root) %}
 
@@ -25,10 +26,10 @@
                 {% endif %}
 
 
-                <div class="rounded-5 lazy bg-contain my-3"
+                <div class="lazy w-100"
                      data-bg="{{ image_path }}"
                      title="{{ card.productName }}"
-                     style="width: 100%; height: 250px; background-image: url('/assets/img/empty.webp');"
+                     style="height: 300px; background-image: url('/assets/img/empty.webp');"
                 >
 
                 </div>
@@ -61,4 +62,5 @@
         </svg>
         <span class="visually-hidden">Next</span>
     </button>
+</div>
 </div>

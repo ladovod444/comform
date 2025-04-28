@@ -3,7 +3,7 @@
 {% macro category_card(image_path, category_name, category_url, category_threes) %}
 
     <div class="col-5">
-        <div class="card border-0 pe-0" style="width:auto;">
+        <div class="card border-0" style="width:auto;">
             <a
                     class="text-decoration-none"
                     href="{{ path('products-product:user.catalog.category', {'category': category_url}) }}"
@@ -22,14 +22,89 @@
 {% endmacro %}
 
 
-<section class="container mb-5 position-relative">
-    <h2 class="fs-4 mb-4">Дизайнерская мебель от производителя</h2>
+{#<section class="container mb-5 position-relative">#}
+{#    <h2 class="fs-4 mb-4">Дизайнерская мебель от производителя</h2>#}
 
+{#    <div class="d-flex gap-2 overflow-auto">#}
+{#    {% if baks_public_menu is defined %}#}
+{#        {% if baks_public_menu|length > 1 %}#}
+
+{#        {% set count =  0 %}#}
+
+{#        {% for i in baks_public_menu %}#}
+
+{#            {% if i.child_category is not null %}#}
+
+{#                {% for child in i.child_category|json_decode %}#}
+
+{#                    {% if child.child_category_cover_ext is defined and child.child_category_cover_ext is not null %}#}
+{#                        {% set image_path =  cdn_image_path(child.child_category_cover_name, child.child_category_cover_ext, child.child_category_cover_cdn) %}#}
+{#                    {% endif %}#}
+
+{#                    {% set category_threes = [] %}#}
+
+{#                    #}{# child_category_three #}
+{#                    {% if i.child_category_three is not null %}#}
+
+{#                        {% for child_three in i.child_category_three|json_decode|filter(cat =>  cat.category == child.child_category_event) %}#}
+{#                            {% set category_threes = category_threes|merge([child_three]) %}#}
+{#                        {% endfor %}#}
+
+{#                    {% endif %}#}
+
+
+{#                    {% if i.child_category_three is null and i.child_products is not null %}#}
+
+{#                        {% for child_three in i.child_products|json_decode|filter(prod =>  prod.category == child.child_category_event) %}#}
+{#                            {% set category_threes = category_threes|merge([child_three]) %}#}
+{#                        {% endfor %}#}
+
+{#                    {% endif %}#}
+{#                    {% if  category_threes is not empty %}#}
+{#                        {% set count = count + 1 %}#}
+{#                        #}{# Передаем значения в макрос для рендеринга элементов меню #}
+{#                        {{ macros.category_card(image_path, child.child_category_name , child.category_url) }}#}
+
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#            {% else %}#}
+
+{#                {% if i.products is not null %}#}
+{#                    {% set count = count + 1 %}#}
+{#                    {% set image_path = '/assets/img/blank.svg' %}#}
+
+{#                    {% if i.category_cover_ext is defined and i.category_cover_ext is not null %}#}
+{#                        {% set image_path = cdn_image_path(i.category_cover_dir, i.category_cover_ext, i.category_cover_cdn) %}#}
+{#                    {% endif %}#}
+
+
+{#                    {{ macros.category_card(image_path, i.category_name, i.category_url) }}#}
+
+{#                {% endif %}#}
+{#            {% endif %}#}
+
+{#        {% endfor %}#}
+{#    </div>#}
+
+{#    {% if count > 4 %}#}
+{#        <button class="btn scroll-btn scroll-btn-left position-absolute top-50" id="scroll-leftBig"#}
+{#                aria-label="left"><span#}
+{#                    class="carousel-control-prev-icon custom-color" aria-hidden="true"></span></button>#}
+{#        <button class="btn scroll-btn scroll-btn-right position-absolute top-50" id="scroll-rightBig"#}
+{#                aria-label="right">#}
+{#            <span class="carousel-control-next-icon custom-color" aria-hidden="true"></span></button>#}
+{#    {% endif %}#}
+{#    {% endif %}#}
+{#    {% endif %}#}
+{#</section>#}
+
+
+{% if baks_public_menu is defined %}
+<section class="container mb-4">
+            {% set count =  0 %}
+
+    <h2 class="fs-5 mb-3"> Дизайнерская мебель от производителя</h2>
     <div class="d-flex gap-2 overflow-auto">
-        {% if baks_public_menu is defined %}
-        {% if baks_public_menu|length > 1 %}
-
-        {% set count =  0 %}
 
         {% for i in baks_public_menu %}
 
@@ -84,18 +159,62 @@
             {% endif %}
 
         {% endfor %}
-    </div>
+{#        <div class=col-5>#}
+{#            <div class="card border-0">#}
+{#                <img class="card-img-top rounded-4 mb-1" style="height: 130px ;"#}
+{#                                            src="/assets/comfort/img/4.jpg" alt="Картинка категории 1">#}
+{#                <p class=m-0>Категория 1</p>#}
+{#            </div>#}
+{#        </div>#}
 
-    {% if count > 4 %}
-        <button class="btn scroll-btn scroll-btn-left position-absolute top-50" id="scroll-leftBig"
-                aria-label="left"><span
-                    class="carousel-control-prev-icon custom-color" aria-hidden="true"></span></button>
-        <button class="btn scroll-btn scroll-btn-right position-absolute top-50" id="scroll-rightBig"
-                aria-label="right">
-            <span class="carousel-control-next-icon custom-color" aria-hidden="true"></span></button>
-    {% endif %}
-    {% endif %}
-    {% endif %}
+
+{#        <div class=col-5>#}
+{#            <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"#}
+{#                                            src="/assets/comfort/img/4.jpg" alt="Картинка категории 2">#}
+{#                <p class=m-0>Категория 2</p></div>#}
+{#        </div>#}
+{#        <div class=col-5>#}
+{#            <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"#}
+{#                                            src="/assets/comfort/img/4.jpg" alt="Картинка категории 3">#}
+{#                <p class=m-0>Категория 3</p></div>#}
+{#        </div>#}
+{#        <div class=col-5>#}
+{#            <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"#}
+{#                                            src="/assets/comfort/img/2.jpg" alt="Картинка категории 4">#}
+{#                <p class=m-0>Категория 4</p></div>#}
+{#        </div>#}
+{#        <div class=col-5>#}
+{#            <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"#}
+{#                                            src="/assets/comfort/img/3.jpg" alt="Картинка категории 5">#}
+{#                <p class=m-0>Категория 5</p></div>#}
+{#        </div>#}
+{#        <div class=col-5>#}
+{#            <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"#}
+{#                                            src="/assets/comfort/img/3.jpg" alt="Картинка категории 6">#}
+{#                <p class=m-0>Категория 6</p></div>#}
+{#        </div>#}
+{#        <div class=col-5>#}
+{#            <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"#}
+{#                                            src="/assets/comfort/img/2.jpg" alt="Картинка категории 7">#}
+{#                <p class=m-0>Категория 7</p></div>#}
+{#        </div>#}
+{#        <div class=col-5>#}
+{#            <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"#}
+{#                                            src="/assets/comfort/img/1.jpg" alt="Картинка категории 8">#}
+{#                <p class=m-0>Категория 8</p></div>#}
+{#        </div>#}
+{#        <div class=col-5>#}
+{#            <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"#}
+{#                                            src="/assets/comfort/img/4.jpg" alt="Картинка категории 9">#}
+{#                <p class=m-0>Категория 9</p></div>#}
+{#        </div>#}
+{#        <div class=col-5>#}
+{#            <div class="card border-0"><img class="card-img-top rounded-4 mb-1" style="height: 130px ;"#}
+{#                                            src="/assets/comfort/img/2.jpg" alt="Картинка категории 10">#}
+{#                <p class=m-0>Категория 10</p></div>#}
+{#        </div>#}
+    </div>
 </section>
+{% endif %}
 
         
