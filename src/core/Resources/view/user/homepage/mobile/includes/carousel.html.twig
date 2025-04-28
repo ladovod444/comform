@@ -9,50 +9,42 @@
                         <div class="carousel-item {{ loop.first ? " active" : ''}} bg-cover lazy" data-bg="{{ banner }}" style="height: 300px; border-radius: 1rem;"></div>
                     {% endfor %}
                 </div>
-                <button class="carousel-control-prev carousel-control-prev-main" type="button" data-bs-target="#carouselBannerMain" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Предыдущий</span>
-                </button>
-                <button class="carousel-control-next carousel-control-next-main" type="button" data-bs-target="#carouselBannerMain" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Следующий</span>
-                </button>
             </div>
         </section>
     {% endif %}
 
 {% if banners['main-banners'] is defined %}
-<div class=" container carousel carousel-fade slide mb-4 pointer-event" data-bs-touch=true data-bs-ride=carousel id=carouselMain>
-    <div class="carousel-indicators button-position justify-content-start" style="margin-left: 10%;">
+<div class=" container carousel  slide  rounded-4 mb-4" data-bs-touch="true" data-bs-ride="carousel" id="carouselMain">
+    {# <div class="carousel-indicators button-position justify-content-start" style="margin-left: 10%;">
 
         {% for banner in banners['main-banners'] %}
 
             <button type=button data-bs-target="#carouselMain" data-bs-slide-to={{ loop.index }} class="{{ loop.first ? " active" : ''}}" aria-current=true
                 aria-label="Slide {{ loop.index }}"></button>
         {% endfor %}
-{#        <button type=button data-bs-target="#carouselMain" data-bs-slide-to=1 class=" " aria-current=true#}
-{#                aria-label="Slide 2"></button>#}
-{#        <button type=button data-bs-target="#carouselMain" data-bs-slide-to=2 class=" " aria-current=true#}
-{#                aria-label="Slide 3"></button>#}
-    </div>
+       <button type=button data-bs-target="#carouselMain" data-bs-slide-to=1 class=" " aria-current=true
+               aria-label="Slide 2"></button>
+       <button type=button data-bs-target="#carouselMain" data-bs-slide-to=2 class=" " aria-current=true
+               aria-label="Slide 3"></button>
+    </div> #}
     <div class="carousel-inner rounded-4" style="height: 300px;">
 
         {% for banner in banners['main-banners'] %}
-            <div class="carousel-item {{ loop.first ? " active" : ''}} h-100 position-relative rounded-4">
-                <img class="d-block lazy"
-                        data-src="{{ banner }}"
-                        alt="Изображение {{ loop.index }}">
-                <div class="carousel-caption carousel-caption-mobile text-light "><h2 class=ms-4>Наименование
+            <div class="carousel-item {{ loop.first ? " active" : ''}} h-100 position-relative rounded-4 bg-cover lazy" data-bg="{{ banner }}">
+                {# <img class="d-block lazy"
+                        
+                        alt="Изображение {{ loop.index }}"> #}
+                {# <div class="carousel-caption carousel-caption-mobile text-light "><h2 class=ms-4>Наименование
                         товара</h2>
-                    <p class="fs-6 ms-4">Описание товара </p></div>
+                    <p class="fs-6 ms-4">Описание товара </p></div> #}
             </div>
         {% endfor %}
 
     </div>
-    <button class=carousel-control-prev data-bs-slide=prev data-bs-target="#carouselMain" type=button><span
+    {# <button class=carousel-control-prev data-bs-slide=prev data-bs-target="#carouselMain" type=button><span
                 class=visually-hidden>Предыдущий</span></button>
     <button class=carousel-control-next data-bs-slide=next data-bs-target="#carouselMain" type=button><span
-                class=visually-hidden>Следующий</span></button>
+                class=visually-hidden>Следующий</span></button> #}
 </div>
 
 {% endif %}

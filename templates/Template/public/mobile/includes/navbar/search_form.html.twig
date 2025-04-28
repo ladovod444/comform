@@ -15,6 +15,7 @@
                 type="submit"
                 aria-label="Поиск"
                 style="top: -4px !important;"
+                id="searchModalBtn"
         >
 
             <svg id="search_icon" class="bi bi-search" xmlns="http://www.w3.org/2000/svg" width="10" height="10"
@@ -39,10 +40,10 @@
 
     {{ form_end(baks_search_form) }}
 
-    <section class="dropdown mt-1 w-100" id="search_results_dropdown">
+    {# <section class="dropdown mt-1 w-100" id="search_results_dropdown">
         <h3 class="d-none">{{ 'search_results.title'|trans }}</h3>
         <ul id="search_result" class="dropdown-menu border-light w-100 p-1">
         </ul>
-    </section>
+    </section> #}
 
 </div>

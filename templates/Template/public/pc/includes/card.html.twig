@@ -11,7 +11,7 @@
         {% set image = product.productImages|first %}
 
         {% if image is defined %}
-            {% set image_path = cdn_image_path(image.img, image.img_ext, image.img_cdn) %}
+            {% set image_path = cdn_image_path(image.img, image.img_ext, image.img_cdn) %} 
         {% endif %}
 
 {#        {% set random_item = random(1, 3) %}#}
